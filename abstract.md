@@ -1,4 +1,4 @@
-# Obscuro 
+# Obscuro  Whitepaper
 **Confidential Smart Contracts for Ethereum**
 
 > /obˈskuː.roː/
