@@ -1,2 +1,2 @@
-{% include_relative abstract.md %}
-{% include_relative motivation.md %}
+1. [Abstract](abstract.md)
+2. [Motivation](motivation.md)
