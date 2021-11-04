@@ -1,4 +1,4 @@
-# Motivation 
+# Motivation
 ## Introduction
 Public blockchain networks have experienced a period of strong growth in 2020-2021, with new use-cases for smart contracts encompassing the finance and art worlds. Decentralised Finance (DeFi) has seen enormous inflows of capital, with the top applications seeing the equivalent of $10 billion of liquidity added, and this has helped push the overall capitalisation of cryptoassets above $2 trillion. Meanwhile, _Non-Fungible Tokens_ (NFTs) surged in value to $10 billion in Q3 2021.
 
@@ -26,11 +26,11 @@ An _over-the-counter_ (OTC) venue, sometimes known as a _dark pool_ is a private
 
 An OTC venue for us would be very different to an _automated market maker_ (AMM); it would be direct peer-to-peer trading with a layer of ‘dark’ price discovery added. The eventual revelation is also important, as trades eventually have to be disseminated to all investors (a consolidated tape)
 
-Prices for assets can be derived from order flow within the enclaves. Obscuro can guarantee fair price discovery and leverage oracles such as Chainlink to ensure prices are within a fair band. 
+Prices for assets can be derived from order flow within the enclaves. Obscuro can guarantee fair price discovery and leverage oracles such as Chainlink to ensure prices are within a fair band.
 
 Competing products already available, but these are not decentralised, and by definition, it's not possible to have a ‘dark’ pool in a decentralised manner without something like Obscuro.
 
-### Fractional Non-Fungible Tokens (NFTs) 
+### Fractional Non-Fungible Tokens (NFTs)
 The idea is to allow NFTs to be tokenised to allow fractional ownership. The difficulty with fractional ownership in the NFT space is for the art piece to be valuable, there needs to be the ability bring all the pieces back together to allow the full piece to be sold to a buyer.
 
 To allow this to happen, a reserve price needs to be set, where once hit, all the individual token holders are compensated and the NFT is sold as a whole piece. A few mechanisms are required for this to happen.
