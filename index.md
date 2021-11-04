@@ -7,3 +7,5 @@
 7. [Technical Background](technical-background.md)
 8. [Detailed Design](detailed-design.md)
 9. [Appendix](appendix.md)
+
+[Page history]({{ site.github.repository_url }}/blame/main/{{page.path}})

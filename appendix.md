@@ -82,3 +82,5 @@ The solution will reveal all transactions after one year through a key-rotation 
 
 ### Alternative Nonce Generation
 A further issue is to ensure that the aggregator host will not be able to repeatedly submit the rollup proof to the TEE to get a new random nonce, and thus achieve a low nonce. The option chosen is to use monotonic counters, but an alternative is to make the nonce deterministic. The nonce is deterministically derived from the L1 block hash combined with the public key of the enclave. This achieves the same purpose of being a fair lottery assuming there is no collusion between L1 miners and L2 aggregators. Even if there was collusion, the cost of gaming the L1 hash might be too high in a proof of work network. In a _Proof of Stake_ network, on the other hand, collusion with L1 would pretty much mean that each round the L1 winner will also win the L2 round.
+
+[Page history]({{ site.github.repository_url }}/blame/main/{{page.path}})
