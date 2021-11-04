@@ -1,0 +1,75 @@
+@startuml
+!pragma teoz true
+skinparam monochrome false
+skinparam roundcorner 15
+skinparam shadowing false
+skinparam sequence{
+  ArrowColor #EC1D24
+  ParticipantBackgroundColor White
+  ParticipantBorderColor White
+  NoteBackgroundColor White
+  NoteBorderColor Black
+  ActorBorderColor Black
+  ActorBackgroundColor White
+  LifeLineBorderColor Black
+}
+skinparam note{
+  BorderColor Black
+  BackgroundColor White
+}
+
+participant "Ethereum Network" as L1
+participant "Aggregator A" as aggregatorA
+participant "Aggregator B" as aggregatorB
+participant "Aggregator C" as aggregatorC
+actor Users
+
+note over L1,aggregatorC: Aggregator nodes must monitor the L1 to determine when the L2 rounds begin. Ideally they participate in the L1 gossip.
+
+L1 --> aggregatorA: monitor
+& L1 --> aggregatorB: monitor
+& L1 --> aggregatorC: monitor
+
+loop Round N
+== Phase 1 - publishing the rollup produced in the previous round ==
+note over L1,aggregatorC: A round begins when the winning aggregator publishes the rollup to L1.
+note over aggregatorA, aggregatorC: First, the aggregators gossip the rollup they produced the previous round and determine who the winner is.
+aggregatorA -> aggregatorB: gossip rollup N
+& aggregatorA -> aggregatorC: gossip rollup N
+aggregatorC -> aggregatorA: gossip rollup N
+& aggregatorC -> aggregatorB: gossip rollup N
+
+note over aggregatorA, aggregatorC: Based on the rollup nonce, each aggregator independently determines who the winner of the round is.
+
+aggregatorC -> aggregatorC: A is winner
+& aggregatorA -> aggregatorA: A is winner
+& aggregatorB -> aggregatorB: A is winner
+
+aggregatorA -> L1: publish rollup in L1 transaction
+note over L1,aggregatorA: The winner is responsible for publishing the rollup, which will get included in a block after a delay.
+
+== Phase 2 - rollup creation==
+note over L1,aggregatorC: While the L1 nodes work on processing the published rollup, the L2 aggregators process L2 transactions submitted by users. This is the main phase of the protocol. Note that it lasts roughly as long as a L1 block.
+aggregatorA -> aggregatorA: create new rollup N+1\npointing to winner
+& aggregatorB -> aggregatorB: create new rollup N+1\npointing to winner
+& aggregatorC -> aggregatorC: create new rollup N+1\npointing to winner
+
+Users -> aggregatorA: L2 transactions
+& Users -> aggregatorB: L2 transactions
+& Users -> aggregatorC: L2 transactions
+
+aggregatorA -> aggregatorA: Add user transactions\nto rollup N+1
+& aggregatorB -> aggregatorB: Add user transactions\nto rollup N+1
+& aggregatorC -> aggregatorC: Add user transactions\nto rollup N+1
+
+... ~ 12 seconds later ...
+== Phase 3 - nonce generation and rollup sealing==
+note over L1,aggregatorC: The round ends as soon as the aggregators independently decide that the rollup published at the beginning of the round was added to a "final" L1 block.
+L1 -> L1: rollup N added to final block
+aggregatorA -> aggregatorA: 1. host presents Merkle proof to TEE\n2. TEE generates random number\n3. TEE seals rollup N+1
+& aggregatorB -> aggregatorB: 1. host presents Merkle proof to TEE\n2. TEE generates random number\n3. TEE seals rollup N+1
+& aggregatorC -> aggregatorC: 1. host presents Merkle proof to TEE\n2. TEE generates random number\n3. TEE seals rollup N+1
+====
+
+end
+@enduml

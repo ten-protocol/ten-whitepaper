@@ -1,0 +1,26 @@
+@startuml
+!pragma teoz true
+skinparam monochrome false
+skinparam roundcorner 15
+skinparam shadowing false
+skinparam sequence{
+  ArrowColor #EC1D24
+  ParticipantBackgroundColor White
+  ParticipantBorderColor White
+  NoteBackgroundColor White
+  NoteBorderColor Black
+  ActorBorderColor Black
+  ActorBackgroundColor White
+  LifeLineBorderColor Black
+}
+skinparam note{
+  BorderColor Black
+  BackgroundColor White
+}
+
+participant A0 as "Aggregator"
+participant KMS as "Management Contract"
+A0 -> KMS: pay stake
+A0 -> KMS: IPAddress\nsigned by Attestation key
+KMS -> KMS: record as valid Aggregator
+@enduml

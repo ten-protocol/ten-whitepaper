@@ -1,0 +1,39 @@
+@startuml
+!pragma teoz true
+skinparam monochrome false
+skinparam roundcorner 15
+skinparam shadowing false
+skinparam sequence{
+  ArrowColor #EC1D24
+  ParticipantBackgroundColor White
+  ParticipantBorderColor White
+  NoteBackgroundColor White
+  NoteBorderColor Black
+  ActorBorderColor Black
+  ActorBackgroundColor White
+  LifeLineBorderColor Black
+}
+skinparam note{
+  BorderColor Black
+  BackgroundColor White
+}
+
+box "User Obscuro Wallet"
+participant UL1 as "L1 Wallet"
+participant UL2 as "L2 Wallet"
+end box
+participant MC as "Management Contract"
+participant T as "Obscuro Node"
+UL1 -> MC: transfer ERC token from L1 wallet to Bridge contract pool
+... wait to be mined in one block ...
+UL2 -> T: create "deposit" L2 txn including MTree proof of L1 deposit
+T -> T: if proof valid, include L2 txn in current rollup with dependency to L1 block
+T -> T: internally update L2 user ledger balance with wrapped token
+T -> MC: publish rollup
+alt the rollup dependency is the hash of a previous block
+    MC -> MC: accept rollup
+    T -> UL2: emit encrypted event of successful balance update (as long as there is no L1 or L2 block reorg)
+else the dependency is NOT the hash of a previous block
+    MC -> MC: reject rollup
+end
+@enduml

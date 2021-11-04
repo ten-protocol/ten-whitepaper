@@ -1,0 +1,37 @@
+@startuml
+!pragma teoz true
+skinparam monochrome false
+skinparam roundcorner 15
+skinparam shadowing false
+skinparam sequence{
+  ArrowColor #EC1D24
+  ParticipantBackgroundColor White
+  ParticipantBorderColor White
+  NoteBackgroundColor White
+  NoteBorderColor Black
+  ActorBorderColor Black
+  ActorBackgroundColor White
+  LifeLineBorderColor Black
+}
+skinparam note{
+  BorderColor Black
+  BackgroundColor White
+}
+
+Host -> TEE: present winning rollup from previous round
+TEE -> TEE: create new rollup pointing to parent
+TEE -> TEE: create Nonce Generation Monotonic Counter for current rollup (NGMC)
+loop while previous rollup not published in block
+Host -> TEE: add L2 transaction
+end
+Host -> TEE: present L1 proof of parent inclusion
+TEE -> TEE: check L1 proof header
+TEE -> TEE: check parent rollup inclusion
+TEE -> TEE: check NGMC==0
+TEE -> TEE: generate nonce
+TEE -> TEE: increment NGMC
+TEE -> TEE: add nonce to current rollup
+TEE -> TEE: add L1 block ID to current rollup
+TEE -> TEE: sign current rollup
+TEE -> Host: signed rollup
+@enduml

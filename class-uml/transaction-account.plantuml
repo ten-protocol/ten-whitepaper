@@ -1,0 +1,79 @@
+@startuml
+!pragma teoz true
+skinparam monochrome false
+skinparam roundcorner 15
+skinparam shadowing false
+skinparam object{
+  BackgroundColor White
+  BorderColor Black
+}
+
+!define C(x) <color:grey>// x</color>
+!define NL |||
+
+object Transaction{
+    C(This is the transaction sent by users)
+    C(Same as in Ethereum because we want to support the same model)
+    NL
+
+    NL
+	C(Prevent replay attacks)
+	- nonce: Int
+
+    NL
+	C(Either a user or a contract)
+	- to: Address
+
+    NL
+	C(How much to transfer in Obscuro tokens)
+	- value: Long
+
+    NL
+	C(For new deployment of contract it is the bytecode and the encoded arguments)
+	C(For execution of contract function it contains the function signature and the encoded arguments)
+	C(It is left empty in fund transfer)
+	- data: Bytes
+}
+
+object EncryptedTransaction{
+    C(The object that is included in the Rollup)
+    C(Includes the signature)
+    - encryptedBytes: ByteArray
+}
+
+object TransactionReceipt {
+    C(Same as in Ethereum to support the same model)
+    NL
+    - postTransactionState: Trie
+    - transactionLogs: List<LogEntry>
+    - logInfo: BloomFilter
+}
+
+object Account {
+    C(Same as in Ethereum because we want to support the same model)
+    NL
+
+    C(Number of transactions sent from this address)
+    - nonce: Int
+
+    NL
+    C(Number of Obscuro tokens owned by this address)
+    - balance: Int
+
+    NL
+    C(Root hash of a Patricia MTree encoding the content)
+    - storageRoot: Hash
+
+    NL
+    C(Hash of the code in case this account represent a contract)
+    - codeHash: Hash
+}
+
+object LogEntry {
+    C(Same as in Ethereum to support the same model)
+    NL
+    - address: Address
+    - topics: List<Topic>
+    - data: ByteArray
+}
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+!pragma teoz true
+skinparam monochrome false
+skinparam roundcorner 15
+skinparam shadowing false
+skinparam sequence{
+  ArrowColor #EC1D24
+  ParticipantBackgroundColor White
+  ParticipantBorderColor White
+  NoteBackgroundColor White
+  NoteBorderColor Black
+  ActorBorderColor Black
+  ActorBackgroundColor White
+  LifeLineBorderColor Black
+}
+skinparam note{
+  BorderColor Black
+  BackgroundColor White
+}
+
+box "Node 0"
+participant E0 as "Enclave"
+participant A0 as "Host"
+end box
+participant KMS as "Management Contract"
+box "Node N"
+participant A1 as "Host"
+participant E1 as "Enclave"
+end box
+== Network initialisation ==
+E0 -> A0: attestation(pubKey0)
+A0 -> KMS: register(attestation(pubKey0)))
+A0 -> E0: network initialisation command
+E0 -> E0: generate shared Secret and encrypt with pubKey0
+E0 -> A0: encrypted secret
+A0 -> KMS: register encrypted secret
+KMS -> KMS: store encrypted secret
+
+... Later ...
+
+== New L2 node registration ==
+E1 -> A1: attestation(pubKeyN)
+A1 -> KMS: register(attestation(pubKeyN)); pay token fee
+A0 --> KMS: monitor new node registrations; (getNewEnclaves())
+A0 -> E0: request secret for attestation(pubKeyN)
+E0 -> E0: encrypt sharedSecret with pubKeyN
+E0 -> A0: pubKeyN encrypted sharedSecret
+A0 -> KMS: store pubKeyN encrypted sharedSecret
+KMS -> E0: send token fee
+A1 -> KMS: download historic rollups
+A1 -> E1: historic rollups
+E1 -> E1: process historic transactions previously\npublished, in order to synchronise internally-held\nObscuro contract state with other nodes.
+@enduml
