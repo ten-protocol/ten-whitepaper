@@ -25,9 +25,9 @@ Token allocation is benchmarked to similar successful projects. Typically, such 
     2. Aggregators.
     3. Users.
 
-100 million OBX tokens will be created to power the network, and a large number of those tokens would remain unassigned in the early days of the network going live as it is critical to have a large, non-circulating token reserve that can be deployed as needed in the pursuit of growth and adoption.
+OBX tokens will be created to power the network, and a large number of those tokens would remain unassigned in the early days of the network going live as it is critical to have a large, non-circulating token reserve that can be deployed as needed to drive growth and adoption.
 
-One point to note on the listing above is the allocation to initial funders. They include the primary developer of Obscuro for the first few months of its existence, therefore they will receive an allocation of the Obscuro token as payment in kind for the work done to-date on the project. This is a one-time only allocation, after which funders will not be involved in either development or day to day operations of the Obscuro Foundation. The number of tokens allocated to funders is to be agreed by the Obscuro Foundation.
+One point to note on the listing above is the allocation to initial funders. They include the initial developer of Obscuro.  They will receive an allocation of the Obscuro token as payment in kind for the work done to-date on the project. This is a one-time only allocation, after which funders will not be involved in either development or day to day operations of the Obscuro Foundation. The number of tokens allocated to funders is to be agreed by the Obscuro Foundation.
 
 ## Relationship to ETH
 As each Obscuro block is published to the Ethereum Mainnet, Obscuro aggregators must hold a balance of ETH to be able to do this. Aggregators get paid in OBX (via block reward and transaction fees) and have outgoings in ETH, therefore there exists currency exposure between OBX and ETH, which, in theory, can be hedged with futures or options if such a market existed. The combination of transaction fees and block reward in terms of ETH must be great enough to:

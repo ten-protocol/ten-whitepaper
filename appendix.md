@@ -9,6 +9,8 @@ The Obscuro project is decentralised in nature, and this whitepaper has benefite
 * Tim Brinded
 * Fred Dalibard
 
+Additional feedback is welcome, and all reviewers will be credited.
+
 ## Glossary
 **Smart Contract / Contract**
 A user application running on a blockchain network which holds data or state, responds to user commands, and may store and manage assets or money.
