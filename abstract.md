@@ -5,7 +5,8 @@
 > 1. (Latin) To conceal, hide;
 > 2. A spell used to conjure a blindfold over the eyes of the target.
 
-V0.3, October 2021 _Note: This document is under development, so please check for updates._
+V0.3, October 2021 
+_Note: This document is under development, so please check for updates. Several ideas included are novel and have been submitted in a defensive, provisional patent application only to establish prior art. Obscuro will be fully open-source, as befits decentralised and permissionless networks in particular._
 
 James Carlyle, Tudor Malene, Cais Manai, Roger Willis; with significant additional [contributors](./appendix#contributors).
 
@@ -21,7 +22,3 @@ Conceptually, Obscuro sits between Optimistic and ZK-rollups. Only rollups signe
 Although they have many advantages, the security guarantees of TEEs are weaker than the mathematics behind zero-knowledge proofs. Obscuro addresses this limitation by using a blockchain-like data structure for storing rollups which allows multiple competing forks. This data structure was pioneered by Bitcoin and used later by Ethereum. The significant advantage of this approach is that it allows honest nodes to ignore eventual malicious rollups created by a compromised enclave, which is the exact mechanism by which Layer 1 protocols handle malicious behavior, coupled with the right incentives. As long as at least a single node with an uncompromised TEE is active, the valid fork will continue to grow and include user transactions.
 
 The Ethereum smart contract backing the rollups will detect forks in the rollup-chain and will pause withdrawals until there is a single active fork. Note that short-living forks might not represent malicious behaviors as they can also originate from honest delays in the protocol. A potential attacker who spent resources to compromise the TEE cannot reap any benefits until she can execute a withdrawal to a controlled wallet. Withdrawals cannot happen as long as valid TEEs keep publishing rollups that will get rewarded eventually, which means the attacker has to continuously spend Ethereum gas to publish many rollups without any benefit. The only effect of this attack is a denial of service on the withdrawal functionality, but the L2 ledger will continue to evolve. The high cost and the impossibility to withdraw any stolen funds acts as a potent deterrent against this type of attack.
-
-```diff
-# Several ideas in this paper are novel and have been submitted in a defensive, provisional patent application only to establish prior art. Obscuro will be fully open-source, as befits decentralised and permissionless networks in particular.
-```
