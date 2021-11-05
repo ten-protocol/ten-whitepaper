@@ -92,7 +92,6 @@ Note that forks are possible at both layers, and it is the responsibility of the
 
 ![Block Rollup Progression](./images/block-rollup-progression.png)
 
-
 ## Cryptography
 The first enclave (or a special key generation enclave), generates a 256bit master seed inside the encrypted memory space. It encrypts this seed with the EK and sends it to the management contract to be stored there.
 Subsequent enclaves, after proving their attestation will receive that secret encrypted with their key. The medium over which they receive the key is the management contract, to ensure maximum data availability.
@@ -199,9 +198,12 @@ The reward mechanism implements the following rules:
 3. Do not pay anything to a competing aggregator that front-runs the winner, and publishes an alternative non-winning rollup. Considering that the frontrunner is consuming precious Ethereum gas, this mechanism is in effect a punishment.
    This case will manifest itself as two competing rollups for the same generation published in sequential Ethereum blocks, where the rollup published in the first block has a higher nonce.
 
-_Note that in the latter case, to achieve smooth running, the non-winning rollup published by the frontrunner is part of the canonical chain, but it pays no reward._
+_Note that in the latter case, to achieve smooth running, the non-winning rollup published by the frontrunner is part of the canonical chain, but it pays no reward._ 
 
 As a consequence of these rules, any winning aggregator is incentivised to publish with the _gas_price_ high enough to claim the full reward.
+
+The rules are depicted in the following diagram:
+![L1 front running](./images/l1-front-running.png)
 
 If there is a random spike or delay and the rollup is added to the next block, they at least don't make a loss.
 In such a scenario, the rest of the aggregators have two options:
@@ -211,7 +213,6 @@ In such a scenario, the rest of the aggregators have two options:
 It makes more sense to go for the second option if the rollup has a good chance of being added to the next block, since the odds of receiving a lower nonce than the previous winner is quite low.
 
 In the case of a front-running attack, rational miners will receive the gas cost back, but not make any profit, while the frontrunners will not get any reward, thus lowering the overall running cost of the network.
-
 
 ### Competing L1 Blockchain Forks
 In theory, different L2 aggregators could be connected to L1 nodes that have different views of the L1 ledger. This will be visible in the L2 network as rollups being gossiped that point to different L1 forked blocks. Each aggregator will have to make a bet and continue working on the L1 fork which it considers to have the best chance. This is the same behaviour as any L1 node.
