@@ -10,6 +10,8 @@ Public blockchains rely on the entire network seeing all transactions in order t
 * By providing an _Ethereum Virtual Machine_ (EVM) compatible VM, deploying existing contracts to Obscuro with minimal change may be possible.
 * Obscuro is trustless and decentralized. It takes processing from the Ethereum Layer-1 (L1) and allows lower transaction costs similar to other Layer-2 (L2) networks.
 * Obscuro acknowledges the limitations of hardware-based confidential computing and relies on TEE for privacy but not for integrity.
+* Obscuro guarantees quick finality by synchronizing the publishing of rollups to the cadence of the L1 blocks. 
+* Obscuro introduces a novel mechanism to allow application developers to balance the need for user data privacy (and MEV prevention) with the need to deter long-term illegal behavior.
 
 ## Use Cases
 There are many, many use cases for applications deployed to the Obscuro network, but a recurring theme is protecting privacy in order to create fair markets.

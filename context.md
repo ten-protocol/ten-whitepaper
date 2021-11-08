@@ -1,13 +1,4 @@
 # Context
-## Design Principles
-The solution follows the following principles:
-* Complexity makes the solution harder to reason about and increases the risk of successful attacks, so the solution is as simple as possible and as widely applicable as possible.
-* Embrace the characteristics of the underlying L1 blockchain and use them to create a simple model. The L1 blockchain should not require change.
-* Prioritise immediate funds access for business-as-usual processing over TEE compromise. The use of TEEs allows a solution with multiple advantages over optimistic L2 solutions, which cannot grant immediate access for funds to the same degree.
-* Use game theory and incentives to reinforce correct behavior and penalize subversive, disruptive actions.
-* Structure the solution so that other L1 blockchains or other confidential computing techniques could be adopted.
-* Make the software (contracts, TEE environments) open-source to support the permissionless goals and permit validation of the correct operation of the L2 network. Additionally, deployed applications should remain auditable.
-
 ## Challenges
 As well as preserving the confidentiality of user data, the other main goals of this protocol are to be fully permissionless and decentralized and to be a generic smart-contract execution engine compatible to the greatest extent with the EVM. To achieve this, Obscuro pioneers a novel consensus protocol.
 
@@ -22,3 +13,13 @@ A privacy-preserving platform should consider illegal usage and design to preven
 One important challenge of such a system is making sure that some catastrophic event cannot leave all the value locked.
 
 High transaction fees is one of the main barriers of entry for Ethereum. Obscuro addresses this using a novel approach to calculate fees based on the actual costs of running nodes.
+
+## Design Principles
+The solution follows the following principles:
+* Complexity makes the solution harder to reason about and increases the risk of successful attacks, so the solution is as simple as possible and as widely applicable as possible.
+* Embrace the characteristics of the underlying L1 blockchain and use them to create a simple model. The L1 blockchain should not require change.
+* Prioritise immediate funds access for business-as-usual processing over TEE compromise. The use of TEEs allows a solution with multiple advantages over optimistic L2 solutions, which cannot grant immediate access for funds to the same degree.
+* Use game theory and incentives to reinforce correct behavior and penalize subversive, disruptive actions.
+* Structure the solution so that other L1 blockchains or other confidential computing techniques could be adopted.
+* Make the software (contracts, TEE environments) open-source to support the permissionless goals and permit validation of the correct operation of the L2 network. Additionally, deployed applications should remain auditable.
+
