@@ -59,4 +59,4 @@ Slashing is an implicit process carried out by the management contract based on 
 
 ## Procedures and Separation of Powers
 
-[TODO]
+[comment]: <> ([TODO])

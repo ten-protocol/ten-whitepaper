@@ -28,7 +28,9 @@ A further issue is to ensure that the host will not be able to repeatedly submit
 6. The winning aggregator has to create an ethereum transaction that publishes this rollup to L1.
 
 Note that by introducing the requirement for proof of inclusion in the L1, the cadence of publishing the rollups to the block times is synchronised.
-Also, note that the hash of L1 block used to prove to the TEE that the previous rollup was published will be added to the current rollup. The management contract, and the other aggregators will only accept proofs from the _final_ fork. ([TODO- more details])
+Also, note that the hash of L1 block used to prove to the TEE that the previous rollup was published will be added to the current rollup. The management contract, and the other aggregators will only accept proofs from the _final_ fork. 
+
+[comment]: <> (&#40;[TODO- more details]&#41;)
 
 This sequence is depicted in the following diagram:
 ![node-processing](./images/node-processing.png)
@@ -81,6 +83,6 @@ The rules in the case of front-running are depicted in the following diagram:
 ### Competing L1 Blockchain Forks
 In theory, different L2 aggregators could be connected to L1 nodes that have different views of the L1 ledger. This will be visible in the L2 network as rollups being gossiped that point to different L1 forked blocks. Each aggregator will have to make a bet and continue working on the L1 fork which it considers to have the best chance. This is the same behaviour as any L1 node.
 
-This is depicted in [Basic Rollup Data Structure](rollup-data-structure.md).
+This is depicted in [Basic Rollup Data Structure](detailed-design#rollup-data-structure).
 
 In case it proves that the decision was wrong it has to roll back the state to a checkpoint and replay the winning rollups.

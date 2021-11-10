@@ -5,6 +5,6 @@ From a high level, the solution uses an optimistic mechanism to handle such a ca
 
 There are two types of attacks that someone can execute against Obscuro:
 
-- Read-level hacks happen when the attacker is able to extract some information from the TEE. The only way to defend against these attacks is to perform a careful audit of the code, and to keep the _Attestation constraints_ up to date. An attacker that is careful not to reveal her advantage can remain undetected.
+1. Read-level hacks happen when the attacker is able to extract some information from the TEE. The only way to defend against these attacks is to perform a careful audit of the code, and to keep the _Attestation constraints_ up to date. An attacker that is careful not to reveal her advantage can remain undetected.
 
-- Write-level hacks are powerful since they enable the attacker to _write_ to the ledger and thus be able to break its integrity. A write-level hack could happen if an attacker is able to extract the enclave key and sign a hand-crafted rollup which contains an invalid withdraw instruction. This is the type of attack which is viewed as the main threat for the protocol and thus handled explicitly.
+2. Write-level hacks are powerful since they enable the attacker to _write_ to the ledger and thus be able to break its integrity. A write-level hack could happen if an attacker is able to extract the enclave key and sign a hand-crafted rollup which contains an invalid withdraw instruction. This is the type of attack which is viewed as the main threat for the protocol and thus handled explicitly.

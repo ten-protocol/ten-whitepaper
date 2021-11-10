@@ -34,6 +34,8 @@ Separately from the blob, a data structure is created containing the position of
 
 After enough rollups have been added, any node operator can request from the TEE the encryption key and the position of the transactions they are entitled to view.
 
-[TODO - add more details and some diagrams.]
-[TODO - diagram1: Interaction diagram ]
-[TODO - diagram2: Structure of a block ]
+[comment]: <> ([TODO - add more details and some diagrams.])
+
+[comment]: <> ([TODO - diagram1: Interaction diagram ])
+
+[comment]: <> ([TODO - diagram2: Structure of a block ])

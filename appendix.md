@@ -8,6 +8,7 @@ The Obscuro project is decentralised in nature, and this whitepaper has benefite
 * Moritz Platt
 * Tim Brinded
 * Fred Dalibard
+* Stefan Iliev
 
 Additional feedback is welcome, and all reviewers will be credited.
 

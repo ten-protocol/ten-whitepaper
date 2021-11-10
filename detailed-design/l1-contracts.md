@@ -19,7 +19,7 @@ This contract interacts with the aggregators.
 This contract is important for the security of the solution since all value deposited by end users will be locked in this bridge.
 
 * It acts as a pool where people can deposit assets, like fungible or non-fungible ERC tokens, which will be made available as wrapped tokens to use on the Obscuro network, and which they can withdraw later.
-* In case of conflicting forks in the rollup chain, it must delay withdrawals until one fork expires, or enter a procedure to discover which fork is the valid one. This is covered in more detail in [Withdrawals](obscuro-ethereum-interaction#withdrawals).
+* In case of conflicting forks in the rollup chain, it must delay withdrawals until one fork expires, or enter a procedure to discover which fork is the valid one. This is covered in more detail in [Withdrawals](detailed-design#withdrawals).
 * It may be extended to manage liquidity yields.
 
 ### Explicit Governance Mechanism
