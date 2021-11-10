@@ -23,7 +23,7 @@ For example:
 
 One of these options will be chosen by default for applications that don't explicitly specify one.
 
-Each predefined period will reveal have to reveal transactions in a different cycle. The protocol will deterministically derive a symmetric encryption key from the master seed, the id of the reveal option, and the running counter for that option. All enclaves in possession of the master secret will be able to calculate the same encryption key.
+Each predefined period will have to reveal transactions in a different cycle. The protocol will deterministically derive a symmetric encryption key from the master seed, the id of the reveal option, and the running counter for that option. All enclaves in possession of the master secret will be able to calculate the same encryption key.
 
 Each interval for each reveal option will thus have a dedicated key _EncryptionKey(Reveal_option, Interval)_.
 
