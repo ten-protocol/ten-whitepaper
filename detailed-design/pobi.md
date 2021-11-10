@@ -31,10 +31,9 @@ Note that by introducing the requirement for proof of inclusion in the L1, the c
 Also, note that the hash of L1 block used to prove to the TEE that the previous rollup was published will be added to the current rollup. The management contract, and the other aggregators will only accept proofs from the _final_ fork. ([TODO- more details])
 
 This sequence is depicted in the following diagram:
-![node-processing](./images/node-processing.png)
+![node-processing](../images/node-processing.png)
 
-### Preventing repeated random number generation
-
+### Preventing Repeated Random Number Generation
 In Phase 3 of the protocol, the TEE of each aggregator generates a random number which determines the winner of the protocol. This introduces the possibility of gaming the system by restarting the TEE, and attempting to generate multiple numbers.
 
 The solution proposed by Obscuro is to introduce a timer upon startup of the Enclave, in the constructor. A conventional timer, based on the clock of the computer is not very effective since it can be gamed by the host.
@@ -45,15 +44,13 @@ This solution is effective, since the code is attested, and does not rely on any
 
 This built-in delay is also useful in preventing other side channel attacks.
 
-### Failure scenarios and incentives
-
+## Failure Scenarios and Incentives
 The next sections will analyze different failure scenarios and how the incentives ensure good functioning.
 
 ### Non-publishing Sequencer Scenario
 Compared to a typical L1 protocol, there is an additional complexity. In a L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent, because they know everyone will do that as well. In a L2 decentralised protocol like POBI, there is an additional step, which is the publication of the rollup to L1, which can fail for multiple reasons.
 
-#### Incentives for publishing
-
+#### Incentives For Publishing
 The high level goal is to keep the system functioning as smoothly as possible, and be resistant to random failures or malicious behaviour, while not penalising Obscuro nodes for not being available.
 
 The reward mechanism implements the following rules:
@@ -66,8 +63,8 @@ _Note that in the latter case, to achieve smooth running, the non-winning rollup
 
 As a consequence of these rules, any winning aggregator is incentivised to publish with the _gas_price_ high enough to claim the full reward.
 
-The rules are depicted in the following diagram:
-![L1 front running](./images/l1-front-running.png)
+The reward rules are depicted in the following diagram:
+![L1 front running](../images/block-rewarding.png)
 
 If there is a random spike or delay and the rollup is added to the next block, they at least don't make a loss.
 In such a scenario, the rest of the aggregators have two options:
@@ -78,6 +75,12 @@ It makes more sense to go for the second option if the rollup has a good chance 
 
 In the case of a front-running attack, rational miners will receive the gas cost back, but not make any profit, while the frontrunners will not get any reward, thus lowering the overall running cost of the network.
 
+The rules in the case of front-running are depicted in the following diagram:
+![L1 front running](../images/block-frontrunning.png)
+
 ### Competing L1 Blockchain Forks
 In theory, different L2 aggregators could be connected to L1 nodes that have different views of the L1 ledger. This will be visible in the L2 network as rollups being gossiped that point to different L1 forked blocks. Each aggregator will have to make a bet and continue working on the L1 fork which it considers to have the best chance. This is the same behaviour as any L1 node.
+
+This is depicted in [Basic Rollup Data Structure](rollup-data-structure.md).
+
 In case it proves that the decision was wrong it has to roll back the state to a checkpoint and replay the winning rollups.

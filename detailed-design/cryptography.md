@@ -9,8 +9,7 @@ This master entropy will be used by each enclave to deterministically generate a
 
 When submitting a rollup, each enclave will sign it with the key found in their attestation (the AK).
 
-### Symmetric key revealing
-
+### Symmetric Key Revealing
 One of the explicit design goals is to help application developers achieve their privacy requirements, while giving them the tooling to dis-incentivise users from using the application for illegal behaviour such as money-laundering.
 
 When deploying a contract to Obscuro, the developer has to choose one of the predefined revealing options.

@@ -6,7 +6,7 @@ This contract is the gatekeeper for the protocol. Any node wishing to join Obscu
 
 * It registers L2 nodes, verifies their TEE attestation, and manages their stakes. (Stakes are required for the aggregators who publish rollups, as an incentive to follow the protocol.)
 * It manages the TEE attestation requirements. This means that the governance of the contract can decide which enclave code is approved to join.
-* It manages the L2 TEEs' shared secret key so that it is available in case of L2 node failure. The L1 acts as the ultimate high availability storage. Note: This is expanded in the [Cryptography](#cryptography) section.
+* It manages the L2 TEEs' shared secret key so that it is available in case of L2 node failure. The L1 acts as the ultimate high availability storage. Note: This is expanded in the [Cryptography](cryptography#cryptography) section.
 * It keeps a list of IP addresses for all aggregators.
 
 ### Rollup Management
@@ -19,7 +19,7 @@ This contract interacts with the aggregators.
 This contract is important for the security of the solution since all value deposited by end users will be locked in this bridge.
 
 * It acts as a pool where people can deposit assets, like fungible or non-fungible ERC tokens, which will be made available as wrapped tokens to use on the Obscuro network, and which they can withdraw later.
-* In case of conflicting forks in the rollup chain, it must delay withdrawals until one fork expires, or enter a procedure to discover which fork is the valid one. This is covered in more detail in [Withdrawals](#withdrawals).
+* In case of conflicting forks in the rollup chain, it must delay withdrawals until one fork expires, or enter a procedure to discover which fork is the valid one. This is covered in more detail in [Withdrawals](obscuro-ethereum-interaction#withdrawals).
 * It may be extended to manage liquidity yields.
 
 ### Explicit Governance Mechanism
@@ -32,8 +32,7 @@ The management contract is the root of trust for the L2 network. The implemented
 
 Since Obscuro follows the rollup pattern, the L1 is the source of truth for the L2 network. Any L2 node with a valid TEE in possession of the shared secret is able to download all the rollups from the L1, calculate the entire state inside its encrypted memory, and at the same time validate all transactions.
 
-Governance
-
+#### Governance
 There are two types of powers for a decentralised network
 - Explicit powers exercised by a group of people using direct signing or voting.
 - Powers implicit in the protocol.
@@ -51,7 +50,6 @@ This is a list of Obscuro powers
 1. The TEE attestation requirements
    This controls which software is able to process the user transactions and create the rollups.
 
-
 A group of competent auditors have to carefully analyze the code that will run inside the TEE, and approve it by signing it.
 The list of "approved auditors" has to be configured by someone.
 
@@ -61,7 +59,6 @@ With TEE solutions, these auditors have to be declared in the management contrac
 Based on the declared auditors, the smart contract will approve a proposed software.
 
 The auditors have to be independent and reputable parties.
-
 
 2. Admin of the different management contract modules
    These modules will have upgradeable parts, to cater for bugs and features.
@@ -76,27 +73,20 @@ Ideally this list should be managed through a proposal and vote process by the c
 
 Going a level deeper, the code that manages this process might need to be upgradeable, so there is someone controlling it.
 
-
 3. Creating rollups
-   Aggregators with attested software and hardware who have paid a stake
+   Aggregators with attested software and hardware who have paid a stake.
 
-
-3. Canonical chain
+4. Canonical chain
    The canonical chain is not decided by the users, as with layer 1 solutions.
    It is decided by the management contract, based on the repartition of rollups.
 
-Todo: this is the main difference between the l1 and obscuro mechanism. While we also have multiple possible chains, it's not the users directly who choose them, but the aggregators.
+This is the main difference between the l1 and Obscuro mechanism. While Obscuro also has multiple possible chains, it's not the users directly who choose them, but the aggregators.
 
 
-4. Slashing the stake of misbehaving parties
-   For now, the only slashing event is for publishing invalid blocks that try to break the integrity of the ledger.
-   The L1 management contract can't verify the actual validity, so slashing has to be controlled by a group who have executed the rollup and knows for sure it's fake.
-   Or we can come up with some heuristic saying that everyone who publishes on a fork that is more than N rollups deep, which eventually dies out will get punished by slashing.
+5. Slashing the stake of misbehaving parties.
+   For now, the only slashing event is for publishing invalid blocks that try to break the integrity of the ledger. The L1 Rollup contract can't verify the actual validity, so slashing has to be controlled by a group which has executed the rollup and can confirm that it is incorrect. An alternative is a heuristic that everyone who publishes on a fork that is more than N rollups deep which eventually dies out will get punished by slashing.
 
-
-
-Ideally we would achieve a credible separation of powers.
-
+Obscuro aims to achieve a credible separation of powers.
 
 ### Node Registration
 The enclaves must encrypt L2 transactions with a secret key shared across the L2 nodes rather than an enclave-specific key which would be lost if an enclave is damaged.
@@ -105,10 +95,10 @@ Before obtaining the shared secret, the L2 nodes must attest that they are runni
 An L2 node invokes a method on the Network Management contract to submit their attestation. Another L2 node (which already holds the secret key inside its enclave) responds by confirming the attestation and then updating this record with the shared secret encrypted using the public key of the new node. Whichever existing L2 node replies first, signed by the enclave to guarantee knowledge of the secret, gets a reward. This solves several problems; the Network Management contract provides a well-known central registration point on a decentralised L1 network which is able to store the L2 shared secret in public, and existing L2 nodes are compensated for their infrastructure and L1 gas costs to onboard new nodes.
 
 The sequence for node registration is shown in the following diagram:
-![node registration](./images/node-registration.png)
+![node registration](../images/node-registration.png)
 
 1. Any L2 node must register with the Network Management contract. The node supplies its TEE attestation. It will also pay a fee for the service of receiving the shared secret. If the node wants to be an aggregator it has to pay the required stake. The first L2 node to register will be responsible with setting up a shared secret - which is the entropy from which all further secrets will be derived.
-2. The first L2 node generates a secret and encrypts it with its enclave specific public key to store. It then submits these secrets to the management contract which will store this encrypted secret and register the public key of the newly formed network. This is covered further in [Cryptography](#cryptography).
+2. The first L2 node generates a secret and encrypts it with its enclave specific public key to store. It then submits these secrets to the management contract which will store this encrypted secret and register the public key of the newly formed network. This is covered further in [Cryptography](cryptography#cryptography).
 3. A new party wishing to become an L2 node uses the Network Management contract to submit the remote attestation object, which signals to the network that it wants to know the shared secret. The Network Management contract will check the attestation against the current attestation rules. Existing nodes will be incentivised to respond with the encrypted secret. Any node with a valid TEE able to pass the attestation should be able to receive the key from another node.
 4. The new node begins executing all the transactions already published to the Rollup Management contract, in order to synchronise its internally cached state with the other nodes. This includes user deposits and withdrawals into the Bridge contract, as well as confirmed user transactions.
 
@@ -125,7 +115,7 @@ An Aggregator is a special type of L2 node which has the power to be a sequencer
 In addition to node registration, there is an additional step of pledging a stake.
 
 The sequence for node registration is shown in the following diagram:
-![aggregator staking](./images/aggregator-stake.png)
+![aggregator staking](../images/aggregator-stake.png)
 
 These are the steps to become an aggregator.
 * Register with the L1 Network Management contract and pay a significant stake in the Obscuro token. The stake has multiple roles. The first one is to penalize aggregators who attempt to hack the protocol, and second is for the aggregators to buy into the ecosystem, so that they will make an effort to keep it running smoothly.
@@ -142,7 +132,7 @@ Note: Each aggregator needs an ETH balance on the L1 to pay for the submission o
 
 ### User Registration
 The Network Management contract is also one of the possible gateways for users to use the L2 network. The sequence is shown in the following diagram:
-![user registration](./images/user-registration.png)
+![user registration](../images/user-registration.png)
 
 The user interaction is very simple. The user deposits supported tokens into the well known address of the Network Management contract, and once the transaction is successfully added to a block, the Obscuro wallet automatically creates a L2 transaction including a proof of the L1 transaction.
 
