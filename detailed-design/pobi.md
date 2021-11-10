@@ -83,6 +83,6 @@ The rules in the case of front-running are depicted in the following diagram:
 ### Competing L1 Blockchain Forks
 In theory, different L2 aggregators could be connected to L1 nodes that have different views of the L1 ledger. This will be visible in the L2 network as rollups being gossiped that point to different L1 forked blocks. Each aggregator will have to make a bet and continue working on the L1 fork which it considers to have the best chance. This is the same behaviour as any L1 node.
 
-This is depicted in [Basic Rollup Data Structure](detailed-design#rollup-data-structure).
+This is depicted in [Rollup Data Structure](detailed-design#rollup-data-structure).
 
 In case it proves that the decision was wrong it has to roll back the state to a checkpoint and replay the winning rollups.
