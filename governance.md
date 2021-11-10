@@ -11,8 +11,9 @@ Ultimately there is an explicit governance process somewhere. It is turtles all 
 Bitcoin miners, for example, have some power to determine the rules by choosing which version of the core code to install and to produce blocks with. If there are disagreements, there will be a fork, and the user community will ultimately decide what value to assign to each fork. This is only a problem if the competing forks have similar mining power, and thus security. For day-to-day upgrades, miners have the de-facto decision power, but in case of disagreements, the users have the ultimate power through free markets.
 This is currently the golden standard for decentralized governance, with advantages and disadvantages.
 
-It gets even more complicated on networks like Ethereum with smart contract capabilities. On the one hand, similar to Bitcoin, the end-users decide which miners have chosen the correct version. On the other hand, the applications running on top of Ethereum have their governance requirements. In the early days, _The DAO_ was falling into the second category: _2. Implicit powers implemented in an immutable protocol._, but it was hacked, and so it became apparent that there was actually a mutable codebase behind the immutable protocol (the Ethereum codebase itself), and then it also became apparent that users have the ultimate power as they indirectly voted with their wallets on the preferred approach of handling that hack (ETH vs ETC).
-After that hard lesson, the majority of Ethereum smart contracts have component contracts that can be upgraded through an explicit governance process since it is unlikely the users will hand any more "Get out of jail free" cards to application developers. Sometimes the governance is obfuscated, but generally, if the contract is _Upgradeable_, it means someone is in charge.
+It gets even more complicated on networks like Ethereum with smart contract capabilities. On the one hand, similar to Bitcoin, the end-users decide which miners have chosen the correct version. On the other hand, the applications running on top of Ethereum have their governance requirements. In the early days, _The DAO_ was falling into the second category: _Implicit powers implemented in an immutable protocol._, but it was hacked, and in forking Ethereum and indirectly creating Ethereum Classic, it became apparent that there was actually a mutable codebase behind the immutable protocol (the Ethereum codebase itself). It also became apparent that users have the ultimate power as they indirectly voted with their wallets on the preferred approach of handling that hack, and Ethereum Classic has much lower adoption that the mutated Ethereum.
+
+After that hard lesson, the majority of Ethereum smart contracts have component contracts that can be upgraded through an explicit governance process since it is unlikely the community will again provide "get out of jail free" cards to application developers. Sometimes the governance is obfuscated, but generally, if the contract is _upgradeable_, it means someone is in charge.
 
 The key difference between the golden standard of Bitcoin, and typical smart contract governance, is that the end-users no longer have any power to choose which "smart contract fork" they prefer. Using the original smart contract and adding some value to it, they are at the mercy of the application governors.
 
@@ -56,6 +57,6 @@ Aggregators that hack an enclave and attempt to break the ledger's integrity are
 
 Slashing is an implicit process carried out by the management contract based on predefined rules. Ultimately it is itself controlled by the code governance.
 
-## Procedures and separation of powers
+## Procedures and Separation of Powers
 
 [TODO]
