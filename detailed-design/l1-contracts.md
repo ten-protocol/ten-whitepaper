@@ -6,7 +6,7 @@ This contract is the gatekeeper for the protocol. Any node wishing to join Obscu
 
 * It registers L2 nodes, verifies their TEE attestation, and manages their stakes. (Stakes are required for the aggregators who publish rollups, as an incentive to follow the protocol.)
 * It manages the TEE attestation requirements. This means that the governance of the contract can decide which enclave code is approved to join.
-* It manages the L2 TEEs' shared secret key so that it is available in case of L2 node failure. The L1 acts as the ultimate high availability storage. Note: This is expanded in the [Cryptography](cryptography#cryptography) section.
+* It manages the L2 TEEs' shared secret key so that it is available in case of L2 node failure. The L1 acts as the ultimate high availability storage. Note: This is expanded in the [Cryptography](detailed-design#cryptography) section.
 * It keeps a list of IP addresses for all aggregators.
 
 ### Rollup Management
@@ -95,10 +95,10 @@ Before obtaining the shared secret, the L2 nodes must attest that they are runni
 An L2 node invokes a method on the Network Management contract to submit their attestation. Another L2 node (which already holds the secret key inside its enclave) responds by confirming the attestation and then updating this record with the shared secret encrypted using the public key of the new node. Whichever existing L2 node replies first, signed by the enclave to guarantee knowledge of the secret, gets a reward. This solves several problems; the Network Management contract provides a well-known central registration point on a decentralised L1 network which is able to store the L2 shared secret in public, and existing L2 nodes are compensated for their infrastructure and L1 gas costs to onboard new nodes.
 
 The sequence for node registration is shown in the following diagram:
-![node registration](../images/node-registration.png)
+![node registration](./images/node-registration.png)
 
 1. Any L2 node must register with the Network Management contract. The node supplies its TEE attestation. It will also pay a fee for the service of receiving the shared secret. If the node wants to be an aggregator it has to pay the required stake. The first L2 node to register will be responsible with setting up a shared secret - which is the entropy from which all further secrets will be derived.
-2. The first L2 node generates a secret and encrypts it with its enclave specific public key to store. It then submits these secrets to the management contract which will store this encrypted secret and register the public key of the newly formed network. This is covered further in [Cryptography](cryptography#cryptography).
+2. The first L2 node generates a secret and encrypts it with its enclave specific public key to store. It then submits these secrets to the management contract which will store this encrypted secret and register the public key of the newly formed network. This is covered further in [Cryptography](detailed-design#cryptography).
 3. A new party wishing to become an L2 node uses the Network Management contract to submit the remote attestation object, which signals to the network that it wants to know the shared secret. The Network Management contract will check the attestation against the current attestation rules. Existing nodes will be incentivised to respond with the encrypted secret. Any node with a valid TEE able to pass the attestation should be able to receive the key from another node.
 4. The new node begins executing all the transactions already published to the Rollup Management contract, in order to synchronise its internally cached state with the other nodes. This includes user deposits and withdrawals into the Bridge contract, as well as confirmed user transactions.
 
@@ -115,7 +115,7 @@ An Aggregator is a special type of L2 node which has the power to be a sequencer
 In addition to node registration, there is an additional step of pledging a stake.
 
 The sequence for node registration is shown in the following diagram:
-![aggregator staking](../images/aggregator-stake.png)
+![aggregator staking](./images/aggregator-stake.png)
 
 These are the steps to become an aggregator.
 * Register with the L1 Network Management contract and pay a significant stake in the Obscuro token. The stake has multiple roles. The first one is to penalize aggregators who attempt to hack the protocol, and second is for the aggregators to buy into the ecosystem, so that they will make an effort to keep it running smoothly.
@@ -132,7 +132,7 @@ Note: Each aggregator needs an ETH balance on the L1 to pay for the submission o
 
 ### User Registration
 The Network Management contract is also one of the possible gateways for users to use the L2 network. The sequence is shown in the following diagram:
-![user registration](../images/user-registration.png)
+![user registration](./images/user-registration.png)
 
 The user interaction is very simple. The user deposits supported tokens into the well known address of the Network Management contract, and once the transaction is successfully added to a block, the Obscuro wallet automatically creates a L2 transaction including a proof of the L1 transaction.
 

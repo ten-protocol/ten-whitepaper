@@ -7,4 +7,4 @@ The TEEs use the shared secret to generate further asymmetric and symmetric keys
 
 Note that high available replication of the shared secret is fundamental for the good functioning of Obscuro. There are multiple incentives built into the protocol to ensure this.
 
-Read more about this in the detailed [Cryptography section](cryptography#cryptography).
+Read more about this in the detailed [Cryptography section](detailed-design#cryptography).
