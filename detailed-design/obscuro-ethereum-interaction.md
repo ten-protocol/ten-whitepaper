@@ -55,4 +55,4 @@ If there is a rollup fork, then the number of blocks have to be increased to all
 This mechanism ensures that as long as there is one honest participant in the market and the L1 network is reasonably censorship resistant, the funds are safe.
 
 The withdrawal process is indicated in the following diagram:
-![deposit process](../images/deposit-process.png)
+![deposit process](./images/deposit-process.png)
