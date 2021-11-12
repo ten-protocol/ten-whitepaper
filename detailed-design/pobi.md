@@ -136,33 +136,67 @@ Rollup_Generation_.
 This is python-like pseudocode. Note that it is not comprehensive.
 
 ```python
-# the rollup generation for which we calculate the rewards
+# The rollup generation for which we calculate the rewards
 generation = N
 
-# genN_L1_Blocks is a list of all L1 blocks starting with the _L1_Block_Generation_ of the head 
+# 'genN_L1_Blocks' is a list of all L1 blocks starting with the _L1_Block_Generation_ of the head 
 # of the canonical chain of the previous generation, until the block where you encounter the 
 # first valid rollup of _Rollup_Generation_ plus one extra L1 block.
 genN_L1_Blocks = calculateBlocks()
 
-# list of rollups of generation N found in the last block
+# List of rollups of generation N found in the last block
 rollups_in_last_block = genN_L1_Blocks[-1].rollups.filter(lambda r: r.generation == generation)
 
-# list of rollups of generation N found in the target block
+# List of rollups of generation N found in the target block
 rollups_in_target_block = genN_L1_Blocks[-2].rollups.filter(lambda r: r.generation == generation)
 
 if rollups_in_target_block.size == 1 and rollups_in_last_block.size == 0:
+
+    # There is no competition for the target rollup
     fullRewardTo(rollups_in_target_block[0].aggregator)
+
 elif rollups_in_target_block.size == 1 and rollups_in_last_block.size == 1:
+
+    # There is competition for the target rollup in the next rollup
+    # Which means there is suspicion of frontrunning
     target_rollup = rollups_in_target_block[0]
     competition_rollup = rollups_in_last_block[0]
-    if competition_rollup.L1_Proof_Generation == target_rollup.L1_Proof_Generation:
-       if competition_rollup.nonce < target_rollup.nonce:
-          fullRewardTo(competition_rollup.aggregator)
-       else:
-          fullRewardTo(target_rollup.aggregator)
-    elif       
-      
-    
+   
+    if competition_rollup.L1_Proof_Generation == target_rollup.L1_Proof_Generation and competition_rollup.nonce < target_rollup.nonce:
+       # This is more likely front-running
+       partialRewardTo(competition_rollup.aggregator)
+    else:
+       # The target has the lower nonce or is generated with a different proof, which means 
+       # this is a coincidence.
+       fullRewardTo(target_rollup.aggregator)
+
+elif rollups_in_target_block.size == 2:
+
+   # Two competing rollups in the target block
+   # This is not a frunt-running situation, so eventual rollups published in the next block don't matter
+   rollup1 = rollups_in_target_block[0]
+   rollup2 = rollups_in_target_block[1]
+
+   if rollup1.L1_Proof_Generation == rollup2.L1_Proof_Generation:
+
+      # According to rule #2 the competing rollups will split the reward 
+      if rollup1.nonce < rollup2.nonce:
+         splitRewardHigh(rollup1.aggregator)
+         splitRewardLow(rollup2.aggregator)
+      else:
+         splitRewardLow(rollup1.aggregator)
+         splitRewardHigh(rollup2.aggregator)
+
+    elif rollup1.L1_Proof_Generation > rollup2.L1_Proof_Generation:
+
+       # According to rule #3 the rollup generated with the more recent proof gets the reward 
+      fullRewardTo(rollup1.aggregator)
+   
+   else:
+
+      # According to rule #3 the rollup generated with the more recent proof gets the reward 
+      fullRewardTo(rollup2.aggregator)
+
 else:
     pass
 ```
