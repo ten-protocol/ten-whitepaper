@@ -98,22 +98,26 @@ The high level goal is to keep the system functioning as smoothly as possible, a
 
 These are the aggregator rewarding rules:
 
-1. The aggregator that has a single rollup without competition included in a block that was generated with the proof of the parent L1 block, will get the full reward. This is the most efficient case that is encouraged.
+1. The first aggregator that has successfully published a rollup without competition in the current or next L1 block, will get the full reward. This is the most efficient case that is encouraged.
+_Note: Competition means a rollup from the same generation._ 
 
 2. If multiple rollups generated with the same L1 proof and different nonces are published in the same block, the one with the lowest nonce is on the canonical chain, but the reward is split between them in a proportion of 80/20 (this ratio is indicative only). The reason for this rule is that it incentivises aggregators to gossip their winning rollup such that no one else publishes at the same time.
-    - There is no incentive for the losing aggregator to publish as 20% of the reward will not even cover the cost of
-      gas.
+    - There is no incentive for the losing aggregator to publish as 20% of the reward will not even cover the cost of gas.
     - There is an incentive for the winning aggregator to gossip to everyone else to avoid having this competition.
     - In case of a genuine failure in gossip, the losing aggregator will receive something. This is to reduce the risk
       of aggregators just waiting more than necessary to receive messages from all the other aggregators.
 
-3. If the winning rollup is published with one or multiple blocks delay and there is no competition it will receive the full reward. Note that in this case there will be at least an L1 block that will contain no rollup. If another rollup with the same parent rollup, but generated using a more recent empty L1 block as proof, is included in the same block, it will receive the full reward. The original winning rollup that didn't get published immediately will not receive any reward since there was more recent competition. This rule is designed to encourage publishing with enough gas, such that there is no risk of competition in a further block. The rule also encourages aggregators to not wait for rollups published with insufficient gas or not at all. As soon as there is a new L1 block, the round resets, and the reward is up for grabs. An actor controlling multiple aggregators with malicious irrational behaviour will only be able to slow the ledger down, because the rational actors will publish the rounds they win.
+3. If multiple sibling rollups generated using different L1 blocks as proof are included in the same block, the one created with the most recent proof will receive the full reward. 
+ The original winning rollup that didn't get published immediately will not receive any reward since there was more recent competition. This rule is designed to encourage publishing with enough gas, such that there is no risk of competition in a further block. The rule also encourages aggregators to not wait for rollups published with insufficient gas or not at all. As soon as there is a new L1 block, the round resets, and the reward is up for grabs. An actor controlling multiple aggregators with malicious irrational behaviour will only be able to slow the ledger down, because the rational actors will publish the rounds they win.
 
-4. If two consecutive L1 blocks include each a rollup from the same generation created from the same L1 proof, but the rollup from the second block has a lower nonce, pay a reduced reward to the aggregator that created the rollup with the lower nonce and do not pay anything to the aggregator with a higher nonce. Note that the rollup with the higher nonce will be on the canonical chain without receiving any reward. The reason for this surprising rule is that this scenario is most likely the result of rollup front-running, which is thus strongly discouraged. Considering that the frontrunner is consuming precious Ethereum gas, this mechanism is in effect a punishment.
+4. If two consecutive L1 blocks include each a rollup from the same generation created from the same L1 proof, but the rollup from the second block has a lower nonce, split the reward evenly between the two aggregators. 
+ Note that the rollup with the higher nonce will be on the canonical chain. 
+ The reason for this rule is that this scenario is possibly the result of rollup front-running, which is thus discouraged as the frontrunner is consuming precious Ethereum gas.
+ The even splitting of the reward also encourages the aggregator that wins a nonce generation round to publish as soon as possible, because publishing a block later will at best result in a small loss.
 
-5. If two rollups created from the same L1 proof, are published more than one block apart, where the first published rollup has a higher nonce, then pay the reward in full to the first published rollup. The reason for this rule is that the winner most likely added far too little gas, and someone else spotted the opportunity and contributed to earlier finality, which is rewarded.
+6. If two rollups created from the same L1 proof, are published more than one block apart, where the first published rollup has a higher nonce, then pay the reward in full to the first published rollup. The reason for this rule is that the winner most likely added far too little gas, and someone else spotted the opportunity and contributed to earlier finality, which is rewarded.
 
-6. Do not pay rewards in any other case.
+7. Do not pay rewards in any other case.
 
 The reward rules are depicted in the following diagram:
 ![L1 rewarding](../images/block-rewarding.png)
@@ -121,17 +125,13 @@ The reward rules are depicted in the following diagram:
 The rules in the case of front-running are depicted in the following diagram:
 ![L1 front running](../images/block-frontrunning.png)
 
-[comment]: <> (The notation is the following: _R_$Rollup_Generation[$Aggregator, $L1_Proof_Generation, $L1_Block_Generation, $Nonce]_)
-
 There are four types of rewards:
 
 - _Full Reward_ (FR)
-- _Partial Reward_ (PR - which covers the cost of gas
-- _Split_Reward_High_ (SRH - 80% of FR)
-- _Split_Reward_Low_ (SRL - 20% of FR)
+- _Minimal Reward_ (MR - which covers the cost of gas)
+- _Split_Reward_ (SR - a percentage of FR)
 
-Using the notation, this is how to calculate the rewards that can be claimed by an _Aggregator_ for a _
-Rollup_Generation_.
+Using the notation, this is how to calculate the rewards that can be claimed by an _Aggregator_ for a _Rollup_Generation_.
 
 This is python-like pseudocode. Note that it is not comprehensive.
 
@@ -163,40 +163,39 @@ elif rollups_in_target_block.size == 1 and rollups_in_last_block.size == 1:
     competition_rollup = rollups_in_last_block[0]
    
     if competition_rollup.L1_Proof_Generation == target_rollup.L1_Proof_Generation and competition_rollup.nonce < target_rollup.nonce:
-       # This is more likely front-running
-       partialRewardTo(competition_rollup.aggregator)
+        # This is possibly front-running or failure to gossip
+        # All parties involved in this will make a small loss
+        partialRewardTo(target_rollup.aggregator, '50%')
+        partialRewardTo(competition_rollup.aggregator, '50%')
     else:
-       # The target has the lower nonce or is generated with a different proof, which means 
-       # this is a coincidence.
-       fullRewardTo(target_rollup.aggregator)
+        # The target has the lower nonce or is generated with a different proof
+        fullRewardTo(target_rollup.aggregator)
 
 elif rollups_in_target_block.size == 2:
+    # Two competing rollups in the target block
+    # This is not a frunt-running situation, so eventual rollups published in the next block don't matter
+    rollup1 = rollups_in_target_block[0]
+    rollup2 = rollups_in_target_block[1]
 
-   # Two competing rollups in the target block
-   # This is not a frunt-running situation, so eventual rollups published in the next block don't matter
-   rollup1 = rollups_in_target_block[0]
-   rollup2 = rollups_in_target_block[1]
+    if rollup1.L1_Proof_Generation == rollup2.L1_Proof_Generation:
 
-   if rollup1.L1_Proof_Generation == rollup2.L1_Proof_Generation:
-
-      # According to rule #2 the competing rollups will split the reward 
-      if rollup1.nonce < rollup2.nonce:
-         splitRewardHigh(rollup1.aggregator)
-         splitRewardLow(rollup2.aggregator)
-      else:
-         splitRewardLow(rollup1.aggregator)
-         splitRewardHigh(rollup2.aggregator)
+        # According to rule #2 the competing rollups will split the reward 
+        if rollup1.nonce < rollup2.nonce:
+            partialRewardTo(rollup1.aggregator, '80%')
+            partialRewardTo(rollup2.aggregator, '20%')
+        else:
+            partialRewardTo(rollup2.aggregator, '80%')
+            partialRewardTo(rollup1.aggregator, '20%')
 
     elif rollup1.L1_Proof_Generation > rollup2.L1_Proof_Generation:
 
-       # According to rule #3 the rollup generated with the more recent proof gets the reward 
-      fullRewardTo(rollup1.aggregator)
+        # According to rule #3 the rollup generated with the more recent proof gets the reward 
+        fullRewardTo(rollup1.aggregator)
    
-   else:
-
-      # According to rule #3 the rollup generated with the more recent proof gets the reward 
-      fullRewardTo(rollup2.aggregator)
-
+    else:
+        # According to rule #3 the rollup generated with the more recent proof gets the reward 
+        fullRewardTo(rollup2.aggregator)
+        
 else:
     pass
 ```
