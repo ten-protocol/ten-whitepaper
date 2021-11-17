@@ -36,6 +36,8 @@ This is an extreme attack on this protocol, where all aggregators find a way to 
 
 The defense is to have a reasonable number of active verifiers that have a stake in the good functioning of Obscuro. "Active" means that they are watching the Obscuro ledger in real time. These actors will detect if there is a malicious head rollup and no other valid fork is being aggregated.
 
+_Note: One such actor monitoring the network will be the Obscuro Foundation, which has the mandate to keep the protocol functioning correctly. The protocol also rewards other independent parties to take on this job by assigning a small amount each rollup to a random validator if they can prove they are active._
+
 Any one of them will be able to become an aggregator quickly, by benefiting from the censorship resistance of Ethereum.  They will have to pay the stake, and publish a correct block. This valid fork will disable withdraws, and will trigger a governance event which will most likely lead to a code or hardware fix, and new _Attestation Constraints_.
 
 #### Invalid Rollup Attacks
@@ -51,7 +53,7 @@ The reasoning around this attack is quite different from typical public blockcha
 
 There are two reasons for such an attack:
 - The attackers want to steal the funds locked in the L1 Bridge. Note that this is not a problem in typical L1 chains as there are no side effects there, but it is in L2s.
-- Double spending. The attacker plans a malicious re-org or the L2 ledger. This is the typical threat for sybil attacks in L1 networks.
+- Double spending. The attacker plans a malicious re-org of the L2 ledger. This is the typical threat for sybil attacks in L1 networks.
 
 ##### The attack
 
