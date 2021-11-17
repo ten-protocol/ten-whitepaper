@@ -1,2 +1,3 @@
 ## Auditing
-[TODO] - This section needs to be finalised
+
+[comment]: <> (TODO This section needs to be finalised)

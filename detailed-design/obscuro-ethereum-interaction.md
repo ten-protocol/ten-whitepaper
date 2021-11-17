@@ -15,13 +15,15 @@ Typically, this problem is solved by waiting for a confirmation period. Obscuro 
 
 The L2 transaction that credits the Obscuro account will be in a L2 rollup that will only be accepted by the Bridge contract if the L1 block dependency is part of the ancestors of the current block.
 
-In case the L1 deposit transaction is re-organised away from the current fork, it invalidates the rollup which contains the L2 deposit transaction. See the [Data model](../appendix#data-model) section and the user interaction diagram.
+In case the L1 deposit transaction is re-organised away from the current fork, it invalidates the rollup which contains the L2 deposit transaction. See the [Data model](./appendix#data-model) section and the user interaction diagram, as well as the following dependency diagram.
+
+![deposit process](./images/deposit-process.png)
 
 The L2 transaction that notifies an Obscuro node to update the balance cannot be encrypted because the aggregator has to make a decision whether to include it in the current rollup based on the chances of the L1 block to be final.
 
-[TODO Is there a censorship problem to this approach?]
+[comment]: <> ([TODO Is there a censorship problem to this approach?])
 
-[TODO What is the incentive of the aggregator to add the deposit?]
+[comment]: <> ([TODO What is the incentive of the aggregator to add the deposit?])
 
 ## Withdrawals
 There is a pool of liquidity stored in the L1 management contract, which is controlled by the group of TEEs who maintain the encrypted ledger of ownership. Some users will want to withdraw from the L2 and go back to L1, which means the Bridge contract will have to allow them to claim money from the liquidity pool.
@@ -42,7 +44,7 @@ A real hack event would manifest itself as multiple forked long living chains wi
 This is a moment when the Network Management contract has to enter a special mode where the governance token holders will have to start aggregators with valid TEEs. These new TEEs will sign over the fork they consider valid. The result will be calculated based on the weighted stake.
 
 ### Withdrawal Process
-Each TEE signed rollup will contain an unencrypted list of withdrawal requests. See: [Data Model](../appendix#data-model).
+Each TEE signed rollup will contain an unencrypted list of withdrawal requests. See: [Data Model](./appendix#data-model).
 
 The Bridge contract will keep track of these requests and will execute them at different times, based on the status of the chain.
 
@@ -51,3 +53,6 @@ If at the moment of withdrawal there is only a single active head rollup, then a
 If there is a rollup fork, then the number of blocks have to be increased to allow one of the forks to die out naturally. If it doesn't then all withdrawals will be locked, and the contract will enter the special procedure described above.
 
 This mechanism ensures that as long as there is one honest participant in the market and the L1 network is reasonably censorship resistant, the funds are safe.
+
+The withdrawal process is indicated in the following diagram:
+![withdrawal process](./images/withdrawal-process.png)
