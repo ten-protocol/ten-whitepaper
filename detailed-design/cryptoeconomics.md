@@ -1,5 +1,5 @@
 ## Cryptoeconomics
-All successful decentralised solutions need a strong incentive mechanism to keep the protocol functioning efficiently. On top of that, Obscuro also aims to give its users a good experience by not allowing any form of "MEV". This means it must avoid the gas price bidding war we constantly see in popular blockchains.
+All successful decentralised solutions need a strong incentive mechanism to keep the protocol functioning effectively. On top of that, Obscuro also aims to give its users a good experience by not allowing any form of "MEV". This means it must avoid the gas price bidding war we constantly see in popular blockchains.
 
 For simplicity, this analysis focuses on the normal functioning of the network, assuming it reached adoption, and it will handle bootstrapping separately.
 

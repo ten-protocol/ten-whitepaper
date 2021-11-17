@@ -29,7 +29,7 @@ There are a few variants of this attack.
 
 The most severe is when the attacker impersonates a TEE and signs a rollup containing illegal transactions. If there is no withdrawal attempt in the rollup, or there are no other external side effects, this attack is equivalent to an L1 node publishing an invalid block. All the honest TEEs will ignore it. Even in this case, the protocol reverts to the behavior of a typical blockchain.
 
-If the attacker impersonating an enclave attempts to withdraw funds from the bridge contract based on invalid transactions, is a case that needs special consideration. This is where the L1 protocol meets the L2 protocol, and the bridge contract has to decide the validity of the withdrawal request in order to execute it. The solution is described in detail in the POBI protocol.
+If the attacker impersonating an enclave attempts to withdraw funds from the bridge contract based on invalid transactions, this is a case that needs special consideration. This is where the L1 protocol meets the L2 protocol, and the bridge contract has to decide the validity of the withdrawal request in order to execute it. The solution is described in detail in the POBI protocol.
 
 #### Colluding Write Level Attacks
 This is an extreme attack on this protocol, where all aggregators find a way to break the TEE and are colluding to steal all funds.
@@ -79,7 +79,7 @@ To perform a double spend, the attackers have to actually perform a double spend
 
 ###### Sybil attack when hacking the TEE
 
-In this scenario, the attacker is able to hack the TEE, and they setup a large number of aggregators, limited only by the stake.  Their motivation is that they want to steal the funds from the bridge – the ultimate prise.
+In this scenario, the attacker is able to hack the TEE, and they setup a large number of aggregators, limited only by the stake.  Their motivation is that they want to steal the funds from the bridge – the ultimate prize.
 
 The attack is as follows:
 1. Using a script, they handcraft invalid rollups, and publish them (by paying ethereum gas). On the L1, this would show as 2 forks. One maintained by the attacker, one maintained by the valid TEEs who just ignore the invalid rollups and keep doing their job.
