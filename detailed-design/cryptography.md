@@ -23,7 +23,7 @@ For example:
 
 One of these options will be chosen by default for applications that don't explicitly specify one.
 
-Each predefined period will reveal have to reveal transactions in a different cycle. The protocol will deterministically derive a symmetric encryption key from the master seed, the id of the reveal option, and the running counter for that option. All enclaves in possession of the master secret will be able to calculate the same encryption key.
+Each predefined period will have to reveal transactions in a different cycle. The protocol will deterministically derive a symmetric encryption key from the master seed, the id of the reveal option, and the running counter for that option. All enclaves in possession of the master secret will be able to calculate the same encryption key.
 
 Each interval for each reveal option will thus have a dedicated key _EncryptionKey(Reveal_option, Interval)_.
 
@@ -34,6 +34,8 @@ Separately from the blob, a data structure is created containing the position of
 
 After enough rollups have been added, any node operator can request from the TEE the encryption key and the position of the transactions they are entitled to view.
 
-[TODO - add more details and some diagrams.]
-[TODO - diagram1: Interaction diagram ]
-[TODO - diagram2: Structure of a block ]
+[comment]: <> ([TODO - add more details and some diagrams.])
+
+[comment]: <> ([TODO - diagram1: Interaction diagram ])
+
+[comment]: <> ([TODO - diagram2: Structure of a block ])
