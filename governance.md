@@ -1,6 +1,6 @@
 # Governance
 
-There are a few types of powers exercised in a decentralized system:
+There are several types of power exercised in a decentralized system:
 1. Explicit powers exercised by a group of people using direct signing or voting.
 2. Implicit powers implemented in an immutable protocol.
 3. Implicit powers implemented in a protocol that itself is represented by an open-source codebase that is mutable.
@@ -21,6 +21,8 @@ Since the Obscuro protocol is anchored in Ethereum as a smart contract, it canno
 The next best thing is to be very explicit about all the system's powers and achieve separation of powers.
 
 ## Obscuro powers
+Building on the above, we present the powers that are exercised within Obscuro.
+
 
 ###  1. The TEE attestation constraints.
 The _Attestation Constraints_ (AC) control which software is allowed to run inside the TEE and can process the user transactions and create the rollups. A group of independent, reputable, and competent security auditors has to analyze the code and approve it by signing it carefully. The constraints will contain the keys of the _approved auditors_.

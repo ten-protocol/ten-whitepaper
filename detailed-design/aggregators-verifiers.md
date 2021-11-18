@@ -2,7 +2,7 @@
 There are two categories of nodes in the Obscuro network:
 
 ### Aggregator Nodes
-Aggregators are the nodes in possession of the _shared secret_ who can submit rollups to the L1. To gain this privilege, these nodes must pledge a stake.
+Aggregators are the Obscuro nodes whose TEEs are in possession of the _shared secret_ and can submit rollups to the L1. To gain this privilege, these nodes must pledge a stake.
 
 End users will send encrypted transactions to any registered aggregators who will then gossip the transactions. Every round, one of the aggregators will publish the transaction in a rollup.
 

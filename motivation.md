@@ -1,15 +1,18 @@
 # Motivation
-## Introduction
 Public blockchain networks have experienced a period of strong growth in 2020-2021, with new use-cases for smart contracts encompassing the finance and art worlds. Decentralised Finance (DeFi) has seen enormous inflows of capital, with the top applications seeing the equivalent of $10 billion (summer 2021) of liquidity added, and this has helped push the overall capitalisation of cryptoassets above $2 trillion (summer 2021). Meanwhile, _Non-Fungible Tokens_ (NFTs) surged in value to $10 billion (autumn 2021).
 
-Public blockchains rely on the entire network seeing all transactions in order to be able to validate them and secure the network. This makes them _transparency engines_. But it also makes them inappropriate for many commercial and personal use-cases, where the confidential nature of interactions and deals should be maintained. It also creates a front-running issue, known as _Maximum Extractable Value_ (MEV), where miners or stakers and block proposers may steal value by observing user transactions and then preempting them. For example, a miner or bot may observe a user's desire to buy an asset at market price with an automated market maker, insert their own purchase ahead in the processing queue by paying a higher transaction fee, cause the price to go up for the user, and then sell their own purchase at a higher price and extract a profit from the user. By some estimates, front-running was valued at $1.4 billion annually in early 2021.
+Public blockchains rely on the entire network seeing all transactions in order to be able to validate them and secure the network. This makes them _transparency engines_. This creates a front-running issue, known as _Maximum Extractable Value_ (MEV), where miners or stakers and block proposers may steal value by observing user transactions and then preempting them. For example, a miner or bot may observe a user's desire to buy an asset at market price with an automated market maker, insert their own purchase ahead in the processing queue by paying a higher transaction fee, cause the price to go up for the user, and then sell their own purchase at a higher price and extract a profit from the user.
+
+By some estimates, front-running was valued at $1.4 billion annually in early 2021. This means that users of public blockchain networks are not deriving the full economic benefits of the technology. In addition, the transparant nature of the technology makes them inappropriate for many commercial and personal use-cases, where the confidential nature of interactions and deals should be maintained.
+
+We propose, Obscuro, a decentralized Ethereum Layer 2 Rollup protocol designed to address the above problems, introduce new use-cases and unlock the full potential and economic advantages of blockchain technology.
 
 ## Differentiators
-* Obscuro relies on Ethereum, a public blockchain with the greatest adoption,  legitimacy, security, and liquidity, as a base layer to handle security and data availability and manage the inflow and outflow of value.
-* Obscuro keeps all transactions and the internal state of application contracts encrypted and hidden, and so may provide a credible solution to MEV.
+* Obscuro leverages Ethereum, a public blockchain with the greatest adoption,  legitimacy, security, and liquidity, as a base layer to handle security and data availability and manage the inflow and outflow of value.
+* Obscuro keeps all transactions and the internal state of application contracts encrypted and hidden, and so provides a credible solution to MEV.
 * By providing an _Ethereum Virtual Machine_ (EVM) compatible VM, deploying existing contracts to Obscuro with minimal change may be possible.
 * Obscuro is trustless and decentralized. It takes processing from the Ethereum Layer-1 (L1) and allows lower transaction costs similar to other Layer-2 (L2) networks.
-* Obscuro acknowledges the limitations of hardware-based confidential computing and relies on TEE for privacy but not for integrity.
+* Obscuro leverages TEEs for privacy but not for integrity, and so we can acknowledge the limitations of hardware-based confidential computing and maintain integrity.
 * Obscuro guarantees quick finality by synchronizing the publishing of rollups to the cadence of the L1 blocks. 
 * Obscuro introduces a novel mechanism to allow application developers to balance the need for user data privacy (and MEV prevention) with the need to deter long-term illegal behavior.
 
@@ -23,14 +26,20 @@ Keeping the bids private helps ensure that if all bids are too low for any of th
 
 This type of auction requires Obscuro.
 
-### OTC Trading
-An _over-the-counter_ (OTC) venue, sometimes known as a _dark pool_ is a privately organised exchange for trading securities where exposure can be hidden until after everything has been executed and reported. This allows investors to trade without publicly revealing their intentions during the search for a buyer or seller as well as hiding any pricing data which could result in investors receiving poorer prices.
+### Dark pools and OTC Trading
+A _dark pool_ is a privately organised exchange for trading securities where exposure can be hidden until after execution and reporting. This allows investors to trade without publicly revealing their intentions during the search for a buyer or seller as well as hiding any pricing data which could result in investors receiving poorer prices.
 
-An OTC venue for us would be very different to an _automated market maker_ (AMM); it would be direct peer-to-peer trading with a layer of ‘dark’ price discovery added. The eventual revelation is also important, as trades eventually have to be disseminated to all investors (a consolidated tape)
+Dark pools on Obscuro would be very different to a typical DEX; it would be direct peer-to-peer trading with a layer of ‘dark’ price discovery added.
 
-Prices for assets can be derived from order flow within the enclaves. Obscuro can guarantee fair price discovery and leverage oracles such as Chainlink to ensure prices are within a fair band.
+Prices for assets can be derived from order flow within the Obscuro enclaves, guaranteeing fair price discovery and leveraging oracles such as Chainlink to ensure prices are within a fair band. The eventual revelation is also important, as trades eventually have to be disseminated to all investors (a consolidated tape).
+
+_Over-the-counter_ (OTC) trading is where bespoke products are tailored to specific client requirements. The most common usage of OTC is in financial derivatives where “OTC” means the opposite of “Exchange-traded”.
+
+They come in where there's a need for unique idiosyncratic terms for, as an example, an option, such as non-standard length of time, strike price, market conventions, or payoff structure and are negotiated between a buyer and issuer. Obscuro can guarantee privacy in both negotiating and structuring such products.
 
 Competing products already available, but these are not decentralised, and by definition, it's not possible to have a ‘dark’ pool in a decentralised manner without something like Obscuro.
+
+This type of trading is made possible with Obscuro.
 
 ### Fractional Non-Fungible Tokens (NFTs)
 The idea is to allow NFTs to be tokenised to allow fractional ownership. The difficulty with fractional ownership in the NFT space is for the art piece to be valuable, there needs to be the ability bring all the pieces back together to allow the full piece to be sold to a buyer.
