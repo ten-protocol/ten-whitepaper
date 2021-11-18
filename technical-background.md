@@ -7,15 +7,15 @@ Using a smart contract, it's possible to use the Ethereum network as an uncensor
 ## Trusted Execution Environment
 A TEE is a secure area of a main processor or CPU. It guarantees code and data loaded inside to be protected with respect to confidentiality and integrity as it is processed. We focus on Intel's SGX, based on our 5 years of experience developing a Java-based confidential computing product with it. The TEE data can not be read or processed outside the SGX enclave, including processes running at higher privilege levels in the same host.
 
-An SGX-capable CPU has two device root keys that are fused into it by the manufacturer, the _Root Provisioning Key_ (RPK) and the _Root Sealing Key_ (RSK). These keys can be used to create other CPU specific keys. In this whitepaper we will refer to them as the _Enclave Key_ (EK).  Processes and users outside the enclave encrypt data that is only meant for the enclave using keys generated inside the enclave. When the enclave wishes to store data, it is again encrypted so that the host (the server which stores the data) is not able to see it.
+An SGX-capable CPU has two device root keys that are fused into it by the manufacturer, the _Root Provisioning Key_ (RPK) and the _Root Sealing Key_ (RSK). The RPK is known to Intel and used to prove a CPU is genuine via remote attestation and the RSK is not known to any entity outside the CPU. These keys can be used to create other CPU specific keys. In this whitepaper we will refer to them as the _Enclave Key_ (EK).  Processes and users outside the enclave encrypt data that is only meant for the enclave using keys generated inside the enclave. When the enclave wishes to store data, it is again encrypted so that the host (the server which stores the data) is not able to see it.
 
-Attestation allows user verification that the SGX enclave is genuine and properly-patched, and the application running inside matches a particular codebase and is un-tampered, before the user shares confidential data with it. This allows the user or someone trusted by them to audit the code of the application in advance and know for sure that only that code will see that data.
+Attestation allows user verification that the enclave is running on a genuine SGX capable CPU that is properly-patched, and the application running inside the enclave matches a particular codebase and is un-tampered, before the user shares confidential data with it. This allows the user or someone trusted by them to audit the code of the application in advance and know for sure that only that code will see that data.
 
 In Obscuro's case, the SGX application is a virtual machine largely compatible with the EVM, allowing execution of existing Ethereum smart contracts, along with the rollup functionality necessary to interact with the L1 contract.
 
-The _Trusted Computing Base_ (TCB) is defined as the set of computing technologies that must be working correctly and not be malicious or compromised for a security system to operate. The TCB is composed of the hardware TCB (the CPU) and the software TCB (the firmware and the application).
-Attestation provides to the verifier a report containing the details about all the components of a TCB, like CPU type, version of the firmware and the version of the application.
-An attestation report that was deemed as secure could become insecure if a vulnerability is disclosed. At that moment the system needs to be re-secured, process which is called TCB recovery.
+The _Trusted Computing Base_ (TCB) is defined as the set of computing technologies that must be working correctly and not be malicious or compromised for a security system to operate. The TCB is composed of the hardware TCB (the CPU) and the software TCB (the CPU microcode and the application).
+Attestation provides to the verifier a report containing the details about all the components of a TCB, like CPU type, the SGX security version number (CPUSVN) and the version of the application.
+An attestation report that was deemed as secure could become insecure if a vulnerability is disclosed. At that moment the system needs to be re-secured, a process which is called TCB recovery.
 
 This whitepaper refers to the _Attestation Report_ (AR) as a generic object that describes the TCB and also contains an encryption key referred to as the _Attestation Key_ (AK), and as _Attestation Constraints_ (AC) to a set of constraints that a report must satisfy to be considered secure at a point in time. The constraints will change over time as vulnerabilities are discovered, and the Obscuro nodes will have to upgrade to be able to participate in the network.
 
@@ -27,7 +27,7 @@ The diagram below is a conceptual high-level overview of the mechanism by which 
 
 A signature from the EK attests that a signed data packet originates from a genuine CPU. That is not enough for the output of typical confidential computing use cases, as clients have to know what program runs inside the CPU and what firmware.
 
-To solve this problem, the TEE generates a new key (the AK) and inserts it into the attestation report, together with the software and hardware versions, and signs this report with the EK.
+To solve this problem, the TEE generates a new key (the AK) derived from the RSK which is then included in the attestation report, together with the software and hardware versions, and signs this report with the EK.
 
 By this mechanism, data packets signed with the AK include the trust from the genuine CPU and the hash of the program attested by the group of auditors.
 
