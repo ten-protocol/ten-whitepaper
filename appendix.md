@@ -90,7 +90,7 @@ Software Guard Extensions, a technology provided by Intel, a major CPU manufactu
 A user application running on a blockchain network which holds data or state, responds to user commands, and may store and manage assets or money.
 
 **Trusted Execution Environment / TEE**
-Trusted Execution Environment, in this case an environment where contracts may be managed in a deterministic, repeatable and auditable way, based on a set of trust dependencies. This design begins with SGX.
+An environment where contracts may be managed in a deterministic, repeatable and auditable way, based on a set of trust dependencies.
 
 **Trusted computing base / TCB**
  The set of computing technologies that must be working correctly and not be malicious or compromised for a security system to operate.
