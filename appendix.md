@@ -39,7 +39,7 @@ The unit that measures the amount of computational effort required to execute sp
 The levy imposed for every computation executed on the Ethereum network to encourage good behaviour, e.g. prevent bad actors from spamming the network.
 
 **Genesis enclave**
-The first Trusted Execution Environment to join a new network. The Genesis enclave propagates the master seed to the other attested nodes by encrypting it with specific Trusted Execution Enclave keys.
+The first Trusted Execution Environment to join a new network. The Genesis enclave propagates the master seed to the other attested nodes by encrypting it with specific Trusted Execution Environment keys.
 
 **Host**
 The party controlling the physical server who runs the Trusted Execution Environment. In the threat model of typical confidential computing applications, including Obscuro, the Host is an adversary of the system.
