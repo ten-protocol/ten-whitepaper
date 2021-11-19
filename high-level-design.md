@@ -3,6 +3,8 @@ We have designed for an L2 protocol, where user activity is moved _off-chain_ fr
 
 L2 networks have a unidirectional dependency on a L1 network: while the L2 network relies on the L1 network to provide an immutable and public record of rollup transaction data and to provide censorship resistance, liveness and availability, the L1 network is unaware of any individual L2 network. L2 submitted rollups are just normal L1 transactions.
 
+The following diagram shows the interactions between the two decentralised networks, Ethereum (L1) and Obscuro (L2): Obscuro is formed of Nodes called Aggregators, who compete to process user transactions, roll them up, and submit for inclusion in Ethereum blocks. Ethereum, through it's protocol, leverages it's own nodes to produce Ethereum blocks containing, amonst other things, the submitted Obscuro Rollups.
+
 ![L1-L2 Interaction](./images/l1-l2-interaction.png)
 
 ## L1 Network
