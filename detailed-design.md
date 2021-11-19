@@ -16,6 +16,7 @@ In this section, we introduce the key Obscuro component designs and protocol inc
 {% include_relative detailed-design/front-running-protection.md %}
 {% include_relative detailed-design/threat-model.md %}
 {% include_relative detailed-design/l1-contracts.md %}
+{% include_relative detailed-design/registrations.md %}
 
 [comment]: <> ({% include_relative detailed-design/upgrading.md %})
 
