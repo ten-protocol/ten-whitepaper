@@ -1,5 +1,5 @@
-## Registrations
-For nodes and users to interact with the Obscuro network they must register via the Network Management contract.
+## Joining the Obscuro Network
+Anyone wishing to join the Obsuro network as a Node must first check their hardware is compatible with the latest Attestation Constraints. Next they must download and install the latest software. Then they must perform the steps detailed below.
 
 ### Node Registration
 The enclaves must encrypt L2 transactions with a secret key shared across the L2 nodes rather than an enclave-specific key which would be lost if an enclave is damaged.
