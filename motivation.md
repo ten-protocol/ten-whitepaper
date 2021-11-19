@@ -12,7 +12,7 @@ We propose, Obscuro, a decentralized Ethereum Layer 2 Rollup protocol designed t
 * Obscuro keeps all transactions and the internal state of application contracts encrypted and hidden, and so provides a credible solution to MEV.
 * By providing an _Ethereum Virtual Machine_ (EVM) compatible VM, deploying existing contracts to Obscuro with minimal change may be possible.
 * Obscuro is trustless and decentralized. It takes processing from the Ethereum Layer-1 (L1) and allows lower transaction costs similar to other Layer-2 (L2) networks.
-* Obscuro leverages TEEs for privacy but not for integrity, and so we can acknowledge the limitations of hardware-based confidential computing and maintain integrity.
+* Obscuro leverages TEEs for privacy but not for integrity, and is not affected by the limitations of hardware-based confidential computing.
 * Obscuro guarantees quick finality by synchronizing the publishing of rollups to the cadence of the L1 blocks. 
 * Obscuro introduces a novel mechanism to allow application developers to balance the need for user data privacy (and MEV prevention) with the need to deter long-term illegal behavior.
 
