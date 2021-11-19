@@ -1,9 +1,9 @@
 # High Level Design
-Obscuro is a decentralised network composed of nodes with TEE capabilities, where users submit encrypted transactions and data is kept confidential from everyone including the host of the TEE. Network usage is paid for using an Obscuro utility token (OBX)
-
-The solution is an L2 protocol, which means it moves the user activity _off-chain_ from the L1, and it follows the increasingly common rollup pattern to store transactions on the L1 chain. Read more about [rollups](https://vitalik.ca/general/2021/01/05/rollup.html). Most rollup implementations exist to provide scalability for L1 networks, but the prime objective of Obscuro is to provide confidentiality.
+We have designed for an L2 protocol, where user activity is moved _off-chain_ from the L1, and it follows the increasingly common rollup pattern to store transactions on the L1 chain. Read more about [rollups](https://vitalik.ca/general/2021/01/05/rollup.html). Most rollup implementations exist to provide scalability for L1 networks, but the prime objective of Obscuro is to provide confidentiality.
 
 L2 networks have a unidirectional dependency on a L1 network: while the L2 network relies on the L1 network to provide an immutable and public record of rollup transaction data and to provide censorship resistance, liveness and availability, the L1 network is unaware of any individual L2 network. L2 submitted rollups are just normal L1 transactions.
+
+The following diagram shows the interactions between the two decentralised networks, Ethereum (L1) and Obscuro (L2): Obscuro is formed of Nodes called Aggregators, who compete to process user transactions, roll them up, and submit for inclusion in Ethereum blocks. Ethereum, through it's protocol, leverages it's own nodes to produce Ethereum blocks containing, amonst other things, the submitted Obscuro Rollups.
 
 ![L1-L2 Interaction](./images/l1-l2-interaction.png)
 

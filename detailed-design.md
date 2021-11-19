@@ -1,4 +1,5 @@
 # Detailed Technical Design
+In this section, we introduce the key Obscuro component designs and protocol incentives. We then explore the threats against key components and the robust solutions which Obscuro combines to protect against.
 
 {% include_relative detailed-design/shared-secret.md %}
 {% include_relative detailed-design/account-based-state.md %}
