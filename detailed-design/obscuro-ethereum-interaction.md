@@ -6,6 +6,8 @@ All side-chains and L2 solutions have developed solutions to the mismatches betw
 
 The difference between side-chains and L2 solutions is that mismatches are more significant for side-chains with their own finality and security mechanisms, and thus the bridge logic is either very complex or centralized.
 
+### Withdrawals
+
 At a high level, a user deposits ERC tokens in the Bridge contract, and the same amount will be credited with wrapped tokens on the user's account on Obscuro. The fact that the finality of L1 transactions is probabilistic makes crediting the L2 account not straightforward.
 
 Most solutions solve this problem by waiting for a confirmation period before crediting the account. Obscuro takes a different approach and introduces a dependency mechanism between the L2 rollup and the L1 blocks.
