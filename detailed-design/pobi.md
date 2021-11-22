@@ -209,35 +209,3 @@ else:
 ```
 
 _Note that these rules are subject to tweaking based on real life experience._
-
-### Failure Scenarios
-
-The next sections will analyze different failure scenarios and how the incentive rules ensure the good functioning of the protocol.
-
-#### 1. The winning sequencer does not publish
-
-The winning aggregator is incentivised to publish the rollup in order to receive the reward. This scenario should only occur infrequently, if the aggregator crashes or malfunctions. In case it happens, it will only be detected by the other aggregators when the round is supposed to end, and the next rollup is ready to publish. They will notice that the winning rollup was not added to the L1 block.
-
-In this situation, every aggregator will:
-
-* Discard the current rollup.
-* Unseal the previous rollup.
-* Add all current transactions to it.
-* Then seal it using the last empty block.
-* Gossip it.
-
-In effect this means that the previous round is replayed. The winning aggregator of this replayed round has priority over the reward in case the previous winner is eventually added in the same block.
-
-#### 2. The winning sequencer adds too little gas, and the rollup just sits in the mempool unconfirmed
-
-This scenario has the exact same effect as the previous one and can be handled in the same way. If the rollup is not in the next block, the round is replayed.
-
-Publishing with insufficient gas is in effect punished by the protocol, because it means that on top of missing the rollup reward, the aggregator will also pay the L1 gas fee, and there is no guarantee that she will receive the reward.
-
-### Competing L1 Blockchain Forks
-
-In theory, different L2 aggregators could be connected to L1 nodes that have different views of the L1 ledger. This will be visible in the L2 network as rollups being gossiped that point to different L1 forked blocks. Each aggregator will have to make a bet and continue working on the L1 fork which it considers to have the best chance. This is the same behaviour as any L1 node.
-
-This is depicted in [Rollup Data Structure](detailed-design#rollup-data-structure).
-
-In case it proves that the decision was wrong it has to roll back the state to a checkpoint and replay the winning rollups.
