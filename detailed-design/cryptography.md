@@ -34,6 +34,27 @@ Separately from the blob, a data structure is created containing the position of
 
 After enough rollups have been added, any node operator can request from the TEE the encryption key and the position of the transactions they are entitled to view.
 
+## Shared Secret
+A CPU manufacturer provisions every TEE with one or multiple keys, the EK. These keys are used for digitally signing messages and identifying a TEE. They are also used for encrypting data that only one hardware TEE can decrypt. To achieve the goals of a collaborative network like Obscuro, all the TEEs have to work on the same set of transactions, which means they must decrypt them.
+
+Obscuro achieves this by implementing a mechanism for attested TEEs to share 256 bits of entropy called the _shared secret_ (SS) or _master seed_.  This master seed is generated inside the Genesis enclave. The Genesis enclave propagates the master seed to the other attested nodes by encrypting it with specific TEE keys.
+
+The TEEs use the shared secret to generate further asymmetric and symmetric keys used by users to encrypt transactions and by the enclaves themselves to encrypt the content of the rollups.
+
+Note that high available replication of the shared secret is fundamental for the good functioning of Obscuro. There are multiple incentives built into the protocol to ensure this.
+
+Read more about this in the detailed [Cryptography section](detailed-design#cryptography).
+
+
+## Privacy Revelation
+There are several options for revealing private data to allow law enforcement agencies to prosecute illegal behaviour and deter criminals from taking advantage of Obscuro's privacy features:
+* Not make a provision to reveal on the basis that Obscuro is a platform and is unopinionated on what it is used for.
+* The transaction encryption key can be rotated and revealed periodically with a delay, such that any interested party can view all transactions.
+* A governance committee can approve some data mining enclaves that will have access to the shared secret and output suspicious activity.
+* Interested authorities can submit requests for data revelation and after review they may get access to encryption keys for various accounts or for the entire ledger.
+
+From the outset Obscuro will rotate the encryption key every year and reveal historic keys in the first phase, and decide later if additional mechanisms are required. Making no attempt to deter illegal behaviour is unethical. A case-by-case revelation based on authority demands is time-consuming and prone to political interference. It is also difficult to determine objectively what is a bona-fide authority which introduces an ethical dilemma.
+
 [comment]: <> ([TODO - add more details and some diagrams.])
 
 [comment]: <> ([TODO - diagram1: Interaction diagram ])
