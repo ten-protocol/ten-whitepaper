@@ -47,6 +47,6 @@ Note: Each aggregator needs an ETH balance on the L1 to pay for the submission o
 The Network Management contract is also one of the possible gateways for users to use the L2 network. The sequence is shown in the following diagram:
 ![user registration](./images/user-registration.png)
 
-The user interaction is very simple. The user deposits supported tokens into the well known address of the Network Management contract, and once the transaction is successfully added to a block, the Obscuro wallet automatically creates a L2 transaction including a proof of the L1 transaction.
+The user interaction is very simple. The user deposits supported tokens into the well known address of the Network Management contract, and once the transaction is successfully added to a block, the Obscuro-enabled wallet automatically creates a L2 transaction including a proof of the L1 transaction.
 
 Note: There is no need for a _confirmation period_, due to the L2 design based on dependencies between L2 rollups and L1 blocks.
