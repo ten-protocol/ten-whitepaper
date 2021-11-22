@@ -1,4 +1,4 @@
-## Aggregators and Verifiers
+## L2 Nodes
 There are two categories of nodes in the Obscuro network:
 
 ### Aggregator Nodes
