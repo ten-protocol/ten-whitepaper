@@ -6,13 +6,16 @@ The main threat to any ledger technology is data corruption. It could take the f
 Leading blockchains solve this problem by implementing a _Byzantine Fault Tolerant_ (BFT) consensus between independent parties and creating incentives to ensure that anyone who breaks the rules will not be rewarded or will even be penalized. The most extreme attack is a 51% "Sybil" attack, where the attacker somehow gains the majority of the decision power (computing power for proof of work, or staking for proof of stake) and can rewrite the history. This attack manifests as replacing an existing valid transaction with a valid competing transaction. While the ledger remains _logically_ valid, for the beneficiary of the first transaction, this is equivalent to stealing. If the attacker tried to _physically_ corrupt the ledger, everyone would ignore the invalid block.  The best defense against this attack is to ensure that multiple independent powerful actors have no incentive to collude.
 
 The Obscuro POBI protocol delegates this threat to the underlying L1 blockchain - Ethereum, which has good enough security properties.
-The general principle of the protocol is that it reverts to the behavior of a typical non-confidential blockchain in case of hacks on the TEE technology. 
+The general principle of the protocol is that it reverts to the behavior of a typical non-confidential blockchain in case of hacks on the TEE technology. As a result the L1 is the source of truth for the L2 network. Any L2 node with a valid TEE in possession of the shared secret is able to download all the rollups from the L1, calculate the entire state inside its encrypted memory, and at the same time validate all transactions.
 The protocol ensures that an attacker has nothing to gain and is slashed if they attempt to corrupt the ledger.
 This deterrent, combined with the technical difficulty and the high cost of attacking hardware security, will ensure the correct functioning of the protocol.
 
-The core principle of the design of Obscuro is that the integrity of the ledger, and thus the possessions of the users, are not in any way depending on trusting a hardware manufacturer. 
+The core principle of the design of Obscuro is that the integrity of the ledger, and thus the possessions of the users, are not in any way depending on trusting a hardware manufacturer. In case of a severe breach, the governance model implemented by the management contract will have to select the valid ledger and freeze it such that everyone has the chance to withdraw using balance proofs.
 
 ### Threats to TEE Technology
+The TEE technology and the program inside are not considered easily hackable, so the primary concern for the system is to ensure high availability.
+Attacks on TEEs have occurred in laboratories, so a secondary but essential concern is to prevent ultra-sophisticated actors with the ability to hack this technology from stealing funds or breaking the integrity of the ledger. From a high level, the solution uses an optimistic mechanism to handle such a case and penalise the culprits, rather than introduce real time delays or checks to prevent it.
+
 It is assumed that attackers run an aggregator node on a computer with a CPU they control, and then receive the secret key and the entire ledger, and then are able to run any possible attack on it, including those on the physical CPU.
 
 Assuming that such attacks are successful, the attacker can limit themselves to read-level access or try to corrupt the ledger using a write-level attack.
@@ -22,7 +25,7 @@ There is a spectrum of attack severity. The least severe is a side-channel where
 
 If this attacker is discreet, the information leak can continue until a software patch is published or until new hardware that removes this attack is released.
 
-This threat is specific to confidential blockchains. If the attack is successful, the protocol reverts to the behavior of a typical public blockchain where all transactions are public, and MEV is possible.
+This threat is specific to confidential blockchains. The only way to defend against these attacks is to perform a careful audit of the code, and to keep the _Attestation constraints_ up to date. If the attack is successful, the protocol reverts to the behavior of a typical public blockchain where all transactions are public, and MEV is possible.
 
 #### Write-Level Attacks
 There are a few variants of this attack.
@@ -100,3 +103,43 @@ There is no risk in altering the ledger or performing double spend attacks.
 There is not even a risk of denial of service, since the cryptoeconomics encourages all actors to quickly fill in gaps in published rollups.
 
 This type of attack could lead to centralisation, but it's unclear what effects that might have.
+
+### Front-Running Protection
+A TEE that emits events and responds to balance enquires becomes vulnerable to front-running attacks. An aggregator could in theory execute a transaction from an account they control, then execute a user transaction, then execute another transaction from a controlled account, and be able to learn something.
+
+This is much more complicated and expensive than traditional public front-running and MEV, but it doesn't solve the problem completely.
+
+A slight delay is introduced to make this attack impractical for the aggregators, but preserve the same user experience.  The TEE will emit events and respond to balance requests only when it received proof that a rollup was included in the L1 rollup contract. That proof is easy to obtain, and it will prevent an aggregator from probing while creating a rollup.
+
+An aggregator wishing to attack this scheme would have to quickly publish valid Ethereum blocks while executing user transactions, which is highly impractical.
+
+### Threats to the POBI Protocol
+Failure scenarios in the POBI protocol exist and the incentive rules are designed to ensure the good functioning of the protocol.
+
+#### 1. The winning sequencer does not publish
+
+The winning aggregator is incentivised to publish the rollup in order to receive the reward. This scenario should only occur infrequently, if the aggregator crashes or malfunctions. In case it happens, it will only be detected by the other aggregators when the round is supposed to end, and the next rollup is ready to publish. They will notice that the winning rollup was not added to the L1 block.
+
+In this situation, every aggregator will:
+
+* Discard the current rollup.
+* Unseal the previous rollup.
+* Add all current transactions to it.
+* Then seal it using the last empty block.
+* Gossip it.
+
+In effect this means that the previous round is replayed. The winning aggregator of this replayed round has priority over the reward in case the previous winner is eventually added in the same block.
+
+#### 2. The winning sequencer adds too little gas, and the rollup just sits in the mempool unconfirmed
+
+This scenario has the exact same effect as the previous one and can be handled in the same way. If the rollup is not in the next block, the round is replayed.
+
+Publishing with insufficient gas is in effect punished by the protocol, because it means that on top of missing the rollup reward, the aggregator will also pay the L1 gas fee, and there is no guarantee that she will receive the reward.
+
+### Competing L1 Blockchain Forks
+
+In theory, different L2 aggregators could be connected to L1 nodes that have different views of the L1 ledger. This will be visible in the L2 network as rollups being gossiped that point to different L1 forked blocks. Each aggregator will have to make a bet and continue working on the L1 fork which it considers to have the best chance. This is the same behaviour as any L1 node.
+
+This is depicted in [Rollup Data Structure](detailed-design#rollup-data-structure).
+
+In case it proves that the decision was wrong it has to roll back the state to a checkpoint and replay the winning rollups.

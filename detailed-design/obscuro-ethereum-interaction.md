@@ -19,6 +19,14 @@ If the L1 deposit transaction is no longer on the canonical L1 chain, it will au
 
 _Note: The deposit L2 transaction cannot be fully encrypted because the aggregator has to decide whether to include it in the current rollup based on the chances of the L1 block it depends on being final._
 
+### User Registration
+The Network Management contract is also one of the possible gateways for users to use the L2 network. The sequence is shown in the following diagram:
+![user registration](./images/user-registration.png)
+
+The user interaction is very simple. The user deposits supported tokens into the well known address of the Network Management contract, and once the transaction is successfully added to a block, the Obscuro-enabled wallet automatically creates a L2 transaction including a proof of the L1 transaction.
+
+Note: There is no need for a _confirmation period_, due to the L2 design based on dependencies between L2 rollups and L1 blocks.
+
 ### Withdrawals
 The high-level requirement for the withdrawal function is simple: allow Obscuro users to move assets back into the Ethereum network. The problem is that this is where the most significant threat against such a solution lies because there might be a large amount of locked value.
 

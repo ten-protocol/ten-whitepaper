@@ -1,3 +1,5 @@
+# Consensus
+
 ## Proof of Block Inclusion
 
 Obscuro uses a novel decentralised round-based consensus protocol based on a fair lottery and on synchronisation with the L1, specifically designed for L2 rollups, called _Proof Of Block Inclusion_ (POBI). It solves, among others, the fair leader election problem, which is a fundamental issue that all decentralised rollup solutions have to address. POBI is inspired by [Proof Of Elapsed Time](https://sawtooth.hyperledger.org/docs/core/releases/1.0/architecture/poet.html).
@@ -92,9 +94,15 @@ This built-in startup delay is also useful in preventing other real time side ch
 
 ### Aggregator Incentives
 
-Compared to a typical L1 protocol, there is an additional complexity. In a L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent, because they know everyone will do that as well. In a L2 decentralised protocol like POBI, there is an additional step, which is the publication of the rollup to L1, which can fail for multiple reasons.
+All successful decentralised solutions need a strong incentive mechanism to keep the protocol functioning effectively.
 
-The high level goal is to keep the system functioning as smoothly as possible, and be resistant to random failures or malicious behaviour, while not penalising Obscuro nodes for not being available.
+The Bitcoin incentive model is very simple. Each transaction pays a fee and on top of that each block contains a coinbase transaction, both going to the winner. If there are re-organisations of the chain, the block that makes it onto the canonical chain is the one that pays the reward, because it is in the ledger. This mechanism provides the right incentives for miners to follow the rules. One disadvantage of this model is that fees can get very high in periods of network congestion, which degrades user experience.
+
+Ethereum builds on top of this model to handle the complexities of Turing complete smart contract execution, by introducing a notion of _gas_ and of _gas price_, but the high level mechanics remain the same.
+
+Compared to a typical L1 protocol, there is an additional complexity to consider. In a L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent, because they know everyone will do that as well. In a L2 decentralised protocol like POBI, there is an additional step, which is the publication of the rollup to L1, which can fail for multiple reasons. Furthermore, the incentive design must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to a L1 block, which is where a L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
+
+The high level goal is to keep the system functioning as smoothly as possible, and be resistant to random failures or malicious behaviour, while not penalising Obscuro nodes for not being available. Obscuro introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain. The great advantage is increased flexibility in aligning incentives, at the cost of increased complexity.
 
 These are the aggregator rewarding rules:
 
@@ -201,35 +209,3 @@ else:
 ```
 
 _Note that these rules are subject to tweaking based on real life experience._
-
-### Failure Scenarios
-
-The next sections will analyze different failure scenarios and how the incentive rules ensure the good functioning of the protocol.
-
-#### 1. The winning sequencer does not publish
-
-The winning aggregator is incentivised to publish the rollup in order to receive the reward. This scenario should only occur infrequently, if the aggregator crashes or malfunctions. In case it happens, it will only be detected by the other aggregators when the round is supposed to end, and the next rollup is ready to publish. They will notice that the winning rollup was not added to the L1 block.
-
-In this situation, every aggregator will:
-
-* Discard the current rollup.
-* Unseal the previous rollup.
-* Add all current transactions to it.
-* Then seal it using the last empty block.
-* Gossip it.
-
-In effect this means that the previous round is replayed. The winning aggregator of this replayed round has priority over the reward in case the previous winner is eventually added in the same block.
-
-#### 2. The winning sequencer adds too little gas, and the rollup just sits in the mempool unconfirmed
-
-This scenario has the exact same effect as the previous one and can be handled in the same way. If the rollup is not in the next block, the round is replayed.
-
-Publishing with insufficient gas is in effect punished by the protocol, because it means that on top of missing the rollup reward, the aggregator will also pay the L1 gas fee, and there is no guarantee that she will receive the reward.
-
-### Competing L1 Blockchain Forks
-
-In theory, different L2 aggregators could be connected to L1 nodes that have different views of the L1 ledger. This will be visible in the L2 network as rollups being gossiped that point to different L1 forked blocks. Each aggregator will have to make a bet and continue working on the L1 fork which it considers to have the best chance. This is the same behaviour as any L1 node.
-
-This is depicted in [Rollup Data Structure](detailed-design#rollup-data-structure).
-
-In case it proves that the decision was wrong it has to roll back the state to a checkpoint and replay the winning rollups.
