@@ -1,58 +1,65 @@
-
 ## Obscuro and Ethereum Interaction
-Obscuro is designed as a confidential extension to Ethereum. This means that assets have to move freely between the two networks.
 
-The Bridge contract safeguards assets that are moved to the L2.
+Obscuro is a confidential extension to Ethereum, and thus assets have to move freely between the two networks.
 
-All side-chains and L2 solutions have to come up with solutions to the mismatches between the different models of the two networks.
+All side-chains and L2 solutions have developed solutions to the mismatches between the different models of the two networks, and typically there is a bridge contract that safeguards assets.
 
-Obscuro delegates finality and most security concerns to the Layer 1 network. There is a single situation where a Layer 1 voting based governance event has to decide between competing, persistent rollup forks.
+The difference between side-chains and L2 solutions is that mismatches are more significant for side-chains with their own finality and security mechanisms, and thus the bridge logic is either very complex or centralized.
 
-## Deposits
-At a high level, a user has to deposit ERC tokens in the Bridge contract, and the same amount has to be credited with wrapped tokens on the user's account on Obscuro. This is not straightforward since finality is probabilistic.
+At a high level, a user deposits ERC tokens in the Bridge contract, and the same amount will be credited with wrapped tokens on the user's account on Obscuro. The fact that the finality of L1 transactions is probabilistic makes crediting the L2 account not straightforward.
 
-Typically, this problem is solved by waiting for a confirmation period. Obscuro solves this by introducing a dependency mechanism between the L2 rollup and the L1 blocks.
+Most solutions solve this problem by waiting for a confirmation period before crediting the account. Obscuro takes a different approach and introduces a dependency mechanism between the L2 rollup and the L1 blocks.
 
-The L2 transaction that credits the Obscuro account will be in a L2 rollup that will only be accepted by the Bridge contract if the L1 block dependency is part of the ancestors of the current block.
+The rule is that the L2 rollup that includes the transaction that credits the Obscuro account will have a hard dependency on an L1 block, and the Bridge contract will enforce that it is one of the ancestors of the current block.
+If the L1 deposit transaction is no longer on the canonical L1 chain, it will automatically invalidate the rollup that contains the L2 deposit transaction. See the [Data model](./appendix#data-model) section and the user interaction diagram, as well as the following dependency diagram.
 
-In case the L1 deposit transaction is re-organised away from the current fork, it invalidates the rollup which contains the L2 deposit transaction. See the [Data model](./appendix#data-model) section and the user interaction diagram, as well as the following dependency diagram.
+![deposit process](../images/deposit-process.png)
 
-![deposit process](./images/deposit-process.png)
+_Note: The deposit L2 transaction cannot be fully encrypted because the aggregator has to decide whether to include it in the current rollup based on the chances of the L1 block it depends on being final._
 
-The L2 transaction that notifies an Obscuro node to update the balance cannot be encrypted because the aggregator has to make a decision whether to include it in the current rollup based on the chances of the L1 block to be final.
+### Withdrawals
+The high-level requirement for the withdrawal function is simple: allow Obscuro users to move assets back into the Ethereum network. The problem is that this is where the most significant threat against such a solution lies because there might be a large amount of locked value.
 
-[comment]: <> ([TODO Is there a censorship problem to this approach?])
+The challenge is to implement this functionality in a decentralized way by defining a protocol and economic incentives.
+Due to the sensitivity of this function, many side-chains and L2 solutions rely on multi-signature technology to control the release of funds. Optimistic Rollups rely on a challenge mechanism during a long waiting period before releasing funds, powered by economic incentives.
+Obscuro uses TEE technology, but it cannot leverage it for this aspect because of our threat model. The Bridge contract could release funds based on a signature from an attested TEE if it were invulnerable, but it is not, so the solution is to use economic incentives on top of the POBI protocol.
 
-[comment]: <> ([TODO What is the incentive of the aggregator to add the deposit?])
+#### Rollup Finality
 
-## Withdrawals
-There is a pool of liquidity stored in the L1 management contract, which is controlled by the group of TEEs who maintain the encrypted ledger of ownership. Some users will want to withdraw from the L2 and go back to L1, which means the Bridge contract will have to allow them to claim money from the liquidity pool.
+The general rule is that withdrawals can be processed only when a rollup is _Final_. This means this is the protocol for the finality of the Obscuro chain relative to the Ethereum chain.
 
-### The Rollup-Chain
-If the TEE technology was completely invulnerable, the Bridge contract could just release funds based on a signature from a valid TEE.
+##### Rule 1 - The standard delay period
+In the usual case, a rollup from the canonical chain (see POBI protocol) is final if a standard period of 1 day has passed from the ethereum block where it was published.
+- Note 1: The period is measured in ethereum blocks because the delay is stable on average between blocks.
+- Note 2: The reason for this period is to give honest nodes the chance to "challenge" the rollup if it is malicious.
+- Note 3: The period is inverse to the number of L2 nodes. It should be long enough to give honest participants the chance to react and publish in the face of aggressive censorship attempts against them, but short enough not to degrade the user experience. We estimate that once the network reaches a healthy number of nodes, we can reduce it to 50-100 blocks (~ 10 minutes).
 
-One attack is that one of the aggregators hacks the secure enclave, and is able to produce a proof that they own more and immediately withdraw it.
+##### Rule 2 - The competing forks
 
-The solution to this problem makes use of the blockchain data model that was introduced already.
+Assuming the period chosen at rule #1 is enough, the only possible write attack performed by an actor that could hack the TEE will manifest as multiple parallel forks at least two rollups deep. The reason for this is that all valid TEEs run the same attested code that will choose the same canonical chain from the rollups published in the L1 block presented as proof. If the management contract notices multiple forks, the rule is that finality is suspended on all forks, thus, withdrawals are suspended. If one of the forks becomes inactive, the rule is that all rollups on the alive fork become final once a standard period of 1 day has passed from the last L1 block that contained a rollup published on the inactive branch.
 
-If an attack happened, it would manifest itself as multiple forks in the L2 chain. The Bridge contract cannot evaluate which one is correct because it can't execute the transactions inside. These could be both valid forks but some bug is preventing aggregators to agree.
+- Note1: This rule degrades a _write-attack_ into a Denial of Service attack on the withdrawal function.
+- Note2: Assuming there are honest participants, the actual canonical ledger will keep growing including user transactions.
+- Note3: The attacker has to spend Ethereum gas to keep the malicious fork alive.
 
-The simple rule to detect an honest mistake is to wait for N blocks. If a fork does not progress for N blocks it is considered dead.
+##### Rule 3 - Addressing the DoS on Finality
 
-A real hack event would manifest itself as multiple forked long living chains with more than N rollups. The valid aggregators would ignore the invalid fork and continue on the valid one, while the hackers would publish rollups on the invalid fork.
+Since rule #2 transforms any attack into a DoS attack, the protocol has some mechanisms to keep user experience satisfactory even in the extreme case of a TEE hack.
 
-This is a moment when the Network Management contract has to enter a special mode where the governance token holders will have to start aggregators with valid TEEs. These new TEEs will sign over the fork they consider valid. The result will be calculated based on the weighted stake.
+a. The ultimate backstop is the "Attestation Constraints" rules. Forks in the canonical chain are clearly a breach of protocol, caused either by a TEE hack or a protocol hack. This is ultimately resolved with software or, at worst, hardware updates. Once the management contract forces an upgrade, the attacker will no longer be able to create malicious rollups, and thus the fork will become inactive, and finality will resume on the valid fork.
 
-### Withdrawal Process
-Each TEE signed rollup will contain an unencrypted list of withdrawal requests. See: [Data Model](./appendix#data-model).
+b. For any users with an L2 node, it is obvious which is the canonical chain, as it is the one that does not fail. Market makers operating on both L1 and L2 can step in and absorb the withdrawal requests of users at a slight discount without taking any actual risk.
 
-The Bridge contract will keep track of these requests and will execute them at different times, based on the status of the chain.
+c. The above rules will, in practice, prevent this type of attack, and if it happens, offer a practical solution for users.
+The protocol has yet another backstop to address the extreme case of a very persistent attacker.
 
-If at the moment of withdrawal there is only a single active head rollup, then all the system has to do is wait for a reasonable N number of blocks to ensure that there is no censorship attempt on L1. (Colluding L1 nodes could prevent a valid rollup from being published just long enough to not challenge the invalid one)
+Any user can trigger the _Forced Finality procedure_by staking a large amount on one of the competing chains. This amount should be a percentage of the amounts being withdrawn on that branch. Backers of the other chain are obliged to stake a similar or higher value to stay in the game. The game ends as an auction, where the party that loses also loses the bids. When the game is over, all rollups on that chain are considered final, and withdrawals executed.
 
-If there is a rollup fork, then the number of blocks have to be increased to allow one of the forks to die out naturally. If it doesn't then all withdrawals will be locked, and the contract will enter the special procedure described above.
+#### Withdrawals protocol
 
-This mechanism ensures that as long as there is one honest participant in the market and the L1 network is reasonably censorship resistant, the funds are safe.
+Each TEE signed rollup would contain a plaintext list of withdrawal requests. See: [Data Model](./appendix#data-model).
+
+The Bridge contract will keep track of these requests and will execute them at different times, based on the finality status of that rollup.
 
 The withdrawal process is indicated in the following diagram:
 ![withdrawal process](./images/withdrawal-process.png)

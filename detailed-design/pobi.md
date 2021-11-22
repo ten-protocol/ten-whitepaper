@@ -37,14 +37,14 @@ This sequence is depicted in the following diagram:
 
 ### Notation
 
-There are four elements which define a rollup :
+There are six elements which define a rollup :
 
-- the parent
-- the generation
-- the aggregator who generated it
-- the generation of the L1 block used as proof
-- the generation of the L1 block that includes this rollup.
-- the nonce
+1. The parent.
+2. The generation.
+3. The aggregator who generated it.
+4. The generation of the L1 block used as proof.
+5. The generation of the L1 block that includes this rollup.
+6. The nonce.
 
 The notation is the following: _R_$Rollup_Generation[$Aggregator, $L1_Proof_Generation, $L1_Block_Generation, $Nonce]_
 
