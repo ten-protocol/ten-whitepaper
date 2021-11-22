@@ -59,6 +59,4 @@ Aggregators that hack an enclave and attempt to break the ledger's integrity are
 
 Slashing is an implicit process carried out by the management contract based on predefined rules. Ultimately it is itself controlled by the code governance.
 
-## Procedures and Separation of Powers
-
 [comment]: <> ([TODO])
