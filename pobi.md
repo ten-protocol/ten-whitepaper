@@ -90,14 +90,14 @@ Ethereum builds on top of this model to handle the complexities of Turing comple
 
 Compared to a typical L1 protocol, there is an additional complexity to consider. In a L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent, because they know everyone will do that as well. In a L2 decentralised protocol like POBI, there is an additional step, which is the publication of the rollup to L1, which can fail for multiple reasons. Furthermore, the incentive design must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to a L1 block, which is where a L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
 
-The high level goal is to keep the system functioning as smoothly as possible, and be resistant to random failures or malicious behaviour, while not penalising Obscuro nodes for not being available. Obscuro introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain. The great advantage is increased flexibility in aligning incentives, at the cost of increased complexity.
+The high level goal is to keep the system functioning as smoothly as possible, and be resistant to random failures or malicious behaviour, while not penalising Obscuro nodes for not being available. Obscuro introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain. The great advantage is increased flexibility in aligning incentives, at the cost of increased complexity. Rewards can be awarded in full, split between aggregators or just enough to cover the cost of gas.
 
 These are the aggregator rewarding rules:
 
 1. The first aggregator that has successfully published a rollup without competition in the current or next L1 block, will get the full reward. This is the most efficient case that is encouraged.
 _Note: Competition means a rollup from the same generation._ 
 
-2. If multiple rollups generated with the same L1 proof and different nonces are published in the same block, the one with the lowest nonce is on the canonical chain, but the reward is split between them in a proportion of 80/20 (this ratio is indicative only). The reason for this rule is that it incentivises aggregators to gossip their winning rollup such that no one else publishes at the same time.
+2. If multiple rollups generated with the same L1 proof and different nonces are published in the same block (the target block), the one with the lowest nonce is on the canonical chain, but the reward is split between them in a proportion of 80/20 (this ratio is indicative only). The reason for this rule is that it incentivises aggregators to gossip their winning rollup such that no one else publishes at the same time.
     - There is no incentive for the losing aggregator to publish as 20% of the reward will not even cover the cost of gas.
     - There is an incentive for the winning aggregator to gossip to everyone else to avoid having this competition.
     - In case of a genuine failure in gossip, the losing aggregator will receive something. This is to reduce the risk
@@ -121,29 +121,22 @@ The reward rules are depicted in the following diagram:
 The rules in the case of front-running are depicted in the following diagram:
 ![L1 front running](./images/block-frontrunning.png)
 
-There are three types of rewards:
-1. _Full Reward_ (FR)
-2. _Minimal Reward_ (MR - which covers the cost of gas)
-3. _Split_Reward_ (SR - a percentage of FR)
-
-Using the notation, this is how to calculate the rewards that can be claimed by an _Aggregator_ for a _Rollup_Generation_.
-
-This is python-like pseudocode. Note that it is not comprehensive.
+This is python-like pseudocode to calculate the rewards that can be claimed by an _Aggregator_ for a _Rollup_Height_. Note that it is not comprehensive.
 
 ```python
-# The rollup generation for which we calculate the rewards
-generation = N
+# The rollup height for which we calculate the rewards
+height = N
 
-# 'genN_L1_Blocks' is a list of all L1 blocks starting with the _L1_Block_Generation_ of the head 
+# 'heightN_L1_Blocks' is a list of all L1 blocks starting with the _L1_Block_Height_ of the head 
 # of the canonical chain of the previous generation, until the block where you encounter the 
-# first valid rollup of _Rollup_Generation_ plus one extra L1 block.
-genN_L1_Blocks = calculateBlocks()
+# first valid rollup of _Rollup_Height_ plus one extra L1 block.
+heightN_L1_Blocks = calculateBlocks()
 
-# List of rollups of generation N found in the last block
-rollups_in_last_block = genN_L1_Blocks[-1].rollups.filter(lambda r: r.generation == generation)
+# List of rollups of height N found in the last block
+rollups_in_last_block = heightN_L1_Blocks[-1].rollups.filter(r.height == height)
 
-# List of rollups of generation N found in the target block
-rollups_in_target_block = genN_L1_Blocks[-2].rollups.filter(lambda r: r.generation == generation)
+# List of rollups of height N found in the target block
+rollups_in_target_block = heightN_L1_Blocks[-2].rollups.filter(r.height == height)
 
 if rollups_in_target_block.size == 1 and rollups_in_last_block.size == 0:
 
@@ -157,7 +150,7 @@ elif rollups_in_target_block.size == 1 and rollups_in_last_block.size == 1:
     target_rollup = rollups_in_target_block[0]
     competition_rollup = rollups_in_last_block[0]
    
-    if competition_rollup.L1_Proof_Generation == target_rollup.L1_Proof_Generation and competition_rollup.nonce < target_rollup.nonce:
+    if competition_rollup.L1_Proof_Height == target_rollup.L1_Proof_Height and competition_rollup.nonce < target_rollup.nonce:
         # This is possibly front-running or failure to gossip
         # All parties involved in this will make a small loss
         partialRewardTo(target_rollup.aggregator, '50%')
@@ -172,17 +165,17 @@ elif rollups_in_target_block.size == 2:
     rollup1 = rollups_in_target_block[0]
     rollup2 = rollups_in_target_block[1]
 
-    if rollup1.L1_Proof_Generation == rollup2.L1_Proof_Generation:
+    if rollup1.L1_Proof_Height == rollup2.L1_Proof_Height:
 
         # According to rule #2 the competing rollups will split the reward 
         if rollup1.nonce < rollup2.nonce:
             partialRewardTo(rollup1.aggregator, '80%')
             partialRewardTo(rollup2.aggregator, '20%')
         else:
-            partialRewardTo(rollup2.aggregator, '80%')
             partialRewardTo(rollup1.aggregator, '20%')
+            partialRewardTo(rollup2.aggregator, '80%')
 
-    elif rollup1.L1_Proof_Generation > rollup2.L1_Proof_Generation:
+    elif rollup1.L1_Proof_Height > rollup2.L1_Proof_Height:
 
         # According to rule #3 the rollup generated with the more recent proof gets the reward 
         fullRewardTo(rollup1.aggregator)
