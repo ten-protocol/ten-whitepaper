@@ -1,0 +1,17 @@
+---
+input:
+  abstract.md: ""
+  motivation.md: ""
+  context.md: ""
+  high-level-design.md: ""
+  technical-background.md: ""
+  detailed-design/rollup-data-structure.md: ""
+  detailed-design/aggregators-verifiers.md: ""
+  detailed-design/registrations.md: ""
+  detailed-design/pobi.md: ""
+  detailed-design.md: ""
+  detailed-design/state-confidentiality-wallets.md: ""
+  governance.md: ""
+  appendix.md: ""
+output: whitepaper.md
+---
