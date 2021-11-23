@@ -20,6 +20,9 @@ A node which participates in a L2 network and collaborates with other aggregator
 **Attestation constraints**
 Means of controlling which software is allowed to run inside the Trusted Execution Environment.
 
+**Automated Market Maker / AMM**
+Uses liquidity pools to allow digital assets to be traded automatically and without permissions.
+
 **Block reward**
 An amount of OBX which is given to node operators to cover their costs to validate and publish blocks.
 
@@ -53,8 +56,8 @@ The public Ethereum blockchain and network.
 **Layer 2 / L2**
 A second network built on top of a L1 network and dependent on it. A L2 network expands on the capabilities of the L1 network by increasing capacity or enhancing functionality.
 
-**MEV**
-Maximum Extractable Value. Miners or stakers and block proposers may extract value by observing user transactions and then preempting them by inserting their own transaction ahead in the processing queue and influencing the price of an asset in order to extract a profit.
+**Maximal Extractable Value / MEV**
+Participants in the network may extract value by observing user transactions and then preempting them by inserting their own transaction ahead in the processing queue and influencing the price of an asset in order to extract a profit.
 
 **Non-Fungible Token / NFT**
 A unique and non-interchangeable unit of data stored on a digital ledger.
@@ -92,11 +95,17 @@ Software Guard Extensions, a technology provided by Intel, a major CPU manufactu
 **Smart Contract / Contract**
 A user application running on a blockchain network which holds data or state, responds to user commands, and may store and manage assets or money.
 
+**Stake**
+A non-negligable amount of value which is given over to an activity or process to demonstrate commitment to follow the rules for that activity or process.
+
 **Trusted Execution Environment / TEE**
 An environment where contracts may be managed in a deterministic, repeatable and auditable way, based on a set of trust dependencies.
 
 **Trusted computing base / TCB**
  The set of computing technologies that must be working correctly and not be malicious or compromised for a security system to operate.
+
+**Utility Token**
+Tokens which are intended to provide digital access to an application or service.
 
 **Verifier**
 A _light_ L2 node which observes transaction rollups published to the L1 blockchain, and can participate in possible disputes. Any verifier can become an aggregator by registering on the L1 contract and pledging some stake.
