@@ -33,7 +33,7 @@ Collection of one or more cryptographics keys used for encrypting and decrypting
 Ethereum Request for Comments 20, proposed by Fabian Vogelsteller in November 2015, is a token standard that implements an API for tokens within Smart Contracts.
 
 **Ethereum Virtual Machine / EVM**
-A virtual computer whose existance is maintained by thousands of connected real-world computers running an Ethereum client.
+A virtual computer whose existence is maintained by thousands of connected real-world computers running an Ethereum client.
 
 **Gas**
 The unit that measures the amount of computational effort required to execute specific operations on the Ethereum network.
