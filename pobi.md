@@ -191,4 +191,4 @@ else:
     pass
 ```
 
-_Note that these rules are subject to tweaking based on real life experience._
+_Note that these rules are subject to adjustment based on production observations._
