@@ -26,9 +26,9 @@ This threat is specific to confidential blockchains. The only way to defend agai
 #### Write-level attacks
 There are a few variants of this attack.
 
-The most severe is when the attacker impersonates a TEE and signs a rollup containing illegal transactions. If there is no withdrawal attempt in the rollup, or there are no other external side effects, this attack is equivalent to an L1 node publishing an invalid block. All the honest TEEs will ignore it. Even in this case, the protocol reverts to the behavior of a typical blockchain.
+The most severe is when the attacker impersonates a TEE and signs a rollup containing illegal transactions. If there is no withdrawal attempt in the rollup, or there are no other external side effects, this attack is equivalent to an L1 node publishing an invalid block. All the honest TEEs will ignore it. Even in this case, the protocol reverts to the behavior of a typical blockchain and the attacker's stake is lost.
 
-If the attacker impersonating an enclave attempts to withdraw funds from the bridge contract based on invalid transactions, this is a case that needs special consideration. This is where the L1 protocol meets the L2 protocol, and the bridge contract has to decide the validity of the withdrawal request in order to execute it. The solution is described in detail in the POBI protocol.
+If the attacker impersonating an enclave attempts to withdraw funds from the bridge contract based on invalid transactions, this is a case that needs special consideration. This is where the L1 protocol meets the L2 protocol, and the bridge contract has to decide the validity of the withdrawal request in order to execute it. The solution is described in detail in Rollup Finality.
 
 #### Colluding write level attacks
 This is an extreme attack on this protocol, where all aggregators find a way to break the TEE and are colluding to steal all funds.
