@@ -1,5 +1,4 @@
 # Governance
-
 There are several types of power exercised in a decentralized system:
 1. Explicit powers exercised by a group of people using direct signing or voting.
 2. Implicit powers implemented in an immutable protocol.
@@ -21,10 +20,9 @@ Since the Obscuro protocol is anchored in Ethereum as a smart contract, it canno
 The next best thing is to be very explicit about all the system's powers and achieve separation of powers.
 
 ## Obscuro powers
-Building on the above, we present the powers that are exercised within Obscuro.
+Building on the above, the following powers that are exercised within Obscuro.
 
-
-###  1. The TEE attestation constraints.
+###  1. The TEE Attestation Constraints.
 The _Attestation Constraints_ (AC) control which software is allowed to run inside the TEE and can process the user transactions and create the rollups. A group of independent, reputable, and competent security auditors has to analyze the code and approve it by signing it carefully. The constraints will contain the keys of the _approved auditors_.
 
 The parties who have the power to set the AC and thus appoint auditors ultimately control the software.
@@ -32,7 +30,7 @@ The parties who have the power to set the AC and thus appoint auditors ultimatel
 This concern is not completely different from the smart contracts security auditors, except that typically users decide which auditors they trust by using or not using those contracts.
 
 
-###  2. Administration of the different Ethereum management contracts.
+###  2. Administration Of Ethereum Management Contracts.
 Like all the other Ethereum applications, these contracts will have upgradeable parts to cater to bugs and new features. Whatever is upgradeable means that the _administrators_ have full powers over those aspects.
 1. Bridge logic
 2. Rollup logic
@@ -40,12 +38,12 @@ Like all the other Ethereum applications, these contracts will have upgradeable 
 
 In the example above, the auditors are a fixed list. However, that might not be practical, as companies might appear or disappear. The list of approved auditors has to be managed by a proposal and vote process by the community without any requirement for human intervention. Going a level deeper, the code that manages this process might need to be upgradeable, so someone ends up controlling it.
 
-###  3. Creating rollups
+###  3. Creating Rollups
 Another power, equivalent to the L1 stakers or miners, is held by Obscuro Aggregators. They run attested software and hardware and have paid a stake.
 
 They have the power to append to the L2 ledger, but they do not have the power to choose competing software and thus create forks.
 
-###  4. Canonical rollup chain.
+###  4. Canonical Rollup Chain.
 In a typical L1, the canonical chain is ultimately decided by its users from one of the competing forks because the ledger is ultimately coupled to the value of the coin.
 
 In Obscuro, the aggregators have to run attested software, which constraints their free will unless they can hack the TEE technology.
@@ -54,9 +52,7 @@ According to the rules implemented, a valid TEE will not sign a rollup building 
 
 Additional complexity involves the withdrawal process, which depends on assured finality on the canonical chain.
 
-###  5. Slashing the stake of misbehaving parties.
+###  5. Slashing the Stake of Misbehaving Parties.
 Aggregators that hack an enclave and attempt to break the ledger's integrity are discovered by the protocol and will be punished by slashing to disincentivise such disruptive behavior further.
 
 Slashing is an implicit process carried out by the management contract based on predefined rules. Ultimately it is itself controlled by the code governance.
-
-[comment]: <> ([TODO])

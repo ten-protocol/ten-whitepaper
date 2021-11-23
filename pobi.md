@@ -1,11 +1,9 @@
 # Consensus
 
 ## Proof of Block Inclusion
-
 Obscuro uses a novel decentralised round-based consensus protocol based on a fair lottery and on synchronisation with the L1, specifically designed for L2 rollups, called _Proof Of Block Inclusion_ (POBI). It solves, among others, the fair leader election problem, which is a fundamental issue that all decentralised rollup solutions have to address. POBI is inspired by [Proof Of Elapsed Time](https://sawtooth.hyperledger.org/docs/core/releases/1.0/architecture/poet.html).
 
 ### High Level Description
-
 The high level goals of the POBI protocol are:
 
 1. Each round, to distribute the sequencer function fairly among all the active registered aggregators.
@@ -13,7 +11,7 @@ The high level goals of the POBI protocol are:
 
 To achieve fairness, the PoBI protocol states that each round the TEE can generate one random nonce and the winner of a round is the aggregator whose TEE generated the lowest random number from the group. The TEEs will generate these numbers independently and then will gossip them. The aggregators who didn't win the round, similar to L1 miners, will respect this decision because it is the rational thing to do based on the incentive mechanism. If they don't want to respect the protocol, they are free to submit a losing rollup to the L1, but it will be ignored by all compliant aggregators, which means such an aggregator has to pay L1 gas and not get any useful reward.
 
-We achieve the second goal by linking the random nonce generation which terminates a round to the Merkle proof of inclusion of the parent rollup in a L1 block. This property is what gives the name of the protocol. This means that an aggregator is able to obtain a signed rollup from the TEE only if it is able to present a Merkle proof of block inclusion. This feature links the creation of L2 rollup to an L1 block, thus synchronising their cadence.
+The second goal is achieved by linking the random nonce generation which terminates a round to the Merkle proof of inclusion of the parent rollup in a L1 block. This property is what gives the name of the protocol. This means that an aggregator is able to obtain a signed rollup from the TEE only if it is able to present a Merkle proof of block inclusion. This feature links the creation of L2 rollup to an L1 block, thus synchronising their cadence.
 
 A party wishing to increase its chances of winning rounds will have to register multiple aggregators and pay the stake for each. The value of the stake needs to be calculated in such a way as to achieve a right decentralisation and practicality balance. This will be discussed further in the incentives section.
 
@@ -24,7 +22,6 @@ Note that the L1 management contract is not checking the nonces of the submitted
 A further issue to solve is to ensure that the host will not be able to repeatedly submit the proof to the TEE to get a new random number.
 
 ### Typical Scenario
-
 1. A new round starts from the point of view of an aggregator when it decides that someone has gossiped a winning rollup. At that point it creates a new empty rollup structure, points it to the previous one, and starts adding transactions to it (which are being received from users or by gossip).
 2. In the meantime it is closely monitoring the L1 by being directly connected to a L1 node.
 3. As soon as the previous rollup was added to a mined L1 block, the aggregator takes that Merkle proof, feeds it to the TEE who replies with a signed rollup containing a random nonce generated inside the enclave.
@@ -38,7 +35,6 @@ This sequence is depicted in the following diagram:
 ![node-processing](./images/node-processing.png)
 
 ### Notation
-
 There are six elements which define a rollup :
 
 1. The parent.
@@ -55,34 +51,27 @@ Note that: L1_Proof_Generation < L1_Block_Generation .
 Example: _R_15[Alice, 100, 102, 20]_ means the generation is 15, the aggregator is _Alice_, the generation of the L1 bock used as proof is 100, the generation of the L1 bock that included the rollup is 102, and the nonce equals 20.
 
 ### The canonical chain
-
 The POBI protocol allows any aggregator to publish rollups to the management contract. This means that short-lived forks are a normal part of the protocol. The ObscuroVM running inside the TEE of every node must be able to deterministically select one of the forks as the canonical chain and only append a rollup on top of that. This means that the TEE must receive all the relevant content of the L1 blocks, and the logic must be identical on all nodes.
 
 The rules for the canonical chain:
-
 1. The genesis rollup is part of the canonical chain, and will be included in a block by the first aggregator.
-
 2. If an L1 block contains a single rollup whose parent is the head rollup of the canonical chain included in a previous L1 block, it will also be on the canonical chain if no other rollup with the same parent was included in an earlier block. Any other sibling rollup included in a later block is not on the canonical chain. This is the _Primogeniture_ rule, where a rollup is born when included in an L1 block.
-
 3. If an L1 block contains multiple sibling rollups created in the same round using the same L1 proof, the one with the lower nonce will be on the canonical chain.
-
 4. If an L1 block contains multiple sibling rollups created using different L1 proofs, the one created more recently is on the canonical chain.
 
 [comment]: <> ([TODO - diagram depicting these scenarios])
 
 Using the notation, for the same _Rollup_Generation_, the rollup that will be on the canonical chain is the one with:
-
-- the lowest L1_Block_Generation
-- in case there are multiple use the highest L1_Proof_Generation
-- in case there are multiple use the lowest Nonce
+1. The lowest L1_Block_Generation. 
+2. In case there are multiple matches, use the highest L1_Proof_Generation. 
+3. In case there are multiple matches, use the lowest nonce.
 
 Given that the nonce is a random number with sufficient entropy, we assume there cannot be a collision at this point.
 
 ### Preventing Repeated Random Nonce Generation
-
 In phase 3 of the protocol, the TEE of each aggregator generates a random nonce which determines the winner of the protocol. This introduces the possibility of gaming the system by restarting the TEE, and attempting to generate multiple numbers.
 
-The solution proposed by Obscuro is to introduce a timer upon startup of the enclave, in the constructor. A conventional timer, based on the clock of the computer is not very effective since it can be gamed by the host.
+The solution proposed by Obscuro is to introduce a timer upon startup of the enclave, in the constructor. A conventional timer, based on the clock of the computer, is not very effective since it can be gamed by the host.
 
 The solution is for the enclave to serially (on a single thread) calculate a large enough number of SHA256 hashes which it wouldn't be able to do faster than an average block time on even a very fast CPU.
 
@@ -93,7 +82,6 @@ A node operator wanting to cheat would restart the enclave, and quickly feed it 
 This built-in startup delay is also useful in preventing other real time side channel attacks, which could be used for MEV.
 
 ### Aggregator Incentives
-
 All successful decentralised solutions need a strong incentive mechanism to keep the protocol functioning effectively.
 
 The Bitcoin incentive model is very simple. Each transaction pays a fee and on top of that each block contains a coinbase transaction, both going to the winner. If there are re-organisations of the chain, the block that makes it onto the canonical chain is the one that pays the reward, because it is in the ledger. This mechanism provides the right incentives for miners to follow the rules. One disadvantage of this model is that fees can get very high in periods of network congestion, which degrades user experience.
@@ -133,11 +121,10 @@ The reward rules are depicted in the following diagram:
 The rules in the case of front-running are depicted in the following diagram:
 ![L1 front running](./images/block-frontrunning.png)
 
-There are four types of rewards:
-
-- _Full Reward_ (FR)
-- _Minimal Reward_ (MR - which covers the cost of gas)
-- _Split_Reward_ (SR - a percentage of FR)
+There are three types of rewards:
+1. _Full Reward_ (FR)
+2. _Minimal Reward_ (MR - which covers the cost of gas)
+3. _Split_Reward_ (SR - a percentage of FR)
 
 Using the notation, this is how to calculate the rewards that can be claimed by an _Aggregator_ for a _Rollup_Generation_.
 
