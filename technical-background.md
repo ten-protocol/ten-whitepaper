@@ -17,7 +17,7 @@ The _Trusted Computing Base_ (TCB) is defined as the set of computing technologi
 Attestation provides to the verifier a report containing the details about all the components of a TCB, like CPU type, the SGX security version number (CPUSVN) and the version of the application.
 An attestation report that was deemed as secure could become insecure if a vulnerability is disclosed. At that moment the system needs to be re-secured, a process which is called TCB recovery.
 
-This whitepaper refers to the _Attestation Report_ (AR) as a generic object that describes the TCB and also contains an encryption key referred to as the _Attestation Key_ (AK), and as _Attestation Constraints_ (AC) to a set of constraints that a report must satisfy to be considered secure at a point in time. The constraints will change over time as vulnerabilities are discovered, and the Obscuro nodes will have to upgrade to be able to participate in the network.
+This whitepaper refers to the _Attestation Report_ (AR) as a generic object that describes the TCB and also contains an encryption key referred to as the _Attestation Key_ (AK), and as _Attestation Constraints_ (AC) to a set of constraints that a report must satisfy to be considered secure at a point in time. The constraints will change over time as vulnerabilities are discovered, the software is upgraded with new features or to keep up with the evolution of the EVM. The Obscuro nodes will have to upgrade to continue participating in the network.
 
 Any message originating from an enclave can be signed with the AK. This is a guarantee for the recipient that it must have originated only inside a valid enclave.
 

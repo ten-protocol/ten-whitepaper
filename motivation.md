@@ -18,13 +18,13 @@ Keeping the bids private helps ensure that if all bids are too low for any of th
 This type of auction requires Obscuro.
 
 ### Dark pools and OTC Trading
-A _dark pool_ is a privately organised exchange for trading securities where exposure can be hidden until after execution and reporting. This allows investors to trade without publicly revealing their intentions during the search for a buyer or seller as well as hiding any pricing data which could result in investors receiving poorer prices.
+A _dark pool_ [dark pool](https://www.investopedia.com/articles/markets/050614/introduction-dark-pools.asp) is a privately organised exchange for trading securities where exposure can be hidden until after execution and reporting. This allows investors to trade without publicly revealing their intentions during the search for a buyer or seller as well as hiding any pricing data which could result in investors receiving poorer prices.
 
 Dark pools on Obscuro would be very different to a typical DEX; it would be direct peer-to-peer trading with a layer of ‘dark’ price discovery added.
 
 Prices for assets can be derived from order flow within the Obscuro enclaves, guaranteeing fair price discovery and leveraging oracles such as Chainlink to ensure prices are within a fair band. The eventual revelation is also important, as trades eventually have to be disseminated to all investors (a consolidated tape).
 
-_Over-the-counter_ (OTC) trading is where bespoke products are tailored to specific client requirements. The most common usage of OTC is in financial derivatives where “OTC” means the opposite of “Exchange-traded”.
+[Over-the-counter (OTC)](https://www.investopedia.com/terms/o/otc.asp) trading is where bespoke products are tailored to specific client requirements. The most common usage of OTC is in financial derivatives where “OTC” means the opposite of “Exchange-traded”.
 
 They come in where there's a need for unique idiosyncratic terms for, as an example, an option, such as non-standard length of time, strike price, market conventions, or payoff structure and are negotiated between a buyer and issuer. Obscuro can guarantee privacy in both negotiating and structuring such products.
 

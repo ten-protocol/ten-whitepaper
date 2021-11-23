@@ -152,10 +152,10 @@ The aggregator host must not be able to repeatedly submit the rollup proof to th
 
 ### Alternative Privacy Revelation
 There are several options for revealing private data to allow law enforcement agencies to prosecute illegal behaviour and deter criminals from taking advantage of Obscuro's privacy features:
-* Not make a provision to reveal on the basis that Obscuro is a platform and is unopinionated on what it is used for.
-* The transaction encryption key can be rotated and revealed periodically with a delay, such that any interested party can view all transactions. This is the solution we chose, but with some aplication level flexibility.
+* Not make a provision to reveal on the basis that Obscuro is a platform and is un-opinionated on what it is used for.
+* The transaction encryption key can be rotated and revealed periodically with a delay, such that any interested party can view all transactions. This is the solution we chose, but with some application level flexibility.
 * A governance committee can approve some data mining enclaves that will have access to the shared secret and output suspicious activity.
 
-From the outset Obscuro will rotate the encryption key every year and reveal historic keys in the first phase, and decide later if additional mechanisms are required. Making no attempt to deter illegal behaviour is unethical. A case-by-case revelation based on authority demands is time-consuming and prone to political interference. It is also difficult to determine objectively what is a bona-fide authority which introduces a political dilemma.
+From the outset Obscuro will rotate the encryption key every year and reveal historic keys in the first phase, and decide later if additional mechanisms are required. A case-by-case revelation based on authority demands is time-consuming and prone to political interference. It is also difficult to determine objectively what is a bona-fide authority which introduces a political dilemma.
 
 [Page history]({{ site.github.repository_url }}/blame/main/{{page.path}})

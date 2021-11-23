@@ -4,8 +4,8 @@ There are several types of power exercised in a decentralized system:
 2. Implicit powers implemented in an immutable protocol.
 3. Implicit powers implemented in a protocol that itself is represented by an open-source codebase that is mutable.
 
-Note that nothing is truly immutable because a codebase or even hardware executes even the most immutable protocol and can change its behavior.
-Ultimately there is an explicit governance process somewhere. It is turtles all the way down.
+Note that almost nothing is truly immutable because a codebase or even hardware executes even the most immutable protocol and can change its behavior. In theory, a truly immutable system could be achieved using various hash constraints within TEEs, however, allowing for upgrades is a more desirable outcome.
+Ultimately, for all other cases, there is an explicit governance process somewhere. It is turtles all the way down.
 
 Bitcoin miners, for example, have some power to determine the rules by choosing which version of the core code to install and to produce blocks with. If there are disagreements, there will be a fork, and the user community will ultimately decide what value to assign to each fork. This is only a problem if the competing forks have similar mining power, and thus security. For day-to-day upgrades, miners have the de-facto decision power, but in case of disagreements, the users have the ultimate power through free markets.
 This is currently the golden standard for decentralized governance, with advantages and disadvantages.
