@@ -37,20 +37,23 @@ This sequence is depicted in the following diagram:
 ### Notation
 There are six elements which define a rollup :
 
-1. The parent.
-2. The generation.
+1. The rollup parent.
+2. The rollup height (Nth generation).
 3. The aggregator who generated it.
-4. The generation of the L1 block used as proof.
-5. The generation of the L1 block that includes this rollup.
+4. The height of the L1 block used as proof (L1_Proof_Height).
+5. The height of the L1 block that includes this rollup (L1_Block_Height).
 6. The nonce.
 
-The notation is the following: _R_$Rollup_Generation[$Aggregator, $L1_Proof_Generation, $L1_Block_Generation, $Nonce]_
+These elements are depicted in the following diagram:
+![block elements](./images/block-elements.png)
 
-Note that: L1_Proof_Generation < L1_Block_Generation .
+The notation is the following: _R_$Rollup_Generation[$Aggregator, $L1_Proof_Generation, $L1_Block_Generation, $Nonce]_.
+
+Note that the value of L1_Proof_Height is less than L1_Block_Height.
 
 Example: _R_15[Alice, 100, 102, 20]_ means the generation is 15, the aggregator is _Alice_, the generation of the L1 bock used as proof is 100, the generation of the L1 bock that included the rollup is 102, and the nonce equals 20.
 
-### The canonical chain
+### The Canonical Chain
 The POBI protocol allows any aggregator to publish rollups to the management contract. This means that short-lived forks are a normal part of the protocol. The ObscuroVM running inside the TEE of every node must be able to deterministically select one of the forks as the canonical chain and only append a rollup on top of that. This means that the TEE must receive all the relevant content of the L1 blocks, and the logic must be identical on all nodes.
 
 The rules for the canonical chain:
@@ -116,10 +119,10 @@ _Note: Competition means a rollup from the same generation._
 7. Do not pay rewards in any other case.
 
 The reward rules are depicted in the following diagram:
-![L1 rewarding](./images/block-rewarding.png)
+![l1 rewarding](./images/block-rewarding.png)
 
 The rules in the case of front-running are depicted in the following diagram:
-![L1 front running](./images/block-frontrunning.png)
+![l1 front running](./images/block-frontrunning.png)
 
 This is python-like pseudocode to calculate the rewards that can be claimed by an _Aggregator_ for a _Rollup_Height_. Note that it is not comprehensive.
 
@@ -188,4 +191,4 @@ else:
     pass
 ```
 
-_Note that these rules are subject to tweaking based on real life experience._
+_Note that these rules are subject to adjustment based on production observations._
