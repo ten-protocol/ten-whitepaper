@@ -1,5 +1,5 @@
 ## Joining the Obscuro Network
-Anyone wishing to join the Obsuro network as a Node must first check their hardware is compatible with the latest Attestation Constraints. Next they must download and install the latest software. Then they must perform the steps detailed below.
+Anyone wishing to join the Obscure network as a Node must first check their hardware is compatible with the latest Attestation Constraints. Next they must download and install the latest software. Then they must perform the steps detailed below.
 
 ### Node Registration
 The enclaves must encrypt L2 transactions with a secret key shared across the L2 nodes rather than an enclave-specific key which would be lost if an enclave is damaged.
@@ -11,7 +11,7 @@ The sequence for node registration is shown in the following diagram:
 ![node registration](./images/node-registration.png)
 
 1. Any L2 node must register with the Network Management contract. The node supplies its TEE attestation. It will also pay a fee for the service of receiving the shared secret. If the node wants to be an aggregator it has to pay the required stake. The first L2 node to register will be responsible with setting up a shared secret - which is the entropy from which all further secrets will be derived.
-2. The first L2 node generates a secret and encrypts it with its enclave specific public key to store. It then submits these secrets to the management contract which will store this encrypted secret and register the public key of the newly formed network. This is covered further in [Cryptography](detailed-design#cryptography).
+2. The first L2 node generates a secret and encrypts it with its enclave specific public key to store. It then submits these secrets to the management contract which will store this encrypted secret and register the public key of the newly formed network. This is covered further in [Cryptography](cryptography.md).
 3. A new party wishing to become an L2 node uses the Network Management contract to submit the remote attestation object, which signals to the network that it wants to know the shared secret. The Network Management contract will check the attestation against the current attestation rules. Existing nodes will be incentivised to respond with the encrypted secret. Any node with a valid TEE able to pass the attestation should be able to receive the key from another node.
 4. The new node begins executing all the transactions already published to the Rollup Management contract, in order to synchronise its internally cached state with the other nodes. This includes user deposits and withdrawals into the Bridge contract, as well as confirmed user transactions.
 
