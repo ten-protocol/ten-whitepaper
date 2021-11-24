@@ -11,14 +11,11 @@ input:
   detailed-design.md: ""
   cryptography.md: ""
   account-based-state.md: ""
-  state-confidentiality-wallets.md: ""
-  obscuro-vm.md: ""
   l1-contracts.md: ""
   tokenomics.md: ""
   threat-model.md: ""
   obscuro-ethereum-interaction.md: ""
   governance.md: ""
-  registrations.md: ""
   appendix.md: ""
 output: whitepaper.md
 ---
