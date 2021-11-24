@@ -18,7 +18,7 @@ Keeping the bids private helps ensure that if all bids are too low for any of th
 This type of auction requires Obscuro.
 
 ### Dark pools and OTC Trading
-A _dark pool_ [dark pool](https://www.investopedia.com/articles/markets/050614/introduction-dark-pools.asp) is a privately organised exchange for trading securities where exposure can be hidden until after execution and reporting. This allows investors to trade without publicly revealing their intentions during the search for a buyer or seller as well as hiding any pricing data which could result in investors receiving poorer prices.
+A [dark pool](https://www.investopedia.com/articles/markets/050614/introduction-dark-pools.asp) is a privately organised exchange for trading securities where exposure can be hidden until after execution and reporting. This allows investors to trade without publicly revealing their intentions during the search for a buyer or seller as well as hiding any pricing data which could result in investors receiving poorer prices.
 
 Dark pools on Obscuro would be very different to a typical DEX; it would be direct peer-to-peer trading with a layer of ‘dark’ price discovery added.
 
