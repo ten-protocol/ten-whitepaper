@@ -10,7 +10,7 @@ The following diagram shows the interactions between the two decentralised netwo
 ## L1 Network
 On the L1 network there are several regular Ethereum contracts, referred to as management contracts.
 
-The L1 design is covered in much greater detail in [L1 Contracts](./l1-contracts)
+The L1 design is covered in much greater detail in [L1 Contracts](./l1-contracts.md)
 
 ### Network Management
 This contract is the gatekeeper for the protocol. Any aggregator or verifier node wishing to join Obscuro will have to interact with this contract and prove it is valid. This contract will manage the TEE attestation requirements and will be able to verify reports.

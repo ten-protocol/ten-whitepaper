@@ -31,7 +31,7 @@ This concern is not completely different from the smart contracts security audit
 
 
 ###  2. Administration Of Ethereum Management Contracts.
-Like all the other Ethereum applications, these contracts will have upgradeable parts to cater to bugs and new features. Whatever is upgradeable means that the _administrators_ have full powers over those aspects.
+Like all the other Ethereum applications, these contracts will have upgradeable parts to cater for bugs and new features. Whatever is upgradeable means that the _administrators_ have full powers over those aspects.
 1. Bridge logic
 2. Rollup logic
 3. Attestation logic
