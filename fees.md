@@ -24,6 +24,7 @@ What follows is a treatment of the fee mechanics
 
 (A) The monthly operational cost, which is a flat fee set to represent the monthly operational cost to run a node in OBX, and represented as:
 
+<<<<<<< HEAD
 ![equation_1.png](./images/equation_1.png)
 
 (B) The cost incurred by nodes for L1 storage, represented as:
@@ -37,11 +38,30 @@ What follows is a treatment of the fee mechanics
 Factoring in the upper limit on gas costs within Obscuro and the current cost of storing one byte of data in Ethereum calldata as 16, this gives the fee per transaction as:
 
 ![equation_4.png](./images/equation_4.png)
+=======
+![img_1.png](images/equation_1.png)
+
+(B) The cost incurred by nodes for L1 storage, represented as:
+
+![img_2.png](images/equation_2.png)
+
+(C) The additional overhead cost incurred by nodes for publishing rollups is as follows:
+
+![img_3.png](images/equation_3.png)
+
+Factoring in the upper limit on gas costs within Obscuro and the current cost of storing one byte of data in Ethereum calldata as 16, this gives the fee per transaction as:
+
+![img_4.png](images/equation_4.png)
+>>>>>>> e79ea372ce191b52f90e8388ea5eaeff2ed3224b
 
 
 The lottery payout (active node reward) amount per rollup round is represented as:
 
+<<<<<<< HEAD
 ![equation_5.png](./images/equation_5.png)
+=======
+![img_5.png](images/equation_5.png)
+>>>>>>> e79ea372ce191b52f90e8388ea5eaeff2ed3224b
 
 
 ### Bootstrapping the network
