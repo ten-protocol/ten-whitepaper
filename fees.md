@@ -6,7 +6,6 @@ The structure also doesn&#39;t punish Aggregators that miss out on a publishing 
 
 ### What fees are for
 
-
 - Operators run the network and incur operational costs by running and maintaining nodes.
 - Aggregator nodes incur a cost from storing rollup data on Ethereum.
 - Aggregator nodes incur a cost from the overhead in participating in publishing rollups outside of the storage cost, e.g. signing transactions
@@ -14,7 +13,6 @@ The structure also doesn&#39;t punish Aggregators that miss out on a publishing 
 
 - The Obscuro protocol rewards both Validators and Aggregators that actively monitor the network via a lottery. The lottery randomly rewards active nodes each round with an OBX reward for participating. Nodes prove they&#39;re alive by claiming their reward within the subsequent few blocks; else, the reward is burned. This is designed to cover the operational costs of active nodes
 - To incentivize nodes to join the Obscuro network, nodes must have a path to making a profit. The profit comes from rewards paid out in OBX for Aggregator nodes that successfully win the right to validate and publish a rollup. This reward covers both the L1 costs incurred and a profit margin
-
 
 ### Fee mechanics
 
@@ -24,7 +22,6 @@ What follows is a treatment of the fee mechanics
 
 (A) The monthly operational cost, which is a flat fee set to represent the monthly operational cost to run a node in OBX, and represented as:
 
-<<<<<<< HEAD
 ![equation_1.png](./images/equation_1.png)
 
 (B) The cost incurred by nodes for L1 storage, represented as:
@@ -38,34 +35,13 @@ What follows is a treatment of the fee mechanics
 Factoring in the upper limit on gas costs within Obscuro and the current cost of storing one byte of data in Ethereum calldata as 16, this gives the fee per transaction as:
 
 ![equation_4.png](./images/equation_4.png)
-=======
-![img_1.png](images/equation_1.png)
-
-(B) The cost incurred by nodes for L1 storage, represented as:
-
-![img_2.png](images/equation_2.png)
-
-(C) The additional overhead cost incurred by nodes for publishing rollups is as follows:
-
-![img_3.png](images/equation_3.png)
-
-Factoring in the upper limit on gas costs within Obscuro and the current cost of storing one byte of data in Ethereum calldata as 16, this gives the fee per transaction as:
-
-![img_4.png](images/equation_4.png)
->>>>>>> e79ea372ce191b52f90e8388ea5eaeff2ed3224b
 
 
 The lottery payout (active node reward) amount per rollup round is represented as:
 
-<<<<<<< HEAD
 ![equation_5.png](./images/equation_5.png)
-=======
-![img_5.png](images/equation_5.png)
->>>>>>> e79ea372ce191b52f90e8388ea5eaeff2ed3224b
-
 
 ### Bootstrapping the network
-
 
 When the network first spins up, it&#39;s prudent to expect low transaction volume. Low transaction volume creates a situation where:
 
