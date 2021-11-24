@@ -3,9 +3,9 @@
 This section will cover the various cryptographic techniques used by Obscuro.
 
 ### Master Seed
-CPU manufacturers provision every TEE with one or multiple keys, the _EK_. These keys are used for digitally signing messages and identifying a TEE. They are also used for encrypting data that only that particular hardware TEE can decrypt. To achieve the goals of a collaborative, decentralized network like Obscuro, all the TEEs have to work on the same set of transactions, which means they must all decrypt them.
+CPU manufacturers provision every TEE with one or multiple keys, the _Enclave Key_ (EK). These keys are used for digitally signing messages and identifying a TEE. They are also used for encrypting data that only that particular hardware TEE can decrypt. To achieve the goals of a collaborative, decentralized network like Obscuro, all the TEEs have to work on the same set of transactions, which means they must all decrypt them.
 
-The first enclave, called the _Genesis enclave_, generates a 256bit random byte array called the _Master Seed_ inside the encrypted memory space. It encrypts this seed with the _EK_ and sends it to the management contract to be stored there, as well as storing it locally on the host server.
+The first enclave, called the _Genesis Enclave_, generates a 256bit random byte array called the _Master Seed_ inside the encrypted memory space. It encrypts this seed with the _EK_ and sends it to the management contract to be stored there, as well as storing it locally on the host server.
 
 ### Sharing the Master Seed
 After proving their attestation, subsequent nodes will receive that secret _Master Seed_ encrypted with their key. The medium over which they receive the data is the management contract to ensure maximum data availability.
@@ -65,6 +65,6 @@ The other piece of the puzzle is the mechanism that controls the actual reveal p
 
 The L1 blocks can be used as a reliable measure of average time. The rule is that after enough blocks have been added on top of the block that includes the rollup with the encrypted transactions, any user can request the encryption key and the position of the transactions they are entitled to view from the Aggregator TEE.
 
-There is one security measure that Obscuro adds to prevent a malicious node operator from _fast-forwarding_ time by creating an Ethereum fork and mining blocks with well-chosen timestamps such that difficulty keeps decreasing.The solution is straightforward. Obscuro hard-codes a minimum difficulty that is much lower than the average network difficulty for the last year, but it is still much higher than any single actor can achieve.
+There is one security measure that Obscuro adds to prevent a malicious node operator from _fast-forwarding_ time by creating an Ethereum fork and mining blocks with well-chosen timestamps such that difficulty keeps decreasing. The solution is straightforward. Obscuro hard-codes a minimum difficulty that is much lower than the average network difficulty for the last year, but it is still much higher than any single actor can achieve.
 
 _Note: There might be a more efficient way to achieve the same high-level goals, and we are considering different other options._
