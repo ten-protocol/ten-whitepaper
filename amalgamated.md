@@ -11,6 +11,7 @@
 {% include_relative account-based-state.md %}
 {% include_relative l1-contracts.md %}
 {% include_relative tokenomics.md %}
+{% include_relative fees.md %}
 {% include_relative threat-model.md %}
 {% include_relative obscuro-ethereum-interaction.md %}
 [comment]: <> ({% include_relative upgrading.md %})
