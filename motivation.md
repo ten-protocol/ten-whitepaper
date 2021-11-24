@@ -28,7 +28,7 @@ Prices for assets can be derived from order flow within the Obscuro enclaves, gu
 
 They come in where there's a need for unique idiosyncratic terms for, as an example, an option, such as non-standard length of time, strike price, market conventions, or payoff structure and are negotiated between a buyer and issuer. Obscuro can guarantee privacy in both negotiating and structuring such products.
 
-Competing products already available, but these are not decentralised, and by definition, it's not possible to have a ‘dark’ pool in a decentralised manner without something like Obscuro.
+Competing products are already available, but these are not decentralised, and by definition, it's not possible to have a ‘dark’ pool in a decentralised manner without something like Obscuro.
 
 This type of trading is made possible with Obscuro.
 
