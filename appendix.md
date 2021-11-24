@@ -113,6 +113,9 @@ A _light_ L2 node which observes transaction rollups published to the L1 blockch
 **ZK-rollups**
 Zero knowledge rollups generate cryptographic proofs that can be used to prove the validity of transactions.
 
+**Patricia Tree Root**
+A Patricia Tree (or Trie), is a data structure used in the Ethereum model to represent the receipt trie, the world state trie, the account storage trie, and the transaction trie. Only the root node of the trie is stored in the ethereum block, and it represents a single cryptographic proof for the entire state.
+
 ## Data Model
 This diagram shows the data structure for the Management contract and aggregator:
 ![management-contract](./images/management-contract.png)
