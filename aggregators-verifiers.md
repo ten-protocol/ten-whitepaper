@@ -15,6 +15,23 @@ Aggregators have the following functions:
     - Submit proofs of block inclusion and receive signed rollups.
 * Store data encrypted by the TEE and make it available when the TEE requests it. Act as an encrypted database.
 
+
+These are the steps to become an aggregator.
+* Register with the L1 Network Management contract and pay a significant stake in the Obscuro token. The stake has multiple roles. The first one is to penalize aggregators who attempt to hack the protocol, and second is for the aggregators to buy into the ecosystem, so that they will make an effort to keep it running smoothly.
+* Set up a server with a valid, unaltered, up-to-date and secured TEE and provide an attestation from the hardware manufacturer or a delegate to the management contract.
+* On seeing this request to join the network published to the L1, another registered TEE will share the shared secret, used to encrypt and decrypt user transactions.
+* Once in possession of the secret, the TEE can start processing all the L2 transactions that are stored on the L1 blockchain and build the state.
+* Once this is completed, the new aggregator can join the gossip with the other aggregators and participate in the lottery for producing rollups.
+* Some end users will send encrypted instructions directly to this server, and it will gossip these with other nodes in the L2 network, encrypted with the shared secret.
+* As aggregators process messages, they maintain the L2 state in the encrypted TEE memory or encrypted in a local database. If they are the winner of the lottery, when the time comes they will create a valid rollup and publish it to L1.
+* All aggregators keep track of the blocks submitted to the management contract to make sure they are up-to-date with the source of truth.
+* The first aggregator to register has a special role, as it has to create the _Master Seed_.
+
+Note: Each aggregator needs an ETH balance on the L1 to pay for the submission of the rollup.
+
+The sequence for node registration is shown in the following diagram:
+![aggregator staking](./images/aggregator-stake.png)
+
 ### Verifier Nodes
 Verifiers are nodes in possession of the shared secret that have not pledged the stake and are not part of the aggregator gossip network. To receive the L2 transactions, they monitor the L1 network and calculate the state based on the rollups submitted there.
 
