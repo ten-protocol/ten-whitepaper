@@ -4,13 +4,13 @@ Obscuro sets out a simple structure for fees and rewards. End users pay fees bas
 
 The structure delivers a steady and predictable income for node operators over the long term and a predictable fee for users proportional to the actual costs of running the network and does not rely on bidding wars or vary according to activity.
 
-The structure also doesn&#39;t punish Aggregators that miss out on a publishing opportunity with slashing. Instead, the loss of reward should be incentive enough.
+The structure also does not punish Aggregators that miss out on a publishing opportunity with slashing. Instead, the loss of reward should be incentive enough.
 
 ## Cost of L2 nodes
 
 Operators run the network and incur operational costs by running and maintaining nodes.
 
-An &quot;expected monthly node operational costs&quot; variable is set through the governance protocol, which is designed to reflect how much a node operator would pay for hardware, hosting etc, in a month. This is analogous to the proof of work difficulty found in other blockchains. This effects demand for running a node.
+An "expected monthly node operational costs" variable is set through the governance protocol, which is designed to reflect how much a node operator would pay for hardware, hosting etc, in a month. This is analogous to the proof of work difficulty found in other blockchains. This effects demand for running a node.
 
 Aggregator nodes incur cost from submitting transactions to L1, through the following:
 
@@ -29,7 +29,7 @@ The total fee a user must pay has three components.
 
 2. The cost incurred by nodes for L1 storage, represented as:
 
-![equation_2.png](images/equation_3.png)
+![equation_3.png](images/equation_3.png)
 
 3. A proportion of the additional overhead cost incurred by nodes for processing rollups is as follows:
 
@@ -41,11 +41,11 @@ The idea behind this is:
 - Where n is high, the cost is averaged out amongst more blocks and therefore less volatile and vice versa. High n adds more risk to Aggregators
 - L2 gas can be computed as Obscuro has the same metering mechanism as L1. As a result of this metering, we can work out the gas consumed and directly map this to the L1 moving average gas cost
 
-![equation_3.png](images/equation_4.png)
+![equation_4.png](images/equation_4.png)
 
 This gives the expected fee per transaction as:
 
-![equation_4.png](images/equation_5.png)
+![equation_5.png](images/equation_5.png)
 
 ##
 
@@ -59,7 +59,7 @@ The lottery pay out (active node reward) amount per rollup round is represented 
 
 - The lottery reward in each rollup is calculated to cover the operational costs of active nodes.
 
-![equation_5.png](images/equation_6.png)
+![equation_6.png](images/equation_6.png)
 
 ## Bootstrapping the network
 
