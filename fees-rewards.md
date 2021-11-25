@@ -17,7 +17,7 @@ Aggregator nodes incur cost from submitting transactions to L1, through the foll
 - Storing rollup data on Ethereum.
 - The overhead of processing the L1 transaction that contains the rollup.
 
-## Fee per transaction
+## Fee Per Transaction
 
 The total fee a user must pay has three components.
 
@@ -50,7 +50,7 @@ This gives the expected fee per transaction as:
 
 ![total_fee_equation_5.png](images/equation_5.png)
 
-## Rewards for L2 nodes
+## Rewards For L2 nodes
 
 The Obscuro protocol rewards both Validators and Aggregators that monitor the network via a lottery. The lottery randomly rewards active nodes each round with an OBX reward for participating. Nodes prove they are alive by claiming their reward within the subsequent few blocks; else, the reward is burned. The reward in each rollup is calculated to cover the operational costs of these nodes.
 
@@ -60,7 +60,7 @@ The lottery pay out amount per rollup round is represented as:
 
 ![active_node_reward_equation_6.png](images/equation_6.png)
 
-## Bootstrapping the network
+## Bootstrapping The Network
 
 When the network first spins up, it is prudent to expect low transaction volume, which can create a situation where:
 
