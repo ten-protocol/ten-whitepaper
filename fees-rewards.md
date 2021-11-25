@@ -10,7 +10,7 @@ The structure also does not punish Aggregators that miss out on a publishing opp
 
 Operators run the network and incur operational costs by running and maintaining nodes.
 
-An "expected monthly node operational costs" variable is set through the governance protocol, which is designed to reflect how much a node operator would pay for hardware, hosting etc, in a month. This is analogous to the proof of work difficulty found in other blockchains. This effects demand for running a node.
+An "expected monthly node operational costs" variable is set through the governance protocol, which is designed to reflect how much a node operator would pay for hardware, hosting etc, in a month. This is analogous to the proof of work difficulty found in other blockchains. This affects demand for running a node.
 
 Aggregator nodes incur cost from submitting transactions to L1, through the following:
 
