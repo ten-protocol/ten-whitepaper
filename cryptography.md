@@ -67,4 +67,11 @@ The L1 blocks can be used as a reliable measure of average time. The rule is tha
 
 There is one security measure that Obscuro adds to prevent a malicious node operator from _fast-forwarding_ time by creating an Ethereum fork and mining blocks with well-chosen timestamps such that difficulty keeps decreasing. The solution is straightforward. Obscuro TEEs fully understand the Ethereum protocol and receive all L1 blocks as part of the POBI protocol, which allows them to verify that the blocks are valid, but they can't know if this is the canonical ethereum chain or not a malicious fork designed to fast-forward time. Obscuro hard-codes a minimum difficulty that is much lower than the average network difficulty for the last year, but it is still much higher than any single actor can achieve.
 
+
+### Cryptographic algorithms
+
+Obscuro makes the same choices as Ethereum for hashing and signing algorithms and uses the same elliptic curve. 
+
+Communication with TEEs and the encryption algorithms are not yet defined. 
+
 _Note: There might be a more efficient way to achieve the same high-level goals, and we are considering different other options._

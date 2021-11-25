@@ -2,19 +2,20 @@
 Obscuro is a confidential extension to Ethereum, and thus assets have to move freely between the two networks.
 
 All side-chains and L2 solutions have developed solutions to the mismatches between the different models of the two networks, and typically there is a bridge contract that safeguards assets.
-
-The difference between side-chains and L2 solutions is that mismatches are more significant for side-chains with their own finality and security mechanisms, and thus the bridge logic is either very complex or centralized.
-
-### User Registration
-The Bridge contract is also one of the possible gateways for users to use the L2 network by depositing value ahead of submitting transactions. The interaction is shown in the following diagram:
-![user registration](./images/user-registration.png)
+The difference between side-chains and L2 solutions is that mismatches are more significant for side-chains because they have their own finality and security mechanisms, and thus the bridge logic is either very complex or centralized.
 
 ### Deposits
-The user interaction is very simple. The user deposits supported ERC tokens into the well known address of the Bridge contract, and once the transaction is successfully added to a block, the Obscuro-enabled wallet automatically creates a L2 transaction including a proof of the L1 transaction, and the same amount will be credited with wrapped tokens on the user's account on Obscuro. 
+
+The user deposits supported ERC tokens into the well known address of the Bridge contract, and once the transaction is successfully added to a block, the Obscuro-enabled wallet automatically creates a L2 transaction including a proof of the L1 transaction, and the same amount will be credited with wrapped tokens on the user's account on Obscuro. 
 
 The fact that the finality of L1 transactions is probabilistic makes crediting the L2 account not straightforward. Most solutions solve this problem by waiting for a confirmation period before crediting the account. Obscuro takes a different approach and introduces a dependency mechanism between the L2 rollup and the L1 blocks.
 
-The rule is that the L2 rollup that includes the transaction that credits the Obscuro account will have a hard dependency on an L1 block, and the Bridge contract will enforce that it is one of the ancestors of the current block. If the L1 deposit transaction is no longer on the canonical L1 chain, it will automatically invalidate the rollup that contains the L2 deposit transaction. See the [Data model](./appendix.md#data-model) section and the following dependency diagram.
+The rule is that the L2 rollup that includes the transaction that credits the Obscuro account will have a hard dependency on an L1 block, and the Bridge contract will enforce that it is one of the ancestors of the current block. If the L1 deposit transaction is no longer on the canonical L1 chain, it will automatically invalidate the rollup that contains the L2 deposit transaction. 
+
+The interaction is shown in the following diagram:
+![user registration](./images/user-registration.png)
+
+See also the [Data model](./appendix.md#data-model) section and the following dependency diagram.
 ![deposit process](./images/deposit-process.png)
 
 _Note: The deposit L2 transaction cannot be fully encrypted because the aggregator has to decide whether to include it in the current rollup based on the chances of the L1 block it depends on being final._
@@ -60,3 +61,16 @@ The Bridge contract will keep track of these requests and will execute them at d
 
 The withdrawal process is indicated in the following diagram:
 ![withdrawal process](./images/withdrawal-process.png)
+
+
+### Obscuro public events
+
+Applications running inside Obscuro can emit special types of events called _Public Events_, which the OVM will add in plaintext into a dedicated data structure in the rollup.
+Once the _Rollup Contract _ processed the rollup, these events will have the same finality lifecycle as withdrawals, which are a specialized type of public event.
+The _Rollup Contract_ will expose these events to external contracts once the rollup they were published in is considered final.
+
+This simple feature unlocks some fascinating use cases.
+
+For example, a public smart contract organizes a fair lottery which needs a reliable random number generator that the miners can't game. Obscuro can generate the random number, and then publish it in a rollup. To avoid any possible influence it can use the submarine technique and first publish the hash of that number in an event, and a few blocks later publish the actual number.
+
+Another example of a public event is the result of a poker game played inside Obscuro, which the L1 contract can use to make a payment or to update the results of a tournament.
