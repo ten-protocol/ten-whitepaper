@@ -10,7 +10,7 @@ The following diagram shows the interactions between the two decentralised netwo
 ## L1 Network
 On the L1 network there are several regular Ethereum contracts, referred to as management contracts.
 
-The L1 design is covered in much greater detail in [L1 Contracts](./l1-contracts)
+The L1 design is covered in much greater detail in [L1 Contracts](./l1-contracts.md)
 
 ### Network Management
 This contract is the gatekeeper for the protocol. Any aggregator or verifier node wishing to join Obscuro will have to interact with this contract and prove it is valid. This contract will manage the TEE attestation requirements and will be able to verify reports.
@@ -29,3 +29,6 @@ This contract is very important for the solution's security since it will protec
 The goal of the L2 design is to create a fair, permissionless, and decentralised network of nodes with valid TEEs who cannot see the transactions they are processing while collaborating to manage a ledger stored as rollups in the L1. The ledger should preserve its integrity even in the face of catastrophic TEE hacks.
 
 All Obscuro nodes have to go through the attestation process with the Network contract before receiving the shared secret and participating.
+
+{% include_relative aggregators-verifiers.md %}
+{% include_relative rollup-data-structure.md %}

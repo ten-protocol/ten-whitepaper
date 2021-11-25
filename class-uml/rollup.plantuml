@@ -21,7 +21,7 @@ object ObscuroRollup {
 
     NL
     C(The timestamp as set by the aggregator)
-    C(The contract checks that it's reasonable compared to the L1 block and the parent)
+    C(The contract checks that it is reasonable compared to the L1 block and the parent)
     - timestamp: Timestamp
 
     NL
