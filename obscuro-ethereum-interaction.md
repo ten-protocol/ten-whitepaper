@@ -65,12 +65,15 @@ The withdrawal process is indicated in the following diagram:
 
 ### Obscuro public events
 
+Ethererum application developers can use a confidential L2 like Obscuro for some jobs that are not possible otherwise.
+
+For example, an L1 smart contract organizes a fair lottery that needs a reliable random number generator that the miners cannot game.
+
+Another example is publishing the result of a poker game played inside Obscuro, which the L1 contract can use to make a payment or update the tournament results.
+
+The challenge for achieving this functionality is that the data originating in L2 has to be final.
+Luckily Obscuro has this mechanism already in place for processing withdrawals.
 Applications running inside Obscuro can emit special types of events called _Public Events_, which the OVM will add in plaintext into a dedicated data structure in the rollup.
-Once the _Rollup Contract _ processed the rollup, these events will have the same finality lifecycle as withdrawals, which are a specialized type of public event.
-The _Rollup Contract_ will expose these events to external contracts once the rollup they were published in is considered final.
+The _Rollup Contract _ first processes the rollup, and then once they reach finality, it exposes these events to external contracts.
 
-This simple feature unlocks some fascinating use cases.
-
-For example, a public smart contract organizes a fair lottery which needs a reliable random number generator that the miners can't game. Obscuro can generate the random number, and then publish it in a rollup. To avoid any possible influence it can use the submarine technique and first publish the hash of that number in an event, and a few blocks later publish the actual number.
-
-Another example of a public event is the result of a poker game played inside Obscuro, which the L1 contract can use to make a payment or to update the results of a tournament.
+Note: The fair lottery can be implemented in two steps to avoid any possible influence. The implementation can use the submarine technique and first publish the hash of that number in an event, and a few blocks later publish the actual number in a different event.
