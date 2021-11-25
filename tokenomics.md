@@ -8,7 +8,7 @@ The main goals for the creation of the OBX token are to provide a truly decentra
 * A means to fund ongoing development of the Obscuro platform.
 * A way to incentivise eco-system development via grants and competitions.
 
-The OBX token will initially be issued onto Ethereum Mainnet as an ERC-20 token. This is because it's easier to bootstrap adoption on to an already existing network and financial infrastructure such as exchanges and existing DeFi applications. It is the intention that the OBX token will not be issued until the first release of the Obscuro platform is substantially complete. In other words, it should be possible to use Obscuro in a testnet environment as a pre-requisite for the utility token launch to proceed.
+The OBX token will initially be issued onto Ethereum Mainnet as an ERC-20 token. This is because it is easier to bootstrap adoption on to an already existing network and financial infrastructure such as exchanges and existing DeFi applications. It is the intention that the OBX token will not be issued until the first release of the Obscuro platform is substantially complete. In other words, it should be possible to use Obscuro in a testnet environment as a pre-requisite for the utility token launch to proceed.
 
 When Obscuro enters production, there will be an allocations of tokens for aggregator rewards, which will be issued directly onto the Obscuro network. Therefore, in effect, there will be two classes of token: Ethereum native and Obscuro native and participants will be able to move seamlessly between them using a two-way bridge.
 
