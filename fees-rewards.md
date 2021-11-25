@@ -35,9 +35,9 @@ The total fee a user must pay has three components.
 
 The idea behind this is:
 
-- At the point of transaction, it&#39;s impossible to know what the true cost of the future rollup is
+- At the point of transaction, it is impossible to know what the true cost of the future rollup is
 - Users need to pay their fair share of what this future rollup cost will be
-- The best indicator of what the future rollup cost might be is a moving average of the previous n blocks
+- The best indicator of what the future rollup cost might be is a moving average of the previous n rollups
 - Where n is high, the cost is averaged out amongst more blocks and therefore less volatile and vice versa. High n adds more risk to Aggregators
 - L2 gas can be computed as Obscuro has the same metering mechanism as L1. As a result of this metering, we can work out the gas consumed and directly map this to the L1 moving average gas cost
 
@@ -51,7 +51,7 @@ This gives the expected fee per transaction as:
 
 ## Rewards for L2 nodes
 
-The Obscuro protocol rewards both Validators and Aggregators that actively monitor the network via a lottery. The lottery randomly rewards active nodes each round with an OBX reward for participating. Nodes prove they&#39;re alive by claiming their reward within the subsequent few blocks; else, the reward is burned. The reward in each rollup is calculated to cover the operational costs of active nodes.
+The Obscuro protocol rewards both Validators and Aggregators that actively monitor the network via a lottery. The lottery randomly rewards active nodes each round with an OBX reward for participating. Nodes prove they are alive by claiming their reward within the subsequent few blocks; else, the reward is burned. The reward in each rollup is calculated to cover the operational costs of active nodes.
 
 Aggregator nodes have an additional reward mechanism that pays out rewards in OBX when they successfully win the right to validate and publish a rollup. This reward covers at least the L1 gas costs incurred.
 
@@ -65,7 +65,7 @@ The lottery pay out (active node reward) amount per rollup round is represented 
 
 ##
 
-When the network first spins up, it&#39;s prudent to expect low transaction volume. Low transaction volume creates a situation where:
+When the network first spins up, it is prudent to expect low transaction volume. Low transaction volume creates a situation where:
 
 1. Nodes can publish continually at a high cadence and absorb what might amount to a loss-making operation.
 2. Nodes can throttle the rate at which rollups are published, leading to a poorer user experience.
