@@ -38,7 +38,7 @@ The idea behind this is:
 - At the point of transaction, it is impossible to know what the true cost of the future rollup is
 - Users need to pay their fair share of what this future rollup cost will be
 - The best indicator of what the future rollup cost might be is a moving average of the previous n rollups
-- Where n is high, the cost is averaged out amongst more blocks and therefore less volatile and vice versa. High n adds more risk to Aggregators
+- Where n is high, the averaging is performed over a larger number of rollups and therefore less volatile and vice versa. High n adds more risk to Aggregators
 - L2 gas can be computed as Obscuro has the same metering mechanism as L1. As a result of this metering, we can work out the gas consumed and directly map this to the L1 moving average gas cost
 
 ![equation_4.png](images/equation_4.png)
