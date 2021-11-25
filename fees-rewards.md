@@ -21,7 +21,7 @@ Aggregator nodes incur cost from submitting transactions to L1, through the foll
 
 The total fee a user must pay has three components.
 
-1. A proportion of the monthly operational cost for all nodes. The proportion is calculated based on the computation of the current transaction as a proportion of the moving average of all L2 transactions over the month. Represented as:
+1. A proportion of the monthly operational cost for all nodes. This is calculated based on the computation of the current transaction as a proportion of the moving average of all L2 transactions over the month. Represented as:
 
 ![proportion_equation.png](images/equation_1.png)
 
@@ -32,8 +32,6 @@ The total fee a user must pay has three components.
 ![storage_equation.png](images/equation_3.png)
 
 3. A proportion of the additional overhead cost incurred by nodes for processing rollups is as follows:
-
-The idea behind this is:
 
 - At the point of transaction, it is impossible to know what the true cost of the future rollup is.
 - Users need to pay their fair share of what this future rollup cost will be.
@@ -66,9 +64,9 @@ When the network first spins up, it is prudent to expect low transaction volume,
 
 1. Aggregators can publish continually at a high cadence and absorb what might amount to a loss-making operation.
 2. Aggregators can throttle the rate at which rollups are published, leading to a poorer user experience.
-3. Alternatively, the network can subsidize early transactions allowing both groups to succeed.
+3. Alternatively, the network can subsidise early transactions allowing both groups to succeed.
 
-While Obscuro optimizes for end-users, early nodes should also be profitable. As such, Obscuro follows the path of option 3
+While Obscuro optimises for end-users, early nodes should also be profitable. As such, Obscuro follows the path of option 3
 
-- In the young days of the network, fees will be subsidized by newly minted tokens to ensure early users do not face excessive fees. The price of a transaction is fixed at $1 in OBX until OBX establishes a stable market.
-- A period of subsidizing new nodes that reduces over time until transaction volume picks up and market forces take over.
+- In the early days of the network, fees will be subsidised by newly minted tokens to ensure early users do not face excessive fees. The price of a transaction is fixed at $1 in OBX until the Obscuro network is better established.
+- A period of subsidising new nodes that reduces over time until transaction volume picks up.
