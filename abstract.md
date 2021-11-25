@@ -8,7 +8,7 @@
 V0.9, November 2021 
 _Note: This document is under development, so please check for updates._
 
-James Carlyle, Tudor Malene, Cais Manai, Roger Willis; with significant additional [contributors](./appendix.md#contributors).
+James Carlyle, Tudor Malene, Cais Manai, Neal Shah, Gavin Thomas, Roger Willis; with significant additional [contributors](./appendix.md#contributors).
 
 # Abstract
 We present Obscuro, a decentralized Ethereum Layer 2 Rollup protocol designed to achieve data confidentiality and prevent [Maximal Extractable Value (MEV)](https://ethereum.org/en/developers/docs/mev/) by leveraging hardware-based [Trusted Execution Environments (TEE)](https://en.wikipedia.org/wiki/Trusted_execution_environment).
