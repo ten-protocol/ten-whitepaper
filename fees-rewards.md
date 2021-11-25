@@ -39,17 +39,10 @@ The idea behind this is:
 - Users need to pay their fair share of what this future rollup cost will be.
 - The best indicator of what the future rollup cost might be is a moving average of the previous n rollups.
 - Where n is high, the averaging is performed over a larger number of rollups and therefore less volatile and vice versa.
-- L2 gas can be computed as Obscuro has the same metering mechanism as L1. As a result of this metering, we can work out the gas consumed and directly map this to the L1 moving average gas cost.
-
-
-The computation required by Obscuro nodes to run a transaction can be estimated by using a metering mechanism similar to the one found in Ethereum.
-Using this information we can calculate what is the share of each transaction from the total computation in an average block.
-The basis to calculate the L1 fee is the cost to publish an average rollup to L1.
-Each transaction will pay a share of that cost proportional to its computation
-
-
-
-
+- The computation required by Obscuro nodes to run a transaction is estimated using a metering mechanism similar to the one found in Ethereum.
+- Using this information, Obscuro calculates the share of each transaction from the total computation in an average block.
+- The basis for calculating the L1 fee is the cost to publish an average rollup to L1.
+- Each transaction pays a share of that cost proportional to its computation.
 
 ![overhead_equation_4.png](images/equation_4.png)
 
