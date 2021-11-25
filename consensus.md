@@ -7,7 +7,7 @@ The high level goals of the POBI protocol are:
 1. Each round, to distribute the sequencer function fairly among all the active registered aggregators.
 2. To synchronise the L2 round duration to L1 rounds. Because the L1 is the source of truth, the finality of the L2 transactions is dependent on the finality of the L1 rollup transaction that includes them, which means there is no advantage in publishing multiple rollups in a single L1 block. It is not possible to decrease the finality time below that of the L1. On the other hand, publishing L2 rollups less frequently means that L2 finality will be unnecessarily long. The optimum frequency is to publish one rollup per L1 block.
 
-To achieve fairness, the PoBI protocol states that each round the TEE can generate one random nonce and the winner of a round is the aggregator whose TEE generated the lowest random number from the group. The TEEs will generate these numbers independently and then will gossip them. The aggregators who didn't win the round, similar to L1 miners, will respect this decision because it is the rational thing to do based on the incentive mechanism. If they don't want to respect the protocol, they are free to submit a losing rollup to the L1, but it will be ignored by all compliant aggregators, which means such an aggregator has to pay L1 gas and not get any useful reward.
+To achieve fairness, the PoBI protocol states that each round the TEE can generate one random nonce and the winner of a round is the aggregator whose TEE generated the lowest random number from the group. The TEEs will generate these numbers independently and then will gossip them. The aggregators who do not win the round, similar to L1 miners, will respect this decision because it is the rational thing to do based on the incentive mechanism. If they do not want to respect the protocol, they are free to submit a losing rollup to the L1, but it will be ignored by all compliant aggregators, which means such an aggregator has to pay L1 gas and not get any useful reward.
 
 The second goal is achieved by linking the random nonce generation which terminates a round to the Merkle proof of inclusion of the parent rollup in a L1 block. This property is what gives the name of the protocol. This means that an aggregator is able to obtain a signed rollup from the TEE only if it is able to present a Merkle proof of block inclusion. This feature links the creation of L2 rollup to an L1 block, thus synchronising their cadence.
 
@@ -74,7 +74,7 @@ In phase 3 of the protocol, the TEE of each aggregator generates a random nonce 
 
 The solution proposed by Obscuro is to introduce a timer upon startup of the enclave, in the constructor. A conventional timer, based on the clock of the computer, is not very effective since it can be gamed by the host.
 
-The solution is for the enclave to serially (on a single thread) calculate a large enough number of SHA256 hashes which it wouldn't be able to do faster than an average block time on even a very fast CPU.
+The solution is for the enclave to serially (on a single thread) calculate a large enough number of SHA256 hashes which it would not be able to do faster than an average block time on even a very fast CPU.
 
 This solution is effective, since the code is attested, and does not rely on any input from the host.
 
@@ -105,7 +105,7 @@ _Note: Competition means a rollup from the same generation._
       of aggregators just waiting more than necessary to receive messages from all the other aggregators.
 
 3. If multiple sibling rollups generated using different L1 blocks as proof are included in the same block, the one created with the most recent proof will receive the full reward. 
- The original winning rollup that didn't get published immediately will not receive any reward since there was more recent competition. This rule is designed to encourage publishing with enough gas, such that there is no risk of competition in a further block. The rule also encourages aggregators to not wait for rollups published with insufficient gas or not at all. As soon as there is a new L1 block, the round resets, and the reward is up for grabs. An actor controlling multiple aggregators with malicious irrational behaviour will only be able to slow the ledger down, because the rational actors will publish the rounds they win.
+ The original winning rollup that did not get published immediately will not receive any reward since there was more recent competition. This rule is designed to encourage publishing with enough gas, such that there is no risk of competition in a further block. The rule also encourages aggregators to not wait for rollups published with insufficient gas or not at all. As soon as there is a new L1 block, the round resets, and the reward is up for grabs. An actor controlling multiple aggregators with malicious irrational behaviour will only be able to slow the ledger down, because the rational actors will publish the rounds they win.
 
 4. If two consecutive L1 blocks include each a rollup from the same generation created from the same L1 proof, but the rollup from the second block has a lower nonce, split the reward evenly between the two aggregators. 
  Note that the rollup with the higher nonce will be on the canonical chain. 
@@ -162,7 +162,7 @@ elif rollups_in_target_block.size == 1 and rollups_in_last_block.size == 1:
 
 elif rollups_in_target_block.size == 2:
     # Two competing rollups in the target block
-    # This is not a frunt-running situation, so eventual rollups published in the next block don't matter
+    # This is not a front-running situation, so eventual rollups published in the next block do not matter
     rollup1 = rollups_in_target_block[0]
     rollup2 = rollups_in_target_block[1]
 

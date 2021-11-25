@@ -26,9 +26,9 @@ Prices for assets can be derived from order flow within the Obscuro enclaves, gu
 
 [Over-the-counter (OTC)](https://www.investopedia.com/terms/o/otc.asp) trading is where bespoke products are tailored to specific client requirements. The most common usage of OTC is in financial derivatives, where “OTC” means the opposite of “Exchange-traded”.
 
-They come in where there's a need for unique, idiosyncratic terms for, as an example, an option, such as non-standard length of time, strike price, market conventions, or payoff structure and are negotiated between a buyer and issuer. Obscuro can guarantee privacy in both negotiating and structuring such products.
+They come in where there is a need for unique, idiosyncratic terms for, as an example, an option, such as non-standard length of time, strike price, market conventions, or payoff structure and are negotiated between a buyer and issuer. Obscuro can guarantee privacy in both negotiating and structuring such products.
 
-Competing products are already available, but these are not decentralised, and by definition, it's not possible to have a ‘dark’ pool in a decentralised manner without something like Obscuro.
+Competing products are already available, but these are not decentralised, and by definition, it is not possible to have a ‘dark’ pool in a decentralised manner without something like Obscuro.
 
 This type of trading is made possible with Obscuro.
 
@@ -42,7 +42,7 @@ Token holders need to submit the reserve price that makes sense to them. This ge
 Keeping the bids private helps ensure that if all bids are too low for any of them to be accepted by the sellers, the NFT will not become stigmatized by having a perceived low value in the marketplace.
 
 ### Retail Activity
-Current smart contract activity undertaken by individuals can often be linked to them, either by data mining or simple association of an Ethereum L1 address with a username registered on the Ethereum Name Service. Pioneers don't care about whether their NFT purchases are publicly visible, but the next wave of mass adoption and use of smart contracts by the wider public (such as a health insurance contract) requires privacy. Obscuro helps here.
+Current smart contract activity undertaken by individuals can often be linked to them, either by data mining or simple association of an Ethereum L1 address with a username registered on the Ethereum Name Service. Pioneers do not care about whether their NFT purchases are publicly visible, but the next wave of mass adoption and use of smart contracts by the wider public (such as a health insurance contract) requires privacy. Obscuro helps here.
 
 ## Differentiators
 * Obscuro leverages Ethereum, a public blockchain with the greatest adoption,  legitimacy, security, and liquidity, as a base layer to handle security and data availability and manage the inflow and outflow of value.
