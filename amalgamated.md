@@ -3,8 +3,7 @@
 {% include_relative context.md %}
 {% include_relative technical-background.md %}
 {% include_relative high-level-design.md %}
-{% include_relative aggregators-verifiers.md %}
-{% include_relative rollup-data-structure.md %}
+
 {% include_relative pobi.md %}
 {% include_relative detailed-design.md %}
 {% include_relative cryptography.md %}
