@@ -6,9 +6,7 @@
 
 {% include_relative pobi.md %}
 {% include_relative detailed-design.md %}
-{% include_relative cryptography.md %}
-{% include_relative account-based-state.md %}
-{% include_relative l1-contracts.md %}
+
 {% include_relative tokenomics.md %}
 {% include_relative fees.md %}
 {% include_relative threat-model.md %}
