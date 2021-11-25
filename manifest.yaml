@@ -13,6 +13,7 @@ input:
   account-based-state.md: ""
   l1-contracts.md: ""
   tokenomics.md: ""
+  fees-rewards.md: ""
   threat-model.md: ""
   obscuro-ethereum-interaction.md: ""
   governance.md: ""

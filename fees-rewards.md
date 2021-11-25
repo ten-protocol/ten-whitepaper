@@ -25,7 +25,7 @@ The total fee a user must pay has three components.
 
 ![equation_1.png](images/equation_1.png)
 
-![equation_2_1.png](images/equation_2.png)
+![equation_2.png](images/equation_2.png)
 
 2. The cost incurred by nodes for L1 storage, represented as:
 
