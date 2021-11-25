@@ -6,7 +6,7 @@ The difference between side-chains and L2 solutions is that mismatches are more 
 
 ## Deposits
 
-The user deposits supported ERC tokens into the well known address of the Bridge contract, and once the transaction is successfully added to a block, the Obscuro-enabled wallet automatically creates a L2 transaction including a proof of the L1 transaction, and the same amount will be credited with wrapped tokens on the user's account on Obscuro. 
+The user deposits supported ERC tokens into the well known address of the Bridge contract, and once the transaction is successfully added to a block, the Obscuro-enabled wallet automatically creates an L2 transaction including a proof of the L1 transaction, and the same amount will be credited with wrapped tokens on the user's account on Obscuro. 
 
 The fact that the finality of L1 transactions is probabilistic makes crediting the L2 account not straightforward. Most solutions solve this problem by waiting for a confirmation period before crediting the account. Obscuro takes a different approach and introduces a dependency mechanism between the L2 rollup and the L1 blocks.
 

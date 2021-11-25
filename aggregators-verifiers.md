@@ -7,7 +7,7 @@ Aggregators are the Obscuro nodes whose TEEs are in possession of the _shared se
 End users will send encrypted transactions to any registered aggregators who will then gossip the transactions. Every round, one of the aggregators will publish the transaction in a rollup.
 
 Aggregators have the following functions:
-* Integrate with a L1 node to monitor published blocks and to submit rollups.
+* Integrate with an L1 node to monitor published blocks and to submit rollups.
 * Gossip with the other aggregators registered in the management contract.
 * Interact with the TEE:
     - Submit user encrypted transactions.
