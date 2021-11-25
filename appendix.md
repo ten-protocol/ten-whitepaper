@@ -1,8 +1,6 @@
 # Appendix
 ## Contributors
 The Obscuro project is decentralised in nature, and this whitepaper has benefited enormously with feedback from the following contributors:
-* Gavin Thomas
-* Neal Shah
 * Richard Gendal Brown
 * Mike Hearn
 * Moritz Platt
@@ -27,7 +25,7 @@ Uses liquidity pools to allow digital assets to be traded automatically and with
 An amount of OBX which is given to node operators to cover their costs to validate and publish blocks.
 
 **Enclave Key / EK**
-Collection of one or more cryptographics keys used for encrypting and decrypting data unique to a specific enclave, digitally signing data and identifying a Trusted Execution Environment.
+Collection of one or more cryptographic keys used for encrypting and decrypting data unique to a specific enclave, digitally signing data and identifying a Trusted Execution Environment.
 
 **ERC-20**
 Ethereum Request for Comments 20, proposed by Fabian Vogelsteller in November 2015, is a token standard that implements an API for tokens within Smart Contracts.
@@ -62,6 +60,9 @@ Participants in the network may extract value by observing user transactions and
 **Non-Fungible Token / NFT**
 A unique and non-interchangeable unit of data stored on a digital ledger.
 
+**Obscuro Public events**
+Special events emitted by L2 contracts that are included in the rollups in plaintext, and are exposed to L1 contracts once rollups reach finality. It is a mechanism by which Obscuro can publish information. 
+
 **OBX**
 The utility token used by Obscuro.
 
@@ -69,10 +70,13 @@ The utility token used by Obscuro.
 Activity happening away from the Layer 1 blockchain.
 
 **Optimistic rollup**
-Optimistic rollups assume that all transactions are valid and submit batches without performing any computation. They include a challenge period during which anyone can dispute the legitimacy of the data contained in a batch. If a fraudulent transaction is detected, the rollup executes a so called fraud proof and runs the correct transaction computation using the data available on Layer 1.
+Optimistic rollups assume that all transactions are valid and submit batches without performing any computation. They include a challenge period during which anyone can dispute the legitimacy of the data contained in a batch. If a fraudulent transaction is detected, the rollup executes a so-called fraud proof and runs the correct transaction computation using the data available on Layer 1.
 
 **Over-the-counter / OTC**
 A venue to provide bespoke financial agreements or options negotiated between counterparties as opposed to being listed on an exchange.
+
+**Patricia Tree Root**
+A Patricia Tree (or Trie), is a data structure used in the Ethereum model to represent the receipt trie, the world state trie, the account storage trie, and the transaction trie. Only the root node of the trie is stored in the ethereum block, and it represents a single cryptographic proof for the entire state.
 
 **Proof Of Block Inclusion / POBI**
 Obscuro's novel decentralised round-based consensus protocol based on a fair lottery and on synchronisation with the L1 designed for L2 rollups.
@@ -84,7 +88,7 @@ L2 solutions that perform transaction execution outside the main L1 chain, but p
 A cryptographic key randomly created and retained by Intel. It is the basis for how the processor demonstrates that it is a genuine Intel SGX CPU at a specific trusted computing base.
 
 **Root Sealing Key / RSK**
-A crytographic key which is unique to an enclave which that enclave uses to encrypt and decrypt data stored outside of the enclave boundary.
+A cryptographic key which is unique to an enclave which that enclave uses to encrypt and decrypt data stored outside the enclave boundary.
 
 **Sequencer**
 A sequencer is the selected aggregator which builds a rollup in a round.
@@ -96,7 +100,7 @@ Software Guard Extensions, a technology provided by Intel, a major CPU manufactu
 A user application running on a blockchain network which holds data or state, responds to user commands, and may store and manage assets or money.
 
 **Stake**
-A non-negligable amount of value which is given over to an activity or process to demonstrate commitment to follow the rules for that activity or process.
+A non-negligible amount of value which is given over to an activity or process to demonstrate commitment to follow the rules for that activity or process.
 
 **Trusted Execution Environment / TEE**
 An environment where contracts may be managed in a deterministic, repeatable and auditable way, based on a set of trust dependencies.
@@ -142,7 +146,7 @@ We could organise the aggregators in a BFT setup, and require that 2/3 of them s
 
 Another option with a better trust model is to introduce a challenge mechanism similar to the optimistic rollups. The disadvantage is that it introduces a delay, and a concept of probabilistic finality.
 
-The data structure containing the rollups is a chain that can have multiple heads. The management contract cannot evaluate which one is correct because it can't execute the transactions inside. But there are some simple rules that can be applied. For example, if a branch does not progress for N blocks it is considered dead. If at the moment of withdrawal there is only a single active head rollup, then all the system has to do is wait for a reasonable number of blocks (20-50) to ensure that there is no censorship attempt on L1. If there is a fork, then the number of blocks has to be increased to allow one of the forks to die out naturally. If it doesn't then all withdrawals will be locked, and the contract will enter a special procedure.
+The data structure containing the rollups is a chain that can have multiple heads. The management contract cannot evaluate which one is correct because it cannot execute the transactions inside. But there are some simple rules that can be applied. For example, if a branch does not progress for N blocks it is considered dead. If at the moment of withdrawal there is only a single active head rollup, then all the system has to do is wait for a reasonable number of blocks (20-50) to ensure that there is no censorship attempt on L1. If there is a fork, then the number of blocks has to be increased to allow one of the forks to die out naturally. If it does not then all withdrawals will be locked, and the contract will enter a special procedure.
 
 ### Alternative Revelation Options
 The solution will reveal all transactions after one year through a key-rotation process. An alternative policy could be to specify a ratio of transactions (e.g. 1%) are revealed either immediately or subsequently. Illegal transaction detection then becomes risk-based, but the ratio cannot be high enough to be a disincentive and yet still provide utility.
@@ -153,7 +157,7 @@ The aggregator host must not be able to repeatedly submit the rollup proof to th
 ### Alternative Privacy Revelation
 There are several options for revealing private data to allow law enforcement agencies to prosecute illegal behaviour and deter criminals from taking advantage of Obscuro's privacy features:
 * Not make a provision to reveal on the basis that Obscuro is a platform and is un-opinionated on what it is used for.
-* The transaction encryption key can be rotated and revealed periodically with a delay, such that any interested party can view all transactions. This is the solution we chose, but with some application level flexibility.
+* The transaction encryption key can be rotated and revealed periodically with a delay, such that any interested party can view all transactions. This is the solution we chose, but with some application-level flexibility.
 * A governance committee can approve some data mining enclaves that will have access to the shared secret and output suspicious activity.
 
 From the outset Obscuro will rotate the encryption key every year and reveal historic keys in the first phase, and decide later if additional mechanisms are required. A case-by-case revelation based on authority demands is time-consuming and prone to political interference. It is also difficult to determine objectively what is a bona-fide authority which introduces a political dilemma.
