@@ -68,5 +68,4 @@ When the network first spins up, it is prudent to expect low transaction volume,
 
 While Obscuro optimises for end-users, early nodes should also be profitable. As such, Obscuro follows the path of option 3
 
-- In the early days of the network, fees will be subsidised by newly minted tokens to ensure early users do not face excessive fees. The price of a transaction is fixed at $1 in OBX until the Obscuro network is better established.
-- A period of subsidising new nodes that reduces over time until transaction volume picks up.
+In the early days of the network, fees will be subsidised by newly minted tokens to ensure early users do not face excessive fees. The price of a transaction is fixed at $1 in OBX until the Obscuro network is better established. For nodes, there is a period of subsidisation that reduces over time until transaction volume picks up.
