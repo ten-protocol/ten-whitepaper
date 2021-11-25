@@ -1,9 +1,7 @@
-# Consensus
-
-## Proof of Block Inclusion
+# Consensus - Proof of Block Inclusion
 Obscuro uses a novel decentralised round-based consensus protocol based on a fair lottery and on synchronisation with the L1, specifically designed for L2 rollups, called _Proof Of Block Inclusion_ (POBI). It solves, among others, the fair leader election problem, which is a fundamental issue that all decentralised rollup solutions have to address. POBI is inspired by [Proof Of Elapsed Time](https://sawtooth.hyperledger.org/docs/core/releases/1.0/architecture/poet.html).
 
-### High Level Description
+## High Level Description
 The high level goals of the POBI protocol are:
 
 1. Each round, to distribute the sequencer function fairly among all the active registered aggregators.
@@ -21,7 +19,7 @@ Note that the L1 management contract is not checking the nonces of the submitted
 
 A further issue to solve is to ensure that the host will not be able to repeatedly submit the proof to the TEE to get a new random number.
 
-### Typical Scenario
+## Typical Scenario
 1. A new round starts from the point of view of an aggregator when it decides that someone has gossiped a winning rollup. At that point it creates a new empty rollup structure, points it to the previous one, and starts adding transactions to it (which are being received from users or by gossip).
 2. In the meantime it is closely monitoring the L1 by being directly connected to a L1 node.
 3. As soon as the previous rollup was added to a mined L1 block, the aggregator takes that Merkle proof, feeds it to the TEE who replies with a signed rollup containing a random nonce generated inside the enclave.
@@ -34,7 +32,7 @@ Note that by introducing the requirement for proof of inclusion in the L1, the c
 This sequence is depicted in the following diagram:
 ![node-processing](./images/node-processing.png)
 
-### Notation
+## Notation
 There are six elements which define a rollup :
 
 1. The rollup parent.
@@ -53,7 +51,7 @@ Note that the value of L1_Proof_Height is less than L1_Block_Height.
 
 Example: _R_15[Alice, 100, 102, 20]_ means the generation is 15, the aggregator is _Alice_, the generation of the L1 bock used as proof is 100, the generation of the L1 bock that included the rollup is 102, and the nonce equals 20.
 
-### The Canonical Chain
+## The Canonical Chain
 The POBI protocol allows any aggregator to publish rollups to the management contract. This means that short-lived forks are a normal part of the protocol. The ObscuroVM running inside the TEE of every node must be able to deterministically select one of the forks as the canonical chain and only append a rollup on top of that. This means that the TEE must receive all the relevant content of the L1 blocks, and the logic must be identical on all nodes.
 
 The rules for the canonical chain:
@@ -71,7 +69,7 @@ Using the notation, for the same _Rollup_Generation_, the rollup that will be on
 
 Given that the nonce is a random number with sufficient entropy, we assume there cannot be a collision at this point.
 
-### Preventing Repeated Random Nonce Generation
+## Preventing Repeated Random Nonce Generation
 In phase 3 of the protocol, the TEE of each aggregator generates a random nonce which determines the winner of the protocol. This introduces the possibility of gaming the system by restarting the TEE, and attempting to generate multiple numbers.
 
 The solution proposed by Obscuro is to introduce a timer upon startup of the enclave, in the constructor. A conventional timer, based on the clock of the computer, is not very effective since it can be gamed by the host.
@@ -84,7 +82,7 @@ A node operator wanting to cheat would restart the enclave, and quickly feed it 
 
 This built-in startup delay is also useful in preventing other real time side channel attacks, which could be used for MEV.
 
-### Aggregator Incentives
+## Aggregator Incentives
 All successful decentralised solutions need a strong incentive mechanism to keep the protocol functioning effectively.
 
 The Bitcoin incentive model is very simple. Each transaction pays a fee and on top of that each block contains a coinbase transaction, both going to the winner. If there are re-organisations of the chain, the block that makes it onto the canonical chain is the one that pays the reward, because it is in the ledger. This mechanism provides the right incentives for miners to follow the rules. One disadvantage of this model is that fees can get very high in periods of network congestion, which degrades user experience.
