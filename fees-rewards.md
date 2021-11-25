@@ -43,7 +43,7 @@ The idea behind this is:
 
 ![equation_3.png](images/equation_4.png)
 
-this gives the expected fee per transaction as:
+This gives the expected fee per transaction as:
 
 ![equation_4.png](images/equation_5.png)
 
