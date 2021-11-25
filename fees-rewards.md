@@ -53,7 +53,7 @@ This gives the expected fee per transaction as:
 
 The Obscuro protocol rewards both Validators and Aggregators that monitor the network via a lottery. The lottery randomly rewards active nodes each round with an OBX reward for participating. Nodes prove they are alive by claiming their reward within the subsequent few blocks; else, the reward is burned. The reward in each rollup is calculated to cover the operational costs of these nodes.
 
-Aggregator nodes have an additional reward mechanism that pays out rewards in OBX when they successfully win the right to validate and publish a rollup. This reward covers at least the L1 gas costs incurred.
+Aggregator nodes have an additional reward mechanism that pays out rewards in OBX when successfully publish a rollup based on the rules of the POBI protocol. This reward covers at least the L1 gas costs incurred and will not be greater than double the L1 gas cost.
 
 The lottery pay out amount per rollup round is represented as:
 
