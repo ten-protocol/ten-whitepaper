@@ -41,13 +41,21 @@ The idea behind this is:
 - Where n is high, the averaging is performed over a larger number of rollups and therefore less volatile and vice versa. High n adds more risk to Aggregators
 - L2 gas can be computed as Obscuro has the same metering mechanism as L1. As a result of this metering, we can work out the gas consumed and directly map this to the L1 moving average gas cost
 
+
+The computation required by Obscuro nodes to run a transaction can be estimated by using a metering mechanism similar to the one found in Ethereum.
+Using this information we can calculate what is the share of each transaction from the total computation in an average block.
+The basis to calculate the L1 fee is the cost to publish an average rollup to L1.
+Each transaction will pay a share of that cost proportional to its computation
+
+
+
+
+
 ![overhead_equation_4.png](images/equation_4.png)
 
 This gives the expected fee per transaction as:
 
 ![total_fee_equation_5.png](images/equation_5.png)
-
-##
 
 ## Rewards for L2 nodes
 
@@ -61,12 +69,10 @@ The lottery pay out amount per rollup round is represented as:
 
 ## Bootstrapping the network
 
-##
+When the network first spins up, it is prudent to expect low transaction volume, which can create a situation where:
 
-When the network first spins up, it is prudent to expect low transaction volume. Low transaction volume creates a situation where:
-
-1. Nodes can publish continually at a high cadence and absorb what might amount to a loss-making operation.
-2. Nodes can throttle the rate at which rollups are published, leading to a poorer user experience.
+1. Aggregators can publish continually at a high cadence and absorb what might amount to a loss-making operation.
+2. Aggregators can throttle the rate at which rollups are published, leading to a poorer user experience.
 3. Alternatively, the network can subsidize early transactions allowing both groups to succeed.
 
 While Obscuro optimizes for end-users, early nodes should also be profitable. As such, Obscuro follows the path of option 3
