@@ -23,13 +23,13 @@ The total fee a user must pay has three components.
 
 1. A proportion of the monthly operational cost for all nodes. This is calculated based on the computation of the current transaction as a proportion of the moving average of all L2 transactions over the month. Represented as:
 
-![proportion_equation.png](images/equation_1.png)
+![proportion_equation.png](images/proportion_equation.png)
 
-![operation_equation.png](images/equation_2.png)
+![operation_equation.png](images/operation_equation.png)
 
 2. The cost incurred by nodes for L1 storage, represented as:
 
-![storage_equation.png](images/equation_3.png)
+![storage_equation.png](images/storage_equation.png)
 
 3. A proportion of the additional overhead cost incurred by nodes for processing rollups is as follows:
 
@@ -42,11 +42,11 @@ The total fee a user must pay has three components.
 - The basis for calculating the L1 fee is the cost to publish an average rollup to L1.
 - Each transaction pays a share of that cost proportional to its computation.
 
-![overhead_equation_4.png](images/equation_4.png)
+![overhead_equation.png](images/overhead_equation.png)
 
 This gives the expected fee per transaction as:
 
-![total_fee_equation_5.png](images/equation_5.png)
+![total_fee_equation.png](images/total_fee_equation.png)
 
 ## Rewards For L2 nodes
 
@@ -56,7 +56,7 @@ Aggregator nodes have an additional reward mechanism that pays out rewards in OB
 
 The lottery pay out amount per rollup round is represented as:
 
-![active_node_reward_equation_6.png](images/equation_6.png)
+![active_node_reward_equation.png](images/active_node_reward_equation.png)
 
 ## Bootstrapping The Network
 
