@@ -11,7 +11,7 @@ The sequence for node registration is shown in the following diagram:
 ![node registration](./images/node-registration.png)
 
 1. Any L2 node must register with the Network Management contract. The node supplies its TEE attestation. It also must pay a fee for the service of receiving the shared secret. If the node wants to be an Aggregator, it has to pay the required stake. The first L2 node to register is responsible for setting up a shared secret from which the entropy for all further secrets is derived.
-2. The first L2 node generates a secret and encrypts it with its enclave specific public key to store. It then submits these secrets to the management contract, which store this encrypted secret and register the public key of the newly formed network. This is covered further in [Cryptography](cryptography.md).
+2. The first L2 node generates a secret and encrypts it with its enclave specific public key to store. It then submits these secrets to the management contract, which stores this encrypted secret and registers the public key of the newly formed network. This is covered further in [Cryptography](cryptography.md).
 3. A new party wishing to become an L2 node uses the Network Management contract to submit the remote attestation object, which signals to the network that it wants to know the shared secret. The Network Management contract checks the attestation against the current attestation rules. Existing nodes are incentivised to respond with the encrypted secret. Any node with a valid TEE able to pass the attestation can receive the key from another node.
 4. The new node begins executing all the transactions already published to the Rollup Management contract to synchronise its internally cached state with the other nodes. This includes user deposits and withdrawals into the Bridge contract, as well as confirmed user transactions.
 
@@ -34,10 +34,10 @@ These are the steps to becoming an Aggregator.
 * Set up a server with a valid, unaltered, up-to-date and secured TEE and provide an attestation from the hardware manufacturer or a delegate to the management contract.
 * On seeing this request to join the network published to the L1, another registered TEE shares the secret to encrypt and decrypt user transactions.
 * Once in possession of the secret, the TEE can start processing all the L2 transactions stored on the L1 blockchain and build the state.
-* Upon completion, the new aggregator can join the gossip with the other aggregators and participate in the lottery for producing rollups.
+* Upon completion, the new Aggregator can join the gossip with the other Aggregators and participate in the lottery for producing rollups.
 * Some end users send encrypted instructions directly to this node server. The node gossips these with other nodes in the L2 network, encrypted with the shared secret.
-* As aggregators process messages, they maintain the L2 state in the encrypted TEE memory or encrypted in a local database. Then, if they are the lottery winner, they create a valid rollup and publish it to L1 when the time comes.
-* All aggregators keep track of the blocks submitted to the management contract to ensure they are up-to-date with the source of truth.
-* The first aggregator to register has a unique role, as it has to create the shared secret.
+* As Aggregators process messages, they maintain the L2 state in the encrypted TEE memory or encrypted in a local database. Then, if they are the lottery winner, they create a valid rollup and publish it to L1 when the time comes.
+* All Aggregators keep track of the blocks submitted to the management contract to ensure they are up-to-date with the source of truth.
+* The first Aggregator to register has a unique role, as it has to create the shared secret.
 
 Note: Each aggregator needs an ETH balance on the L1 to pay for the submission of the rollup.
