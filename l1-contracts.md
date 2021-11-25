@@ -12,7 +12,7 @@ This contract is the gatekeeper for the protocol. Therefore, any node wishing to
 ### Rollup Management
 This contract interacts with the aggregators.
 
-* It determines whether to accept blocks of transactions submitted by an L2 node. The Rollup contract cannot accept a rollup from an aggregator with no stake or a valid attestation, and it checks the signature of the rollup generated in the TEE matches the Obscuro_Public_Key registered by the L2 node.
+* It determines whether to accept blocks of transactions submitted by an L2 node. The Rollup contract can only accept a rollup from an aggregator with a stake and valid attestation, and it checks that the signature of the rollup generated in the TEE matches the Obscuro_Public_Key registered by the L2 node.
 * It stores the encrypted L2 transactions in an efficient format.
 
 ### Bridge Management
