@@ -116,6 +116,9 @@ Zero knowledge rollups generate cryptographic proofs that can be used to prove t
 **Patricia Tree Root**
 A Patricia Tree (or Trie), is a data structure used in the Ethereum model to represent the receipt trie, the world state trie, the account storage trie, and the transaction trie. Only the root node of the trie is stored in the ethereum block, and it represents a single cryptographic proof for the entire state.
 
+**Obscuro Public events**
+Special events emitted by L2 contracts that are included in the rollups in plaintext, and are exposed to L1 contracts once rollups reach finality. It is a mechanism by which Obscuro can publish information. 
+
 ## Data Model
 This diagram shows the data structure for the Management contract and aggregator:
 ![management-contract](./images/management-contract.png)
