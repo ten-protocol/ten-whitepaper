@@ -29,3 +29,6 @@ This contract is very important for the solution's security since it will protec
 The goal of the L2 design is to create a fair, permissionless, and decentralised network of nodes with valid TEEs who cannot see the transactions they are processing while collaborating to manage a ledger stored as rollups in the L1. The ledger should preserve its integrity even in the face of catastrophic TEE hacks.
 
 All Obscuro nodes have to go through the attestation process with the Network contract before receiving the shared secret and participating.
+
+{% include_relative aggregators-verifiers.md %}
+{% include_relative rollup-data-structure.md %}

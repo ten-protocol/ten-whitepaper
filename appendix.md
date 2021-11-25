@@ -1,8 +1,6 @@
 # Appendix
 ## Contributors
 The Obscuro project is decentralised in nature, and this whitepaper has benefited enormously with feedback from the following contributors:
-* Gavin Thomas
-* Neal Shah
 * Richard Gendal Brown
 * Mike Hearn
 * Moritz Platt
@@ -62,6 +60,9 @@ Participants in the network may extract value by observing user transactions and
 **Non-Fungible Token / NFT**
 A unique and non-interchangeable unit of data stored on a digital ledger.
 
+**Obscuro Public events**
+Special events emitted by L2 contracts that are included in the rollups in plaintext, and are exposed to L1 contracts once rollups reach finality. It is a mechanism by which Obscuro can publish information. 
+
 **OBX**
 The utility token used by Obscuro.
 
@@ -73,6 +74,9 @@ Optimistic rollups assume that all transactions are valid and submit batches wit
 
 **Over-the-counter / OTC**
 A venue to provide bespoke financial agreements or options negotiated between counterparties as opposed to being listed on an exchange.
+
+**Patricia Tree Root**
+A Patricia Tree (or Trie), is a data structure used in the Ethereum model to represent the receipt trie, the world state trie, the account storage trie, and the transaction trie. Only the root node of the trie is stored in the ethereum block, and it represents a single cryptographic proof for the entire state.
 
 **Proof Of Block Inclusion / POBI**
 Obscuro's novel decentralised round-based consensus protocol based on a fair lottery and on synchronisation with the L1 designed for L2 rollups.
@@ -112,12 +116,6 @@ A _light_ L2 node which observes transaction rollups published to the L1 blockch
 
 **ZK-rollups**
 Zero knowledge rollups generate cryptographic proofs that can be used to prove the validity of transactions.
-
-**Patricia Tree Root**
-A Patricia Tree (or Trie), is a data structure used in the Ethereum model to represent the receipt trie, the world state trie, the account storage trie, and the transaction trie. Only the root node of the trie is stored in the ethereum block, and it represents a single cryptographic proof for the entire state.
-
-**Obscuro Public events**
-Special events emitted by L2 contracts that are included in the rollups in plaintext, and are exposed to L1 contracts once rollups reach finality. It is a mechanism by which Obscuro can publish information. 
 
 ## Data Model
 This diagram shows the data structure for the Management contract and aggregator:
