@@ -3,7 +3,7 @@
 This section will cover the various cryptographic techniques used by Obscuro.
 
 ### Master Seed
-CPU manufacturers provision every TEE with one or multiple keys, the _Enclave Key_ (EK). These keys are used for digitally signing messages and identifying a TEE. They are also used for encrypting data that only that particular hardware TEE can decrypt. To achieve the goals of a collaborative, decentralized network like Obscuro, all the TEEs have to work on the same set of transactions, which means they must all decrypt them.
+CPU manufacturers provision every TEE with one or multiple keys, the _Enclave Key_ (EK). These keys are used for digitally signing messages and identifying a TEE. They are also used for encrypting data that only that particular hardware TEE can decrypt. To achieve the goals of a collaborative, decentralised network like Obscuro, all the TEEs have to work on the same set of transactions, which means they must all decrypt them.
 
 The first enclave, called the _Genesis Enclave_, generates a 256bit random byte array called the _Master Seed_ inside the encrypted memory space. It encrypts this seed with the _EK_ and sends it to the management contract to be stored there, as well as storing it locally on the host server.
 
