@@ -164,7 +164,7 @@ elif rollups_in_target_block.size == 1 and rollups_in_last_block.size == 1:
 
 elif rollups_in_target_block.size == 2:
     # Two competing rollups in the target block
-    # This is not a frunt-running situation, so eventual rollups published in the next block do not matter
+    # This is not a front-running situation, so eventual rollups published in the next block do not matter
     rollup1 = rollups_in_target_block[0]
     rollup2 = rollups_in_target_block[1]
 
