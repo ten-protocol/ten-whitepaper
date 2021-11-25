@@ -15,7 +15,7 @@ An "expected monthly node operational costs" variable is set through the governa
 Aggregator nodes incur cost from submitting transactions to L1, through the following:
 
 - Storing rollup data on Ethereum.
-- The overhead in participating in publishing rollups outside of the storage cost, e.g. signing transactions.
+- The overhead of processing the L1 transaction that contains the rollup, e.g. signing transactions.
 
 ## Fee per transaction
 
