@@ -23,13 +23,13 @@ The total fee a user must pay has three components.
 
 1. A proportion of the monthly operational cost for all nodes. The proportion is calculated based on the computation of the current transaction as a proportion of the moving average of all L2 transactions over the month. Represented as:
 
-![equation_1.png](images/equation_1.png)
+![proportion_equation.png](images/equation_1.png)
 
-![equation_2.png](images/equation_2.png)
+![operation_equation.png](images/equation_2.png)
 
 2. The cost incurred by nodes for L1 storage, represented as:
 
-![equation_3.png](images/equation_3.png)
+![storage_equation.png](images/equation_3.png)
 
 3. A proportion of the additional overhead cost incurred by nodes for processing rollups is as follows:
 
@@ -41,11 +41,11 @@ The idea behind this is:
 - Where n is high, the averaging is performed over a larger number of rollups and therefore less volatile and vice versa. High n adds more risk to Aggregators
 - L2 gas can be computed as Obscuro has the same metering mechanism as L1. As a result of this metering, we can work out the gas consumed and directly map this to the L1 moving average gas cost
 
-![equation_4.png](images/equation_4.png)
+![overhead_equation_4.png](images/equation_4.png)
 
 This gives the expected fee per transaction as:
 
-![equation_5.png](images/equation_5.png)
+![total_fee_equation_5.png](images/equation_5.png)
 
 ##
 
@@ -59,7 +59,7 @@ The lottery pay out (active node reward) amount per rollup round is represented 
 
 - The lottery reward in each rollup is calculated to cover the operational costs of active nodes.
 
-![equation_6.png](images/equation_6.png)
+![active_node_reward_equation_6.png](images/equation_6.png)
 
 ## Bootstrapping the network
 
