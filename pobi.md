@@ -69,7 +69,7 @@ Using the notation, for the same _Rollup_Generation_, the rollup on the canonica
 2. In case there are multiple matches, use the highest L1_Proof_Generation. 
 3. In case there are multiple matches, use the lowest nonce.
 
-Given that a nonce is a random number with sufficient entropy, we assume there cannot be a collision at this point.
+Given that the nonce is a random number with sufficient entropy, we assume there cannot be a collision at this point.
 
 ### Preventing Repeated Random Nonce Generation
 In phase 3 of the protocol, the TEE of each aggregator generates a random nonce which determines the winner of the protocol. This introduces the possibility of gaming the system by restarting the TEE, and generating multiple numbers.
