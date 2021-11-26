@@ -2,7 +2,7 @@
 input:
   abstract.md: ""
   motivation.md: ""
-  context.md: ""
+  challenges.md: ""
   technical-background.md: ""
   high-level-design.md: ""
   consensus.md: ""

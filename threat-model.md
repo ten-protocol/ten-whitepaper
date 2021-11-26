@@ -86,7 +86,12 @@ There is no risk in altering the ledger or performing double-spend attacks. Ther
 
 There are no risks of driving other aggregators out of business by denying them the chance to win rollups since they will get the reward of being active nodes.
 
+### Catastrophic events
+One crucial challenge of such a system is ensuring that some catastrophic event cannot leave all the value locked.
+[todo tudor]
+
 ## Front-Running by Aggregators
+[todo tudor - this is duplicated]
 A TEE that emits events and responds to balance enquires becomes vulnerable to front-running attacks. An Aggregator could, in theory, execute a transaction from an account they control, then execute a user transaction, then execute another transaction from a controlled account, and be able to learn something.
 
 This process is much more complicated and expensive than traditional public front-running and MEV, but it does not solve the problem completely.
