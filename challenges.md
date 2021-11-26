@@ -16,7 +16,7 @@ In this section, we enumerate the key challenges we faced when designing the Obs
 - A privacy-preserving platform should consider illegal usage and design mechanisms to help application developers avoid and prevent it. An important insight in this direction is that the value of confidentiality decays over time, to the point where transactions may just be of historical interest. For many transactions involving value, it is critical that they are not public when processed and cannot be front-run, but for others, they are price-sensitive for a longer period. Obscuro uses this insight and implements a flexible policy for delayed transaction revelation. The knowledge that transactions become public in the future is a deterrent for users to engage in criminal behaviour because law-enforcement agencies will eventually catch up. [Alternative](./appendix.md#alternative-revelation-options) options have been considered.
 
 
-- One crucial challenge of such a system is ensuring that some catastrophic event cannot leave all the value locked. The mechanism that prevents this is covered in the [Threat-Model analysis](./threat-model.md#)
+- One crucial challenge of such a system is ensuring that some catastrophic event cannot leave all the value locked. The mechanism that prevents this is covered in the [Threat-Model analysis](./threat-model.md)
 
 
 - High transaction fees are one of the main barriers to entry for Ethereum. Obscuro addresses this by introducing a novel approach to calculate fees based on the actual costs of the running nodes.
