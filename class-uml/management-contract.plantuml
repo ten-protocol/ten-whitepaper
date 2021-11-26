@@ -18,8 +18,8 @@ object ManagementContract {
 
     NL
     C(Registered Aggregators)
-    C(The contract will check the attestation )
-    C(End users will pick one or multiple nodes from this list to submit transactions to)
+    C(The contract checks the attestation )
+    C(End users pick one or multiple nodes from this list to submit transactions to)
     - aggregators: List<Aggregator>
 
     NL
@@ -53,7 +53,7 @@ object ManagementContract {
     C(Encrypted with the key of each enclave)
     C(It will represent a good image of how many copies are out there)
     C(Will have to be used by incentives)
-    C(Users will have to remove when they destory the cpu)
+    C(Users will have to remove when they destroy the cpu)
     - encryptedSecrets: Map<Party,Secret>
 }
 

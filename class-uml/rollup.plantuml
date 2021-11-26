@@ -63,8 +63,8 @@ object ObscuroRollup {
     - aggregator: AggregatorIdentity
 
     NL
-    C(Some of the transactions in the rollup will be withdrawal requests from users)
-    C(The enclave will add these to this list in an unencrypted form to be used by the L1 Management Contract)
+    C(Some of the transactions in the rollup are withdrawal requests from users)
+    C(The enclave adds these to this list in an unencrypted form to be used by the L1 Management Contract)
     TODO(this is a sidechannel. )
     C(We could use something like the submarine technique and disclose withdrawals with a delay)
     - withdrawals: List<Withdrawal>
