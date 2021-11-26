@@ -6,6 +6,8 @@ The structure delivers a steady and predictable income for node operators over t
 
 The structure also does not punish Aggregators that miss out on a publishing opportunity with slashing. Instead, the loss of reward should be incentive enough.
 
+Since Obscuro does not link fees and rewards directly, the high-level goal of this mechanism is to find a stable equilibrium between the amounts paid into the pool by end-users and the amounts paid out to nodes for their service. In periods of high network usage, the pool will grow, and this extra money will be used in quiet periods to pay for publishing rollups more frequently, thus providing a better user experience. 
+
 ## Cost of L2 nodes
 
 Operators run the network and incur operational costs by running and maintaining nodes.

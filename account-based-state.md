@@ -33,17 +33,18 @@ For subsequent versions, Obscuro explores the following concepts:
 * Automatically propagate access. For example, if _Account.getBalance()_ can be invoked only by the owner, it means that any contract that invokes this has to originate from a message signed by the owner. This solution sounds appealing, but it needs more research to determine if this mechanism prevents useful use cases.
 
 ###  Wallets and Transaction Submission
-User wallets creates transactions encrypted with the shared _Obscuro public key_. Only valid TEEs in possession of the private key can decrypt, execute, and see the resulting state. Still, end-users who submitted a transaction must be able to receive the result and query the balance.
+User wallets creates transactions encrypted with the _Obscuro public key_. Only valid TEEs in possession of the Master Seed can decrypt, execute, and see the resulting state. Still, end-users who submitted a transaction must be able to receive the result and query the balance.
 
 A traditional wallet connected to a node on a public blockchain can read the balance of any account and display it to the user. For a similar user experience, Obscuro-enabled wallets need to submit signed requests to L2 nodes and receive responses that they can display to the user. The responses need to be encrypted with the user key and have to be cryptographic proofs linking the balance to a rollup.
 
-Validity verification of such proofs can be done by first checking the TEE signature, then by checking that the rollup is on the canonical chain of both the L2 and the L1 chains.
+Validity verification of such proofs can be done by first checking the TEE signature and then by checking that the rollup is on the canonical chain of both the L2 and the L1 chains.
 
 ###  Smart contracts types
 
 Since all data is temporarily private, and smart contracts are just data, the Obscuro model supports two types of smart contracts.
 
- - _Public contracts_ are equivalent to the Ethereum smart contracts in the sense that the source code will be available online, and anyone can build them and compare the hash of the bytecode against the address they are sending commands to.
+ - _Public contracts_, which are equivalent to the Ethereum smart contracts in the sense that the source code will be available online, and anyone can build them and compare the hash of the bytecode against the address they are sending commands to.
+
 
  - _Private contracts_, for which the developer has not published the source code. These can be used for custom logic like arbitration where the developer intends to keep the profit making strategy hidden from competitors.
 

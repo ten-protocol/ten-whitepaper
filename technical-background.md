@@ -1,11 +1,14 @@
 # Technical Background
-## Ethereum
-Ethereum is a public, transparent, permissionless blockchain system and network of nodes, supporting account-based smart contracts, where business logic can be deployed as code to create an immutable and uncensorable contract which can hold and control the flow of value. The Ethereum Mainnet went live in 2015 and is the most mature and adopted smart contract system.
 
-Using a smart contract, it is possible to use the Ethereum network as an uncensorable storage and management system.
+This section briefly covers the key technologies on which Obscuro relies.
+
+We recommend reading through the "Trusted Execution Environment" section because it introduces concepts and notations used throughout the paper.
+
+## Ethereum
+Ethereum is a public, transparent, permissionless blockchain system and network of nodes, supporting account-based smart contracts, where business logic can be deployed as code to create an immutable and uncensorable contract which can hold and control the flow of value. The Ethereum mainnet went live in 2015 and is the most mature and adopted smart contract system. Read more on the official [website](https://ethereum.org/en/).
 
 ## Trusted Execution Environment
-A TEE is a secure area of a main processor or CPU. It guarantees code and data loaded inside to be protected with respect to confidentiality and integrity as it is processed. Obscuro focuses on Intel's SGX, based on the team's 5 years of experience developing a Java-based confidential computing product with it. The TEE data can not be read or processed outside the SGX enclave, including processes running at higher privilege levels in the same host.
+A TEE is a secure area of a central processor or CPU. It guarantees code and data loaded inside to be protected with respect to confidentiality and integrity as it is processed. Obscuro focuses initially on Intel's SGX, based on the team's 5 years of experience developing a confidential computing product with it. The TEE data cannot be read or processed outside the enclave, including processes running at higher privilege levels in the same host.
 
 An SGX-capable CPU has two device root keys that are fused into it by the manufacturer, the _Root Provisioning Key_ (RPK) and the _Root Sealing Key_ (RSK). The RPK is known to Intel and used to prove a CPU is genuine via remote attestation and the RSK is not known to any entity outside the CPU. These keys can be used to create other CPU specific keys. In this whitepaper we will refer to them as the _Enclave Key_ (EK).  Processes and users outside the enclave encrypt data that is only meant for the enclave using keys generated inside the enclave. When the enclave wishes to store data, it is again encrypted so that the host (the server which stores the data) is not able to see it.
 
@@ -37,5 +40,3 @@ The two approaches to scaling L1 blockchains are to improve the capacity of the 
 The first approach can make the blockchain more centralised, as the cost of node infrastructure increases (limiting the number of participants able to afford it) or the number of nodes involved in consensus decreases. A variation splits the accounts into shards, allowing validation to happen in parallel, and this is the current approach on the Eth2 roadmap.
 
 The second approach is to allow users to engage with contracts on a second-layer network of nodes, where the majority of the processing work is undertaken. One example of the second approach is _rollups_, where the L2 transactions are verified and posted in compressed form in a single rollup transaction to the L1 blockchain. There is an L1 contract which processes deposits and withdrawals. In zero-knowledge rollups, L1 nodes can undertake a lightweight process of verification of the correctness of activity on the L2 network, whereas in optimistic rollups, the L2 transactions submitted are assumed to be correct but another L2 node may disprove them during a challenge window.
-
-Obscuro borrows some aspects from both the optimistic and the ZK rollup patterns. In a nutshell, Obscuro rollups contain the encrypted user transactions, and are signed by an attested TEE which means the rollup is highly likely to be valid. In the very remote possibility that it is invalid due to a TEE hack, there is a mechanism built in which is functionally similar to the optimistic rollups.
