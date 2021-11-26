@@ -1,7 +1,7 @@
 ## Cryptoeconomics
 All successful decentralised solutions need a strong incentive mechanism to keep the protocol functioning effectively. 
 
-For simplicity, this analysis focuses on the normal functioning of the network, assuming it reached adoption, and it will handle bootstrapping separately.
+For simplicity, this analysis focuses on the normal functioning of the network, assuming it has reached adoption. Bootstrapping is handled separately.
 
 ### High Level Requirements
 * Users have to pay for transactions a well-defined amount. The amount will cover the below two points and there will be no bidding wars.

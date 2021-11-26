@@ -23,7 +23,7 @@ _Note: The stake is a piece of the game theory puzzle that ensures that Obscuro 
 This module accepts rollups submitted by L2 nodes and includes them in the rollup-chain structure. It works together with the bridge in processing withdrawal requests from users.
 
 ### Obscuro Bridge
-This contract is very important for the solution's security since it will protect all liquidity deposited by Ethereum end-users.
+This contract is very important for the solution's security since it protects all liquidity deposited by Ethereum end-users.
 
 ## L2 Network
 The goal of the L2 design is to create a fair, permissionless, and decentralised network of nodes with valid TEEs who cannot see the transactions they are processing while collaborating to manage a ledger stored as rollups in the L1. The ledger should preserve its integrity even in the face of catastrophic TEE hacks.

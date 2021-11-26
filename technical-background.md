@@ -1,6 +1,6 @@
 # Technical Background
 ## Ethereum
-Ethereum is a public, transparent, permissionless blockchain system and network of nodes, supporting account-based smart contracts, where business logic can be deployed as code to create an immutable and uncensorable contract which can hold and control the flow of value. The Ethereum mainnet went live in 2015 and is the most mature and adopted smart contract system.
+Ethereum is a public, transparent, permissionless blockchain system and network of nodes, supporting account-based smart contracts, where business logic can be deployed as code to create an immutable and uncensorable contract which can hold and control the flow of value. The Ethereum Mainnet went live in 2015 and is the most mature and adopted smart contract system.
 
 Using a smart contract, it is possible to use the Ethereum network as an uncensorable storage and management system.
 

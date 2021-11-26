@@ -3,7 +3,7 @@ The network requires the participation of several types of actor, some of whom w
 
 The main goals for the creation of the OBX token are to provide a truly decentralised network, as well as a system to sustain sustainable growth of the network. That means creating a system which is equally attractive to developers, Obscuro node operators, end users, enterprises, and the wider community. The OBX Token will be issued as a utility token, as opposed to a regular coin or security [^1].  The token will have four primary uses:
 
-* To provide an inflationary _block reward_ to incentivise users to operate obscuro nodes.
+* To provide an inflationary _block reward_ to incentivise users to operate Obscuro nodes.
 * An accounting mechanism to charge users for transaction computation and state storage or gas.
 * A means to fund ongoing development of the Obscuro platform.
 * A way to incentivise eco-system development via grants and competitions.
@@ -33,13 +33,13 @@ One point to note on the listing above is the allocation to initial funders. The
 
 ## Relationship to ETH
 As each Obscuro block is published to the Ethereum Mainnet, Obscuro aggregators must hold a balance of ETH to be able to do this. Aggregators get paid in OBX (via block reward and transaction fees) and have outgoings in ETH, therefore there exists currency exposure between OBX and ETH, which, in theory, can be hedged with futures or options if such a market existed. The combination of transaction fees and block reward in terms of ETH must be great enough to:
-* Cover the ETH required to publish the latest Obscuro block to Ethereum mainnet.
+* Cover the ETH required to publish the latest Obscuro block to Ethereum Mainnet.
 * Cover the Obscuro computation required to validate and publish the block.
 * Cover a profit margin for the Obscuro aggregators.
 
 It is thus important for the OBX/ETH price to remain as stable as possible. The incentives of the various groups involved in the network should be able to facilitate this. To participate in the network or become an aggregator, users must buy OBX tokens. On the flip side, aggregators will likely sell OBX to cover their ETH expenses. These flows coupled with large amounts of OBX locked up in staking arrangements should enable OBX to retain enough value versus ETH to ensure being an aggregator is profitable.
 
-Gas will be accounted for in the same way that Ethereum does and there will also have a market for OBX gas based upon the supply and demand determined by Obscuro node operators/verifiers. Clearly, income of OBX _in ETH terms_ to an aggregator must be greater than the ETH they require to publish the block to Ethereum Mainnet.
+Gas is be accounted for in the same way that Ethereum does and with a market for OBX gas based upon the supply and demand determined by Obscuro node operators. Clearly, income of OBX _in ETH terms_ to an aggregator must be greater than the ETH they require to publish the block to Ethereum Mainnet.
 
 ## Illustrated flows
 ![token-flow](./images/token-flow.png)
