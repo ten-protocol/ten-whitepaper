@@ -10,10 +10,10 @@ The main goals for the creation of the OBX token are to provide a truly decentra
 
 The OBX token is issued initially onto Ethereum Mainnet as an ERC-20 token. This is because it is easier to bootstrap adoption onto an already existing network with financial infrastructure such as exchanges and other existing DeFi applications. The intention is that the OBX token is not issued until the first release of the Obscuro platform is substantially complete. In other words, it should be possible to use Obscuro in a testnet environment as a pre-requisite for the utility token launch to proceed.
 
-On Obscuro entering production, an allocation of tokens for aggregator rewards will be issued directly onto the Obscuro network. Therefore, there are two classes of token: Ethereum native and Obscuro native, and participants can move seamlessly between them using the Obscuro Bridge Contract.
+On Obscuro entering production, an allocation of tokens for Aggregator rewards will be issued directly onto the Obscuro network. Therefore, there are two classes of token: Ethereum native and Obscuro native, and participants can move seamlessly between them using the Obscuro Bridge Contract.
 
 ## Relationship to ETH
-In order to publish Obscuro rollups to Ethereum Mainnet, Obscuro aggregators must hold a balance of ETH. Aggregators get paid in OBX (via block reward and transaction fees) and have outgoings in ETH; therefore, there exists currency exposure between OBX and ETH, which, in theory, can be hedged with futures or options if such a market existed. The combination of transaction fees and block reward in terms of ETH must be large enough to:
+In order to publish Obscuro rollups to Ethereum Mainnet, Obscuro Aggregators must hold a balance of ETH. Aggregators get paid in OBX (via block reward and transaction fees) and have outgoings in ETH; therefore, there exists currency exposure between OBX and ETH, which, in theory, can be hedged with futures or options if such a market existed. The combination of transaction fees and block reward in terms of ETH must be large enough to:
 * Cover the ETH required to publish the latest Obscuro block to Ethereum mainnet.
 * Cover the Obscuro computation required to validate and publish the block.
 

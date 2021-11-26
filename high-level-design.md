@@ -8,14 +8,14 @@ The following diagram shows the interactions between the two decentralised netwo
 ![L1-L2 Interaction](./images/l1-l2-interaction.png)
 
 ## L1 Network
-On the L1 network there are several regular Ethereum contracts, referred to as management contracts.
+On the L1 network, there are several regular Ethereum contracts, referred to as Management Contracts.
 
 The L1 design is covered in much greater detail in [L1 Contracts](./l1-contracts.md)
 
 ### Network Management
-This contract is the gatekeeper for the protocol. Any aggregator or verifier node wishing to join Obscuro will have to interact with this contract and prove it is valid. This contract will manage the TEE attestation requirements and will be able to verify reports.
+This contract is the gatekeeper for the protocol. Any Aggregator or Verifier node wishing to join Obscuro will have to interact with this contract and prove it is valid. This contract will manage the TEE attestation requirements and will be able to verify reports.
 
-It will also manage the stake of the participants able to submit rollups known as aggregators.
+It will also manage the stake of the participants able to submit rollups known as Aggregators.
 
 _Note: The stake is a piece of the game theory puzzle that ensures that Obscuro participants have the right incentives to follow the protocol._
 

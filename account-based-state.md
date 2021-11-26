@@ -13,7 +13,7 @@ Due to data privacy concerns, existing smart contracts will have to change befor
 
 To implement these requirements, Obscuro supports a runtime largely compatible with the _Ethereum Virtual Machine_ (EVM) and is based on [Geth](https://github.com/ethereum/go-ethereum), the canonical implementation of the Ethereum protocol.
 
-On a high-level, the _Obscuro Virtual Machine_ (OVM) will be almost identical to the EVM, but there are significant differences behind the scenes between the data structures used by Ethereum and the ones used by Obscuro. The rollup structure also differs significantly from the Ethereum block structure as it contains encrypted transactions, plaintext withdrawal instructions, plaintext events, references to L1 blocks, and more. The OVM will eventually introduce new abstractions and primitives to reflect the data privacy requirements and implement data isolation where it is needed. One last significant difference from the EVM is the implementation of the Obscuro cryptography requirements.
+On a high level, the _Obscuro Virtual Machine_ (OVM) will be almost identical to the EVM, but there are significant differences behind the scenes between the data structures used by Ethereum and the ones used by Obscuro. The rollup structure also differs significantly from the Ethereum block structure as it contains encrypted transactions, plaintext withdrawal instructions, plaintext events, references to L1 blocks, and more. The OVM will eventually introduce new abstractions and primitives to reflect the data privacy requirements and implement data isolation where it is needed. One last significant difference from the EVM is the implementation of the Obscuro cryptography requirements.
 
 
 ### State Confidentiality between Smart contracts
