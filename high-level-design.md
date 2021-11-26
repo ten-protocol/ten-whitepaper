@@ -12,7 +12,7 @@ On the bottom right, this diagram also depicts the state of a simple rollup chai
 ## L1 Network
 On the L1 network there are several regular Ethereum contracts, referred to as Management Contracts.
 
-Note: the L1 design is covered in more detail in [L1 Contracts](./l1-contracts.md).
+Note: the L1 design is covered in more detail in [L1 Contracts](./l1-contracts).
 
 ### Network Management
 This contract is the gatekeeper for the protocol. Any Obscuro node wishing to join the network will have to interact with this contract and prove it is valid. 
@@ -33,7 +33,7 @@ The goal of the L2 design is to create a fair, permissionless, and decentralised
 
 All Obscuro nodes have to go through the attestation process with the Network Management contract before receiving the shared secret and participating.
 
-Note: the shared secret is covered in the [cryptography section](./cryptography.md).
+Note: the shared secret is covered in the [cryptography section](./cryptography).
 
 {% include_relative aggregators-verifiers.md %}
 {% include_relative rollup-data-structure.md %}

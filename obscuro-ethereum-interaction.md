@@ -16,7 +16,7 @@ The rule is that the L2 rollup that includes the transaction that credits the Ob
 The interaction is shown in the following diagram:
 ![user registration](./images/user-registration.png)
 
-See also the [Data model](./appendix.md#data-model) section and the following dependency diagram.
+See also the [Data model](./appendix#data-model) section and the following dependency diagram.
 ![deposit process](./images/deposit-process.png)
 
 _Note: The deposit L2 transaction cannot be fully encrypted because the Aggregator has to decide whether to include it in the current rollup based on the chances of the L1 block it depends on being final._
@@ -58,7 +58,7 @@ The above rules will, in practice, prevent this type of attack, and if it happen
 The network governance model allows any user to trigger the _forced finality procedure_ by staking or voting on one of the competing rollup chains. The minimum stake is a percentage of the amounts being withdrawn on that branch, set through governance. Backers of the other chain are obliged to stake a similar or higher value to compete. The decision process is run as an auction, where the party that loses also loses their bids. When concluded, all rollups on that chain are considered final, and withdrawals are executed.
 
 ### Withdrawals protocol
-Each TEE signed rollup contains a plaintext list of withdrawal requests. See: [Data Model](./appendix.md#data-model).
+Each TEE signed rollup contains a plaintext list of withdrawal requests. See: [Data Model](./appendix#data-model).
 
 The Bridge contract keeps track of these requests and executes them at different times, based on the finality status of that rollup.
 

@@ -34,7 +34,7 @@ A write-level hack could happen if an attacker extracts the enclave key and sign
 
 _Note: This type of attack is viewed as the main threat to the protocol and thus handled explicitly._
 
-The mechanism to prevent this attack is described in detail in the [Withdrawals](./obscuro-ethereum-interaction.md#withdrawals) section.
+The mechanism to prevent this attack is described in detail in the [Withdrawals](./obscuro-ethereum-interaction#withdrawals) section.
 
 The high level goal of the protections is to transform such an attack into a liveness attack on the withdrawal function.
 
@@ -129,7 +129,7 @@ Publishing with insufficient gas is, in effect, punished by the protocol because
 ## Competing L1 Blockchain Forks
 In theory, different L2 Aggregators could be connected to L1 nodes that have different views of the L1 ledger. This will be visible in the L2 network, as gossiped rollups pointing to L1 blocks from the two forks. Each Aggregator will have to make a bet and continue working on the L1 fork that it considers to be legitimate, the same behaviour as any L1 node.
 
-This is depicted in [Rollup Data Structure](./rollup-data-structure.md).
+This is depicted in [Rollup Data Structure](./rollup-data-structure).
 
 If it proves that the decision an Aggregator made was wrong, it has to roll back the state to a checkpoint and replay the winning rollups.
 

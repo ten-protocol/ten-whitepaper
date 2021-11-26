@@ -89,7 +89,7 @@ All successful decentralised solutions need a robust incentive mechanism to keep
 
 Compared to a typical L1 protocol, there is an additional complexity to consider. In an L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent because they know everyone does that too. In an L2 decentralised protocol like POBI, there is an additional step: the publication of the rollup to L1, which can fail for multiple reasons. Furthermore, the incentive design must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to an L1 block, which is where an L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
 
-Note that rollup finality will be covered extensively in the [Obscuro - Ethereum interaction section](./obscuro-ethereum-interaction.md).
+Note that rollup finality will be covered extensively in the [Obscuro - Ethereum interaction section](./obscuro-ethereum-interaction).
 
 The high-level goal is to keep the system functioning as smoothly as possible and resist random failures or malicious behaviour while not penalising Obscuro nodes for not being available. We believe that penalties for availability increase the barrier of entry, and thus make the system centralised over the long term. 
 
@@ -97,7 +97,7 @@ Obscuro introduces the concept of _claiming rewards_ independently of the actual
 
 To achieve this, the protocol has to maintain a pool of tokens. Users will pay fees into this pool, while nodes will be paid from it. During bootstrapping, the protocol will have the ability to add newly minted tokens to the pool. Once the network picks up, the protocol will be able to burn excess tokens.
 
-Note, that an important assumption is that the reward from publishing a rollup will never exceed twice the gas cost. This can be tweaked by the formulas that calculate the [fees and rewards](./fees-rewards.md).
+Note, that an important assumption is that the reward from publishing a rollup will never exceed twice the gas cost. This can be tweaked by the formulas that calculate the [fees and rewards](./fees-rewards).
 
 Compared to a typical L1 protocol, there is an additional complexity to consider. In an L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent, because they know everyone will do that as well. In an L2 decentralised protocol like POBI, there is an additional step, which is the publication of the rollup to L1, which can fail for multiple reasons. Furthermore, the incentive design must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to an L1 block, which is where an L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
 

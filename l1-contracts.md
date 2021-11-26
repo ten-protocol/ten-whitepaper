@@ -6,7 +6,7 @@ This contract is the gatekeeper for the protocol. Therefore, any node wishing to
 
 * It registers L2 nodes, verifies their TEE attestation, and manages their stakes. (Stakes are required for the Aggregators who publish rollups as an incentive to follow the protocol.)
 * It manages the TEE attestation requirements. This means that the governance of the contract can decide which enclave code is approved to join.
-* It manages the L2 TEEs' shared secret key to be available in case of L2 node failure. The L1 acts as the ultimate high availability storage. Note: This is expanded in the [Cryptography](./cryptography.md) section.
+* It manages the L2 TEEs' shared secret key to be available in case of L2 node failure. The L1 acts as the ultimate high availability storage. Note: This is expanded in the [Cryptography](./cryptography) section.
 * It keeps a list of IP addresses for all Aggregators.
 
 ### Rollup Management
@@ -19,5 +19,5 @@ This contract interacts with the Aggregators.
 This contract is essential for the solution's security since all value deposited by end-users is locked in this bridge.
 
 * It acts as a pool where people can deposit assets, like fungible or non-fungible ERC tokens, made available as wrapped tokens to use on the Obscuro network and can be withdrawn on demand back to an L1.
-* In case of conflicting forks in the rollup chain, it must delay withdrawals until one fork expires or enter a procedure to discover which fork is valid. This is covered in more detail in [Withdrawals](./obscuro-ethereum-interaction.md#withdrawals).
+* In case of conflicting forks in the rollup chain, it must delay withdrawals until one fork expires or enter a procedure to discover which fork is valid. This is covered in more detail in [Withdrawals](./obscuro-ethereum-interaction#withdrawals).
 * It may be extended to manage liquidity yields.

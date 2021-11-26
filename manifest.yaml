@@ -13,5 +13,5 @@ input:
   tokenomics.md: ""
   governance.md: ""
   appendix.md: ""
-output: whitepaper.md
+output: whitepaper
 ---
