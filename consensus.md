@@ -71,7 +71,6 @@ Using the notation, for the same _Rollup_Height_, the rollup on the canonical ch
 
 Given that the nonce is a random number with sufficient entropy, we assume there cannot be a collision at this point during normal functioning. In the situation where it happens, the rollup on the canonical chain will be the one with the lowest hash.
 
-
 ## Preventing Repeated Random Nonce Generation
 In phase 3 of the protocol, the TEE of each Aggregator generates a random nonce which determines the winner of the protocol. This introduces the possibility of gaming the system by restarting the TEE, and generating multiple numbers.
 
@@ -208,3 +207,8 @@ else:
 ```
 
 _Note that these rules are subject to adjustment based on production observations._
+
+
+## Rollup evolution
+
+![block rollup complex](./images/block-rollup-complex.png)

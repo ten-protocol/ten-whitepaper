@@ -87,16 +87,20 @@ There is no risk in altering the ledger or performing double-spend attacks. Ther
 There are no risks of driving other Aggregators out of business by denying them the chance to win rollups since they will get the reward of being active nodes.
 
 ### Catastrophic events
-One crucial challenge of such a system is ensuring that some catastrophic event cannot leave all the value locked.
-[todo tudor]
+One of the worst scenarios is a catastrophic event that leaves all the value locked.
 
-## Front-Running by Aggregators
-[todo tudor - this is duplicated]
-A TEE that emits events and responds to balance enquires becomes vulnerable to front-running attacks. An Aggregator could, in theory, execute a transaction from an account they control, then execute a user transaction, then execute another transaction from a controlled account, and be able to learn something.
+This could happen in theory if all registered TEEs were simultaneously physically destroyed, and thus the master seed was permanently lost.
 
-This process is much more complicated and expensive than traditional public front-running and MEV, but it does not solve the problem completely.
+If a single TEE is not physically destroyed, and a single Ethereum node has a copy of the L1 ledger, the network can be restarted, since all the required information is stored on the L1, including the master seed encrypted with the key of the surviving enclave and all the rollups.
 
-Obscuro introduces a slight delay to make this attack impractical for the Aggregators but still preserve the same user experience.  The TEE will emit events and respond to balance requests only after proof that the rollup was successfully published in an L1 block. This mechanism will prevent an Aggregator from probing for information while creating a rollup.
+The defense against this is to achieve a reasonable decentralisation.
+
+## MEV by Obscuro Aggregators
+Transactions and processing are hidden from node operators. Still rollups contain some information and the node operator can query the balance of accounts they control. 
+
+To make this attack impractical, Obscuro introduces a slight delay that preserves the user experience of public blockchains.  
+
+The TEE will emit events and respond to balance requests only after it received proof that the rollup was successfully published in an L1 block. This mechanism will prevent an Aggregator from probing for information while creating a rollup.
 
 An Aggregator wishing to attack this scheme would have to quickly create valid Ethereum blocks while executing user transactions, which is highly impractical since there is a hardcoded minimum value for the mining difficulty.
 
@@ -174,3 +178,8 @@ If there is a successful attack against the TEE, the next defense is a single ac
 The next line of defense are the token holders, who will vote on L1 to update the Attestation Constraints, to fix the vulnerability. They are invested in the community, because they hold the token, which means they profit if it functions correctly: Token_Holders_N/2 of Token_Holders_N, where motivation is profit seeking
 
 Note that the attacker is not directly profit seeking, because there is no possibility to withdraw assets until the fork is resolved.
+
+### How badly will the system fail if the assumptions are violated?
+
+If all supported hardware manufacturers colluded, they would be able to break the safety of the ledger.
+   
