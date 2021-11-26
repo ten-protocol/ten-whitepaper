@@ -20,7 +20,7 @@ object ObscuroRollup {
     - generation: Int
 
     NL
-    C(The timestamp as set by the aggregator)
+    C(The timestamp as set by the Aggregator)
     C(The contract checks that it is reasonable compared to the L1 block and the parent)
     - timestamp: Timestamp
 
@@ -49,7 +49,7 @@ object ObscuroRollup {
     - receiptsRoot: Hash
 
     NL
-    C(Root hash of a state Patricia MTree constructed by the aggregator)
+    C(Root hash of a state Patricia MTree constructed by the Aggregator)
     C(Same datastructure as Ethereum)
     - stateRoot: Hash
 
@@ -58,13 +58,13 @@ object ObscuroRollup {
     - logsBloom: BloomFilter
 
     NL
-    C(The pub key of the aggregator who submitted)
+    C(The pub key of the Aggregator who submitted)
     C(Must be part of the stakers. And must be the signer)
     - aggregator: AggregatorIdentity
 
     NL
-    C(Some of the transactions in the rollup will be withdrawal requests from users)
-    C(The enclave will add these to this list in an unencrypted form to be used by the L1 Management Contract)
+    C(Some of the transactions in the rollup are withdrawal requests from users)
+    C(The enclave adds these to this list in an unencrypted form to be used by the L1 Management Contract)
     TODO(this is a sidechannel. )
     C(We could use something like the submarine technique and disclose withdrawals with a delay)
     - withdrawals: List<Withdrawal>
@@ -92,7 +92,7 @@ object SignedObscuroRollup {
 
 object Withdrawal{
     C(It is part of a rollup in plaintext. )
-    C(Processed by the L1 Management contract)
+    C(Processed by the L1 Management Contract)
     C(according to the complex withdraw logic)
     NL
 

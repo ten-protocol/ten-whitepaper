@@ -4,15 +4,15 @@ On the L1 network, several conventional Ethereum contracts act together to form 
 ### Network Management
 This contract is the gatekeeper for the protocol. Therefore, any node wishing to join Obscuro must interact with this contract and prove it is valid.
 
-* It registers L2 nodes, verifies their TEE attestation, and manages their stakes. (Stakes are required for the aggregators who publish rollups as an incentive to follow the protocol.)
+* It registers L2 nodes, verifies their TEE attestation, and manages their stakes. (Stakes are required for the Aggregators who publish rollups as an incentive to follow the protocol.)
 * It manages the TEE attestation requirements. This means that the governance of the contract can decide which enclave code is approved to join.
 * It manages the L2 TEEs' shared secret key to be available in case of L2 node failure. The L1 acts as the ultimate high availability storage. Note: This is expanded in the [Cryptography](./cryptography.md) section.
-* It keeps a list of IP addresses for all aggregators.
+* It keeps a list of IP addresses for all Aggregators.
 
 ### Rollup Management
-This contract interacts with the aggregators.
+This contract interacts with the Aggregators.
 
-* It determines whether to accept blocks of transactions submitted by an L2 node. The Rollup contract can only accept a rollup from an aggregator with a stake and valid attestation, and it checks that the signature of the rollup generated in the TEE matches the Obscuro_Public_Key registered by the L2 node.
+* It determines whether to accept blocks of transactions submitted by an L2 node. The Rollup contract can only accept a rollup from an Aggregator with a stake and valid attestation, and it checks that the signature of the rollup generated in the TEE matches the Obscuro_Public_Key registered by the L2 node.
 * It stores the encrypted L2 transactions in an efficient format.
 
 ### Bridge Management

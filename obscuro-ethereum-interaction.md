@@ -19,7 +19,7 @@ The interaction is shown in the following diagram:
 See also the [Data model](./appendix.md#data-model) section and the following dependency diagram.
 ![deposit process](./images/deposit-process.png)
 
-_Note: The deposit L2 transaction cannot be fully encrypted because the aggregator has to decide whether to include it in the current rollup based on the chances of the L1 block it depends on being final._
+_Note: The deposit L2 transaction cannot be fully encrypted because the Aggregator has to decide whether to include it in the current rollup based on the chances of the L1 block it depends on being final._
 
 ## Withdrawals
 The high-level requirement for the withdrawal function is simple: allow Obscuro users to move assets back into the Ethereum network. The problem is that this is where the most significant threat against such a solution lies because there might be a large amount of locked value.

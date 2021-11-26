@@ -5,21 +5,21 @@ This section covers the various cryptographic techniques used by Obscuro.
 ### Master Seed
 CPU manufacturers provision every TEE with one or multiple keys, the _Enclave Key_ (EK). These keys are used for digitally signing messages and identifying a TEE. They are also used for encrypting data that only that particular hardware TEE can decrypt. To achieve the goals of a collaborative, decentralised network like Obscuro, all the TEEs have to work on the same set of transactions, which means they must all decrypt them.
 
-The first enclave, called the _Genesis Enclave_, generates a 256bit random byte array called the _Master Seed_ inside the encrypted memory space. It encrypts this seed with the _EK_ and sends it to the management contract to be stored there, as well as storing it locally on the host server.
+The first enclave, called the _Genesis Enclave_, generates a 256bit random byte array called the _Master Seed_ inside the encrypted memory space. It encrypts this seed with the _EK_ and sends it to the Management Contract to be stored there, as well as storing it locally on the host server.
 
 ### Sharing the Master Seed
-After proving their attestation, subsequent nodes receive that secret _Master Seed_ encrypted with their key. The medium over which they receive the data is the management contract to ensure maximum data availability.
+After proving their attestation, subsequent nodes receive that secret _Master Seed_ encrypted with their key. The medium over which they receive the data is the Management Contract to ensure maximum data availability.
 
 Before obtaining the shared secret, the L2 nodes must attest that they are running a valid version of the contract execution environment on a valid CPU.
 
-_Note: The solution assumes that attestation verification can be implemented efficiently as part of the  Management contract. This is the ideal solution since it makes the contract the root of trust for the L2 network._
+_Note: The solution assumes that attestation verification can be implemented efficiently as part of the  Management Contract. This is the ideal solution since it makes the contract the root of trust for the L2 network._
 
 The sequence for node registration is shown in the following diagram:
 ![node registration](./images/node-registration.png)
 
-An L2 node invokes a method on the Management contract to submit their attestation, verifying it and saving this request. Then, another L2 node (which already holds the secret key inside its enclave) responds by updating this record with the shared secret encrypted using the public key of the new TEE. Whichever existing L2 node replies first, signed by the enclave to guarantee knowledge of the secret, receives a reward.
+An L2 node invokes a method on the Management Contract to submit their attestation, verifying it and saving this request. Then, another L2 node (which already holds the secret key inside its enclave) responds by updating this record with the shared secret encrypted using the public key of the new TEE. Whichever existing L2 node replies first, signed by the enclave to guarantee knowledge of the secret, receives a reward.
 
-_Note: This solves several problems; the Management contract provides a well-known central registration point on the Ethereum network, which can store the L2 shared secret in public with very high availability, and existing L2 nodes are compensated for their infrastructure and L1 gas costs to onboard new nodes._
+_Note: This solves several problems; the Management Contract provides a well-known central registration point on the Ethereum network, which can store the L2 shared secret in public with very high availability, and existing L2 nodes are compensated for their infrastructure and L1 gas costs to onboard new nodes._
 
 
 ### Generating Keys
