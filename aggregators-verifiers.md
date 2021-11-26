@@ -34,7 +34,7 @@ These are the steps to become an aggregator.
 
 Note: Each aggregator needs an ETH balance on the L1 to pay for the submission of the rollup.
 
-The steps to registre as an Aggregator are shown in the following diagram:
+The steps to register as an Aggregator are shown in the following diagram:
 ![aggregator staking](./images/aggregator-stake.png)
 
 #### Verifier Nodes
