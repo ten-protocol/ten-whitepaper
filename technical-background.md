@@ -2,7 +2,7 @@
 ## Ethereum
 Ethereum is a public, transparent, permissionless blockchain system and network of nodes, supporting account-based smart contracts, where business logic can be deployed as code to create an immutable and uncensorable contract which can hold and control the flow of value. The Ethereum mainnet went live in 2015 and is the most mature and adopted smart contract system.
 
-Using a smart contract, it's possible to use the Ethereum network as an uncensorable storage and management system.
+Using a smart contract, it is possible to use the Ethereum network as an uncensorable storage and management system.
 
 ## Trusted Execution Environment
 A TEE is a secure area of a main processor or CPU. It guarantees code and data loaded inside to be protected with respect to confidentiality and integrity as it is processed. Obscuro focuses on Intel's SGX, based on the team's 5 years of experience developing a Java-based confidential computing product with it. The TEE data can not be read or processed outside the SGX enclave, including processes running at higher privilege levels in the same host.
