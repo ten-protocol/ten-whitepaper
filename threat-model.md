@@ -68,7 +68,7 @@ The _Rollup Contract_ only accepts signed rollups from Aggregators that can prov
 An Aggregator winning a round can freely publish empty rollups, but that would not harm the system if there were multiple independent Aggregators. It will just slow down the network. Obscuro disincentivises this attack since the reward for the publisher is linked to the fees collected from the included transactions.
 
 ## Sybil Attacks
-This section will analyse the threats that a powerful adversary who can create many Aggregators can pose on the protocol.
+This section analyses the threats that a powerful adversary who can create many Aggregators can pose on the protocol.
 The reasoning around this attack is quite different from typical public blockchains.
 
 There are two ways to run this attack against Obscuro depending on the capabilities of the attacker:
