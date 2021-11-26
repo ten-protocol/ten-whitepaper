@@ -7,7 +7,7 @@ The general principle of the Obscuro protocol is that it reverts to the behavior
 
 Obscuro achieves data availability in the same way as all the other rollup solutions; the L1 is the source of data truth for the L2 network. Any L2 node with a valid TEE in possession of the shared secret can download the rollup chain from the L1, calculate the entire state inside its encrypted memory, and at the same time validate all transactions.
 
-The following sections will analyze the different threats against the Obscuro protocol.
+The following sections analyze the different threats against the Obscuro protocol.
 
 ## Threats to the TEE Technology
 The Obscuro design considers that the TEE technology and the program inside are not easily hackable, so the protocol is not optimized to handle them. Attacks on TEEs have occurred in laboratories, so a secondary but essential concern is to prevent ultra-sophisticated actors with the ability to hack this technology from stealing funds or breaking the integrity of the ledger.
