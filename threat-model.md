@@ -1,9 +1,9 @@
 # Threat Model
 Obscuro is different from traditional L1 or L2 solutions primarily because data is stored and processed privately in trusted execution environments, which brings a new set of threats. Compared to other L2 solutions, the decentralised nature of the POBI protocol also brings some new threats.
 
-The main threat to any ledger technology is data corruption, also known as a safety failure. It could take the form of stealing assets, double spending assets, or, more generally, adding illegal entries. Leading blockchains solve this problem by implementing a _Byzantine Fault Tolerant_ (BFT) consensus between independent parties and creating incentives to ensure that anyone who breaks the rules will not be rewarded or will even be penalized. The most extreme attack is a 51% _Sybil_ attack, where the attacker somehow gains the majority of the decision power (computing power for _proof of work_ or stake for _proof of stake_) and can rewrite the history. This attack manifests as replacing an existing valid transaction with a valid competing transaction. While the ledger remains _logically_ valid, this is equivalent to stealing for the beneficiary of the first transaction. If the attacker tried to _physically_ corrupt the ledger, everyone would ignore the invalid block.  The best defense against this attack is to ensure that multiple independent powerful actors have no incentive to collude.
+The main threat to any ledger technology is data corruption, also known as a safety failure. It could take the form of stealing assets, double spending assets, or, more generally, adding illegal entries. Leading blockchains solve this problem by implementing a _Byzantine Fault Tolerant_ (BFT) consensus between independent parties and creating incentives to ensure that anyone who breaks the rules will not be rewarded or will even be penalised. The most extreme attack is a 51% _Sybil_ attack, where the attacker somehow gains the majority of the decision power (computing power for _proof of work_ or stake for _proof of stake_) and can rewrite the history. This attack manifests as replacing an existing valid transaction with a valid competing transaction. While the ledger remains _logically_ valid, this is equivalent to stealing for the beneficiary of the first transaction. If the attacker tried to _physically_ corrupt the ledger, everyone would ignore the invalid block.  The best defence against this attack is to ensure that multiple independent powerful actors have no incentive to collude.
 
-The general principle of the Obscuro protocol is that it reverts to the behavior of a typical non-confidential blockchain in case of hacks on the TEE technology. In other words, the safety of the ledger does not depend on the hardness of the TEEs; instead, what happens is that attackers can read transactions and data. Also, Obscuro does not delegate safety to a single actor by planning to support TEEs from multiple hardware manufacturers. In case of severe attacks, there are multiple mitigation mechanisms in place, the ultimate being that the L2 ledger is frozen, and everyone has the chance to withdraw using balance proofs.
+The general principle of the Obscuro protocol is that it reverts to the behaviour of a typical non-confidential blockchain in case of hacks on the TEE technology. In other words, the safety of the ledger does not depend on the hardness of the TEEs; instead, what happens is that attackers can read transactions and data. Also, Obscuro does not delegate safety to a single actor by planning to support TEEs from multiple hardware manufacturers. In case of severe attacks, there are multiple mitigation mechanisms in place, the ultimate being that the L2 ledger is frozen, and everyone has the chance to withdraw using balance proofs.
 
 Obscuro achieves data availability in the same way as all the other rollup solutions; the L1 is the source of data truth for the L2 network. Any L2 node with a valid TEE in possession of the shared secret can download the rollup chain from the L1, calculate the entire state inside its encrypted memory, and at the same time validate all transactions.
 
@@ -21,11 +21,11 @@ Read-level hacks happen when the attacker can extract some information from the 
 
 The only way to defend against these attacks is to carefully audit the code and keep the _Attestation Constraints_ up to date. If this attacker is discreet, the information leak can continue until a software patch is published or until new hardware that removes this attack is released.
 
-Another way to defend against it which will be considered in future versions is to implement a scheme similar to key rotations.
+Another way to defend against it which will be considered in future versions, is to implement a scheme similar to key rotations.
 
 The least severe read attack is a side-channel where the attacker can find information about a specific transaction. The most severe is when the attacker can extract the master secret and read all present and future transactions.
 
-If such an attack is successful, the network is equivalent to the behavior of a typical public blockchain where all transactions are public, and MEV is possible.
+If such an attack is successful, the network is equivalent to the behaviour of a typical public blockchain where all transactions are public, and MEV is possible.
 
 ### Write-level attacks
 Write-level hacks are powerful in theory since they could enable the attacker to _write_ to the ledger and thus be able to break its integrity if there were no other protections.
@@ -36,12 +36,12 @@ _Note: This type of attack is viewed as the main threat to the protocol and thus
 
 The mechanism to prevent this attack is described in detail in the [Withdrawals](./obscuro-ethereum-interaction.md#withdrawals) section.
 
-The high-level goal of the protections is to transform such an attack into a liveness attack on the withdrawal function.
+The high level goal of the protections is to transform such an attack into a liveness attack on the withdrawal function.
 
 ### Colluding write level attacks
 An extreme variant of the _Write-level attack_ is performed by a powerful group that hacked the TEE and was able to take complete control of all the Aggregator nodes.
 
-The defense against this attack is to incentivise a reasonable number of Verifiers to watch the Obscuro ledger in real-time. These actors will detect a malicious head rollup and notice that no other valid fork is being published.
+The defence against this attack is to incentivise a reasonable number of Verifiers to watch the Obscuro ledger in real-time. These actors will detect a malicious head rollup and notice that no other valid fork is being published.
 
 _Note: One such actor monitoring the network will be the Obscuro Foundation, which has the mandate to keep the protocol functioning correctly. The protocol also rewards other independent parties to take on this job by assigning random rewards to Verifiers who can prove they are active._
 
@@ -69,6 +69,7 @@ An Aggregator winning a round can freely publish empty rollups, but that would n
 
 ## Sybil Attacks
 This section analyses the threats that a powerful adversary who can create many Aggregators can pose on the protocol.
+
 The reasoning around this attack is quite different from typical public blockchains.
 
 There are two ways to run this attack against Obscuro depending on the capabilities of the attacker:
@@ -93,7 +94,7 @@ This could happen in theory if all registered TEEs were simultaneously physicall
 
 If a single TEE is not physically destroyed, and a single Ethereum node has a copy of the L1 ledger, the network can be restarted, since all the required information is stored on the L1, including the master seed encrypted with the key of the surviving enclave and all the rollups.
 
-The defense against this is to achieve a reasonable decentralisation.
+The defence against this is to achieve a reasonable decentralisation.
 
 ## MEV by Obscuro Aggregators
 Transactions and processing are hidden from node operators. Still rollups contain some information and the node operator can query the balance of accounts they control. 
@@ -126,7 +127,7 @@ This scenario has the same effect as the previous one is handled in the same way
 Publishing with insufficient gas is, in effect, punished by the protocol because it means that on top of missing the rollup reward, the Aggregator also pays the L1 gas fee.
 
 ## Competing L1 Blockchain Forks
-In theory, different L2 Aggregators could be connected to L1 nodes that have different views of the L1 ledger. This will be visible in the L2 network, as gossiped rollups pointing to L1 blocks from the two forks. Each Aggregator will have to make a bet and continue working on the L1 fork that it considers to be legitimate, the same behavior as any L1 node.
+In theory, different L2 Aggregators could be connected to L1 nodes that have different views of the L1 ledger. This will be visible in the L2 network, as gossiped rollups pointing to L1 blocks from the two forks. Each Aggregator will have to make a bet and continue working on the L1 fork that it considers to be legitimate, the same behaviour as any L1 node.
 
 This is depicted in [Rollup Data Structure](./rollup-data-structure.md).
 
@@ -140,12 +141,12 @@ Obscuro is slightly different from typical blockchains or L2s because it introdu
 These are the questions that will be answered using the terminology from the framework.
 
 1. How many people do you need to behave as you expect? Out of how many?
-2. What kinds of motivations are needed for those people to behave? Do they need to be altruistic, or just profit seeking? Do they need to be uncoordinated?
+2. What kinds of motivations are needed for those people to behave? Do they need to be altruistic or just profit-seeking? Do they need to be uncoordinated?
 3. How badly will the system fail if the assumptions are violated?
 
 ### Actors
 The following groups are actors in the system.
-1. The Obscuro network may contain a few thousand nodes, from which a minority core set will be _Aggregators_, and the rest _Verifiers_. The governance body can control this number by setting some parameters. 
+1. The Obscuro network may contain a few thousand nodes, from which a minority core set will be _Aggregators_ and the rest _Verifiers_. The governance body can control this number by setting some parameters. 
 2. Another important group in this is the token holders, who have governance powers. 
 3. The supported hardware TEE manufacturers.
 4. The auditors.
@@ -159,27 +160,26 @@ The following groups are actors in the system.
 ### Liveness
 There are multiple aspects to consider when analysing the liveness trust model. Since Obscuro is fully decentralised at the network level, as long as one single Aggregator is alive, the network is alive and processing user transactions.
 
-For transaction processing: 1 of Obscuro_N, where the motivation of nodes is profit seeking.
+For transaction processing: 1 of Obscuro_N, where the motivation of nodes is profit-seeking.
 
-For processing withdrawals, and thus reaching finality the analysis is more complex. Since withdrawals are processed automatically from the instructions found in the rollups, the trust model for the liveness of this feature is the model for the safety.
+For processing withdrawals and thus reaching finality, the analysis is more complex. Since withdrawals are processed automatically from the instructions found in the rollups, the trust model for the liveness of this feature is the model for safety.
 
 ### Safety
 The safety of Obscuro is based on a couple of layers, which transform a safety attack into a liveness attack.
 
 Note that the safety of the ledger is at risk only if there are hacks in the confidential hardware technology.
 
-Given that hardware manufacturers are generally large and reputable companies, they act as the first barrier. Their motivation is ultimately profit seeking, because vulnerabilities in the hardware they create will lead to lower sales and reputational damage.
+Given that hardware manufacturers are generally large and reputable companies, they act as the first barrier. Their motivation is ultimately profit-seeking because vulnerabilities in the hardware they create will lead to lower sales and reputational damage.
 
-Hardware layer: 1 of TEE_Manufacturer_N, where the motivation is profit seeking. Note that this assumes that the hardware manufacturer introduces a bug in the TEE implementation to attack the ledger. Normally the threat is lower since a single user with a valid TEE by any manufacturer will be able to stop an attack.
+Hardware layer: 1 of TEE_Manufacturer_N, where the motivation is profit-seeking. Note that this assumes that the hardware manufacturer introduces a bug in the TEE implementation to attack the ledger. Normally the threat is lower since a single user with a valid TEE by any manufacturer will be able to stop an attack.
 
-If there is a successful attack against the TEE, the next defense is a single active L2 node that publishes a valid rollup.
-1 of Obscuro_N, where the motivation of nodes is profit seeking.
+If there is a successful attack against the TEE, the next defence is a single active L2 node that publishes a valid rollup.
+1 of Obscuro_N, where the motivation of nodes is profit-seeking.
 
-The next line of defense are the token holders, who will vote on L1 to update the Attestation Constraints, to fix the vulnerability. They are invested in the community, because they hold the token, which means they profit if it functions correctly: Token_Holders_N/2 of Token_Holders_N, where motivation is profit seeking
+The next line of defence are the token holders, who will vote on L1 to update the Attestation Constraints, to fix the vulnerability. They are invested in the community because they hold the token, which means they profit if it functions correctly: Token_Holders_N/2 of Token_Holders_N, where motivation is profit-seeking
 
-Note that the attacker is not directly profit seeking, because there is no possibility to withdraw assets until the fork is resolved.
+Note that the attacker is not directly profit seeking because there is no possibility to withdraw assets until the fork is resolved.
 
 ### How badly will the system fail if the assumptions are violated?
 
 If all supported hardware manufacturers colluded, they would be able to break the safety of the ledger.
-   

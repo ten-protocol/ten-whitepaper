@@ -35,7 +35,7 @@ This type of trading is made possible with Obscuro.
 ### Fractional Non-Fungible Tokens (NFTs)
 The idea is to allow NFTs to be tokenised to allow fractional ownership. The difficulty with fractional ownership in the NFT space is that for the art piece to be valuable, there needs to be the ability to bring all the pieces back together to allow the whole piece to be sold to a buyer.
 
-To allow this to happen, a reserve price needs to be set, where once hit, all the individual token holders are compensated and the NFT is sold as a whole piece. A few mechanisms are required for this to happen.
+To allow this to happen, a reserve price needs to be set, where once hit, all the individual token holders are compensated, and the NFT is sold as a whole piece. A few mechanisms are required for this to happen.
 
 Token holders need to submit the reserve price that makes sense to them. This gets weighted by the number of tokens they hold in relation to the total number. Then, the reserve price is calculated and set. To be most effective, both of these require privacy. A hidden reserve price has the potential to attract larger bids.
 
@@ -49,4 +49,4 @@ Current smart contract activity undertaken by individuals can often be linked to
 * Obscuro is trustless and decentralised. It takes processing from the Ethereum Layer-1 (L1) and allows lower transaction costs similar to other Layer-2 (L2) networks.
 * Obscuro leverages TEEs for privacy but not for integrity and is not affected by the limitations of hardware-based confidential computing.
 * Obscuro guarantees quick finality by synchronising the publishing of rollups to the cadence of the L1 blocks. 
-* Obscuro introduces a novel mechanism to allow application developers to balance the need for user data privacy (and MEV prevention) with the need to deter long-term illegal behavior.
+* Obscuro introduces a novel mechanism to allow application developers to balance the need for user data privacy (and MEV prevention) with the need to deter long-term illegal behaviour.

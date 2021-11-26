@@ -13,9 +13,9 @@ Additional feedback is welcome, and all reviewers will be credited.
 
 ## Glossary
 **Aggregator**
-A node which participates in an L2 network and collaborates with other Aggregator nodes to manage the L2 contracts and confirm correctness of transactions. Specifically, it participates in transaction gossip, and may propose transaction rollups to be registered with the L1 blockchain.
+A node that participates in an L2 network and collaborates with other Aggregator nodes to manage the L2 contracts and confirm correctness of transactions. Specifically, it participates in transaction gossip, and may propose transaction rollups to be registered with the L1 blockchain.
 
-**Attestation constraints**
+**Attestation Constraints**
 Means of controlling which software is allowed to run inside the Trusted Execution Environment.
 
 **Automated Market Maker / AMM**
@@ -43,16 +43,16 @@ The levy imposed for every computation executed on the Ethereum network to encou
 The first Trusted Execution Environment to join a new network. The Genesis enclave propagates the master seed to the other attested nodes by encrypting it with specific Trusted Execution Environment keys.
 
 **Host**
-The party controlling the physical server who runs the Trusted Execution Environment. In the threat model of typical confidential computing applications, including Obscuro, the Host is an adversary of the system.
+The party controlling the physical server that runs the Trusted Execution Environment. In the threat model of typical confidential computing applications, including Obscuro, the host is an adversary of the system.
 
 **L1 Management Contract**
-Part of the solution is a smart contract which runs on Ethereum and handles all L1 concerns.
+The smart contract that runs on Ethereum and handles all L1 concerns.
 
 **Layer 1 / L1**
 The public Ethereum blockchain and network.
 
 **Layer 2 / L2**
-A second network built on top of an L1 network and dependent on it. A L2 network expands on the capabilities of the L1 network by increasing capacity or enhancing functionality.
+A second network built on top of an L1 network and dependent on it. An L2 network expands on the capabilities of the L1 network by increasing capacity or enhancing functionality.
 
 **Maximal Extractable Value / MEV**
 Participants in the network may extract value by observing user transactions and then preempting them by inserting their own transaction ahead in the processing queue and influencing the price of an asset in order to extract a profit.
@@ -88,7 +88,7 @@ L2 solutions that perform transaction execution outside the main L1 chain, but p
 A cryptographic key randomly created and retained by Intel. It is the basis for how the processor demonstrates that it is a genuine Intel SGX CPU at a specific trusted computing base.
 
 **Root Sealing Key / RSK**
-A cryptographic key which is unique to an enclave which that enclave uses to encrypt and decrypt data stored outside the enclave boundary.
+A cryptographic key that is unique to an enclave which that enclave uses to encrypt and decrypt data stored outside the enclave boundary.
 
 **Sequencer**
 A sequencer is the selected Aggregator which builds a rollup in a round.
@@ -131,7 +131,7 @@ This diagram shows the data structure for the transactions and account:
 This section describes alternatives considered and discarded.
 
 ### Alternative L1 Deposit management
-On a high level, a user has to deposit some ERC tokens on the L1 Management Contract, and the same amount has to be credited on the user's account on Obscuro. This is not straightforward since finality is probabilistic.
+On a high level, a user has to deposit ERC tokens on the L1 Management Contract, and the same amount has to be credited to the user's account on Obscuro. This is not straightforward since finality is probabilistic.
 One option to achieve this is to wait a number of L1 blocks for confirmation. This has some clear disadvantages.
 
 Another option is to introduce a dependency mechanism between the L2 rollup and the L1 blocks. Basically, the L2 transaction that credits the Obscuro account will be in an L2 rollup that will only be accepted by the Management Contract if the dependency is part of the ancestors of the current block.  This option is discarded because in the case where the L1 deposit gets reorganised away before the rollup is created, the rollup which contains the L2 deposit transaction is invalidated.

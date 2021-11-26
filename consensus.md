@@ -1,17 +1,17 @@
 # Consensus - Proof of Block Inclusion
 Obscuro uses a novel decentralised round-based consensus protocol based on a fair lottery and synchronisation with the L1, designed explicitly for L2 rollups, called _Proof Of Block Inclusion_ (POBI). It solves, among others, the fair leader election problem, which is a fundamental issue that all decentralised rollup solutions have to address. POBI is inspired by [Proof Of Elapsed Time](https://sawtooth.hyperledger.org/docs/core/releases/1.0/architecture/poet.html).
 
-## High Level Description
+## High-Level Description
 The high level goals of the POBI protocol are:
 
-1. Each round, distribute the sequencer function fairly among all the active registered aggregators.
+1. Each round, distribute the sequencer function fairly among all the active registered Aggregators.
 2. To synchronise the L2 round duration to L1 rounds. Because the L1 is the source of truth, the finality of the L2 transactions is dependent on the finality of the L1 rollup transaction that includes them, which means there is no advantage in publishing multiple rollups in a single L1 block. It is impossible to decrease the finality time below that of the L1, and, on the other hand, publishing L2 rollups less frequently means that L2 finality is unnecessarily long. The optimum frequency is to publish one rollup per L1 block.
 
-To achieve fairness, the POBI protocol states that the TEE can generate one random nonce each round, and the winner of a round is the aggregator whose TEE generates the lowest random number from the group. The TEEs generate these numbers independently and then gossip them. The aggregators who do not win the round, similar to L1 miners, respect this decision because it is rational to do based on the incentive mechanism. If they choose to not respect the protocol, they are free to submit a losing rollup to the L1, which is ignored by all compliant aggregators, meaning such an aggregator has to pay L1 gas and not get any useful reward.
+To achieve fairness, the POBI protocol states that the TEE can generate one random nonce each round, and the winner of a round is the Aggregator whose TEE generates the lowest random number from the group. The TEEs generate these numbers independently and then gossip them. The Aggregators who do not win the round, similar to L1 miners, respect this decision because it is rational to do based on the incentive mechanism. If they choose to not respect the protocol, they are free to submit a losing rollup to the L1, which is ignored by all compliant Aggregators, meaning such an Aggregator has to pay L1 gas and not get any useful reward.
 
 The second goal is achieved by linking the random nonce generation, which terminates a round, to the Merkle proof of inclusion of the parent rollup in an L1 block. This property is what gives the name of the protocol. This means that an Aggregator can obtain a signed rollup from the TEE only if it can present a Merkle proof of block inclusion. Furthermore, this feature links the creation of L2 rollup to an L1 block, thus synchronising their cadence.
 
-A party wishing to increase its chances of winning rounds must register multiple aggregators and pay the stake for each. The value of the stake needs to be calculated in such a way as to achieve a right decentralisation and practicality balance. 
+A party wishing to increase its chances of winning rounds must register multiple Aggregators and pay the stake for each. The value of the stake needs to be calculated in such a way as to achieve a right decentralisation and practicality balance. 
 
 It is straightforward for all the other Aggregators to verify which rollup is the winner by comparing the nonces and checking that the rollup signature is from an approved Aggregator.
 
@@ -21,11 +21,11 @@ A further issue to solve is to ensure that the host cannot repeatedly submit the
 
 ## Typical Scenario
 1. A new round starts from the point of view of an Aggregator when it decides that someone has gossiped a winning rollup. At that point, it creates a new empty rollup structure, points it to the previous one, and starts adding transactions to it (which are being received from users or by gossip).
-2. In the meantime it closely monitors the L1 by being directly connected to an L1 node.
-3. As soon as the previous rollup was added to a mined L1 block, the aggregator takes that Merkle proof, feeds it to the TEE, who replies with a signed rollup containing a random nonce generated inside the enclave.
-4. All the other aggregators do roughly the same thing at the same time.
-5. At this point (which happens immediately after successfully publishing the previous rollup in the L1), every aggregator has a signed rollup with a random nonce which they gossip between them. The party with the lowest nonce wins. All the aggregators know this, and, after a short waiting period, a new round starts.
-6. The winning aggregator has to create an Ethereum transaction that publishes this rollup to L1.
+2. In the meantime, it closely monitors the L1 by being directly connected to an L1 node.
+3. As soon as the previous rollup was added to a mined L1 block, the Aggregator takes that Merkle proof, feeds it to the TEE, who replies with a signed rollup containing a random nonce generated inside the enclave.
+4. All the other Aggregators do roughly the same thing at the same time.
+5. At this point (which happens immediately after successfully publishing the previous rollup in the L1), every Aggregator has a signed rollup with a random nonce which they gossip between them. The party with the lowest nonce wins. All the Aggregators know this, and, after a short waiting period, a new round starts.
+6. The winning Aggregator has to create an Ethereum transaction that publishes this rollup to L1.
 
 Note that by introducing the requirement for proof of inclusion in the L1, the cadence of publishing the rollups to the block times is synchronised. Also, note that the hash of the L1 block used to prove to the TEE that the previous rollup was published is added to the current rollup such that the Management Contract and the other Aggregators know whether this rollup was generated correctly.
 
@@ -52,12 +52,12 @@ Note that the value of _L1_Proof_Height_ can only be lower than _L1_Block_Height
 Example: _R_15[Alice, 100, 102, 20]_ means the rollup height is 15, the aggregator is _Alice_, the height of the L1 bock used as proof is 100, the hight of the L1 bock that included the rollup is 102, and the nonce equals 20.
 
 ## The Canonical Chain
-The POBI protocol allows any aggregator to publish rollups to the management contract, so short-lived forks are a normal part of the protocol. The forks cannot be long-living during normal functioning because the ObscuroVM running inside the TEE of every node deterministically selects one of the forks as the canonical chain and only appends a rollup on top of that. 
+The POBI protocol allows any Aggregator to publish rollups to the Management Contract, so short-lived forks are a normal part of the protocol. The forks cannot be long-living during normal functioning because the ObscuroVM running inside the TEE of every node deterministically selects one of the forks as the canonical chain and only appends a rollup on top of that. 
 
 Because the logic is identical and attested on all nodes and the TEEs receive all the relevant content of the L1 blocks (which means they process the same input data), there cannot be any competing forks more than one rollup deep unless there is a hack.
 
 The rules for the canonical chain are the following:
-1. The genesis rollup is part of the canonical chain and will be included in an L1 block by the first aggregator.
+1. The genesis rollup is part of the canonical chain and will be included in an L1 block by the first Aggregator.
 2. An L1 block containing a single rollup whose parent is the head rollup of the canonical chain included in a previous L1 block is on the canonical chain if no other rollup with the same parent was included in an earlier block. Any other sibling rollup included in a later block is not on the canonical chain. This is the _Primogeniture_ rule, where a rollup is born when included in an L1 block.
 3. If an L1 block contains multiple sibling rollups created in the same round using the same L1 proof, the one with the lower nonce is on the canonical chain.
 4. If an L1 block contains multiple sibling rollups created using different L1 proofs, the one created using the more recent proof is on the canonical chain.
@@ -72,7 +72,7 @@ Using the notation, for the same _Rollup_Height_, the rollup on the canonical ch
 Given that the nonce is a random number with sufficient entropy, we assume there cannot be a collision at this point during normal functioning. In the situation where it happens, the rollup on the canonical chain will be the one with the lowest hash.
 
 ## Preventing Repeated Random Nonce Generation
-In phase 3 of the protocol, the TEE of each Aggregator generates a random nonce which determines the winner of the protocol. This introduces the possibility of gaming the system by restarting the TEE, and generating multiple numbers.
+In phase 3 of the protocol, the TEE of each Aggregator generates a random nonce which determines the winner of the protocol. This introduces the possibility of gaming the system by restarting the TEE and generating multiple numbers.
 
 The solution proposed by Obscuro is to introduce a timer upon startup in the constructor of the enclave. A conventional timer, based on the clock of the computer, is not very effective since the host can game it.
 
@@ -87,13 +87,13 @@ This built-in startup delay is also useful in preventing other real-time side-ch
 ## Aggregator Incentives
 All successful decentralised solutions need a robust incentive mechanism to keep the protocol functioning effectively.
 
-Compared to a typical L1 protocol, there is an additional complexity to consider. In an L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent, because they know everyone does that too. In an L2 decentralised protocol like POBI, there is an additional step: the publication of the rollup to L1, which can fail for multiple reasons. Furthermore, the incentive design must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to an L1 block, which is where an L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
+Compared to a typical L1 protocol, there is an additional complexity to consider. In an L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent because they know everyone does that too. In an L2 decentralised protocol like POBI, there is an additional step: the publication of the rollup to L1, which can fail for multiple reasons. Furthermore, the incentive design must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to an L1 block, which is where an L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
 
 Note that rollup finality will be covered extensively in the [Obscuro - Ethereum interaction section](obscuro-ethereum-interaction.md)
 
 The high-level goal is to keep the system functioning as smoothly as possible and resist random failures or malicious behaviour while not penalising Obscuro nodes for not being available. We believe that penalties for availability increase the barrier of entry, and thus make the system centralised over the long term. 
 
-Obscuro introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain. The great advantage is increased flexibility in aligning incentives at the cost of increased complexity. Rewards can be awarded in full, split between aggregators or just enough to cover the cost of gas.
+Obscuro introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain. The great advantage is increased flexibility in aligning incentives at the cost of increased complexity. Rewards can be awarded in full, split between Aggregators or just enough to cover the cost of gas.
 
 To achieve this, the protocol has to maintain a pool of tokens. Users will pay fees into this pool, while nodes will be paid from it. During bootstrapping, the protocol will have the ability to add newly minted tokens to the pool. Once the network picks up, the protocol will be able to burn excess tokens.
 
@@ -105,30 +105,27 @@ The high level goal is to keep the system functioning as smoothly as possible, a
 
 These are the Aggregator rewarding rules:
 
-1. The first aggregator to successfully published a rollup without competition in an L1 block will get the full reward. This is the most efficient case that is encouraged.
+1. The first Aggregator to successfully published a rollup without competition in an L1 block will get the full reward. This is the most efficient case that is encouraged.
 _Note: Competition means another rollup with the same parent._ 
 
-
-2. If multiple rollups generated with the same L1 proof and different nonces are published in the same block (the target block), the one with the lowest nonce is on the canonical chain, but the reward is split between them in a proportion of 75/25 (this ratio is indicative only). The reason for this rule is that it incentivises aggregators to gossip their winning rollup such that no one else publishes at the same time.
-    - There is no incentive for the losing aggregator to publish as 25% of the reward will not cover the cost of gas, so they will make a loss.
-    - There is an incentive for the winning aggregator to gossip the rollup to everyone else to avoid having this unwanted competition.
-    - In case of a genuine failure in gossip, the losing aggregator receives something. This is to reduce the risk of aggregators waiting more than necessary to receive messages from all the other aggregators.
-
+2. If multiple rollups generated with the same L1 proof and different nonces are published in the same block (the target block), the one with the lowest nonce is on the canonical chain, but the reward is split between them in a proportion of 75/25 (this ratio is indicative only). The reason for this rule is that it incentivises Aggregators to gossip their winning rollup such that no one else publishes at the same time.
+    - There is no incentive for the losing Aggregator to publish as 25% of the reward will not cover the cost of gas, so they will make a loss.
+    - There is an incentive for the winning Aggregator to gossip the rollup to everyone else to avoid having this unwanted competition.
+    - In case of a genuine failure in gossip, the losing Aggregator receives something. This is to reduce the risk of Aggregators waiting more than necessary to receive messages from all the other Aggregators.
 
 3. If multiple sibling rollups generated using different L1 blocks as proof are included in the same block, the one created with the most recent proof receives the full reward. 
 
-     The original winning rollup that did not get published immediately does not receive any reward since more recent competition exists. This rule is designed to encourage publishing with enough gas, such that there is no risk of competition in a further block. The rule also encourages aggregators to not wait for rollups published with insufficient gas or not at all. 
+     The original winning rollup that did not get published immediately does not receive any reward since more recent competition exists. This rule is designed to encourage publishing with enough gas, such that there is no risk of competition in a further block. The rule also encourages Aggregators to not wait for rollups published with insufficient gas or not at all. 
 
-   This mechanism ensures rounds reset when new L1 blocks are available and the reward is up for grabs. An actor controlling multiple aggregators with malicious irrational behaviour can only slow down the ledger because the rational actors will publish the rounds they win.
+     This mechanism ensures rounds reset when new L1 blocks are available and the reward is up for grabs. An actor controlling multiple Aggregators with malicious irrational behaviour can only slow down the ledger because the rational actors will publish the rounds they win.
 
-4. If two consecutive L1 blocks include each a rollup with the same height created from the same L1 proof, but the rollup from the second block has a lower nonce, split the reward evenly between the two aggregators.
+4. If two consecutive L1 blocks include each a rollup with the same height created from the same L1 proof, but the rollup from the second block has a lower nonce, split the reward evenly between the two Aggregators.
 
      _Note that the rollup with the higher nonce is on the canonical chain._
 
      The reason for this rule is that this scenario is possibly the result of rollup front-running, which is thus discouraged as the frontrunner is consuming precious Ethereum gas and the reward will always be less than the cost.
 
-     The even splitting of the reward also encourages the aggregator that wins a nonce generation round to publish as soon as possible, because publishing a block later will at best result in a small loss.
-
+     The even splitting of the reward also encourages the Aggregator that wins a nonce generation round to publish as soon as possible, because publishing a block later will at best result in a small loss.
 
 5. If two sibling rollups created from the same L1 proof are published more than one block apart, where the first published rollup has a higher nonce, then pay the reward in full to the first published rollup. The reason for this rule is that the winner most likely added too little gas, and someone else spotted the opportunity and contributed to earlier finality, which is rewarded.
 
