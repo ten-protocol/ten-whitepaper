@@ -42,4 +42,4 @@ These are the steps to becoming an Aggregator.
 * All Aggregators keep track of the blocks submitted to the management contract to ensure they are up-to-date with the source of truth.
 * The first Aggregator to register has a unique role, as it has to create the shared secret.
 
-Note: Each aggregator needs an ETH balance on the L1 to pay for the submission of the rollup.
+Note: Each Aggregator needs an ETH balance on the L1 to pay for the submission of the rollup.

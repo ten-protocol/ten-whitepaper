@@ -13,7 +13,7 @@ The Bitcoin incentive model is very simple. Each transaction pays a fee and on t
 
 Ethereum builds on top of this model to handle the complexities of Turing complete smart contract execution, by introducing a notion of _gas_ and of _gas price_, but the high level mechanics remain the same.
 
-The incentive design for a decentralised L2 protocol must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to a L1 block, which is where a L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
+The incentive design for a decentralised L2 protocol must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to an L1 block, which is where an L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
 
 ### Reward Claiming
 Obscuro moves away from the Bitcoin/Ethereum approach and introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain.

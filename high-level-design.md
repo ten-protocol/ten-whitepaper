@@ -1,7 +1,7 @@
 # High Level Design
 Obscuro has designed for an L2 protocol, where user activity is moved _off-chain_ from the L1, and it follows the increasingly common rollup pattern to store transactions on the L1 chain. Read more about [rollups](https://vitalik.ca/general/2021/01/05/rollup.html). Most rollup implementations exist to provide scalability for L1 networks, but the prime objective of Obscuro is to provide confidentiality.
 
-L2 networks have a unidirectional dependency on a L1 network: while the L2 network relies on the L1 network to provide an immutable and public record of rollup transaction data and to provide censorship resistance, liveness and availability, the L1 network is unaware of any individual L2 network. L2 submitted rollups are just normal L1 transactions.
+L2 networks have a unidirectional dependency on an L1 network: while the L2 network relies on the L1 network to provide an immutable and public record of rollup transaction data and to provide censorship resistance, liveness and availability, the L1 network is unaware of any individual L2 network. L2 submitted rollups are just normal L1 transactions.
 
 The following diagram shows the interactions between the two decentralised networks, Ethereum (L1) and Obscuro (L2): Obscuro is formed of Nodes called Aggregators, who compete to process user transactions, roll them up, and submit for inclusion in Ethereum blocks. Ethereum, through its protocol, leverages its own nodes to produce Ethereum blocks containing, amongst other things, the submitted Obscuro rollups.
 
@@ -13,9 +13,9 @@ On the L1 network there are several regular Ethereum contracts, referred to as m
 The L1 design is covered in much greater detail in [L1 Contracts](./l1-contracts.md)
 
 ### Network Management
-This contract is the gatekeeper for the protocol. Any aggregator or verifier node wishing to join Obscuro will have to interact with this contract and prove it is valid. This contract will manage the TEE attestation requirements and will be able to verify reports.
+This contract is the gatekeeper for the protocol. Any Aggregator or Verifier node wishing to join Obscuro will have to interact with this contract and prove it is valid. This contract will manage the TEE attestation requirements and will be able to verify reports.
 
-It will also manage the stake of the participants able to submit rollups known as aggregators.
+It will also manage the stake of the participants able to submit rollups known as Aggregators.
 
 _Note: The stake is a piece of the game theory puzzle that ensures that Obscuro participants have the right incentives to follow the protocol._
 

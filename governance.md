@@ -23,7 +23,7 @@ The next best thing is to be very explicit about all the system's powers and ach
 Building on the above, the following powers are exercised within Obscuro.
 
 ###  1. The TEE Attestation Constraints.
-The _Attestation Constraints_ (AC) control which software is allowed to run inside the TEE and can process the user transactions and create the rollups. A group of independent, reputable, and competent security auditors has to analyze the code and approve it by signing it carefully. The constraints contain the keys of the _approved auditors_.
+The _Attestation Constraints_ (AC) control which software is allowed to run inside the TEE and can process the user transactions and create the rollups. A group of independent, reputable, and competent security auditors has to analyse the code and approve it by signing it carefully. The constraints contain the keys of the _approved auditors_.
 
 The parties who have the power to set the AC and thus appoint auditors ultimately control the software.
 
@@ -46,7 +46,7 @@ They have the power to append to the L2 ledger, but they do not have the power t
 ###  4. Canonical Rollup Chain.
 In a typical L1, the canonical chain is ultimately decided by its users from one of the competing forks because the ledger is ultimately coupled to the value of the coin.
 
-In Obscuro, the aggregators have to run attested software, which constraints their free will unless they can hack the TEE technology.
+In Obscuro, the Aggregators have to run attested software, which constraints their free will unless they can hack the TEE technology.
 
 According to the rules implemented, a valid TEE does not sign a rollup building on top of a chain that is not canonical, so any hack is immediately visible.
 
