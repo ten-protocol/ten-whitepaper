@@ -92,7 +92,7 @@ object SignedObscuroRollup {
 
 object Withdrawal{
     C(It is part of a rollup in plaintext. )
-    C(Processed by the L1 Management contract)
+    C(Processed by the L1 Management Contract)
     C(according to the complex withdraw logic)
     NL
 

@@ -8,7 +8,7 @@ The following diagram shows the interactions between the two decentralised netwo
 ![L1-L2 Interaction](./images/l1-l2-interaction.png)
 
 ## L1 Network
-On the L1 network there are several regular Ethereum contracts, referred to as management contracts.
+On the L1 network there are several regular Ethereum contracts, referred to as Management Contracts.
 
 The L1 design is covered in much greater detail in [L1 Contracts](./l1-contracts.md)
 

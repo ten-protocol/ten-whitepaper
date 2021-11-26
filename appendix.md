@@ -45,7 +45,7 @@ The first Trusted Execution Environment to join a new network. The Genesis encla
 **Host**
 The party controlling the physical server who runs the Trusted Execution Environment. In the threat model of typical confidential computing applications, including Obscuro, the Host is an adversary of the system.
 
-**L1 management contract**
+**L1 Management Contract**
 Part of the solution is a smart contract which runs on Ethereum and handles all L1 concerns.
 
 **Layer 1 / L1**
@@ -131,13 +131,13 @@ This diagram shows the data structure for the transactions and account:
 This section describes alternatives considered and discarded.
 
 ### Alternative L1 Deposit management
-On a high level, a user has to deposit some ERC tokens on the L1 management contract, and the same amount has to be credited on the user's account on Obscuro. This is not straightforward since finality is probabilistic.
+On a high level, a user has to deposit some ERC tokens on the L1 Management Contract, and the same amount has to be credited on the user's account on Obscuro. This is not straightforward since finality is probabilistic.
 One option to achieve this is to wait a number of L1 blocks for confirmation. This has some clear disadvantages.
 
-Another option is to introduce a dependency mechanism between the L2 rollup and the L1 blocks. Basically, the L2 transaction that credits the Obscuro account will be in an L2 rollup that will only be accepted by the management contract if the dependency is part of the ancestors of the current block.  This option is discarded because in the case where the L1 deposit gets reorganised away before the rollup is created, the rollup which contains the L2 deposit transaction is invalidated.
+Another option is to introduce a dependency mechanism between the L2 rollup and the L1 blocks. Basically, the L2 transaction that credits the Obscuro account will be in an L2 rollup that will only be accepted by the Management Contract if the dependency is part of the ancestors of the current block.  This option is discarded because in the case where the L1 deposit gets reorganised away before the rollup is created, the rollup which contains the L2 deposit transaction is invalidated.
 
 ### Alternative L1 Theft Prevention
-There is a pool of liquidity stored in the L1 Bridge contract, which is controlled by the group of TEEs who maintain the encrypted ledger of ownership. Some users will want to withdraw from the L2 and go back to L1, which means the management contract will have to allow them to claim money from the liquidity pool.
+There is a pool of liquidity stored in the L1 Bridge contract, which is controlled by the group of TEEs who maintain the encrypted ledger of ownership. Some users will want to withdraw from the L2 and go back to L1, which means the Management Contract will have to allow them to claim money from the liquidity pool.
 
 In case one of the Aggregators is able to hack the TEE, they will be able to produce a proof that they own much more and thus run with it.
 
@@ -146,7 +146,7 @@ We could organise the Aggregators in a BFT setup, and require that 2/3 of them s
 
 Another option with a better trust model is to introduce a challenge mechanism similar to the optimistic rollups. The disadvantage is that it introduces a delay, and a concept of probabilistic finality.
 
-The data structure containing the rollups is a chain that can have multiple heads. The management contract cannot evaluate which one is correct because it cannot execute the transactions inside. But there are some simple rules that can be applied. For example, if a branch does not progress for N blocks it is considered dead. If at the moment of withdrawal there is only a single active head rollup, then all the system has to do is wait for a reasonable number of blocks (20-50) to ensure that there is no censorship attempt on L1. If there is a fork, then the number of blocks has to be increased to allow one of the forks to die out naturally. If it does not then all withdrawals will be locked, and the contract will enter a special procedure.
+The data structure containing the rollups is a chain that can have multiple heads. The Management Contract cannot evaluate which one is correct because it cannot execute the transactions inside. But there are some simple rules that can be applied. For example, if a branch does not progress for N blocks it is considered dead. If at the moment of withdrawal there is only a single active head rollup, then all the system has to do is wait for a reasonable number of blocks (20-50) to ensure that there is no censorship attempt on L1. If there is a fork, then the number of blocks has to be increased to allow one of the forks to die out naturally. If it does not then all withdrawals will be locked, and the contract will enter a special procedure.
 
 ### Alternative Revelation Options
 The solution will reveal all transactions after one year through a key-rotation process. An alternative policy could be to specify a ratio of transactions (e.g. 1%) are revealed either immediately or subsequently. Illegal transaction detection then becomes risk-based, but the ratio cannot be high enough to be a disincentive and yet still provide utility.

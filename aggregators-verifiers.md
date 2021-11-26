@@ -8,7 +8,7 @@ End users send encrypted transactions to any registered Aggregators who then gos
 
 Aggregators have the following functions:
 * Integrate with an L1 node to monitor published blocks and to submit rollups.
-* Gossip with the other Aggregators registered in the management contract.
+* Gossip with the other Aggregators registered in the Management Contract.
 * Interact with the TEE:
     - Submit user encrypted transactions.
     - Submit signed user balance requests and encrypted responses back to the users.
@@ -17,14 +17,14 @@ Aggregators have the following functions:
 
 
 These are the steps to become an Aggregator.
-* Register with the L1 Network Management contract and pay a significant stake in the Obscuro token. The stake has multiple roles. The first one is to penalise Aggregators who attempt to hack the protocol, and second is for the Aggregators to buy into the ecosystem, so that they will make an effort to keep it running smoothly.
-* Set up a server with a valid, unaltered, up-to-date and secured TEE and provide an attestation from the hardware manufacturer or a delegate to the management contract.
+* Register with the L1 Network Management Contract and pay a significant stake in the Obscuro token. The stake has multiple roles. The first one is to penalise Aggregators who attempt to hack the protocol, and second is for the Aggregators to buy into the ecosystem, so that they will make an effort to keep it running smoothly.
+* Set up a server with a valid, unaltered, up-to-date and secured TEE and provide an attestation from the hardware manufacturer or a delegate to the Management Contract.
 * On seeing this request to join the network published to the L1, another registered TEE will share the shared secret, used to encrypt and decrypt user transactions.
 * Once in possession of the secret, the TEE can start processing all the L2 transactions that are stored on the L1 blockchain and build the state.
 * Once this is completed, the new Aggregator can join the gossip with the other Aggregators and participate in the lottery for producing rollups.
 * Some end users will send encrypted instructions directly to this server, and it will gossip these with other nodes in the L2 network, encrypted with the shared secret.
 * As Aggregators process messages, they maintain the L2 state in the encrypted TEE memory or encrypted in a local database. If they are the winner of the lottery, when the time comes they will create a valid rollup and publish it to L1.
-* All Aggregators keep track of the blocks submitted to the management contract to make sure they are up-to-date with the source of truth.
+* All Aggregators keep track of the blocks submitted to the Management Contract to make sure they are up-to-date with the source of truth.
 * The first Aggregator to register has a special role, as it has to create the _Master Seed_.
 
 Note: Each Aggregator needs an ETH balance on the L1 to pay for the submission of the rollup.

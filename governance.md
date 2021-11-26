@@ -55,7 +55,7 @@ Additional complexity involves the withdrawal process, which depends on assured 
 ###  5. Slashing the Stake of Misbehaving Parties.
 Aggregators that hack an enclave and attempt to break the ledger's integrity are discovered by the protocol and are punished by slashing to disincentivise such behaviour further.
 
-Slashing is an implicit process carried out by the management contract based on predefined rules. However, ultimately it is itself controlled by the code governance.
+Slashing is an implicit process carried out by the Management Contract based on predefined rules. However, ultimately it is itself controlled by the code governance.
 
 ###  6. Expected monthly operational cost for nodes
 Obscuro has a fee structure that delivers a predictable income for node operators and a predictable fee for users. In order to derive a fee that sufficiently compensates nodes, a value that represents the monthly operational cost for each node must be set.

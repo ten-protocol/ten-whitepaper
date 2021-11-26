@@ -15,7 +15,7 @@ A party wishing to increase its chances of winning rounds must register multiple
 
 It is straightforward for all the other Aggregators to verify which rollup is the winner by comparing the nonces and checking that the rollup signature is from an approved Aggregator.
 
-Note that the L1 management contract is not checking the nonces of the submitted rollups, but it checks that the block inclusion proof is valid. The L1 contract rejects rollups generated using a proof of inclusion that is not an ancestor of the current block.
+Note that the L1 Management Contract is not checking the nonces of the submitted rollups, but it checks that the block inclusion proof is valid. The L1 contract rejects rollups generated using a proof of inclusion that is not an ancestor of the current block.
 
 A further issue to solve is to ensure that the host cannot repeatedly submit the proof to the TEE to get a new random number.
 
@@ -27,7 +27,7 @@ A further issue to solve is to ensure that the host cannot repeatedly submit the
 5. At this point (which happens immediately after successfully publishing the previous rollup in the L1), every Aggregator has a signed rollup with a random nonce which they gossip between them. The party with the lowest nonce wins. All the Aggregators know this, and a new round starts.
 6. The winning Aggregator has to create an Ethereum transaction that publishes this rollup to L1.
 
-Note that by introducing the requirement for proof of inclusion in the L1, the cadence of publishing the rollups to the block times is synchronised. Also, note that the hash of the L1 block used to prove to the TEE that the previous rollup was published is added to the current rollup such that the management contract and the other Aggregators know whether this rollup was generated correctly.
+Note that by introducing the requirement for proof of inclusion in the L1, the cadence of publishing the rollups to the block times is synchronised. Also, note that the hash of the L1 block used to prove to the TEE that the previous rollup was published is added to the current rollup such that the Management Contract and the other Aggregators know whether this rollup was generated correctly.
 
 The following diagram depicts this sequence:
 ![node-processing](./images/node-processing.png)
@@ -52,7 +52,7 @@ Note that the value of L1_Proof_Height is less than L1_Block_Height.
 Example: _R_15[Alice, 100, 102, 20]_ means the generation is 15, the Aggregator is _Alice_, the generation of the L1 bock used as proof is 100, the generation of the L1 bock that included the rollup is 102, and the nonce equals 20.
 
 ## The Canonical Chain
-The POBI protocol allows any Aggregator to publish rollups to the management contract, so short-lived forks are a normal part of the protocol. The forks cannot be long-living during normal functioning because the ObscuroVM running inside the TEE of every node deterministically selects one of the forks as the canonical chain and only append a rollup on top of that. Because the logic is identical on all nodes and the TEEs receive all the relevant content of the L1 blocks, there cannot be any competing forks more than one rollup deep unless there is a hack.
+The POBI protocol allows any Aggregator to publish rollups to the Management Contract, so short-lived forks are a normal part of the protocol. The forks cannot be long-living during normal functioning because the ObscuroVM running inside the TEE of every node deterministically selects one of the forks as the canonical chain and only append a rollup on top of that. Because the logic is identical on all nodes and the TEEs receive all the relevant content of the L1 blocks, there cannot be any competing forks more than one rollup deep unless there is a hack.
 
 The rules for the canonical chain:
 1. The genesis rollup is part of the canonical chain and will be included in a block by the first Aggregator.
