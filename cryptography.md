@@ -28,7 +28,7 @@ The TEEs use the shared secret to generate further asymmetric and symmetric keys
 Each enclave uses this master entropy to generate additional keys deterministically:
 
 1. A public/private key pair is used as the identity of the network. The public key is published to L1 and used by clients to encrypt the signed Obscuro transactions and is referred to as _Obscuro_Public_Key_
-2. A set of symmetric keys used by the TEEs to encrypt the transactions is stored on the L1 blockchain.
+2. A set of symmetric keys used by the TEEs to encrypt the transactions which will stored on the L1 blockchain in rollups.
 
 _Note: When submitting a rollup, each enclave signs it with the key found in their attestation (the _AK_)._
 
@@ -45,7 +45,7 @@ When deploying a contract to Obscuro, the developer has to choose one of the pre
 
 _Note: These periods are counted in L1 blocks and are indicative._
 
-One of these options is chosen by default for applications that do not explicitly specify one. Based on the chosen period, transactions submitted to that application can be decrypted after that time delay.
+One of these options is chosen by default for applications that do not explicitly specify one. Based on the chosen period, transactions submitted to that application can be decrypted by anyone after that time delay.
 
 The protocol deterministically derives 5 symmetric encryption keys for each rollup, derived from the master seed, the reveal option, the running counter for that option, and the block height, such that all TEEs in possession of the master secret can calculate the same encryption key.
 
@@ -63,9 +63,11 @@ The mechanism described above ensures that Obscuro transactions are encrypted wi
 
 The other piece of the puzzle is the mechanism that controls the actual reveal process. On a high level, the platform needs a reliable way to measure the time that cannot be gamed by a malicious host owner.
 
-The L1 blocks can be used as a reliable measure of average time. The rule is that after enough blocks have been added on top of the block that includes the rollup with the encrypted transactions, any user can request the encryption key and the position of the transactions they are entitled to view from the Aggregator TEE.
+The L1 blocks can be used as a reliable measure of average time. The rule is that after enough blocks have been added on top of the block that includes the rollup with the encrypted transactions, any user can request the encryption key and the position of the transactions they are entitled to view from the TEE of any Obscuro node.
 
-Obscuro adds a security measure to prevent a malicious node operator from _fast-forwarding_ time by creating an Ethereum fork and mining blocks with well-chosen timestamps such that difficulty keeps decreasing. The solution is straightforward. Obscuro TEEs fully understand the Ethereum protocol and receive all L1 blocks as part of the POBI protocol, which allows them to verify that the blocks are valid, but they cannot know if this is the canonical Ethereum chain or not a malicious fork designed to fast-forward time. Obscuro hard-codes a minimum difficulty much lower than the average network difficulty for the last year, but it is still much higher than any single actor can achieve.
+A malicious node operator wanting to have a peek at transactions before the designated time has passed can try to _fast-forward_ time by creating an Ethereum fork and mining blocks with well-chosen timestamps such that difficulty keeps decreasing.
+
+The solution to this problem is straightforward. Obscuro TEEs fully understand the Ethereum protocol and receive all L1 blocks as part of the POBI protocol, which allows them to verify that the blocks are valid, but they cannot know wheter this is the canonical Ethereum chain or a malicious fork designed to fast-forward time. To address this, Obscuro hard-codes a minimum difficulty lower than the average network difficulty for the last year, but much higher than any single actor can achieve. This will prevent the node operator from speeding up time.
 
 ### Cryptographic algorithms
 
