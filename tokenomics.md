@@ -8,7 +8,7 @@ The main goals for the creation of the OBX token are to provide a truly decentra
 * A means to fund the ongoing development of the Obscuro platform.
 * A way to incentivise eco-system development via grants and competitions.
 
-The OBX token is issued initially onto Ethereum Mainnet as an ERC-20 token. This is because it's easier to bootstrap adoption onto an already existing network with financial infrastructure such as exchanges and other existing DeFi applications. The intention is that the OBX token is not issued until the first release of the Obscuro platform is substantially complete. In other words, it should be possible to use Obscuro in a testnet environment as a pre-requisite for the utility token launch to proceed.
+The OBX token is issued initially onto Ethereum Mainnet as an ERC-20 token. This is because it is easier to bootstrap adoption onto an already existing network with financial infrastructure such as exchanges and other existing DeFi applications. The intention is that the OBX token is not issued until the first release of the Obscuro platform is substantially complete. In other words, it should be possible to use Obscuro in a testnet environment as a pre-requisite for the utility token launch to proceed.
 
 On Obscuro entering production, an allocation of tokens for aggregator rewards will be issued directly onto the Obscuro network. Therefore, there are two classes of token: Ethereum native and Obscuro native, and participants can move seamlessly between them using the Obscuro Bridge Contract.
 
@@ -23,5 +23,3 @@ It is thus essential for the OBX/ETH relationship to remain as stable as possibl
 ![token-flow](./images/token-flow.png)
 
 Over time the community pool decreases in size. Likewise, the eco-system pool also decreases in size. However, the amount of tokens held by the community (users, market makers and node operators) increases in size. Likewise, the team pool decreases in size over time as tokens are sold to fund development.
-
-[^1]: OBX is not a security because there is no expectation of profit. Indeed, OBX  is issuer-less in that no incorporated entity credits its balance sheet equity or liabilities in conjunction with the issuance of OBX. In addition, OBX is not a regular coin as it is not for use as a generic medium of exchange.
