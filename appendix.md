@@ -21,7 +21,7 @@ Means of controlling which software is allowed to run inside the Trusted Executi
 **Automated Market Maker / AMM**
 Uses liquidity pools to allow digital assets to be traded automatically and without permissions.
 
-**Block reward**
+**Block Reward**
 An amount of OBX which is given to node operators to cover their costs to validate and publish blocks.
 
 **Enclave Key / EK**
@@ -36,10 +36,10 @@ A virtual computer whose existence is maintained by thousands of connected real-
 **Gas**
 The unit that measures the amount of computational effort required to execute specific operations on the Ethereum network.
 
-**Gas price**
+**Gas Price**
 The levy imposed for every computation executed on the Ethereum network to encourage good behaviour, e.g. prevent bad actors from spamming the network.
 
-**Genesis enclave**
+**Genesis Enclave**
 The first Trusted Execution Environment to join a new network. The Genesis enclave propagates the master seed to the other attested nodes by encrypting it with specific Trusted Execution Environment keys.
 
 **Host**
@@ -60,16 +60,16 @@ Participants in the network may extract value by observing user transactions and
 **Non-Fungible Token / NFT**
 A unique and non-interchangeable unit of data stored on a digital ledger.
 
-**Obscuro Public events**
+**Obscuro Public Events**
 Special events emitted by L2 contracts that are included in the rollups in plaintext, and are exposed to L1 contracts once rollups reach finality. It is a mechanism by which Obscuro can publish information. 
 
 **OBX**
 The utility token used by Obscuro.
 
-**Off-chain**
+**Off-Chain**
 Activity happening away from the Layer 1 blockchain.
 
-**Optimistic rollup**
+**Optimistic Rollup**
 Optimistic rollups assume that all transactions are valid and submit batches without performing any computation. They include a challenge period during which anyone can dispute the legitimacy of the data contained in a batch. If a fraudulent transaction is detected, the rollup executes a so-called fraud proof and runs the correct transaction computation using the data available on Layer 1.
 
 **Over-the-counter / OTC**
