@@ -1,7 +1,7 @@
 ## Cryptoeconomics
 All successful decentralised solutions need a strong incentive mechanism to keep the protocol functioning effectively. 
 
-For simplicity, this analysis focuses on the normal functioning of the network, assuming it reached adoption, and it will handle bootstrapping separately.
+For simplicity, this analysis focuses on the normal functioning of the network, assuming it has reached adoption. Bootstrapping is handled separately.
 
 ### High Level Requirements
 * Users have to pay for transactions a well-defined amount. The amount will cover the below two points and there will be no bidding wars.
@@ -20,4 +20,4 @@ Obscuro moves away from the Bitcoin/Ethereum approach and introduces the concept
 
 The great advantage is increased flexibility in aligning incentives, at the cost of increased complexity.
 
-Obscuro nodes that are performing any activity according to the protocol have the possibility of submitting a transaction containing a proof and be rewarded accordingly. To achieve this, the protocol has to maintain a pool of tokens. Users will pay fees into this pool, while nodes will be paid from it. During bootstrapping, the protocol will have the ability to add newly minted tokens to the pool. Once the network picks up, the protocol will be able to burn excess tokens.
+Obscuro nodes that are performing any activity according to the protocol have the possibility of submitting a transaction containing a proof and be rewarded accordingly. To achieve this, the protocol has to maintain a pool of tokens. Users pay fees into this pool, while nodes will be paid from it. During bootstrapping, the protocol will have the ability to add newly minted tokens to the pool. Once the network picks up, the protocol will be able to burn excess tokens.

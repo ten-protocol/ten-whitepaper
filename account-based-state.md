@@ -28,7 +28,7 @@ In this case, the flash-loan contract needs to query balances or find out if it 
 
 This area is still under active research. The first version will rely on application developers to check programmatically who can call different functions and what data they should receive.
 
-For subsequent versions, Obscuro will explore the following concepts:
+For subsequent versions, Obscuro explores the following concepts:
 * Each contract can declaratively whitelist contracts that can access different functions.
 * Automatically propagate access. For example, if _Account.getBalance()_ can be invoked only by the owner, it means that any contract that invokes this has to originate from a message signed by the owner. This solution sounds appealing, but it needs more research to determine if this mechanism prevents useful use cases.
 

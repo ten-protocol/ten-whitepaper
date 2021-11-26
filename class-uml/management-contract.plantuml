@@ -17,13 +17,13 @@ object ManagementContract {
     - deposits: Map<ERC20, Amount>
 
     NL
-    C(Registered aggregators)
-    C(The contract will check the attestation )
-    C(End users will pick one or multiple nodes from this list to submit transactions to)
+    C(Registered Aggregators)
+    C(The contract checks the attestation )
+    C(End users pick one or multiple nodes from this list to submit transactions to)
     - aggregators: List<Aggregator>
 
     NL
-    C(Amounts staked by aggregators)
+    C(Amounts staked by Aggregators)
     - stake: Map<EthAddress, Amount>
 
     NL
@@ -38,9 +38,9 @@ object ManagementContract {
     NL
     C(Normally this list has only one element -which is the head of chain )
     C(Since the Aggregators producing and submitting rollups are a decentralised network)
-    C(We support forks in case multiple aggregators submit simultaneously)
+    C(We support forks in case multiple Aggregators submit simultaneously)
     C(Or in case someone who hacks an enclave submits an invalid rollup that has to be ignored)
-    C(If an aggregator is able to break the TEE - one fork could be malicious)
+    C(If an Aggregator is able to break the TEE - one fork could be malicious)
     C(By allowing forks we allow the community to vote for the right chain)
     C(A compliant Aggregator will always aggregate on the most recent valid fork)
     C(In case there are multiple valid candidates - it will use the rollup with the lowest nonce)
@@ -53,7 +53,7 @@ object ManagementContract {
     C(Encrypted with the key of each enclave)
     C(It will represent a good image of how many copies are out there)
     C(Will have to be used by incentives)
-    C(Users will have to remove when they destory the cpu)
+    C(Users will have to remove when they destroy the cpu)
     - encryptedSecrets: Map<Party,Secret>
 }
 
