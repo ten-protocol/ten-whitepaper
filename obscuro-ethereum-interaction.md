@@ -2,10 +2,12 @@
 Obscuro is a confidential extension to Ethereum, and thus assets have to move freely between the two networks.
 
 All side-chains and L2 solutions have developed solutions to the mismatches between the different models of the two networks, and typically there is a bridge contract that safeguards assets.
-The difference between side-chains and L2 solutions is that mismatches are more significant for side-chains because they have their own finality and security mechanisms, and thus the bridge logic is either very complex or centralized.
+The difference between side-chains and L2 solutions is that mismatches are more significant for side-chains because they have their own finality and security mechanisms, and thus the bridge logic is either very complex or centralised.
 
 ### Deposits
 The user deposits supported ERC tokens into the well-known address of the Bridge contract, and once the transaction is successfully added to a block, the Obscuro-enabled wallet automatically creates an L2 transaction, including proof of the L1 transaction. The exact amount is credited with wrapped tokens on the user's account on Obscuro. 
+
+The user deposits supported ERC tokens into the well known address of the Bridge contract, and once the transaction is successfully added to a block, the Obscuro-enabled wallet automatically creates an L2 transaction including a proof of the L1 transaction, and the same amount will be credited with wrapped tokens on the user's account on Obscuro. 
 
 The fact that the finality of L1 transactions is probabilistic makes crediting the L2 account not straightforward. Most solutions solve this problem by waiting for a confirmation period before crediting the account. Obscuro takes a different approach and introduces a dependency mechanism between the L2 rollup and the L1 blocks.
 
@@ -22,7 +24,7 @@ _Note: The deposit L2 transaction cannot be fully encrypted because the aggregat
 ## Withdrawals
 The high-level requirement for the withdrawal function is simple: allow Obscuro users to move assets back into the Ethereum network. The problem is that this is where the most significant threat against such a solution lies because there might be a large amount of locked value.
 
-The challenge is to implement this functionality in a decentralized way by defining a protocol and economic incentives.
+The challenge is to implement this functionality in a decentralised way by defining a protocol and economic incentives.
 Due to the sensitivity of this function, many side-chains and L2 solutions rely on multi-signature technology to control the release of funds. Optimistic Rollups rely on a challenge mechanism during a long waiting period before releasing funds, powered by economic incentives.
 Obscuro uses TEE technology, but it cannot leverage it for this aspect because of our threat model. The Bridge contract could release funds based on a signature from an attested TEE if it were invulnerable, but it is not, so the solution is to use economic incentives on top of the POBI protocol.
 
@@ -66,7 +68,7 @@ The withdrawal process is indicated in the following diagram:
 
 Ethererum application developers can use a confidential L2 like Obscuro for some jobs that are not possible otherwise.
 
-For example, an L1 smart contract organizes a fair lottery that needs a reliable random number generator that the miners cannot game.
+For example, an L1 smart contract organises a fair lottery that needs a reliable random number generator that the miners cannot game.
 
 Another example is publishing the result of a poker game played inside Obscuro, which the L1 contract can use to make a payment or update the tournament results.
 

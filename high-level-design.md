@@ -1,7 +1,7 @@
 # High Level Design
 Obscuro has designed for an L2 protocol, where user activity is moved _off-chain_ from the L1, and it follows the increasingly common rollup pattern to store transactions on the L1 chain. Read more about [rollups](https://vitalik.ca/general/2021/01/05/rollup.html). Most rollup implementations exist to provide scalability for L1 networks, but the prime objective of Obscuro is to provide confidentiality.
 
-L2 networks have a unidirectional dependency on a L1 network: while the L2 network relies on the L1 network to provide an immutable and public record of rollup transaction data and to provide censorship resistance, liveness and availability, the L1 network is unaware of any individual L2 network. L2 submitted rollups are just normal L1 transactions.
+L2 networks have a unidirectional dependency on an L1 network: while the L2 network relies on the L1 network to provide an immutable and public record of rollup transaction data and to provide censorship resistance, liveness and availability, the L1 network is unaware of any individual L2 network. L2 submitted rollups are just normal L1 transactions.
 
 The following diagram shows the interactions between the two decentralised networks, Ethereum (L1) and Obscuro (L2): Obscuro is formed of Nodes called Aggregators, who compete to process user transactions, roll them up, and submit for inclusion in Ethereum blocks. Ethereum, through its protocol, leverages its own nodes to produce Ethereum blocks containing, amongst other things, the submitted Obscuro rollups.
 

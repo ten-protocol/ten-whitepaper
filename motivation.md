@@ -13,7 +13,7 @@ There are many, many use cases for applications deployed to the Obscuro network,
 ### Sealed Bid Auction
 In a sealed bid auction, bidders privately submit their one best offer in writing, in a sealed envelope. The bids are opened privately by the auctioneer and seller, who do not reveal the bids to any of the participants.
 
-Keeping the bids private helps ensure that if all bids are too low for any of them to be accepted by the seller, the property will not become stigmatized by having a perceived low value in the marketplace. It also ensures that the auctioneer cannot collude and reveal a competing bid to another bidder privately, or front-run a bidder and out-bid them.
+Keeping the bids private helps ensure that if all bids are too low for any of them to be accepted by the seller, the property will not become stigmatised by having a perceived low value in the marketplace. It also ensures that the auctioneer cannot collude and reveal a competing bid to another bidder privately, or front-run a bidder and out-bid them.
 
 This type of auction requires Obscuro.
 
@@ -39,8 +39,6 @@ To allow this to happen, a reserve price needs to be set, where once hit, all th
 
 Token holders need to submit the reserve price that makes sense to them. This gets weighted by the number of tokens they hold in relation to the total number. Then, the reserve price is calculated and set. To be most effective, both of these require privacy. A hidden reserve price has the potential to attract larger bids.
 
-Keeping the bids private helps ensure that if all bids are too low for any of them to be accepted by the sellers, the NFT will not become stigmatized by having a perceived low value in the marketplace.
-
 ### Retail Activity
 Current smart contract activity undertaken by individuals can often be linked to them, either by data mining or simple association of an Ethereum L1 address with a username registered on the Ethereum Name Service. Pioneers do not care about whether their NFT purchases are publicly visible, but the next wave of mass adoption and use of smart contracts by the wider public (such as a health insurance contract) requires privacy. Obscuro helps here.
 
@@ -50,5 +48,5 @@ Current smart contract activity undertaken by individuals can often be linked to
 * By providing an _Ethereum Virtual Machine_ (EVM) compatible VM, deploying existing contracts to Obscuro with minimal change may be possible.
 * Obscuro is trustless and decentralised. It takes processing from the Ethereum Layer-1 (L1) and allows lower transaction costs similar to other Layer-2 (L2) networks.
 * Obscuro leverages TEEs for privacy but not for integrity and is not affected by the limitations of hardware-based confidential computing.
-* Obscuro guarantees quick finality by synchronizing the publishing of rollups to the cadence of the L1 blocks. 
+* Obscuro guarantees quick finality by synchronising the publishing of rollups to the cadence of the L1 blocks. 
 * Obscuro introduces a novel mechanism to allow application developers to balance the need for user data privacy (and MEV prevention) with the need to deter long-term illegal behavior.

@@ -13,7 +13,7 @@ Additional feedback is welcome, and all reviewers will be credited.
 
 ## Glossary
 **Aggregator**
-A node which participates in a L2 network and collaborates with other aggregator nodes to manage the L2 contracts and confirm correctness of transactions. Specifically, it participates in transaction gossip, and may propose transaction rollups to be registered with the L1 blockchain.
+A node which participates in an L2 network and collaborates with other aggregator nodes to manage the L2 contracts and confirm correctness of transactions. Specifically, it participates in transaction gossip, and may propose transaction rollups to be registered with the L1 blockchain.
 
 **Attestation constraints**
 Means of controlling which software is allowed to run inside the Trusted Execution Environment.
@@ -52,7 +52,7 @@ Part of the solution is a smart contract which runs on Ethereum and handles all 
 The public Ethereum blockchain and network.
 
 **Layer 2 / L2**
-A second network built on top of a L1 network and dependent on it. A L2 network expands on the capabilities of the L1 network by increasing capacity or enhancing functionality.
+A second network built on top of an L1 network and dependent on it. A L2 network expands on the capabilities of the L1 network by increasing capacity or enhancing functionality.
 
 **Maximal Extractable Value / MEV**
 Participants in the network may extract value by observing user transactions and then preempting them by inserting their own transaction ahead in the processing queue and influencing the price of an asset in order to extract a profit.
@@ -134,7 +134,7 @@ This section describes alternatives considered and discarded.
 On a high level, a user has to deposit some ERC tokens on the L1 management contract, and the same amount has to be credited on the user's account on Obscuro. This is not straightforward since finality is probabilistic.
 One option to achieve this is to wait a number of L1 blocks for confirmation. This has some clear disadvantages.
 
-Another option is to introduce a dependency mechanism between the L2 rollup and the L1 blocks. Basically, the L2 transaction that credits the Obscuro account will be in a L2 rollup that will only be accepted by the management contract if the dependency is part of the ancestors of the current block.  This option is discarded because in the case where the L1 deposit gets reorganised away before the rollup is created, the rollup which contains the L2 deposit transaction is invalidated.
+Another option is to introduce a dependency mechanism between the L2 rollup and the L1 blocks. Basically, the L2 transaction that credits the Obscuro account will be in an L2 rollup that will only be accepted by the management contract if the dependency is part of the ancestors of the current block.  This option is discarded because in the case where the L1 deposit gets reorganised away before the rollup is created, the rollup which contains the L2 deposit transaction is invalidated.
 
 ### Alternative L1 Theft Prevention
 There is a pool of liquidity stored in the L1 Bridge contract, which is controlled by the group of TEEs who maintain the encrypted ledger of ownership. Some users will want to withdraw from the L2 and go back to L1, which means the management contract will have to allow them to claim money from the liquidity pool.
@@ -142,7 +142,7 @@ There is a pool of liquidity stored in the L1 Bridge contract, which is controll
 In case one of the aggregators is able to hack the TEE, they will be able to produce a proof that they own much more and thus run with it.
 
 To solve this we have a couple of options.
-We could organise the aggregators in a BFT setup, and require that 2/3 of them sign over each rollup. The major disadvantage with this approach is that the finality of a L2 transaction will depend on both the BFT finality and the L1 finality. Another disadvantage is that a determined hacker with the means to break secure hardware could also amass the majority of staking power and be unchallenged.
+We could organise the aggregators in a BFT setup, and require that 2/3 of them sign over each rollup. The major disadvantage with this approach is that the finality of an L2 transaction will depend on both the BFT finality and the L1 finality. Another disadvantage is that a determined hacker with the means to break secure hardware could also amass the majority of staking power and be unchallenged.
 
 Another option with a better trust model is to introduce a challenge mechanism similar to the optimistic rollups. The disadvantage is that it introduces a delay, and a concept of probabilistic finality.
 

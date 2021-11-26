@@ -7,7 +7,7 @@ Aggregators are the Obscuro nodes whose TEEs are in possession of the _shared se
 End users will send encrypted transactions to any registered aggregators who will then gossip the transactions. Every round, one of the aggregators will publish the transaction in a rollup.
 
 Aggregators have the following functions:
-* Integrate with a L1 node to monitor published blocks and to submit rollups.
+* Integrate with an L1 node to monitor published blocks and to submit rollups.
 * Gossip with the other aggregators registered in the management contract.
 * Interact with the TEE:
     - Submit user encrypted transactions.
@@ -17,7 +17,7 @@ Aggregators have the following functions:
 
 
 These are the steps to become an aggregator.
-* Register with the L1 Network Management contract and pay a significant stake in the Obscuro token. The stake has multiple roles. The first one is to penalize aggregators who attempt to hack the protocol, and second is for the aggregators to buy into the ecosystem, so that they will make an effort to keep it running smoothly.
+* Register with the L1 Network Management contract and pay a significant stake in the Obscuro token. The stake has multiple roles. The first one is to penalise aggregators who attempt to hack the protocol, and second is for the aggregators to buy into the ecosystem, so that they will make an effort to keep it running smoothly.
 * Set up a server with a valid, unaltered, up-to-date and secured TEE and provide an attestation from the hardware manufacturer or a delegate to the management contract.
 * On seeing this request to join the network published to the L1, another registered TEE will share the shared secret, used to encrypt and decrypt user transactions.
 * Once in possession of the secret, the TEE can start processing all the L2 transactions that are stored on the L1 blockchain and build the state.

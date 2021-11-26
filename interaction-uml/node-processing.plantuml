@@ -49,7 +49,7 @@ aggregatorA -> L1: publish rollup in L1 transaction
 note over L1,aggregatorA: The winner is responsible for publishing the rollup, which will get included in a block after a delay.
 
 == Phase 2 - rollup creation==
-note over L1,aggregatorC: While the L1 nodes work on processing the published rollup, the L2 aggregators process L2 transactions submitted by users. This is the main phase of the protocol. Note that it lasts roughly as long as a L1 block.
+note over L1,aggregatorC: While the L1 nodes work on processing the published rollup, the L2 aggregators process L2 transactions submitted by users. This is the main phase of the protocol. Note that it lasts roughly as long as an L1 block.
 aggregatorA -> aggregatorA: create new rollup N+1\npointing to winner
 & aggregatorB -> aggregatorB: create new rollup N+1\npointing to winner
 & aggregatorC -> aggregatorC: create new rollup N+1\npointing to winner
