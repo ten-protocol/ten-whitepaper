@@ -1,5 +1,5 @@
 ## L1 Contracts
-On the L1 network, several conventional Ethereum contracts act together to form a Management contract.
+On the L1 network, several conventional Ethereum contracts act together to form a Management Contract.
 
 ### Network Management
 This contract is the gatekeeper for the protocol. Therefore, any node wishing to join Obscuro must interact with this contract and prove it is valid.
@@ -18,6 +18,6 @@ This contract interacts with the aggregators.
 ### Bridge Management
 This contract is essential for the solution's security since all value deposited by end-users is locked in this bridge.
 
-* It acts as a pool where people can deposit assets, like fungible or non-fungible ERC tokens, made available as wrapped tokens to use on the Obscuro network and can be withdrawn on demand back to L1.
+* It acts as a pool where people can deposit assets, like fungible or non-fungible ERC tokens, made available as wrapped tokens to use on the Obscuro network and can be withdrawn on demand back to an L1.
 * In case of conflicting forks in the rollup chain, it must delay withdrawals until one fork expires or enter a procedure to discover which fork is valid. This is covered in more detail in [Withdrawals](./obscuro-ethereum-interaction.md#withdrawals).
 * It may be extended to manage liquidity yields.
