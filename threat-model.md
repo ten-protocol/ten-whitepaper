@@ -1,5 +1,5 @@
 # Threat Model
-Obscuro is different from traditional L1 or L2 solutions primarily because data is stored and processed privately in trusted execution environments, which brings a new set of threats. Compared to other L2 solutions, the decentralized nature of the POBI protocol also brings some new threats.
+Obscuro is different from traditional L1 or L2 solutions primarily because data is stored and processed privately in trusted execution environments, which brings a new set of threats. Compared to other L2 solutions, the decentralised nature of the POBI protocol also brings some new threats.
 
 The main threat to any ledger technology is data corruption, also known as a safety failure. It could take the form of stealing assets, double spending assets, or, more generally, adding illegal entries. Leading blockchains solve this problem by implementing a _Byzantine Fault Tolerant_ (BFT) consensus between independent parties and creating incentives to ensure that anyone who breaks the rules will not be rewarded or will even be penalized. The most extreme attack is a 51% _Sybil_ attack, where the attacker somehow gains the majority of the decision power (computing power for _proof of work_ or stake for _proof of stake_) and can rewrite the history. This attack manifests as replacing an existing valid transaction with a valid competing transaction. While the ledger remains _logically_ valid, this is equivalent to stealing for the beneficiary of the first transaction. If the attacker tried to _physically_ corrupt the ledger, everyone would ignore the invalid block.  The best defense against this attack is to ensure that multiple independent powerful actors have no incentive to collude.
 
@@ -7,10 +7,10 @@ The general principle of the Obscuro protocol is that it reverts to the behavior
 
 Obscuro achieves data availability in the same way as all the other rollup solutions; the L1 is the source of data truth for the L2 network. Any L2 node with a valid TEE in possession of the shared secret can download the rollup chain from the L1, calculate the entire state inside its encrypted memory, and at the same time validate all transactions.
 
-The following sections will analyze the different threats against the Obscuro protocol.
+The following sections will analyse the different threats against the Obscuro protocol.
 
 ## Threats to the TEE Technology
-The Obscuro design considers that the TEE technology and the program inside are not easily hackable, so the protocol is not optimized to handle them. Attacks on TEEs have occurred in laboratories, so a secondary but essential concern is to prevent ultra-sophisticated actors with the ability to hack this technology from stealing funds or breaking the integrity of the ledger.
+The Obscuro design considers that the TEE technology and the program inside are not easily hackable, so the protocol is not optimised to handle them. Attacks on TEEs have occurred in laboratories, so a secondary but essential concern is to prevent ultra-sophisticated actors with the ability to hack this technology from stealing funds or breaking the integrity of the ledger.
 
 _The threat model of Obscuro is that sophisticated attackers run an aggregator node on a machine with a TEE they control, have access to the master seed and the entire ledger, and run any possible attack on it, including attacks on the physical CPU._
 
@@ -59,7 +59,7 @@ _Note: This area is under research_.
 A variation of this attack is when the attacker cannot directly hack the TEE, but it is restarting the TEE in the hope of generating a lower nonce and thus improving their chances. This threat is mitigated by a delay introduced at the startup of the OVM, which will cause the attacker to miss out on that rollup cycle.
 
 ## Other threats to the protocol
-This section analyzes threats not directly linked to the TEE, although a hack against the TEEs might amplify them.
+This section analyses threats not directly linked to the TEE, although a hack against the TEEs might amplify them.
 
 ### Invalid rollup attacks
 The _Rollup Contract_ only accepts signed rollups from aggregators that can prove their TEE attestation, and unless the TEE itself is corrupted, it is impossible to publish invalid rollups. This means that such an attack will become a liveness attack when forks are detected in the rollup chain.
@@ -68,13 +68,13 @@ The _Rollup Contract_ only accepts signed rollups from aggregators that can prov
 An aggregator winning a round can freely publish empty rollups, but that would not harm the system if there were multiple independent aggregators. It will just slow down the network. Obscuro disincentivises this attack since the reward for the publisher is linked to the fees collected from the included transactions.
 
 ## Sybil Attacks
-This section will analyze the threats that a powerful adversary who can create many aggregators can pose on the protocol.
+This section will analyse the threats that a powerful adversary who can create many aggregators can pose on the protocol.
 The reasoning around this attack is quite different from typical public blockchains.
 
 There are two ways to run this attack against Obscuro depending on the capabilities of the attacker:
 
 1. The attacker sets up N CPUs with TEE and pays the stake for each of them, where (N > Total_Number_Of_Aggregators / 2).
-2. The attacker hacks the TEE and can impersonate many TEEs limited only by the stake. This attack has been analyzed in the "Colluding write-level attack".
+2. The attacker hacks the TEE and can impersonate many TEEs limited only by the stake. This attack has been analysed in the "Colluding write-level attack".
 
 ### Sybil attack without hacking the TEE
 If the attacker cannot hack the TEE, they cannot deviate from the canonical chain or insert illegal transactions, as the attested software will not let them. Having a majority on the Obscuro network will not help with this. An attacker who wants to perform a double-spend attack on Obscuro will have to change the canonical chain already published in L1 blocks. To perform a double spend, the attackers have to perform a double-spend attack on the L1 blocks themselves that contain the rollups.
@@ -153,7 +153,7 @@ The following groups are actors in the system.
 4. Token_Holders_N - number of Obscuro token holders. Many thousands
 
 ### Liveness
-There are multiple aspects to consider when analyzing the liveness trust model. Since Obscuro is fully decentralised at the network level, as long as one single aggregator is alive, the network is alive and processing user transactions.
+There are multiple aspects to consider when analysing the liveness trust model. Since Obscuro is fully decentralised at the network level, as long as one single aggregator is alive, the network is alive and processing user transactions.
 
 For transaction processing: 1 of Obscuro_N, where the motivation of nodes is profit seeking.
 

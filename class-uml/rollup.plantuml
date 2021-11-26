@@ -75,7 +75,7 @@ object ObscuroRollup {
 
     NL
     C(The hash of the L1 block where the parent was published)
-    C(This is required because the POBI protocol dictates that a rollup can only be generated after the parent rollup was published in a L1 block)
+    C(This is required because the POBI protocol dictates that a rollup can only be generated after the parent rollup was published in an L1 block)
     - L1ParentBlock: Hash
 
     NL

@@ -1,6 +1,6 @@
 ## State
 
-Obscuro is an account-based L2 decentralized ledger system similar to the L1 Ethereum blockchain, where the state is calculated independently by each node based on the canonical list of transactions and stored as a _Patricia Tree Root_ in each rollup. One significant difference is that the account balances can only be calculated inside the TEEs and are only revealed under certain conditions.
+Obscuro is an account-based L2 decentralised ledger system similar to the L1 Ethereum blockchain, where the state is calculated independently by each node based on the canonical list of transactions and stored as a _Patricia Tree Root_ in each rollup. One significant difference is that the account balances can only be calculated inside the TEEs and are only revealed under certain conditions.
 The model is not described further in this paper because it is the same as [Ethereum Accounts](https://ethereum.org/en/developers/docs/accounts/).
 
 The transaction and smart contract formats are similar to Ethereum, with a few differences introduced by the confidentiality requirements.
