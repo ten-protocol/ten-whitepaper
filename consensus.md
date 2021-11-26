@@ -52,12 +52,12 @@ Note that the value of L1_Proof_Height is less than L1_Block_Height.
 Example: _R_15[Alice, 100, 102, 20]_ means the generation is 15, the aggregator is _Alice_, the generation of the L1 bock used as proof is 100, the generation of the L1 bock that included the rollup is 102, and the nonce equals 20.
 
 ## The Canonical Chain
-The POBI protocol allows any aggregator to publish rollups to the management contract, so short-lived forks are a normal part of the protocol. However, the ObscuroVM running inside the TEE of every node must be able to deterministically select one of the forks as the canonical chain and only append a rollup on top of that. This means that the TEE must receive all the relevant content of the L1 blocks, and the logic must be identical on all nodes.
+The POBI protocol allows any aggregator to publish rollups to the management contract, so short-lived forks are a normal part of the protocol. The forks cannot be long-living during normal functioning because the ObscuroVM running inside the TEE of every node deterministically selects one of the forks as the canonical chain and only append a rollup on top of that. Because the logic is identical on all nodes and the TEEs receive all the relevant content of the L1 blocks, there cannot be any competing forks more than one rollup deep unless there is a hack.
 
 The rules for the canonical chain:
 1. The genesis rollup is part of the canonical chain and will be included in a block by the first aggregator.
 2. An L1 block containing a single rollup whose parent is the head rollup of the canonical chain included in a previous L1 block is on the canonical chain if no other rollup with the same parent was included in an earlier block. Any other sibling rollup included in a later block is not on the canonical chain. This is the _Primogeniture_ rule, where a rollup is born when included in an L1 block.
-3. If an L1 block contains multiple sibling rollups created in the same round using the same L1 proof, the one with the lower nonce, will be on the canonical chain.
+3. If an L1 block contains multiple sibling rollups created in the same round using the same L1 proof, the one with the lower nonce is on the canonical chain.
 4. If an L1 block contains multiple sibling rollups created using different L1 proofs, the one created more recently is on the canonical chain.
 
 [comment]: <> ([TODO - diagram depicting these scenarios])
@@ -85,7 +85,7 @@ This built-in startup delay is also useful in preventing other real-time side-ch
 ## Aggregator Incentives
 All successful decentralised solutions need a robust incentive mechanism to keep the protocol functioning effectively.
 
-Compared to a typical L1 protocol, there is an additional complexity to consider. In an L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent, because they know everyone does that too. In a L2 decentralised protocol like POBI, there is an additional step: the publication of the rollup to L1, which can fail for multiple reasons. Furthermore, the incentive design must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to an L1 block, which is where an L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
+Compared to a typical L1 protocol, there is an additional complexity to consider. In an L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent, because they know everyone does that too. In an L2 decentralised protocol like POBI, there is an additional step: the publication of the rollup to L1, which can fail for multiple reasons. Furthermore, the incentive design must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to an L1 block, which is where an L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
 
 The high-level goal is to keep the system functioning as smoothly as possible and resist random failures or malicious behaviour while not penalising Obscuro nodes for not being available. Obscuro introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain. The great advantage is increased flexibility in aligning incentives at the cost of increased complexity. Rewards can be awarded in full, split between aggregators or just enough to cover the cost of gas. The reward from publishing a rollup will never exceed twice the gas cost.
 
