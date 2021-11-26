@@ -36,7 +36,7 @@ _Note: This type of attack is viewed as the main threat to the protocol and thus
 
 The mechanism to prevent this attack is described in detail in the [Withdrawals](./obscuro-ethereum-interaction.md#withdrawals) section.
 
-The high-level goal of the protections is to transform such an attack into a liveness attack on the withdrawal function.
+The high level goal of the protections is to transform such an attack into a liveness attack on the withdrawal function.
 
 ### Colluding write level attacks
 An extreme variant of the _Write-level attack_ is performed by a powerful group that hacked the TEE and was able to take complete control of all the Aggregator nodes.

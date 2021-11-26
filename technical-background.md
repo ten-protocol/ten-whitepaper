@@ -21,7 +21,7 @@ This whitepaper refers to the _Attestation Report_ (AR) as a generic object that
 
 Any message originating from an enclave can be signed with the AK. This is a guarantee for the recipient that it must have originated only inside a valid enclave.
 
-The diagram below is a conceptual high-level overview of the mechanism by which a TEE manufacturer and a group of security auditors propagate trust to the output of the computing performed inside the TEE.
+The diagram below is a conceptual high level overview of the mechanism by which a TEE manufacturer and a group of security auditors propagate trust to the output of the computing performed inside the TEE.
 
 ![tee architecture](./images/tee-architecture.png)
 
