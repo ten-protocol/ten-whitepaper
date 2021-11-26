@@ -1,8 +1,8 @@
 # Consensus - Proof of Block Inclusion
 Obscuro uses a novel decentralised round-based consensus protocol based on a fair lottery and synchronisation with the L1, designed explicitly for L2 rollups, called _Proof Of Block Inclusion_ (POBI). It solves, among others, the fair leader election problem, which is a fundamental issue that all decentralised rollup solutions have to address. POBI is inspired by [Proof Of Elapsed Time](https://sawtooth.hyperledger.org/docs/core/releases/1.0/architecture/poet.html).
 
-## High Level Description
-The high level goals of the POBI protocol are:
+## High-Level Description
+The high-level goals of the POBI protocol are:
 
 1. Each round, distribute the sequencer function fairly among all the active registered aggregators.
 2. To synchronise the L2 round duration to L1 rounds. Because the L1 is the source of truth, the finality of the L2 transactions is dependent on the finality of the L1 rollup transaction that includes them, which means there is no advantage in publishing multiple rollups in a single L1 block. It is not possible to decrease the finality time below that of the L1. On the other hand, publishing L2 rollups less frequently means that L2 finality is unnecessarily long. The optimum frequency is to publish one rollup per L1 block.
@@ -11,7 +11,7 @@ To achieve fairness, the POBI protocol states that the TEE can generate one rand
 
 The second goal is achieved by linking the random nonce generation, which terminates a round, to the Merkle proof of inclusion of the parent rollup in an L1 block. This property is what gives the name of the protocol. This means that an aggregator can obtain a signed rollup from the TEE only if it can present a Merkle proof of block inclusion. Furthermore, this feature links the creation of L2 rollup to an L1 block, thus synchronising their cadence.
 
-A party wishing to increase its chances of winning rounds must register multiple aggregators and pay the stake for each. The value of the stake needs to be calculated in such a way as to achieve a right decentralisation and practicality balance. This is discussed further in the incentives section.
+A party wishing to increase its chances of winning rounds must register multiple aggregators and pay the stake for each. The value of the stake needs to be calculated in such a way as to achieve the right decentralisation and practicality balance. This is discussed further in the incentives section.
 
 It is straightforward for all the other aggregators to verify which rollup is the winner by comparing the nonces and checking that the rollup signature is from an approved aggregator.
 
@@ -21,7 +21,7 @@ A further issue to solve is to ensure that the host cannot repeatedly submit the
 
 ## Typical Scenario
 1. A new round starts from the point of view of an aggregator when it decides that someone has gossiped a winning rollup. At that point, it creates a new empty rollup structure, points it to the previous one, and starts adding transactions to it (which are being received from users or by gossip).
-2. In the meantime it closely monitors the L1 by being directly connected to an L1 node.
+2. In the meantime, it closely monitors the L1 by being directly connected to an L1 node.
 3. As soon as the previous rollup was added to a mined L1 block, the aggregator takes that Merkle proof, feeds it to the TEE, who replies with a signed rollup containing a random nonce generated inside the enclave.
 4. All the other aggregators do roughly the same thing at the same time.
 5. At this point (which happens immediately after successfully publishing the previous rollup in the L1), every aggregator has a signed rollup with a random nonce which they gossip between them. The party with the lowest nonce wins. All the aggregators know this, and a new round starts.
@@ -49,14 +49,14 @@ The notation is the following: _R_$Rollup_Generation[$Aggregator, $L1_Proof_Gene
 
 Note that the value of L1_Proof_Height is less than L1_Block_Height.
 
-Example: _R_15[Alice, 100, 102, 20]_ means the generation is 15, the aggregator is _Alice_, the generation of the L1 bock used as proof is 100, the generation of the L1 bock that included the rollup is 102, and the nonce equals 20.
+Example: _R_15[Alice, 100, 102, 20]_ means the generation is 15, the aggregator is _Alice_, the generation of the L1 block used as proof is 100, the generation of the L1 block that included the rollup is 102, and the nonce equals 20.
 
 ## The Canonical Chain
 The POBI protocol allows any aggregator to publish rollups to the management contract, so short-lived forks are a normal part of the protocol. The forks cannot be long-living during normal functioning because the ObscuroVM running inside the TEE of every node deterministically selects one of the forks as the canonical chain and only append a rollup on top of that. Because the logic is identical on all nodes and the TEEs receive all the relevant content of the L1 blocks, there cannot be any competing forks more than one rollup deep unless there is a hack.
 
 The rules for the canonical chain:
 1. The genesis rollup is part of the canonical chain and will be included in a block by the first aggregator.
-2. An L1 block containing a single rollup whose parent is the head rollup of the canonical chain included in a previous L1 block is on the canonical chain if no other rollup with the same parent was included in an earlier block. Any other sibling rollup included in a later block is not on the canonical chain. This is the _Primogeniture_ rule, where a rollup is born when included in an L1 block.
+2. An L1 block containing a single rollup whose parent is the head rollup of the canonical chain included in a previous L1 block would be on the canonical chain if no other rollup with the same parent was included in an earlier block. Any other sibling rollup included in a later block is not on the canonical chain. This is the _Primogeniture_ rule, where a rollup is born when included in an L1 block.
 3. If an L1 block contains multiple sibling rollups created in the same round using the same L1 proof, the one with the lower nonce is on the canonical chain.
 4. If an L1 block contains multiple sibling rollups created using different L1 proofs, the one created more recently is on the canonical chain.
 
@@ -70,7 +70,7 @@ Using the notation, for the same _Rollup_Generation_, the rollup on the canonica
 Given that the nonce is a random number with sufficient entropy, we assume there cannot be a collision at this point.
 
 ## Preventing Repeated Random Nonce Generation
-In phase 3 of the protocol, the TEE of each aggregator generates a random nonce which determines the winner of the protocol. This introduces the possibility of gaming the system by restarting the TEE, and generating multiple numbers.
+In phase 3 of the protocol, the TEE of each aggregator generates a random nonce which determines the winner of the protocol. This introduces the possibility of gaming the system by restarting the TEE and generating multiple numbers.
 
 The solution proposed by Obscuro is to introduce a timer upon startup in the constructor of the enclave. A conventional timer, based on the clock of the computer, is not very effective since the host can game it.
 
@@ -88,10 +88,6 @@ All successful decentralised solutions need a robust incentive mechanism to keep
 Compared to a typical L1 protocol, there is an additional complexity to consider. In an L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent, because they know everyone does that too. In an L2 decentralised protocol like POBI, there is an additional step: the publication of the rollup to L1, which can fail for multiple reasons. Furthermore, the incentive design must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to an L1 block, which is where an L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
 
 The high-level goal is to keep the system functioning as smoothly as possible and resist random failures or malicious behaviour while not penalising Obscuro nodes for not being available. Obscuro introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain. The great advantage is increased flexibility in aligning incentives at the cost of increased complexity. Rewards can be awarded in full, split between aggregators or just enough to cover the cost of gas. The reward from publishing a rollup will never exceed twice the gas cost.
-
-Compared to a typical L1 protocol, there is an additional complexity to consider. In an L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent, because they know everyone will do that as well. In an L2 decentralised protocol like POBI, there is an additional step, which is the publication of the rollup to L1, which can fail for multiple reasons. Furthermore, the incentive design must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to an L1 block, which is where an L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
-
-The high level goal is to keep the system functioning as smoothly as possible, and be resistant to random failures or malicious behaviour, while not penalising Obscuro nodes for not being available. Obscuro introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain. The great advantage is increased flexibility in aligning incentives, at the cost of increased complexity. Rewards can be awarded in full, split between aggregators or just enough to cover the cost of gas. The cost of publishing a rollup will never exceed twice the gas cost.
 
 These are the aggregator rewarding rules:
 

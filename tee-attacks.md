@@ -1,7 +1,7 @@
 ## TEE Attacks
 The TEE technology and the program inside are not considered easily hackable, so the primary concern for the system is to ensure high availability.
 Attacks on TEEs have occurred in laboratories, so a secondary but essential concern is to prevent ultra-sophisticated actors with the ability to hack this technology from stealing funds or breaking the integrity of the ledger.
-From a high level, the solution uses an optimistic mechanism to handle such a case and penalise the culprits rather than introduce real-time delays or checks to prevent it.
+From a high-level, the solution uses an optimistic mechanism to handle such a case and penalise the culprits rather than introduce real-time delays or checks to prevent it.
 
 There are two types of attacks that someone can execute against Obscuro:
 

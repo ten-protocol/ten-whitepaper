@@ -6,7 +6,7 @@ A permissionless and decentralised layer 2 network needs a consensus protocol de
 ## Challenges
 Relying on hardware-based TEEs for applications where significant value depends on the security of the hardware poses several challenges. A system designed to manage value should not allow an attacker capable of compromising secure hardware to take ownership of the value under any circumstances. In other words, the ledger's integrity should not depend on TEEs being 100% hack-proof. Obscuro uses the security of Ethereum combined with game theory to detect and correct eventual TEE hacks.
 
-A system where everything is encrypted all the time is not usable. There must be a way for users to query their data or prove it to third parties. Additionally, an existing application contract that reveals internal state (such as the balanceOf(address) function of the ERC-20 standard used to look up anyone's holding) need to be considered carefully; since while Obscuro would prevent the state of the contract being visible, the functions might not.
+A system where everything is encrypted all the time is not usable. There must be a way for users to query their data or prove it to third parties. Additionally, an existing application contract that reveals internal state (such as the balanceOf(address) function of the ERC-20 standard used to look up anyone's holding) need to be considered carefully; since while Obscuro would prevent the state of the contract from being visible, the functions might not.
 
 Another critical challenge for this protocol is the prevention of MEV. Because user transactions and execution are not visible to Obscuro nodes, one might naively assume that this problem is solved. Unfortunately, that is not strictly true since aggregators might gain useful information through side-channels and use that to extract value. For example, an aggregator might own some accounts and submit transactions to them in critical moments and then query for results. Obscuro introduces some novel techniques to prevent aggregators from performing replay-attacks which can generally be used for side-channels.
 
@@ -14,4 +14,4 @@ A privacy-preserving platform should consider illegal usage and design to preven
 
 One crucial challenge of such a system is ensuring that some catastrophic event cannot leave all the value locked.
 
-High transaction fees are one of the main barriers of entry for Ethereum. Obscuro addresses this using a novel approach to calculate fees based on the actual costs of running nodes.
+High transaction fees are one of the main barriers to entry for Ethereum. Obscuro addresses this using a novel approach to calculate fees based on the actual costs of running nodes.

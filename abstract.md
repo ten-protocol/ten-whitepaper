@@ -13,7 +13,7 @@ James Carlyle, Tudor Malene, Cais Manai, Neal Shah, Gavin Thomas, Roger Willis; 
 # Abstract
 We present Obscuro, a decentralised Ethereum Layer 2 Rollup protocol designed to achieve data confidentiality and prevent [Maximal Extractable Value (MEV)](https://ethereum.org/en/developers/docs/mev/) by leveraging hardware-based [Trusted Execution Environments (TEE)](https://en.wikipedia.org/wiki/Trusted_execution_environment).
 
-The design of Obscuro ensures that hardware manufacturers do not have to be trusted for the safety of the ledger. If one manufacturer turns malicious or there is a breach in the TEE technology, the protocol falls back to the behavior of a public blockchain that preserves the ledger's integrity but makes the transactions public. This situation will lead to a partial liveness failure because the withdrawal function will be suspended.
+The design of Obscuro ensures that hardware manufacturers do not have to be trusted for the safety of the ledger. If one manufacturer turns malicious or there is a breach in the TEE technology, the protocol falls back to the behaviour of a public blockchain that preserves the ledger's integrity but makes the transactions public. This situation will lead to a partial liveness failure because the withdrawal function will be suspended.
 
 The design also focuses on preserving privacy for the limited period when it matters most, which removes the need for a privacy technique that is robust against all adversaries in perpetuity.
 

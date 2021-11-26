@@ -43,7 +43,7 @@ The levy imposed for every computation executed on the Ethereum network to encou
 The first Trusted Execution Environment to join a new network. The Genesis enclave propagates the master seed to the other attested nodes by encrypting it with specific Trusted Execution Environment keys.
 
 **Host**
-The party controlling the physical server who runs the Trusted Execution Environment. In the threat model of typical confidential computing applications, including Obscuro, the Host is an adversary of the system.
+The party controlling the physical server who runs the Trusted Execution Environment. In the threat model of typical confidential computing applications, including Obscuro, the host is an adversary of the system.
 
 **L1 management contract**
 Part of the solution is a smart contract which runs on Ethereum and handles all L1 concerns.
@@ -131,7 +131,7 @@ This diagram shows the data structure for the transactions and account:
 This section describes alternatives considered and discarded.
 
 ### Alternative L1 Deposit management
-On a high level, a user has to deposit some ERC tokens on the L1 management contract, and the same amount has to be credited on the user's account on Obscuro. This is not straightforward since finality is probabilistic.
+On a high-level, a user has to deposit some ERC tokens on the L1 management contract, and the same amount has to be credited on the user's account on Obscuro. This is not straightforward since finality is probabilistic.
 One option to achieve this is to wait a number of L1 blocks for confirmation. This has some clear disadvantages.
 
 Another option is to introduce a dependency mechanism between the L2 rollup and the L1 blocks. Basically, the L2 transaction that credits the Obscuro account will be in an L2 rollup that will only be accepted by the management contract if the dependency is part of the ancestors of the current block.  This option is discarded because in the case where the L1 deposit gets reorganised away before the rollup is created, the rollup which contains the L2 deposit transaction is invalidated.

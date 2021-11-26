@@ -61,7 +61,7 @@ _Note that the predefined reveal periods are preferable to each application choo
 ### Revelation Mechanism
 The mechanism described above ensures that Obscuro transactions are encrypted with different keys, which can be revealed independently.
 
-The other piece of the puzzle is the mechanism that controls the actual reveal process. On a high level, the platform needs a reliable way to measure the time that cannot be gamed by a malicious host owner.
+The other piece of the puzzle is the mechanism that controls the actual reveal process. On a high-level, the platform needs a reliable way to measure the time that cannot be gamed by a malicious host owner.
 
 The L1 blocks can be used as a reliable measure of average time. The rule is that after enough blocks have been added on top of the block that includes the rollup with the encrypted transactions, any user can request the encryption key and the position of the transactions they are entitled to view from the Aggregator TEE.
 
