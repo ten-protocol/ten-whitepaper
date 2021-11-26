@@ -75,4 +75,4 @@ Obscuro makes the same choices as Ethereum for hashing and signing algorithms an
 
 Communication with TEEs and the encryption algorithms are not yet defined. 
 
-_Note: There might be a more efficient way to achieve the same high level goals, and we are considering different other options._
+_Note: There might be a more efficient way to achieve the same high-level goals, and we are considering different other options._
