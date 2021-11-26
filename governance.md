@@ -52,11 +52,11 @@ According to the rules implemented, a valid TEE does not sign a rollup building 
 
 Additional complexity involves the withdrawal process, which depends on assured finality on the canonical chain.
 
-###  5. Slashing the Stake of Misbehaving Parties.
+###  5. Slashing The Stake Of Misbehaving Parties.
 Aggregators that hack an enclave and attempt to break the ledger's integrity are discovered by the protocol and are punished by slashing to disincentivise such behaviour further.
 
 Slashing is an implicit process carried out by the Management Contract based on predefined rules. However, ultimately it is itself controlled by the code governance.
 
-###  6. Expected monthly operational cost for nodes
+###  6. Expected Monthly Operational Cost For Nodes
 Obscuro has a fee structure that delivers a predictable income for node operators and a predictable fee for users. In order to derive a fee that sufficiently compensates nodes, a value that represents the monthly operational cost for each node must be set.
 This variable also has the power to increase or decrease demand for running a node helping ensure a balance between decentralisation and end-user cost. 

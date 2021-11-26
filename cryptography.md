@@ -1,5 +1,4 @@
 ## Cryptography
-
 This section covers the various cryptographic techniques used by Obscuro.
 
 ### Master Seed
@@ -69,8 +68,7 @@ A malicious node operator wanting to have a peek at transactions before the desi
 
 The solution to this problem is straightforward. Obscuro TEEs fully understand the Ethereum protocol and receive all L1 blocks as part of the POBI protocol, which allows them to verify that the blocks are valid, but they cannot know wheter this is the canonical Ethereum chain or a malicious fork designed to fast-forward time. To address this, Obscuro hard-codes a minimum difficulty lower than the average network difficulty for the last year, but much higher than any single actor can achieve. This will prevent the node operator from speeding up time.
 
-### Cryptographic algorithms
-
+### Cryptographic Algorithms
 Obscuro makes the same choices as Ethereum for hashing and signing algorithms and uses the same elliptic curve. 
 
 Communication with TEEs and the encryption algorithms are not yet defined. 

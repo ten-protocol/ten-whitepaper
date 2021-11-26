@@ -1,13 +1,9 @@
 ## State
-
-Obscuro is an account-based L2 decentralised ledger system similar to the L1 Ethereum blockchain, where the state is calculated independently by each node based on the canonical list of transactions and stored as a _Patricia Tree Root_ in each rollup. One significant difference is that the account balances can only be calculated inside the TEEs and are only revealed under certain conditions.
-The model is not described further in this paper because it is the same as [Ethereum Accounts](https://ethereum.org/en/developers/docs/accounts/).
+Obscuro is an account-based L2 decentralised ledger system similar to the L1 Ethereum blockchain, where the state is calculated independently by each node based on the canonical list of transactions and stored as a _Patricia Tree Root_ in each rollup. One significant difference is that the account balances can only be calculated inside the TEEs and are only revealed under certain conditions. The model is not described further in this paper because it is the same as [Ethereum Accounts](https://ethereum.org/en/developers/docs/accounts/).
 
 The transaction and smart contract formats are similar to Ethereum, with a few differences introduced by the confidentiality requirements.
 
-
-### Smart contracts and the Obscuro VM
-
+### Smart Contracts and the Obscuro VM
 Obscuro application developers will write smart contracts in a familiar programming language using familiar blockchain tools and abstractions.
 Due to data privacy concerns, existing smart contracts will have to change before deploying them to Obscuro.
 
@@ -17,7 +13,6 @@ On a high level, the _Obscuro Virtual Machine_ (OVM) will be almost identical to
 
 
 ### State Confidentiality between Smart contracts
-
 The main goal of Obscuro is to protect user data. If smart contracts were wholly isolated from each other, it would be easy to define data access rules.
 
 Contract composition introduces significant complexity. DeFi enjoys massive success thanks to the ability of contracts to be combined in serendipitous ways not predicted by the contract creator, and Obscuro intends to replicate that.
@@ -39,12 +34,10 @@ A traditional wallet connected to a node on a public blockchain can read the bal
 
 Validity verification of such proofs can be done by first checking the TEE signature and then by checking that the rollup is on the canonical chain of both the L2 and the L1 chains.
 
-###  Smart contracts types
-
+###  Smart Contract Types
 Since all data is temporarily private, and smart contracts are just data, the Obscuro model supports two types of smart contracts.
 
  - _Public contracts_, which are equivalent to the Ethereum smart contracts in the sense that the source code will be available online, and anyone can build them and compare the hash of the bytecode against the address they are sending commands to.
 
 
  - _Private contracts_, for which the developer has not published the source code. These can be used for custom logic like arbitration where the developer intends to keep the profit making strategy hidden from competitors.
-

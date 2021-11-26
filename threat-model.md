@@ -16,7 +16,7 @@ _The threat model of Obscuro is that sophisticated attackers run an Aggregator n
 
 Assuming that such attacks are successful, the attacker can limit themselves to read-level access or an attempt to corrupt the ledger using a write-level attack.
 
-### Read-level attacks
+### Read-Level Attacks
 Read-level hacks happen when the attacker can extract some information from the TEE. This threat is specific to confidential blockchains.
 
 The only way to defend against these attacks is to carefully audit the code and keep the _Attestation Constraints_ up to date. If this attacker is discreet, the information leak can continue until a software patch is published or until new hardware that removes this attack is released.
@@ -27,7 +27,7 @@ The least severe read attack is a side-channel where the attacker can find infor
 
 If such an attack is successful, the network is equivalent to the behaviour of a typical public blockchain where all transactions are public, and MEV is possible.
 
-### Write-level attacks
+### Write-Level Attacks
 Write-level hacks are powerful in theory since they could enable the attacker to _write_ to the ledger and thus be able to break its integrity if there were no other protections.
 
 A write-level hack could happen if an attacker extracts the enclave key and signs hand-crafted rollups that contain invalid transactions or balances.
@@ -38,7 +38,7 @@ The mechanism to prevent this attack is described in detail in the [Withdrawals]
 
 The high level goal of the protections is to transform such an attack into a liveness attack on the withdrawal function.
 
-### Colluding write level attacks
+### Colluding Write-Level Attacks
 An extreme variant of the _Write-level attack_ is performed by a powerful group that hacked the TEE and was able to take complete control of all the Aggregator nodes.
 
 The defence against this attack is to incentivise a reasonable number of Verifiers to watch the Obscuro ledger in real-time. These actors will detect a malicious head rollup and notice that no other valid fork is being published.
@@ -47,7 +47,7 @@ _Note: One such actor monitoring the network will be the Obscuro Foundation, whi
 
 Any L2 node can become an Aggregator quickly by benefiting from the censorship resistance of Ethereum.  To counter the attack, they will have to pay the stake and publish a correct rollup.
 
-### Attacks against the fair lottery that designates the winner of the round
+### Attacks Against The Fair Lottery That Designates The Winner Of The Round
 The POBI protocol assigns a leader each round by using random numbers generated inside the TEE. An attacker that can hack the technology could generate a well-chosen number and thus win each round. This is not an attack against the safety of the ledger and is not of great concern.
 
 If some Aggregator wins statistically many more rounds than they should, it will highlight the problem to the community.
@@ -58,13 +58,13 @@ _Note: This area is under research_.
 
 A variation of this attack is when the attacker cannot directly hack the TEE, but it is restarting the TEE in the hope of generating a lower nonce and thus improving their chances. This threat is mitigated by a delay introduced at the startup of the OVM, which will cause the attacker to miss out on that rollup cycle.
 
-## Other threats to the protocol
+## Other Threats To The Protocol
 This section analyses threats not directly linked to the TEE, although a hack against the TEEs might amplify them.
 
-### Invalid rollup attacks
+### Invalid Rollup Attacks
 The _Rollup Contract_ only accepts signed rollups from Aggregators that can prove their TEE attestation, and unless the TEE itself is corrupted, it is impossible to publish invalid rollups. This means that such an attack will become a liveness attack when forks are detected in the rollup chain.
 
-### Empty rollup attacks
+### Empty Rollup Attacks
 An Aggregator winning a round can freely publish empty rollups, but that would not harm the system if there were multiple independent Aggregators. It will just slow down the network. Obscuro disincentivises this attack since the reward for the publisher is linked to the fees collected from the included transactions.
 
 ## Sybil Attacks
@@ -77,17 +77,17 @@ There are two ways to run this attack against Obscuro depending on the capabilit
 1. The attacker sets up N CPUs with TEE and pays the stake for each of them, where (N > Total_Number_Of_Aggregators / 2).
 2. The attacker hacks the TEE and can impersonate many TEEs limited only by the stake. This attack has been analysed in the "Colluding write-level attack".
 
-### Sybil attack without hacking the TEE
+### Sybil Attack Without Hacking The TEE
 If the attacker cannot hack the TEE, they cannot deviate from the canonical chain or insert illegal transactions, as the attested software will not let them. Having a majority on the Obscuro network will not help with this. An attacker who wants to perform a double-spend attack on Obscuro will have to change the canonical chain already published in L1 blocks. To perform a double spend, the attackers have to perform a double-spend attack on the L1 blocks themselves that contain the rollups.
 
-### Economical Sybil attacks
+### Economical Sybil Attacks
 Another type of attack, which a well-resourced actor can perform, is controlling many Aggregators to make a good return from the rewards. The more Aggregators someone controls, the more chance of getting a winning nonce.
 
 There is no risk in altering the ledger or performing double-spend attacks. There is no risk of a Denial of Service attack either, by refusing to publish winning rollups since the incentives encourage other actors to quickly fill in gaps and publish rollups.
 
 There are no risks of driving other Aggregators out of business by denying them the chance to win rollups since they will get the reward of being active nodes.
 
-### Catastrophic events
+### Catastrophic Events
 One of the worst scenarios is a catastrophic event that leaves all the value locked.
 
 This could happen in theory if all registered TEEs were simultaneously physically destroyed, and thus the master seed was permanently lost.
@@ -96,7 +96,7 @@ If a single TEE is not physically destroyed, and a single Ethereum node has a co
 
 The defence against this is to achieve a reasonable decentralisation.
 
-## MEV by Obscuro Aggregators
+## MEV By Obscuro Aggregators
 Transactions and processing are hidden from node operators. Still rollups contain some information and the node operator can query the balance of accounts they control. 
 
 To make this attack impractical, Obscuro introduces a slight delay that preserves the user experience of public blockchains.  
@@ -105,7 +105,7 @@ The TEE will emit events and respond to balance requests only after it received 
 
 An Aggregator wishing to attack this scheme would have to quickly create valid Ethereum blocks while executing user transactions, which is highly impractical since there is a hardcoded minimum value for the mining difficulty.
 
-## Threats to the POBI Protocol
+## Threats To The POBI Protocol
 The POBI protocol handles most failure scenarios using a set of incentive rules.
 
 #### 1. The winning sequencer does not publish
@@ -180,6 +180,5 @@ The next line of defence are the token holders, who will vote on L1 to update th
 
 Note that the attacker is not directly profit seeking because there is no possibility to withdraw assets until the fork is resolved.
 
-### How badly will the system fail if the assumptions are violated?
-
+### How Badly Will The System Fail If The Assumptions Are Violated?
 If all supported hardware manufacturers colluded, they would be able to break the safety of the ledger.
