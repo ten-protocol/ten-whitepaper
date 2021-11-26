@@ -33,7 +33,7 @@ The goal of the L2 design is to create a fair, permissionless, and decentralised
 
 All Obscuro nodes have to go through the attestation process with the Network Management contract before receiving the shared secret and participating.
 
-Note: the shared secret is covered in the [cryptography section](cryptography.md)
+Note: the shared secret is covered in the [cryptography section](./cryptography.md)
 
 {% include_relative aggregators-verifiers.md %}
 {% include_relative rollup-data-structure.md %}
