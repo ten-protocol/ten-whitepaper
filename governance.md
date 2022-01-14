@@ -4,8 +4,7 @@ There are several types of power exercised in a decentralised system:
 2. Implicit powers implemented in an immutable protocol.
 3. Implicit powers implemented in a protocol that itself is represented by an open-source codebase that is mutable.
 
-Note that almost nothing is truly immutable because a codebase or even hardware executes even the most immutable protocol and can change its behaviour. In theory, a truly immutable system could be achieved using various hash constraints within TEEs; however, allowing for upgrades is a more desirable outcome.
-Ultimately, for all other cases, there is an explicit governance process somewhere. It is turtles all the way down.
+Note that almost nothing is truly immutable because a codebase or even hardware executes even the most immutable protocol and can change its behaviour, or it can be changed. In theory, a truly immutable system could be achieved using various hash constraints within TEEs; however, allowing for upgrades is a more desirable outcome. Ultimately, for all other cases, there is an explicit governance process somewhere.
 
 Bitcoin miners, for example, have some power to determine the rules by choosing which version of the core code to install and to produce blocks with. If there is disagreement, there is a fork, and the user community ultimately decides what value to assign to each fork. This is only a problem if the competing forks have similar mining power, and thus security. For day-to-day upgrades, miners have the de-facto decision power, but in case of disagreements, the users have the ultimate power through free markets.
 This is currently the golden standard for decentralised governance, with advantages and disadvantages.
@@ -17,7 +16,7 @@ After that hard lesson, most Ethereum smart contracts have component contracts t
 The key difference between the golden standard of Bitcoin, and typical smart contract governance, is that the end-users no longer have any power to choose which "smart contract fork" they prefer. Using the original smart contract and adding some value to it, they are at the mercy of the application governors.
 
 Since the Obscuro protocol is anchored in Ethereum as a smart contract, it cannot rely on the end-users to hold the ultimate power.
-The next best thing is to be very explicit about all the system's powers and achieve separation of powers.
+The next best thing is to be very explicit about all the system's powers and achieve separation of decision-making (which can be devolved to token-holders and articulated in a governance specification as proposals) from execution (which relies on individuals pushing buttons).
 
 ## Obscuro powers
 Building on the above, the following powers are exercised within Obscuro.
@@ -29,14 +28,13 @@ The parties who have the power to set the AC and thus appoint auditors ultimatel
 
 This concern is not entirely different from the smart contracts security auditors, except that typically users decide which auditors they trust by using or not using those contracts.
 
-
 ###  2. Administration Of Ethereum Management Contracts.
-Like all the other Ethereum applications, these contracts will have upgradeable parts to cater for bugs and new features. Whatever is upgradeable means that the _administrators_ have full powers over those aspects.
+Like most other Ethereum applications, these contracts will have upgradeable parts to cater for bugs and new features. Whatever is upgradeable means that the _administrators_ have full powers over those aspects.
 1. Bridge logic
 2. Rollup logic
 3. Attestation logic
 
-In the example above, the auditors are a fixed list. However, that might not be practical, as companies might appear or disappear. The list of approved auditors has to be managed by a proposal and vote process by the community without any requirement for human intervention. Going a level deeper, the code that manages this process might need to be upgradeable, so someone ends up controlling it.
+In the example above, the auditors are a fixed list. However, that might not be practical, as companies might appear or disappear. The list of approved auditors has to be managed by a proposal and vote process by the community without any requirement for central intervention. Going a level deeper, the code that manages this process might need to be upgradeable, so someone ends up controlling it.
 
 ###  3. Creating Rollups
 Another power, equivalent to the L1 stakers or miners, is held by Obscuro Aggregators. They run attested software and hardware and have paid a stake.

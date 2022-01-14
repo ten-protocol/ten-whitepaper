@@ -59,7 +59,7 @@ object ManagementContract {
 
 object Aggregator{
     - attestation: Attestation[PubKey, Proof]
-    - internetAddress: Address[IP, port]
+    - internetAddress: URL or Address[IP, port]
     - ethAddress: EthAddress
 }
 @enduml

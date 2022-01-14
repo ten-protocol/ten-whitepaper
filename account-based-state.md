@@ -1,5 +1,5 @@
 ## State
-Obscuro is an account-based L2 decentralised ledger system similar to the L1 Ethereum blockchain, where the state is calculated independently by each node based on the canonical list of transactions and stored as a _Patricia Tree Root_ in each rollup. One significant difference is that the account balances can only be calculated inside the TEEs and are only revealed under certain conditions. The model is not described further in this paper because it is the same as [Ethereum Accounts](https://ethereum.org/en/developers/docs/accounts/).
+Obscuro is an account-based L2 decentralised ledger system similar to the L1 Ethereum blockchain, where the state is calculated independently by each node based on the canonical list of transactions and stored as a _Patricia Trie_ in each rollup. Each node processes all prior transactions to establish the current state (full sync), and optimised sync methods (e.g. fast sync) will likely be supported. One significant difference is that the account balances can only be calculated inside the TEEs and are only revealed under certain conditions. The model is not described further in this paper because it is the same as [Ethereum Accounts](https://ethereum.org/en/developers/docs/accounts/).
 
 The transaction and smart contract formats are similar to Ethereum, with a few differences introduced by the confidentiality requirements.
 
@@ -17,18 +17,16 @@ The main goal of Obscuro is to protect user data. If smart contracts were wholly
 
 Contract composition introduces significant complexity. DeFi enjoys massive success thanks to the ability of contracts to be combined in serendipitous ways not predicted by the contract creator, and Obscuro intends to replicate that.
 
-For example, consider a flash-loan where a user borrows 10 ETH from Aave, swaps them for 100 ABC coins on UniSwap, then swaps them for 500 DEF coins on SushiSwap, and then swaps them for 10.1 ETH on UniSwap, and then pays back the loan and makes a 0.1 ETH profit.
+For example, one contract might have been written to reveal information for the caller's eyes only in an encrypted response. But if the caller is another contract, that wrapping contract might turn the response into a public broadcast event, visible to everyone.
 
-In this case, the flash-loan contract needs to query balances or find out if it can loan a certain amount. It also needs to know the price for the ABC/BCD on a specific exchange. All this information that it needs access to perform its duties could, in theory, be emitted directly or indirectly as an event to the caller of the contract. Alternatively, the attacker could write the state on accounts they controlled.
-
-This area is still under active research. The first version will rely on application developers to check programmatically who can call different functions and what data they should receive.
+This area is still under active research. The first version of Obscuro will rely on application developers to check programmatically who can call different functions and what data they should receive, and therefore developers should reason about what could happen if their contract is called by a contract that they don't control.
 
 For subsequent versions, Obscuro explores the following concepts:
 * Each contract can declaratively whitelist contracts that can access different functions.
 * Automatically propagate access. For example, if _Account.getBalance()_ can be invoked only by the owner, it means that any contract that invokes this has to originate from a message signed by the owner. This solution sounds appealing, but it needs more research to determine if this mechanism prevents useful use cases.
 
 ###  Wallets and Transaction Submission
-User wallets creates transactions encrypted with the _Obscuro public key_. Only valid TEEs in possession of the Master Seed can decrypt, execute, and see the resulting state. Still, end-users who submitted a transaction must be able to receive the result and query the balance.
+User wallets create transactions encrypted with the _Obscuro public key_. Only valid TEEs (i.e. Aggregators and Verifiers) in possession of the Master Seed can decrypt, execute, and see the resulting state. Still, end-users who submitted a transaction must be able to receive the result and query the balance.
 
 A traditional wallet connected to a node on a public blockchain can read the balance of any account and display it to the user. For a similar user experience, Obscuro-enabled wallets need to submit signed requests to L2 nodes and receive responses that they can display to the user. The responses need to be encrypted with the user key and have to be cryptographic proofs linking the balance to a rollup.
 

@@ -4,14 +4,17 @@ h2{counter-reset: sub-section}
 h3{counter-reset: composite}
 
 h1:before{
- counter-increment: chapter;
- content: counter(chapter) " ";
+    counter-increment: chapter;
+    content: counter(chapter) " ";
 }
 h2:before{
- counter-increment: section;
- content: counter(chapter) "." counter(section) " ";
+    counter-increment: section;
+    content: counter(chapter) "." counter(section) " ";
 }
 h3:before{
- counter-increment: sub-section;
- content: counter(chapter) "." counter(section) "." counter(sub-section) " ";
+    counter-increment: sub-section;
+    content: counter(chapter) "." counter(section) "." counter(sub-section) " ";
+}
+code{
+    font-size: smaller;
 }

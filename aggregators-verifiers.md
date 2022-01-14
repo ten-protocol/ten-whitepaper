@@ -28,7 +28,7 @@ These are the steps to become an Aggregator.
 * Once in possession of the secret, the TEE can start processing all the L2 transactions that are stored on the L1 blockchain and build the state.
 * Once this is completed, the new Aggregator can join the gossip with the other Aggregators and participate in the lottery for producing rollups.
 * Some end users will send encrypted instructions directly to this server, and it will gossip these with other nodes in the L2 network.
-* As Aggregators process messages, they maintain the L2 state in the encrypted TEE memory or encrypted in a local database. If they are the winner of the round they can create a valid rollup and publish it to L1.
+* As Aggregators process messages, they maintain the L2 state in the encrypted TEE memory and then journal encrypted data in a local database. If they are the winner of the round they can create a valid rollup and publish it to L1.
 * All Aggregators keep track of the blocks submitted to the Management Contract to make sure they are up-to-date with the source of truth.
 * The first Aggregator to register has a special role, as it has to create the _Shared secret_.
 
@@ -38,7 +38,7 @@ The steps to register as an Aggregator are shown in the following diagram:
 ![aggregator staking](./images/aggregator-stake.png)
 
 #### Verifier Nodes
-Verifiers are nodes in possession of the shared secret that have not pledged the stake and are not part of the Aggregator gossip network. To receive the L2 transactions, they monitor the L1 network and calculate the state based on the rollups submitted there.
+Verifiers are TEE-equiped Obscuro nodes in possession of the shared secret and play a strong role in consensus security. They are configured differently and have not pledged the stake or are part of the Aggregator gossip network. To receive the L2 transactions, they monitor the L1 network and calculate the state based on the rollups submitted there.
 
 End users can interact with either Aggregators or Verifiers to receive events on submitted transactions or query their accounts' balance. Anyone can become a Verifier with minimal cost if they have compatible hardware.
 

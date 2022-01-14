@@ -21,6 +21,6 @@ skinparam note{
 participant A0 as "Aggregator"
 participant KMS as "Management Contract"
 A0 -> KMS: pay stake
-A0 -> KMS: IPAddress\nsigned by attestation key
+A0 -> KMS: URL/IPAddress\nsigned by attestation key
 KMS -> KMS: record as valid Aggregator
 @enduml

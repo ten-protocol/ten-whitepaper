@@ -7,7 +7,7 @@ This contract is the gatekeeper for the protocol. Therefore, any node wishing to
 * It registers L2 nodes, verifies their TEE attestation, and manages their stakes. (Stakes are required for the Aggregators who publish rollups as an incentive to follow the protocol.)
 * It manages the TEE attestation requirements. This means that the governance of the contract can decide which enclave code is approved to join.
 * It manages the L2 TEEs' shared secret key to be available in case of L2 node failure. The L1 acts as the ultimate high availability storage. Note: This is expanded in the [Cryptography](./cryptography) section.
-* It keeps a list of IP addresses for all Aggregators.
+* It keeps a list of URLs (or IP addresses) for all Aggregators. The use of URLs allows for the underlying IP address to be changed. Verifiers do not stake, and are not a gossip recipient, so their address is not recorded, but they must register in order to attest a correct TEE and to be able to collect rewards.
 
 ### Rollup Management
 This contract interacts with the Aggregators.

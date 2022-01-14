@@ -11,7 +11,7 @@ The user deposits supported ERC tokens into the well known address of the Bridge
 
 The fact that the finality of L1 transactions is probabilistic makes crediting the L2 account not straightforward. Most solutions solve this problem by waiting for a confirmation period before crediting the account. Obscuro takes a different approach and introduces a dependency mechanism between the L2 rollup and the L1 blocks.
 
-The rule is that the L2 rollup that includes the transaction that credits the Obscuro account has a hard dependency on an L1 block, and the Bridge contract enforces that it is one of the ancestors of the current block. If the L1 deposit transaction is no longer on the canonical L1 chain, it automatically invalidates the rollup that contains the L2 deposit transaction.
+The rule is that the L2 rollup that includes the transaction that credits the Obscuro account has a hard dependency on an L1 block, and the Bridge contract enforces that it is one of the ancestors of the current block. If the L1 deposit transaction is no longer in the canonical L1 chain, it automatically invalidates the rollup that contains the L2 deposit transaction, and the L1 deposit will only be recognised as the basis for an L2 rollup credit transaction when it has been included in the canonical L1 chain.
 
 The interaction is shown in the following diagram:
 ![user registration](./images/user-registration.png)
