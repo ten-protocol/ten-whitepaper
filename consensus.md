@@ -49,7 +49,7 @@ The notation is the following: _R_$Rollup_Height[$Aggregator, L1_Proof_Height, L
 
 Note that the value of _L1_Proof_Height_ can only be lower than _L1_Block_Height_.
 
-Example: _R_15[Alice, 100, 102, 20]_ means the rollup height is 15, the aggregator is _Alice_, the height of the L1 bock used as proof is 100, the hight of the L1 bock that included the rollup is 102, and the nonce equals 20.
+Example: _R_15[Alice, 100, 102, 20]_ means the rollup height is 15, the aggregator is _Alice_, the height of the L1 block used as proof is 100, the height of the L1 block that included the rollup is 102, and the nonce equals 20.
 
 ## The Canonical Chain
 The POBI protocol allows any Aggregator to publish rollups to the Management Contract, so short-lived forks are a normal part of the protocol. The forks cannot be long-living during normal functioning because the ObscuroVM running inside the TEE of every node deterministically selects one of the forks as the canonical chain and only appends a rollup on top of that. 

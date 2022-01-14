@@ -1,25 +1,27 @@
 # Governance
-There are several types of power exercised in a decentralised system:
-1. Explicit powers exercised by a group of people using direct signing or voting.
-2. Implicit powers implemented in an immutable protocol.
-3. Implicit powers implemented in a protocol that itself is represented by an open-source codebase that is mutable.
+Governance for the Obscuro protocol, the reference implementation, and the network configuration will be made explicit and visible to all. Obscuro governance thinking is derived from the experience of Bitcoin and Ethereum.
 
-Note that almost nothing is truly immutable because a codebase or even hardware executes even the most immutable protocol and can change its behaviour, or it can be changed. In theory, a truly immutable system could be achieved using various hash constraints within TEEs; however, allowing for upgrades is a more desirable outcome. Ultimately, for all other cases, there is an explicit governance process somewhere.
+There are several types of control exercised in a decentralised system:
+1. Explicit control exercised by a group of people using direct signing or voting.
+2. Implicit control implemented in an immutable protocol.
+3. Implicit control implemented in a protocol that itself is represented by an open-source codebase that is mutable.
+
+Note that almost nothing is truly immutable because a codebase or even hardware executing even the most immutable protocol can change its behaviour, or it can be changed. In theory, a truly immutable system could be achieved using various hash constraints within TEEs; however, allowing for upgrades is a more desirable outcome. Ultimately, for all other cases, there is an explicit governance process somewhere.
 
 Bitcoin miners, for example, have some power to determine the rules by choosing which version of the core code to install and to produce blocks with. If there is disagreement, there is a fork, and the user community ultimately decides what value to assign to each fork. This is only a problem if the competing forks have similar mining power, and thus security. For day-to-day upgrades, miners have the de-facto decision power, but in case of disagreements, the users have the ultimate power through free markets.
 This is currently the golden standard for decentralised governance, with advantages and disadvantages.
 
-It gets even more complicated on networks like Ethereum with smart contract capabilities. On the one hand, similar to Bitcoin, the end-users decide which miners have chosen the correct version. On the other hand, the applications running on top of Ethereum have their governance requirements. In the early days, _The DAO_ fell into the second category: _Implicit powers implemented in an immutable protocol._, but it was hacked, and in forking Ethereum and indirectly creating Ethereum Classic, it became apparent that there was actually a mutable codebase behind the immutable protocol (the Ethereum codebase itself). It also became apparent that users have the ultimate power as they indirectly voted with their wallets on the preferred approach of handling that hack, and Ethereum Classic has much lower adoption than the mutated Ethereum.
+It gets even more complicated on networks like Ethereum with smart contract capabilities. On the one hand, similar to Bitcoin, the end-users decide which miners have chosen the correct version. On the other hand, the applications running on top of Ethereum have their governance requirements. In the early days, _The DAO_ fell into the second category: _Implicit controls implemented in an immutable protocol._, but it was exploited, and in addressing this by forking Ethereum and indirectly creating Ethereum Classic, it became apparent that there was actually a mutable codebase behind the immutable protocol (the Ethereum codebase itself). It also became apparent that users have the ultimate power as they indirectly voted with their wallets on the preferred approach of handling that hack, and Ethereum Classic has much lower adoption than the mutated Ethereum.
 
 After that hard lesson, most Ethereum smart contracts have component contracts that can be upgraded through an explicit governance process since it is unlikely the community will again provide "get out of jail free" cards to application developers. Sometimes the governance is obfuscated, but generally, if the contract is _upgradeable_, it means someone is in charge.
 
 The key difference between the golden standard of Bitcoin, and typical smart contract governance, is that the end-users no longer have any power to choose which "smart contract fork" they prefer. Using the original smart contract and adding some value to it, they are at the mercy of the application governors.
 
-Since the Obscuro protocol is anchored in Ethereum as a smart contract, it cannot rely on the end-users to hold the ultimate power.
-The next best thing is to be very explicit about all the system's powers and achieve separation of decision-making (which can be devolved to token-holders and articulated in a governance specification as proposals) from execution (which relies on individuals pushing buttons).
+Since the Obscuro protocol is anchored in Ethereum as a smart contract, it cannot rely on Obscuro end-users to hold the ultimate power.
+The next best thing is to be very explicit about all the system's controls and achieve separation of decision-making (which can be devolved to token-holders and articulated in a governance specification as proposals) from execution (which relies on individuals pushing buttons).
 
-## Obscuro powers
-Building on the above, the following powers are exercised within Obscuro.
+## Obscuro Controls
+Building on the above, the following controls are exercised within Obscuro.
 
 ###  1. The TEE Attestation Constraints.
 The _Attestation Constraints_ (AC) control which software is allowed to run inside the TEE and can process the user transactions and create the rollups. A group of independent, reputable, and competent security auditors has to analyse the code and approve it by signing it carefully. The constraints contain the keys of the _approved auditors_.
@@ -29,7 +31,7 @@ The parties who have the power to set the AC and thus appoint auditors ultimatel
 This concern is not entirely different from the smart contracts security auditors, except that typically users decide which auditors they trust by using or not using those contracts.
 
 ###  2. Administration Of Ethereum Management Contracts.
-Like most other Ethereum applications, these contracts will have upgradeable parts to cater for bugs and new features. Whatever is upgradeable means that the _administrators_ have full powers over those aspects.
+Like most other Ethereum applications, these contracts will have upgradeable parts to cater for bugs and new features. Whatever is upgradeable means that the _administrators_ have full control over those aspects.
 1. Bridge logic
 2. Rollup logic
 3. Attestation logic

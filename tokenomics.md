@@ -19,7 +19,7 @@ In order to publish Obscuro rollups to Ethereum Mainnet, Obscuro Aggregators mus
 
 It is thus essential for the OBX/ETH relationship to remain as stable as possible. The incentives of the various groups involved in the network should be able to facilitate this. To participate in the network or become an Aggregator, users must have OBX tokens. Aggregator behaviour is incentivised by a [fees and rewards](./fees-rewards) structure.
 
-Gas is be accounted for in the same way that Ethereum does and with a market for OBX gas based upon the supply and demand determined by Obscuro node operators. Clearly, income of OBX _in ETH terms_ to an Aggregator must be greater than the ETH they require to publish the block to Ethereum Mainnet.
+Gas is accounted for in the same way that Ethereum does and with a market for OBX gas based upon the supply and demand determined by Obscuro node operators. Clearly, income of OBX _in ETH terms_ to an Aggregator must be greater than the ETH they require to publish the block to Ethereum Mainnet.
 
 ## Illustrated flows
 ![token-flow](./images/token-flow.png)
