@@ -38,7 +38,7 @@ The steps to register as an Aggregator are shown in the following diagram:
 ![aggregator staking](./images/aggregator-stake.png)
 
 #### Verifier Nodes
-Verifiers are TEE-equiped Obscuro nodes in possession of the shared secret and play a strong role in consensus security. They are configured differently and have not pledged the stake or are part of the Aggregator gossip network. To receive the L2 transactions, they monitor the L1 network and calculate the state based on the rollups submitted there.
+Verifiers are TEE-equiped Obscuro nodes in possession of the shared secret and play a strong role in consensus security. They are configured differently and have not pledged the stake nor are they part of the Aggregator gossip network. To receive the L2 transactions, they monitor the L1 network and calculate the state based on the rollups submitted there.
 
 End users can interact with either Aggregators or Verifiers to receive events on submitted transactions or query their accounts' balance. Anyone can become a Verifier with minimal cost if they have compatible hardware.
 
