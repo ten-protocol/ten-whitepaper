@@ -5,7 +5,6 @@
 {% include_relative high-level-design.md %}
 {% include_relative consensus.md %}
 {% include_relative detailed-design.md %}
-{% include_relative fees-rewards.md %}
 {% include_relative obscuro-ethereum-interaction.md %}
 {% include_relative threat-model.md %}
 {% include_relative tokenomics.md %}
