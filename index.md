@@ -7,8 +7,7 @@
 7. [Detailed Design](./detailed-design.md)
 8. [Obscuro Ethereum Interaction](./obscuro-ethereum-interaction.md)
 9. [Threat Model](./threat-model.md)
-10. [Tokenomics](./tokenomics.md)
-11. [Governance](./governance.md)
-12. [Appendix](./appendix.md)
+10. [Governance](./governance.md)
+11. [Appendix](./appendix.md)
 
 [Page history]({{ site.github.repository_url }}/blame/main/{{page.path}})
