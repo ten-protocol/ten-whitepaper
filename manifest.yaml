@@ -9,7 +9,6 @@ input:
   detailed-design.md: ""
   obscuro-ethereum-interaction.md: ""
   threat-model.md: ""
-  tokenomics.md: ""
   governance.md: ""
   appendix.md: ""
 output: whitepaper
