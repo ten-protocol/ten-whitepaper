@@ -7,7 +7,6 @@ input:
   high-level-design.md: ""
   consensus.md: ""
   detailed-design.md: ""
-  fees-rewards.md: ""
   obscuro-ethereum-interaction.md: ""
   threat-model.md: ""
   tokenomics.md: ""
