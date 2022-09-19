@@ -95,7 +95,7 @@ Obscuro introduces the concept of _claiming rewards_ independently of the actual
 
 To achieve this, the protocol has to maintain a pool of tokens. Users will pay fees into this pool, while nodes will be paid from it. During bootstrapping, the protocol will have the ability to add newly minted tokens to the pool. Once the network picks up, the protocol will be able to burn excess tokens.
 
-Note, that an important assumption is that the reward from publishing a rollup will never exceed twice the gas cost. This can be tweaked by the formulas that calculate the [fees and rewards](./fees-rewards).
+Note, that an important assumption is that the reward from publishing a rollup will never exceed twice the gas cost.
 
 These are the Aggregator rewarding rules:
 
