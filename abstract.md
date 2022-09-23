@@ -5,7 +5,7 @@
 > 1. (Latin) To conceal, hide;
 > 2. A spell used to conjure a blindfold over the eyes of the target.
 
-V0.9, November 2021 
+V0.10.0, November 2021 
 _Note: This document is under development, so please check for updates._
 
 James Carlyle, Tudor Malene, Cais Manai, Neal Shah, Gavin Thomas, Roger Willis; with significant additional [contributors](./appendix#contributors).
