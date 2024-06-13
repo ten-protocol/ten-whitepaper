@@ -7,9 +7,10 @@ input:
   high-level-design.md: ""
   consensus.md: ""
   detailed-design.md: ""
-  obscuro-ethereum-interaction.md: ""
+  ten-ethereum-interaction.md: ""
   threat-model.md: ""
   governance.md: ""
   appendix.md: ""
-output: whitepaper
+output: 
+  name: whitepaper.md
 ---

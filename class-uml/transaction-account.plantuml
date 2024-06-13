@@ -25,7 +25,7 @@ object Transaction{
 	- to: Address
 
     NL
-	C(How much to transfer in Obscuro tokens)
+	C(How much to transfer in TEN tokens)
 	- value: Long
 
     NL
@@ -57,7 +57,7 @@ object Account {
     - nonce: Int
 
     NL
-    C(Number of Obscuro tokens owned by this address)
+    C(Number of TEN tokens owned by this address)
     - balance: Int
 
     NL

@@ -5,13 +5,13 @@ Public blockchains rely on the entire network seeing all transactions in order t
 
 By some estimates, front-running was valued at $1.4 billion annually in early 2021. This means users of public blockchain networks are not deriving the full economic benefits of the technology. In addition, the transparent nature of the technology makes them inappropriate for many commercial and personal use-cases, where the confidential nature of interactions and deals should be maintained.
 
-Obscuro is a decentralised Ethereum Layer 2 Rollup protocol designed to address the above problems, introduce new use-cases, and unlock blockchain technology's full potential and economic advantages.
+TEN is a decentralised Ethereum Layer 2 Rollup protocol designed to address the above problems, introduce new use-cases, and unlock blockchain technology's full potential and economic advantages.
 
 ## Differentiators
-* Obscuro leverages Ethereum, a public blockchain with the greatest adoption,  legitimacy, security, and liquidity, as a base layer to handle security and data availability and manage the inflow and outflow of value.
-* Obscuro keeps all transactions and the internal state of application contracts encrypted and hidden, and so provides a credible solution to MEV.
-* By providing an _Ethereum Virtual Machine_ (EVM) compatible VM, deploying existing contracts to Obscuro with minimal change may be possible.
-* Obscuro is trustless and decentralised. It takes processing from the Ethereum Layer-1 (L1) and allows lower transaction costs similar to other Layer-2 (L2) networks.
-* Obscuro leverages TEEs for privacy but not for integrity and is not affected by the limitations of hardware-based confidential computing.
-* Obscuro guarantees quick finality by synchronising the publishing of rollups to the cadence of the L1 blocks. 
-* Obscuro introduces a novel mechanism to allow application developers to balance the need for user data privacy (and MEV prevention) with the need to deter long-term illegal behaviour.
+* TEN leverages Ethereum, a public blockchain with the greatest adoption,  legitimacy, security, and liquidity, as a base layer to handle security and data availability and manage the inflow and outflow of value.
+* TEN keeps all transactions and the internal state of application contracts encrypted and hidden, and so provides a credible solution to MEV.
+* By providing an _Ethereum Virtual Machine_ (EVM) compatible VM, deploying existing contracts to TEN with minimal change may be possible.
+* TEN is trustless and decentralised. It takes processing from the Ethereum Layer-1 (L1) and allows lower transaction costs similar to other Layer-2 (L2) networks.
+* TEN leverages TEEs for privacy but not for integrity and is not affected by the limitations of hardware-based confidential computing.
+* TEN guarantees quick finality by synchronising the publishing of rollups to the cadence of the L1 blocks. 
+* TEN introduces a novel mechanism to allow application developers to balance the need for user data privacy (and MEV prevention) with the need to deter long-term illegal behaviour.

@@ -1,8 +1,8 @@
 ### L2 Nodes
-There are two categories of nodes in the Obscuro network:
+There are two categories of nodes in the TEN network:
 
 #### Aggregator Nodes
-Aggregators are the Obscuro nodes whose TEEs are in possession of the _shared secret_ and can submit rollups to the L1. To gain this privilege, these nodes must pledge a stake.
+Aggregators are the TEN nodes whose TEEs are in possession of the _shared secret_ and can submit rollups to the L1. To gain this privilege, these nodes must pledge a stake.
 
 End users send encrypted transactions to any registered Aggregators who then gossip the transactions. Every round, one of the Aggregators publishes the transaction in a rollup.
 
@@ -17,12 +17,12 @@ Aggregators have the following functions:
 
 Note that logically a node is split into two main sections:
 - The section that is controlled by the node operator
-- The TEE, which is attested to the Management contract and is in effect controlled by the governance body of Obscuro. 
+- The TEE, which is attested to the Management contract and is in effect controlled by the governance body of TEN. 
 
 [comment]: <> (TODO - add diagram )
 
 These are the steps to become an Aggregator.
-* Register with the L1 Network Management contract and pay a significant stake in the Obscuro token. The stake has multiple roles. The first one is to penalise Aggregators who attempt to hack the protocol, and second is for the Aggregators to buy into the ecosystem, so that they will make an effort to keep it running smoothly.
+* Register with the L1 Network Management contract and pay a significant stake in the TEN token. The stake has multiple roles. The first one is to penalise Aggregators who attempt to hack the protocol, and second is for the Aggregators to buy into the ecosystem, so that they will make an effort to keep it running smoothly.
 * Set up a server with a valid, unaltered and up-to-date TEE and provide an attestation to the Management Contract.
 * On seeing this request to join the network published to the L1, another registered TEE will share the shared secret.
 * Once in possession of the secret, the TEE can start processing all the L2 transactions that are stored on the L1 blockchain and build the state.
@@ -38,7 +38,7 @@ The steps to register as an Aggregator are shown in the following diagram:
 ![aggregator staking](./images/aggregator-stake.png)
 
 #### Verifier Nodes
-Verifiers are TEE-equiped Obscuro nodes in possession of the shared secret and play a strong role in consensus security. They are configured differently and have not pledged the stake nor are they part of the Aggregator gossip network. To receive the L2 transactions, they monitor the L1 network and calculate the state based on the rollups submitted there.
+Verifiers are TEE-equiped TEN nodes in possession of the shared secret and play a strong role in consensus security. They are configured differently and have not pledged the stake nor are they part of the Aggregator gossip network. To receive the L2 transactions, they monitor the L1 network and calculate the state based on the rollups submitted there.
 
 End users can interact with either Aggregators or Verifiers to receive events on submitted transactions or query their accounts' balance. Anyone can become a Verifier with minimal cost if they have compatible hardware.
 

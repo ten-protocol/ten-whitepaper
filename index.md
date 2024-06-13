@@ -5,7 +5,7 @@
 5. [High Level Design](./high-level-design.md)
 6. [Consensus](./consensus.md)
 7. [Detailed Design](./detailed-design.md)
-8. [Obscuro Ethereum Interaction](./obscuro-ethereum-interaction.md)
+8. [TEN Ethereum Interaction](./ten-ethereum-interaction.md)
 9. [Threat Model](./threat-model.md)
 10. [Governance](./governance.md)
 11. [Appendix](./appendix.md)

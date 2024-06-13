@@ -1,5 +1,5 @@
 # Consensus - Proof of Block Inclusion
-Obscuro uses a novel decentralised round-based consensus protocol based on a fair lottery and synchronisation with the L1, designed explicitly for L2 rollups, called _Proof Of Block Inclusion_ (POBI). It solves, among others, the fair leader election problem, which is a fundamental issue that all decentralised rollup solutions have to address. POBI is inspired by [Proof Of Elapsed Time](https://www.investopedia.com/terms/p/proof-elapsed-time-cryptocurrency.asp).
+TEN uses a novel decentralised round-based consensus protocol based on a fair lottery and synchronisation with the L1, designed explicitly for L2 rollups, called _Proof Of Block Inclusion_ (POBI). It solves, among others, the fair leader election problem, which is a fundamental issue that all decentralised rollup solutions have to address. POBI is inspired by [Proof Of Elapsed Time](https://www.investopedia.com/terms/p/proof-elapsed-time-cryptocurrency.asp).
 
 ## High-Level Description
 The high level goals of the POBI protocol are:
@@ -52,7 +52,7 @@ Note that the value of _L1_Proof_Height_ can only be lower than _L1_Block_Height
 Example: _R_15[Alice, 100, 102, 20]_ means the rollup height is 15, the aggregator is _Alice_, the height of the L1 block used as proof is 100, the height of the L1 block that included the rollup is 102, and the nonce equals 20.
 
 ## The Canonical Chain
-The POBI protocol allows any Aggregator to publish rollups to the Management Contract, so short-lived forks are a normal part of the protocol. The forks cannot be long-living during normal functioning because the ObscuroVM running inside the TEE of every node deterministically selects one of the forks as the canonical chain and only appends a rollup on top of that. 
+The POBI protocol allows any Aggregator to publish rollups to the Management Contract, so short-lived forks are a normal part of the protocol. The forks cannot be long-living during normal functioning because the TENVM running inside the TEE of every node deterministically selects one of the forks as the canonical chain and only appends a rollup on top of that. 
 
 Because the logic is identical and attested on all nodes and the TEEs receive all the relevant content of the L1 blocks (which means they process the same input data), there cannot be any competing forks more than one rollup deep unless there is a hack.
 
@@ -74,7 +74,7 @@ Given that the nonce is a random number with sufficient entropy, we assume there
 ## Preventing Repeated Random Nonce Generation
 In phase 3 of the protocol, the TEE of each Aggregator generates a random nonce which determines the winner of the protocol. This introduces the possibility of gaming the system by restarting the TEE and generating multiple numbers.
 
-The solution proposed by Obscuro is to introduce a timer in the constructor upon every startup of the enclave. A conventional timer, based on the clock of the computer, is not very effective since the host can game it. Instead, the enclave must calculate serially (on a single thread) a large enough number of SHA256 hashes, which it would not be able to do faster than an average block time even on powerful hardware.
+The solution proposed by TEN is to introduce a timer in the constructor upon every startup of the enclave. A conventional timer, based on the clock of the computer, is not very effective since the host can game it. Instead, the enclave must calculate serially (on a single thread) a large enough number of SHA256 hashes, which it would not be able to do faster than an average block time even on powerful hardware.
 
 This solution is effective since the code is attested and does not rely on any input from the host.
 
@@ -87,11 +87,11 @@ All successful decentralised solutions need a robust incentive mechanism to keep
 
 Compared to a typical L1 protocol, there is an additional complexity to consider. In an L1 like Bitcoin or Ethereum, once a node gossips a valid block, all the other nodes are incentivised to use it as a parent because they know everyone does that too. In an L2 decentralised protocol like POBI, there is an additional step: the publication of the rollup to L1, which can fail for multiple reasons. Furthermore, the incentive design must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to an L1 block, which is where an L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
 
-Note that rollup finality will be covered extensively in the [Obscuro - Ethereum interaction section](./obscuro-ethereum-interaction).
+Note that rollup finality will be covered extensively in the [TEN - Ethereum interaction section](./ten-ethereum-interaction).
 
-The high-level goal is to keep the system functioning as smoothly as possible and resist random failures or malicious behaviour while not penalising Obscuro nodes for not being available. We believe that penalties for availability increase the barrier of entry, and thus make the system centralised over the long term. 
+The high-level goal is to keep the system functioning as smoothly as possible and resist random failures or malicious behaviour while not penalising TEN nodes for not being available. We believe that penalties for availability increase the barrier of entry, and thus make the system centralised over the long term. 
 
-Obscuro introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain. The great advantage is increased flexibility in aligning incentives at the cost of increased complexity. Rewards can be awarded in full, split between Aggregators or just enough to cover the cost of gas.
+TEN introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain. The great advantage is increased flexibility in aligning incentives at the cost of increased complexity. Rewards can be awarded in full, split between Aggregators or just enough to cover the cost of gas.
 
 To achieve this, the protocol has to maintain a pool of tokens. Users will pay fees into this pool, while nodes will be paid from it. During bootstrapping, the protocol will have the ability to add newly minted tokens to the pool. Once the network picks up, the protocol will be able to burn excess tokens.
 

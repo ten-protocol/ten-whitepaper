@@ -18,12 +18,12 @@ skinparam note{
   BackgroundColor White
 }
 
-box "User Obscuro Wallet"
+box "User TEN Wallet"
 participant UL1 as "L1 Wallet"
 participant UL2 as "L2 Wallet"
 end box
 participant MC as "Management Contract"
-participant T as "Obscuro Node"
+participant T as "TEN Node"
 UL1 -> MC: transfer ERC token from L1 wallet to Bridge contract pool
 ... wait to be mined in one block ...
 UL2 -> T: create "deposit" L2 txn including MTree proof of L1 deposit

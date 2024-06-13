@@ -11,7 +11,7 @@ skinparam object{
 !define C(x) <color:grey>// x</color>
 !define NL |||
 
-object ObscuroRollup {
+object TENRollup {
     C(Hash of the parent rollup)
     - parentHash: Hash
 
@@ -84,8 +84,8 @@ object ObscuroRollup {
     - nonce: Long
 }
 
-object SignedObscuroRollup {
-    - rollup: ObscuroRollup
+object SignedTENRollup {
+    - rollup: TENRollup
     - hashOfRollup: Hash
     - signatureOfTEE: Signature
 }
