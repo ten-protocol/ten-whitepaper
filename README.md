@@ -1,4 +1,4 @@
-# Obscuro Whitepaper
+# TEN Whitepaper
 
 ## Output as PDF
 
