@@ -49,5 +49,5 @@ A0 -> KMS: store pubKeyN encrypted sharedSecret
 KMS -> E0: send token fee
 A1 -> KMS: download historic rollups
 A1 -> E1: historic rollups
-E1 -> E1: process historic transactions previously\npublished, in order to synchronise internally-held\nObscuro contract state with other nodes.
+E1 -> E1: process historic transactions previously\npublished, in order to synchronise internally-held\nTEN contract state with other nodes.
 @enduml

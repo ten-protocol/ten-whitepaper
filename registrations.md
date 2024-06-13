@@ -1,5 +1,5 @@
-## Joining the Obscuro Network
-Anyone wishing to join the Obscuro network as a Node must first check that their hardware is compatible with the latest Attestation Constraints. Next, they must download and install the latest software. Then they must perform the steps detailed below.
+## Joining the TEN Network
+Anyone wishing to join the TEN network as a Node must first check that their hardware is compatible with the latest Attestation Constraints. Next, they must download and install the latest software. Then they must perform the steps detailed below.
 
 ### Node Registration
 The enclaves must encrypt L2 transactions with a secret key shared across the L2 nodes rather than an enclave-specific key which would be lost if an enclave is damaged.
@@ -32,7 +32,7 @@ The sequence for node registration is shown in the following diagram:
 ![aggregator staking](./images/aggregator-stake.png)
 
 These are the steps to becoming an Aggregator.
-* Register with the L1 Network Management Contract and pay a significant stake in the Obscuro token. The stake has multiple roles. The first one is to penalise Aggregators who attempt to hack the protocol, and the second is for the Aggregators to buy into the ecosystem and make an effort to keep it running smoothly.
+* Register with the L1 Network Management Contract and pay a significant stake in the TEN token. The stake has multiple roles. The first one is to penalise Aggregators who attempt to hack the protocol, and the second is for the Aggregators to buy into the ecosystem and make an effort to keep it running smoothly.
 * Set up a server with a valid, unaltered, up-to-date and secured TEE and provide an attestation from the hardware manufacturer or a delegate to the Management Contract.
 * On seeing this request to join the network published to the L1, another registered TEE shares the secret to encrypt and decrypt user transactions.
 * Once in possession of the secret, the TEE can start processing all the L2 transactions stored on the L1 blockchain and build the state.

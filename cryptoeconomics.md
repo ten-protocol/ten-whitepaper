@@ -16,8 +16,8 @@ Ethereum builds on top of this model to handle the complexities of Turing comple
 The incentive design for a decentralised L2 protocol must also consider the problem of front-running the actual rollup. For a rollup to be final, it has to be added to an L1 block, which is where an L1 miner or staker can attempt to claim the reward that rightfully belongs to a different L2 node.
 
 ### Reward Claiming
-Obscuro moves away from the Bitcoin/Ethereum approach and introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain.
+TEN moves away from the Bitcoin/Ethereum approach and introduces the concept of _claiming rewards_ independently of the actual canonical rollup chain.
 
 The great advantage is increased flexibility in aligning incentives, at the cost of increased complexity.
 
-Obscuro nodes that are performing any activity according to the protocol have the possibility of submitting a transaction containing a proof and be rewarded accordingly. To achieve this, the protocol has to maintain a pool of tokens. Users pay fees into this pool, while nodes will be paid from it. During bootstrapping, the protocol will have the ability to add newly minted tokens to the pool. Once the network picks up, the protocol will be able to burn excess tokens.
+TEN nodes that are performing any activity according to the protocol have the possibility of submitting a transaction containing a proof and be rewarded accordingly. To achieve this, the protocol has to maintain a pool of tokens. Users pay fees into this pool, while nodes will be paid from it. During bootstrapping, the protocol will have the ability to add newly minted tokens to the pool. Once the network picks up, the protocol will be able to burn excess tokens.

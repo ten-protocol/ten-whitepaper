@@ -1,6 +1,6 @@
 # Appendix
 ## Contributors
-The Obscuro project is decentralised in nature, and this whitepaper has benefited enormously with feedback from the following contributors:
+The TEN project is decentralised in nature, and this whitepaper has benefited enormously with feedback from the following contributors:
 * Richard Gendal Brown
 * Mike Hearn
 * Moritz Platt
@@ -43,7 +43,7 @@ The levy imposed for every computation executed on the Ethereum network to encou
 The first Trusted Execution Environment to join a new network. The Genesis enclave propagates the master seed to the other attested nodes by encrypting it with specific Trusted Execution Environment keys.
 
 **Host**
-The party controlling the physical server that runs the Trusted Execution Environment. In the threat model of typical confidential computing applications, including Obscuro, the host is an adversary of the system.
+The party controlling the physical server that runs the Trusted Execution Environment. In the threat model of typical confidential computing applications, including TEN, the host is an adversary of the system.
 
 **L1 Management Contract**
 The smart contract that runs on Ethereum and handles all L1 concerns.
@@ -60,11 +60,11 @@ Participants in the network may extract value by observing user transactions and
 **Non-Fungible Token / NFT**
 A unique and non-interchangeable unit of data stored on a digital ledger.
 
-**Obscuro Public Events**
-Special events emitted by L2 contracts that are included in the rollups in plaintext, and are exposed to L1 contracts once rollups reach finality. It is a mechanism by which Obscuro can publish information. 
+**TEN Public Events**
+Special events emitted by L2 contracts that are included in the rollups in plaintext, and are exposed to L1 contracts once rollups reach finality. It is a mechanism by which TEN can publish information. 
 
-**OBX**
-The utility token used by Obscuro.
+**TEN**
+The utility token used by TEN.
 
 **Off-Chain**
 Activity happening away from the Layer 1 blockchain.
@@ -79,7 +79,7 @@ A venue to provide bespoke financial agreements or options negotiated between co
 A Patricia Tree (or Trie), is a data structure used in the Ethereum model to represent the receipt trie, the world state trie, the account storage trie, and the transaction trie. Only the root node of the trie is stored in the ethereum block, and it represents a single cryptographic proof for the entire state.
 
 **Proof Of Block Inclusion / POBI**
-Obscuro's novel decentralised round-based consensus protocol based on a fair lottery and on synchronisation with the L1 designed for L2 rollups.
+TEN's novel decentralised round-based consensus protocol based on a fair lottery and on synchronisation with the L1 designed for L2 rollups.
 
 **Rollup**
 L2 solutions that perform transaction execution outside the main L1 chain, but post transaction data on L1. A rollup is a batch of transactions that were executed by the L2 Verifiers.
@@ -131,10 +131,10 @@ This diagram shows the data structure for the transactions and account:
 This section describes alternatives considered and discarded.
 
 ### Alternative L1 Deposit management
-On a high level, a user has to deposit ERC tokens on the L1 Management Contract, and the same amount has to be credited to the user's account on Obscuro. This is not straightforward since finality is probabilistic.
+On a high level, a user has to deposit ERC tokens on the L1 Management Contract, and the same amount has to be credited to the user's account on TEN. This is not straightforward since finality is probabilistic.
 One option to achieve this is to wait a number of L1 blocks for confirmation. This has some clear disadvantages.
 
-Another option is to introduce a dependency mechanism between the L2 rollup and the L1 blocks. Basically, the L2 transaction that credits the Obscuro account will be in an L2 rollup that will only be accepted by the Management Contract if the dependency is part of the ancestors of the current block.  This option is discarded because in the case where the L1 deposit gets reorganised away before the rollup is created, the rollup which contains the L2 deposit transaction is invalidated.
+Another option is to introduce a dependency mechanism between the L2 rollup and the L1 blocks. Basically, the L2 transaction that credits the TEN account will be in an L2 rollup that will only be accepted by the Management Contract if the dependency is part of the ancestors of the current block.  This option is discarded because in the case where the L1 deposit gets reorganised away before the rollup is created, the rollup which contains the L2 deposit transaction is invalidated.
 
 ### Alternative L1 Theft Prevention
 There is a pool of liquidity stored in the L1 Bridge contract, which is controlled by the group of TEEs who maintain the encrypted ledger of ownership. Some users will want to withdraw from the L2 and go back to L1, which means the Management Contract will have to allow them to claim money from the liquidity pool.
@@ -155,11 +155,11 @@ The solution will reveal all transactions after one year through a key-rotation 
 The Aggregator host must not be able to repeatedly submit the rollup proof to the TEE to get a new random nonce, and thus achieve a low nonce in order to win the Aggregator selection round. Monotonic counters were considered but an alternative is to make the nonce deterministic. The nonce is deterministically derived from the L1 block hash combined with the public key of the enclave. This achieves the same purpose of being a fair lottery assuming there is no collusion between L1 miners and L2 Aggregators. Even if there was collusion, the cost of gaming the L1 hash might be too high in a proof of work network. In a _Proof of Stake_ network, on the other hand, collusion with L1 would pretty much mean that each round the L1 winner will also win the L2 round.
 
 ### Alternative Privacy Revelation
-There are several options for revealing private data to allow law enforcement agencies to prosecute illegal behaviour and deter criminals from taking advantage of Obscuro's privacy features:
-* Not make a provision to reveal on the basis that Obscuro is a platform and is un-opinionated on what it is used for.
+There are several options for revealing private data to allow law enforcement agencies to prosecute illegal behaviour and deter criminals from taking advantage of TEN's privacy features:
+* Not make a provision to reveal on the basis that TEN is a platform and is un-opinionated on what it is used for.
 * The transaction encryption key can be rotated and revealed periodically with a delay, such that any interested party can view all transactions. This is the solution we chose, but with some application-level flexibility.
 * A governance committee can approve some data mining enclaves that will have access to the shared secret and output suspicious activity.
 
-From the outset Obscuro will rotate the encryption key every year and reveal historic keys in the first phase, and decide later if additional mechanisms are required. A case-by-case revelation based on authority demands is time-consuming and prone to political interference. It is also difficult to determine objectively what is a bona-fide authority which introduces a political dilemma.
+From the outset TEN will rotate the encryption key every year and reveal historic keys in the first phase, and decide later if additional mechanisms are required. A case-by-case revelation based on authority demands is time-consuming and prone to political interference. It is also difficult to determine objectively what is a bona-fide authority which introduces a political dilemma.
 
 [Page history]({{ site.github.repository_url }}/blame/main/{{page.path}})

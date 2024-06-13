@@ -46,7 +46,7 @@ object ManagementContract {
     C(In case there are multiple valid candidates - it will use the rollup with the lowest nonce)
     C(Aggregating on top of an invalid fork will result in full slashing of the deposit)
     C(Submitting out of order blocks should be discouraged as it costs ethereum gas and partial slashing)
-    - headRollups: List<SignedObscuroRollup>
+    - headRollups: List<SignedTENRollup>
 
     NL
     C(This is where the secrets are kept)
