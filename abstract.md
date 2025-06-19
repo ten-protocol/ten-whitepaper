@@ -1,4 +1,4 @@
-# TEN (formerly Obscuro)
+# TEN
 **Confidential Smart Contracts for Ethereum**
 
 > /TENː/
