@@ -6,11 +6,13 @@
 > 2. **T**he **E**ncrypted **N**etwork.
 
 V0.20.0, June 2025 
-_Note: This document is under development, so please check for updates. Some diagrams will refer to the former name (Obscuro)_
+_Note: Some diagrams will refer to the former name (Obscuro)_
 
 James Carlyle, Tudor Malene, Cais Manai, Neal Shah, Gavin Thomas, Roger Willis; with significant additional [contributors](./appendix#contributors).
 
+
 # Abstract
+
 We present TEN, a next-generation Ethereum Layer 2 rollup protocol that introduces data confidentiality, computational privacy, and resistance to [Maximal Extractable Value (MEV)](https://ethereum.org/en/developers/docs/mev/) by leveraging hardware-based [Trusted Execution Environments (TEEs)](https://en.wikipedia.org/wiki/Trusted_execution_environment).
 
 TEN represents a significant advancement in the design of decentralised systems by restoring data access controls, a foundational feature of Web2 that Web3 largely abandoned in the pursuit of transparency. In early computing, users interacted with isolated desktop machines. The internet ushered in a new paradigm: shared data and remote computation, gated by fine-grained access control. Platforms like Facebook and eBay flourished under this model. However, as Web3 reimagined the internet with open-state, composable systems, it discarded the principle of controlled data visibility—limiting its ability to support sensitive, real-world use cases.
@@ -21,20 +23,17 @@ Importantly, TEN’s trust model does not require perpetual belief in any single
 
 TEN is not just a technical improvement; it represents a shift in what Web3 can become. With support for autonomous AI agents, composable encrypted dApps, and robust MEV protection, TEN unlocks applications previously thought infeasible in decentralised contexts. In doing so, TEN closes the gap between Web2's functionality and Web3's promise—offering the best of both worlds, only better.
 
+
 # Motivation
-Public blockchains have come a long way since the explosive growth of 2020–2021, when DeFi and NFTs broke into mainstream awareness. At their peak, DeFi protocols attracted over $100 billion in total value locked, while NFT marketplaces exceeded $10 billion in volume. These early use-cases validated the promise of programmable value — but also exposed a critical flaw: the complete absence of data access control.
 
-Transparency, once celebrated as a virtue, has become a liability. On-chain activity today remains fully public: every balance, transaction, strategy, and piece of logic is visible to everyone — including competitors, adversaries, and MEV bots. This design made sense for verifying Bitcoin payments, but not for building real-world applications.
-
-If you analyze any successful digital application — Netflix, WhatsApp, Spotify, Revolut, even mobile games — you’ll find one thing in common: they all rely on access control. Not just to provide privacy, but to function. A bank wouldn’t work if everyone could read and manipulate every account. Games collapse if opponents can see your position. Spotify's business model fails if anyone can stream anything for free. The foundation of the modern internet isn’t decentralization — it’s restricted access to data.
-
+Public blockchains have come a long way since the explosive growth of 2020–2021, when DeFi and NFTs broke into mainstream awareness. At their peak, DeFi protocols attracted over $100 billion in total value locked, while NFT marketplaces exceeded $10 billion in volume. These early use-cases validated the promise of programmable value - but also exposed a critical flaw: the complete absence of data access control.
+Transparency, once celebrated as a virtue, has become a liability. On-chain activity today remains fully public: every balance, transaction, strategy, and piece of logic is visible to everyone - including competitors, adversaries, and MEV bots. This design made sense for verifying Bitcoin payments, but not for building real-world applications.
+If you analyze any successful digital application - Netflix, WhatsApp, Spotify, Revolut, even mobile games - you’ll find one thing in common: they all rely on access control. Not just to provide privacy, but to function. A bank wouldn’t work if everyone could read and manipulate every account. Games collapse if opponents can see your position. Spotify's business model fails if anyone can stream anything for free.
 Yet, blockchains don’t have that. Smart contracts today can define who can write data, but they cannot restrict who can read it. Every view() function leaks everything. Every NFT, position, and strategy is exposed. This makes it nearly impossible to build viable applications in Web3 beyond speculation.
-
-TEN is a new kind of Ethereum Layer 2 rollup that introduces Smart Transparency — a paradigm where smart contracts not only enforce rules of computation, but also enforce rules of data access. TEN leverages Trusted Execution Environments (TEEs) — hardware-based enclaves already trusted by banks, cloud providers, and mobile platforms — to enable encrypted state, private view functions, and programmable access control at the smart contract level.
-
-Meanwhile, MEV has grown into a $2+ billion-a-year drain on users — with advanced attacks like sandwiching, liquidation sniping, and time-bandit reorgs degrading user experience and undermining trust. The need for encrypted computation is no longer theoretical. It is existential.
-
-More than just fixing MEV, TEN expands what’s possible on-chain. From fully confidential DeFi protocols and dark pools, to AI-native gaming and autonomous agent marketplaces, TEN unlocks use-cases previously thought incompatible with blockchain. By enabling encrypted, composable dApps while preserving Ethereum compatibility, TEN opens a new chapter in the evolution of Web3—one where trustlessness, privacy, and programmability are no longer mutually exclusive.
+TEN is a new kind of Ethereum Layer 2 rollup that introduces Smart Transparency - a paradigm where smart contracts not only enforce rules of computation, but also enforce rules of data access. TEN leverages Trusted Execution Environments (TEEs) - hardware-based enclaves already trusted by banks, cloud providers, and mobile platforms - to enable encrypted state, private view functions, and programmable access control at the smart contract level.
+This lack of access control doesn’t just limit user privacy - it leaves the entire ecosystem vulnerable. Without the ability to hide intent or protect positions, users become easy targets for extractive behavior. Nowhere is this more evident than in the rise of Maximal Extractable Value (MEV) - a growing class of attacks where adversaries exploit transaction visibility and ordering for profit.
+MEV has become a $2+ billion-a-year drain on users, with techniques like sandwiching, liquidation sniping, and time-bandit reorgs degrading user experience and undermining trust in blockchain infrastructure. In this context, the need for encrypted computation is no longer theoretical. It is existential.
+TEN addresses this not only by mitigating MEV, but by radically expanding what’s possible on-chain. From fully confidential DeFi protocols and dark pools to AI-native gaming and autonomous agent marketplaces, TEN enables use-cases previously thought incompatible with blockchain. By supporting encrypted, composable dApps while preserving Ethereum compatibility, TEN opens a new chapter in Web3 - one where trustlessness, privacy, and programmability are no longer mutually exclusive.
 
 ## Differentiators
 * TEN leverages Ethereum, a public blockchain with the greatest adoption,  legitimacy, security, and liquidity, as a base layer to handle security and data availability and manage the inflow and outflow of value.
