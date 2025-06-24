@@ -105,7 +105,7 @@ Any message originating from an enclave can be signed with the AK. This is a gua
 
 The diagram below is a conceptual high-level overview of the mechanism by which a TEE manufacturer and a group of security auditors propagate trust to the output of the computing performed inside the TEE.
 
-![tee architecture](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/tee-architecture.png)
+![tee architecture](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/tee-architecture.png)
 
 A signature from the EK attests that a signed data packet originates from a genuine CPU. That is not enough for the output of typical confidential computing use cases, as clients have to know what program runs inside the CPU and what firmware.
 
@@ -128,7 +128,7 @@ L2 networks have a unidirectional dependency on an L1 network: while the L2 netw
 
 The following diagram shows the interactions between the two decentralised networks, Ethereum (L1) and TEN (L2): TEN is formed of Nodes called Aggregators, who compete to process user transactions, roll them up, and submit for inclusion in Ethereum blocks. Ethereum, through its protocol, leverages its own nodes to produce Ethereum blocks containing, amongst other things, the submitted TEN rollups.
 
-![L1-L2 Interaction](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/l1-l2-interaction.png)
+![L1-L2 Interaction](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/l1-l2-interaction.png)
 
 On the bottom right, this diagram also depicts the state of a simple rollup chain as it is found in the sequential L1 blocks. 
 
@@ -194,7 +194,7 @@ A further issue to solve is to ensure that the host cannot repeatedly submit the
 Note that by introducing the requirement for proof of inclusion in the L1, the cadence of publishing the rollups to the block times is synchronised. Also, note that the hash of the L1 block used to prove to the TEE that the previous rollup was published is added to the current rollup such that the Management Contract and the other Aggregators know whether this rollup was generated correctly.
 
 The following diagram depicts this sequence:
-![node-processing](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/node-processing.png)
+![node-processing](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/node-processing.png)
 
 ## Notation
 There are six elements that define a rollup :
@@ -207,7 +207,7 @@ There are six elements that define a rollup :
 6. The nonce.
 
 The following diagram depicts these elements:
-![block elements](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/block-elements.png)
+![block elements](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/block-elements.png)
 
 The notation is the following: _R_$Rollup_Height[$Aggregator, L1_Proof_Height, L1_Block_Height, $Nonce]_.
 
@@ -287,10 +287,10 @@ _Note: Competition means another rollup with the same parent._
 
 
 The following diagrams depict some of the rewarding rules:
-![l1 rewarding](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/block-rewarding.png)
+![l1 rewarding](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/block-rewarding.png)
 
 The following diagram depicts rules in the case of front-running:
-![l1 front running](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/block-frontrunning.png)
+![l1 front running](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/block-frontrunning.png)
 
 This is python-like pseudocode to calculate the rewards that can be claimed by an _Aggregator_ for a _Rollup_Height_. Note that it is not comprehensive, and there may be many competing aggregators.
 
@@ -370,7 +370,7 @@ The lottery mechanism creates additional excitement and value for users, where r
 
 
 ## Rollup Evolution
-![block rollup complex](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/block-rollup-complex.png)
+![block rollup complex](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/block-rollup-complex.png)
 
 
 # Detailed Technical Design
@@ -418,10 +418,10 @@ The fact that the finality of L1 transactions is probabilistic makes crediting t
 The rule is that the L2 rollup that includes the transaction that credits the TEN account has a hard dependency on an L1 block, and the Bridge contract enforces that it is one of the ancestors of the current block. If the L1 deposit transaction is no longer in the canonical L1 chain, it automatically invalidates the rollup that contains the L2 deposit transaction, and the L1 deposit will only be recognised as the basis for an L2 rollup credit transaction when it has been included in the canonical L1 chain.
 
 The interaction is shown in the following diagram:
-![user registration](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/user-registration.png)
+![user registration](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/user-registration.png)
 
 See also the [Data model](./appendix#data-model) section and the following dependency diagram.
-![deposit process](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/deposit-process.png)
+![deposit process](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/deposit-process.png)
 
 _Note: The deposit L2 transaction cannot be fully encrypted because the Aggregator has to decide whether to include it in the current rollup based on the chances of the L1 block it depends on being final._
 
@@ -467,7 +467,7 @@ Each TEE signed rollup contains a plaintext list of withdrawal requests. See: [D
 The Bridge contract keeps track of these requests and executes them at different times, based on the finality status of that rollup.
 
 The withdrawal process is indicated in the following diagram:
-![withdrawal process](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/withdrawal-process.png)
+![withdrawal process](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/withdrawal-process.png)
 
 
 ## TEN public events
@@ -855,13 +855,13 @@ Zero knowledge rollups generate cryptographic proofs that can be used to prove t
 
 ## Data Model
 This diagram shows the data structure for the Management Contract and Aggregator:
-![management-contract](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/management-contract.png)
+![management-contract](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/management-contract.png)
 
 This diagram shows the data structure for the rollup and withdrawal:
-![rollup](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/rollup.png)
+![rollup](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/rollup.png)
 
 This diagram shows the data structure for the transactions and account:
-![transaction-account](https://github.com/ten-protocol/ten-whitepaper/tree/main/images/transaction-account.png)
+![transaction-account](https://raw.githubusercontent.com/ten-protocol/ten-whitepaper/refs/heads/main/images/transaction-account.png)
 
 ## Design Alternatives
 This section describes alternatives considered and discarded.
