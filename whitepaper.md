@@ -1,33 +1,46 @@
-# TEN (formerly Obscuro)
+# TEN
 **Confidential Smart Contracts for Ethereum**
 
 > /TENː/
 > 1. 天 (Japanese) Heaven; sky; the celestial;
 > 2. **T**he **E**ncrypted **N**etwork.
 
-V0.10.0, November 2021 
-_Note: This document is under development, so please check for updates. Some diagrams will refer to the former name_
+V0.20.0, June 2025 
+_Note: Some diagrams will refer to the former name (Obscuro)_
 
 James Carlyle, Tudor Malene, Cais Manai, Neal Shah, Gavin Thomas, Roger Willis; with significant additional [contributors](./appendix#contributors).
 
+
 # Abstract
-We present TEN, a decentralised Ethereum Layer 2 Rollup protocol designed to achieve data confidentiality, computational privacy and prevent [Maximal Extractable Value (MEV)](https://ethereum.org/en/developers/docs/mev/) by leveraging hardware-based [Trusted Execution Environments (TEE)](https://en.wikipedia.org/wiki/Trusted_execution_environment).
 
-The design of TEN ensures that hardware manufacturers do not have to be trusted for the safety of the ledger. If one manufacturer turns malicious or there is a breach in the TEE technology, the protocol falls back to the behaviour of a public blockchain that preserves the ledger's integrity but makes the transactions public.
+We present TEN, a next-generation Ethereum Layer 2 rollup protocol that introduces data confidentiality, computational privacy, and resistance to [Maximal Extractable Value (MEV)](https://ethereum.org/en/developers/docs/mev/) by leveraging hardware-based [Trusted Execution Environments (TEEs)](https://en.wikipedia.org/wiki/Trusted_execution_environment).
 
-The design also focuses on preserving privacy for the limited period when it matters most, which removes the need for a privacy technique that is robust against all adversaries in perpetuity.
+TEN represents a major step forward in decentralized system design by reintroducing data access controls — a foundational feature of Web2 that Web3 largely abandoned in favor of radical transparency. Early computing was local: users interacted with isolated desktop machines. The internet changed that, enabling shared data and remote computation — but always gated by fine-grained access control. Platforms like Facebook and Amazon thrived under this model. Web3, in its push for openness and composability, discarded controlled data visibility - making it nearly impossible to support sensitive, real-world applications.
 
-TEN sits in what we believe is a sweet spot between the existing [rollup-based L2 offerings](https://ethereum.org/en/developers/docs/scaling/layer-2-rollups/) Optimistic and ZK Rollups. The use of [confidential computing techniques](https://www.intel.co.uk/content/www/uk/en/security/confidential-computing.html) coupled with economic incentives allows TEN to retain the performance and programming model simplicity of Optimistic rollups, and on top of that attain confidentiality, short withdrawal periods, and address MEV.
+By integrating programmable encryption, TEEs, and an Ethereum-compatible execution environment, TEN reintroduces access control into a fully decentralised setting. This enables encrypted, autonomous, and composable smart contracts that preserve user and application privacy without sacrificing decentralisation or composability. The protocol supports private shared state, confidential transactions, and short withdrawal periods, while maintaining the simplicity and performance characteristics of Optimistic rollups.
+
+Importantly, TEN’s trust model does not require perpetual belief in any single hardware vendor. If a TEE is compromised or a manufacturer behaves maliciously, the system gracefully degrades into a transparent blockchain, preserving ledger integrity while forfeiting privacy—a fallback consistent with the ethos of credible neutrality.
+
+TEN is not just a technical improvement; it represents a shift in what Web3 can become. With support for autonomous AI agents, composable encrypted dApps, and robust MEV protection, TEN unlocks applications previously thought infeasible in decentralised contexts. In doing so, TEN closes the gap between Web2's functionality and Web3's promise—offering the best of both worlds, only better.
 
 
 # Motivation
-Public blockchain networks have experienced a period of strong growth in 2020-2021, with new use-cases for smart contracts encompassing the finance and art worlds. Decentralised Finance (DeFi) has seen enormous inflows of capital, with the top applications seeing the equivalent of $10 billion (summer 2021) of liquidity added, and this has helped push the overall capitalisation of cryptoassets above $2 trillion (summer 2021). Meanwhile, _Non-Fungible Tokens_ (NFTs) surged in value to $10 billion (autumn 2021).
 
-Public blockchains rely on the entire network seeing all transactions in order to be able to validate them and secure the network. This makes them _transparency engines_. Unfortunately, this creates a front-running issue, known as _Maximal Extractable Value_ (MEV), where miners or stakers and block proposers may steal value by observing user transactions and then preempting them. For example, a miner or bot may observe a user's desire to buy an asset at market price with an automated market maker, insert their purchase ahead in the processing queue by paying a higher transaction fee, causing the price to go up for the user, and then sell their purchase at a higher price and extract a profit from the user.
+Public blockchains have come a long way since the explosive growth of 2020–2021, when DeFi and NFTs broke into mainstream awareness. At their peak, DeFi protocols attracted over $100 billion in total value locked, while NFT marketplaces exceeded $10 billion in volume. These early use-cases validated the promise of programmable value - but also exposed a critical flaw: the complete absence of data access control.
 
-By some estimates, front-running was valued at $1.4 billion annually in early 2021. This means users of public blockchain networks are not deriving the full economic benefits of the technology. In addition, the transparent nature of the technology makes them inappropriate for many commercial and personal use-cases, where the confidential nature of interactions and deals should be maintained.
+Transparency, once celebrated as a virtue, has become a liability. On-chain activity today remains fully public: every balance, transaction, strategy, and piece of logic is visible to everyone - including competitors, adversaries, and MEV bots. This design made sense for verifying Bitcoin payments, but not for building real-world applications.
 
-TEN is a decentralised Ethereum Layer 2 Rollup protocol designed to address the above problems, introduce new use-cases, and unlock blockchain technology's full potential and economic advantages.
+If you analyze any successful digital application - Netflix, WhatsApp, Spotify, Revolut, even mobile games - you’ll find one thing in common: they all rely on access control. Not just to provide privacy, but to function. A bank wouldn’t work if everyone could read and manipulate every account. Games collapse if opponents can see your position. Spotify's business model fails if anyone can stream anything for free.
+
+Yet, blockchains don’t have that. Smart contracts today can define who can write data, but they cannot restrict who can read it. Every view() function leaks everything. Every NFT, position, and strategy is exposed. This makes it nearly impossible to build viable applications in Web3 beyond speculation.
+
+TEN is a new kind of Ethereum Layer 2 rollup that introduces Smart Transparency - a paradigm where smart contracts not only enforce rules of computation, but also enforce rules of data access. TEN leverages Trusted Execution Environments (TEEs) - hardware-based enclaves already trusted by banks, cloud providers, and mobile platforms - to enable encrypted state, private view functions, and programmable access control at the smart contract level.
+
+This lack of access control doesn’t just limit user privacy - it leaves the entire ecosystem vulnerable. Without the ability to hide intent or protect positions, users become easy targets for extractive behavior. Nowhere is this more evident than in the rise of Maximal Extractable Value (MEV) - a growing class of attacks where adversaries exploit transaction visibility and ordering for profit.
+
+MEV has become a $2+ billion-a-year drain on users, with techniques like sandwiching, liquidation sniping, and time-bandit reorgs degrading user experience and undermining trust in blockchain infrastructure. In this context, the need for encrypted computation is no longer theoretical. It is existential.
+
+TEN addresses this not only by mitigating MEV, but by radically expanding what’s possible on-chain. From fully confidential DeFi protocols and dark pools to AI-native gaming and autonomous agent marketplaces, TEN enables use-cases previously thought incompatible with blockchain. By supporting encrypted, composable dApps while preserving Ethereum compatibility, TEN opens a new chapter in Web3 - one where trustlessness, privacy, and programmability are no longer mutually exclusive.
 
 ## Differentiators
 * TEN leverages Ethereum, a public blockchain with the greatest adoption,  legitimacy, security, and liquidity, as a base layer to handle security and data availability and manage the inflow and outflow of value.
@@ -213,8 +226,6 @@ The rules for the canonical chain are the following:
 3. If an L1 block contains multiple sibling rollups created in the same round using the same L1 proof, the one with the lower nonce is on the canonical chain.
 4. If an L1 block contains multiple sibling rollups created using different L1 proofs, the one created using the more recent proof is on the canonical chain.
 
-[comment]: <> ([TODO - diagram depicting these scenarios])
-
 Using the notation, for the same _Rollup_Height_, the rollup on the canonical chain is the one with:
 1. The lowest L1_Block_Generation. 
 2. In case there are multiple matches, use the highest L1_Proof_Generation. 
@@ -350,6 +361,13 @@ else:
 
 _Note that these rules are subject to adjustment based on production observations._
 
+### System Smart Contracts and Activity Rewards
+TEN introduces a novel mechanism for incentivizing network activity through system smart contracts. These contracts can programmatically reward any transaction with tokens or create live transaction lotteries where any transaction can win prizes.
+
+This system enables the platform to reward activity arbitrarily, encouraging user engagement and network growth. For example, a system contract could reward users for interacting with new DeFi protocols, participating in governance, or simply maintaining activity during network bootstrap phases.
+
+The lottery mechanism creates additional excitement and value for users, where routine transactions have the potential to win substantial rewards. This gamification of network participation helps drive adoption while maintaining the core functionality and security of the platform.
+
 
 ## Rollup Evolution
 ![block rollup complex](/Users/revelation/Projects/ten-whitepaper/images/block-rollup-complex.png)
@@ -357,6 +375,29 @@ _Note that these rules are subject to adjustment based on production observation
 
 # Detailed Technical Design
 This section describes key TEN component designs.
+
+## Developer Features
+TEN introduces several developer-focused features that enhance the programmability and user experience of smart contracts while maintaining privacy guarantees.
+
+### Session Keys
+Session keys enable seamless user interactions by allowing developers to authorize subsequent transactions without requiring manual signature approval for each operation. With a few API calls, developers can configure transaction flows to use session keys, dramatically improving user experience for interactive applications.
+
+This feature is particularly valuable for on-chain gaming, where users would otherwise need to sign transactions every few seconds. Session keys maintain security while eliminating the friction of constant wallet interactions, enabling truly Web2-like experiences on-chain.
+
+### Secure Entropy
+TEN provides secure, verifiable randomness natively within every transaction execution context. This eliminates the need for external oracle calls or complex commit-reveal schemes, reducing costs and latency while improving security.
+
+The entropy is generated within the TEE environment using hardware-based random number generation, ensuring that random values cannot be predicted or manipulated by node operators or external parties. This enables fair gaming, secure lotteries, and other applications requiring trustworthy randomness.
+
+### Asynchronous Game Move Execution
+To prevent exploitation in on-chain games, TEN introduces asynchronous move execution. Game moves are submitted in one transaction but executed separately within the same block, providing the same latency characteristics while eliminating timing-based attack vectors.
+
+This architecture prevents clever users from exploiting transaction ordering or execution timing to gain unfair advantages. The move execution occurs deterministically within the block but is isolated from the submission transaction, maintaining fairness across all participants.
+
+### Precise Timestamping
+Every transaction receives a precise timestamp indicating when it reached the sequencer, enabling time-sensitive applications that require exact timing guarantees. This feature supports continuous-flow games like "Aviator" or competitive timing-based applications.
+
+The timestamp precision enables developers to create sophisticated time-dependent logic, competitive games where milliseconds matter, and financial applications requiring exact execution timing. This brings Web2-level temporal precision to decentralized applications.
 
 {% include_relative cryptography.md %}
 {% include_relative account-based-state.md %}
