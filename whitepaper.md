@@ -3,7 +3,7 @@
 
 > /TENː/
 > 1. 天 (Japanese) Heaven; sky; the celestial;
-> 2. **T**he **E**ncrypted **N**etwork.
+> 2. **T**he **E**ncrypted **N**etwork
 
 V0.20.0, June 2025
 
