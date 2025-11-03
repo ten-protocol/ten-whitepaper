@@ -5,7 +5,7 @@
 > 1. 天 (Japanese) Heaven; sky; the celestial;
 > 2. **T**he **E**ncrypted **N**etwork.
 
-V0.10.0, November 2021 
+V1.0.0, November 2025 
 _Note: This document is under development, so please check for updates. Some diagrams will refer to the former name_
 
 James Carlyle, Tudor Malene, Cais Manai, Neal Shah, Gavin Thomas, Roger Willis; with significant additional [contributors](./appendix#contributors).
