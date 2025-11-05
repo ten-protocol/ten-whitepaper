@@ -6,7 +6,7 @@
 > 2. **T**he **E**ncrypted **N**etwork.
 
 V1.0.0, November 2025 
-_Note: This document is under development, so please check for updates. Some diagrams will refer to the former name_
+_Note: Some diagrams will refer to the former name Obscuro_
 
 James Carlyle, Tudor Malene, Cais Manai, Neal Shah, Gavin Thomas, Roger Willis; with significant additional [contributors](./appendix#contributors).
 
